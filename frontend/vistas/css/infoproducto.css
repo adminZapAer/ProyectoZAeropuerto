@@ -1,0 +1,114 @@
+/*============================================
+                INFOPRODUCTO
+============================================*/
+
+.infoproducto figure.visor img{
+    display: none;
+    cursor: crosshair;/*colocamos a todas las imagenes el cursor croshair para que se vea como una cruz*/
+}
+/*visualizamos la primera imagen (El primer hijo) de la etiqueta img*/
+.infoproducto figure.visor img:first-child{
+    display:block;
+}
+
+.flexslider{
+    cursor: pointer;
+}
+
+/*============================================
+                    LUPA
+============================================*/
+
+.lupa{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.lupa img{
+    position: relative;
+    margin-top: -100%;
+    margin-left: -50%;
+    width: 160%;
+}
+
+/*============================================
+                COMPARTIR EN REDES
+============================================*/
+
+.compartirRedes{
+    border: 0;
+    box-shadow: none;
+    margin: 0px;
+}
+
+.compartirRedes li p{
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    padding: 8px;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.btnFacebook{
+    background: #46639f;
+}
+
+.btnTwitter{
+    background: #1da1f2;
+}
+
+.alturaComentarios{
+	height:300px;
+}
+
+/*--=================================
+    PUNTOS DE QUIEBRE PERSONALIZADOS
+===================================*/
+/*--======================================================================
+                ESCRITORIO GRANDE (LG revisamos en 1366 en adelante)
+========================================================================*/
+@media (min-width: 1200px)
+{
+    .videoPresentacion{
+        height: 415px;
+    }
+}
+/*--======================================================================
+        ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
+========================================================================*/
+@media (max-width: 1199px) and (min-width: 992px)
+{
+    .videoPresentacion{
+        height: 350px;
+    }
+}
+/*--======================================================================
+        ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
+========================================================================*/
+@media (max-width: 991px) and (min-width: 768px)
+{
+    .videoPresentacion{
+        height: 300px;
+    }
+}
+/*--======================================================================
+                                MOVILES (XS revisamos en 320px)
+========================================================================*/
+@media (max-width: 767px)
+{
+    .videoPresentacion{
+        height: 200px;
+    }
+    .fondoBreadcrumb{
+        font-size:12px;
+    }
+    .botonesCompra button{
+        margin: 5px 0;
+    }
+}

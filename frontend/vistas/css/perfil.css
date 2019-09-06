@@ -1,0 +1,28 @@
+/*=============================================
+PERFIL
+=============================================*/
+#perfil figure#imgPerfil img{
+	width: 80%;
+	margin:10px 0;
+}
+
+/*Subir imagen*/
+#perfil #subirImagen{
+	display: none;
+	margin: 20px 0px;
+	border: 2px dotted #ccc;
+	overflow: hidden;
+	padding: 40px;
+	cursor: pointer;
+}
+/*Asignamos las dimensiones a la pre-visualizacion de la imagen a cambiar*/
+#perfil #subirImagen img{
+	width: 100%;
+	padding: 10px;
+}
+/*Etsilo para el input*/
+#perfil #subirImagen #datosImagen{
+	height: 65px;
+}
+
+
