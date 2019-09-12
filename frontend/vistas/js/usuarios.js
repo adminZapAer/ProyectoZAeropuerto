@@ -495,3 +495,57 @@ $("#eliminarUsuario").click(function(){
     });
 
 })
+
+/*=============================================
+VALIDAR EL COMENTARIO
+=============================================*/
+
+function validarFormDireccion(form) {
+	console.log(form);
+	let nombre = $(form).find('input#nombreCompleto').val();
+	let telefono = $(form).find('input#telefono').val();
+	let cp = $(form).find('input#cp').val();
+	let estado = $(form).find('input#estado').val();
+	let municipio = $(form).find('input#municipio').val();
+	let calle = $(form).find('input#calle').val();
+
+	if (nombre != "" && cp != "" && estado != "" && municipio != "" && calle != "") {
+		if (telefono != "" && !isNaN(telefono)) 
+			return true;
+		else if(telefono == "")
+			return true;
+		else 
+			false;
+	}
+	else{
+		return false;
+	}
+	return false;
+}
+
+
+/*=============================================
+ELIMINAR Dirección
+=============================================*/
+
+$(".delete-direccion").click(function(event){
+	event.preventDefault();
+	let  idUsuario = $("#idUsuario").val();
+	let idDireccion = $(this).prop('id');
+	console.log(idDireccion);
+	swal({
+        title: "¿Está usted seguro(a) de eliminar esta dirección?",
+		text: "¡Si borrar esta direccion ya no se puede recuperar los datos!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "¡Si, borrar dirección!",
+		closeOnConfirm: false
+    },
+	function(isConfirm){
+        if (isConfirm) {	   
+		    window.location = "index.php?ruta=perfil&deletedir="+idDireccion;
+		} 
+    });
+
+})

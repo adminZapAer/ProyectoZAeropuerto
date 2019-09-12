@@ -29,17 +29,17 @@ class ModeloPlantilla{
     
     static public function mdlTraerCabecera($ruta, $tabla){
         
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta = :ruta");
+        // $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta = :ruta");
         
-        $stmt -> bindParam(":ruta", $ruta, PDO::PARAM_STR);
+        // $stmt -> bindParam(":ruta", $ruta, PDO::PARAM_STR);
         
-        $stmt -> execute();
+        // $stmt -> execute();
         
-        return $stmt -> fetch();
+        // return $stmt -> fetch();
         
-        $stmt -> close();
+        // $stmt -> close();
         
-        $stmt = null;
+        // $stmt = null;
         
         
     }

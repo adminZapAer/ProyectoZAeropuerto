@@ -364,6 +364,88 @@ class ModeloUsuarios{
 
 	}
 
+	/*=============================================
+	AGREGAR DIRECCIÓN DE USUARIO
+	=============================================*/
+
+	public function mdlAgregarDireccion($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla 
+			(nombre, celular, cp, estado, municipio, colonia, calle, numext, numint, id_usuario) 
+			VALUES (:nombre, :celular, :cp, :estado, :municipio, :colonia, :calle, :numext, :numint, :id_usuario)");
+
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":celular", $datos["celular"], PDO::PARAM_STR);
+		$stmt->bindParam(":cp", $datos["cp"], PDO::PARAM_INT);
+		$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
+		$stmt->bindParam(":municipio", $datos["municipio"], PDO::PARAM_STR);
+		$stmt->bindParam(":colonia", $datos["colonia"], PDO::PARAM_STR);
+		$stmt->bindParam(":calle", $datos["calle"], PDO::PARAM_STR);
+		$stmt->bindParam(":numext", $datos["numext"], PDO::PARAM_INT);
+		$stmt->bindParam(":numint", $datos["numint"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_usuario", $datos["id_usuario"], PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+
+		}
+
+		$stmt-> close();
+
+		$stmt = null;
+	}
+
+	/*=============================================
+	MOSTRAR LISTA DE DIRECCIONES
+	=============================================*/
+
+	static public function mdlMostrarDirecciones($tabla, $item){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_usuario = :id_usuario ORDER BY id_usuario DESC");
+
+		$stmt -> bindParam(":id_usuario", $item, PDO::PARAM_INT);
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	ELIMINAR DIRECCION DE USUARIO
+	=============================================*/
+
+	static public function mdlEliminarDireccion($tabla, $idDireccion){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+		$stmt -> bindParam(":id", $idDireccion, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+
+		}
+
+		$stmt-> close();
+
+		$stmt = null;
+
+	}
+
 
     
 }

@@ -71,12 +71,25 @@ SECCIÓN PERFIL
                     <i class="fa fa-user"></i> EDITAR PERFIL
                 </a>
             </li>
+
+            <li>                
+                <a data-toggle="tab" href="#direccion">
+                    <i class="fa fa-map-marker"></i>  MIS DIRECCIONES
+                </a>
+            </li>
+
+            <li>                
+                <a data-toggle="tab" href="#facturacion">
+                    <i class="fa fa-map-marker"></i>  FACTURACIÓN
+                </a>
+            </li>
             
             <li>				
                 <a href="<?php echo $url; ?>ofertas">
                     <i class="fa fa-star"></i>	VER OFERTAS
                 </a>
             </li>
+
             
 		</ul>
         
@@ -613,7 +626,7 @@ SECCIÓN PERFIL
                             <br>
                             
                             <?php
-                            
+
                             if($_SESSION["modo"] != "directo"){
                                 
                                 echo '
@@ -692,7 +705,7 @@ SECCIÓN PERFIL
                                 
                                 <button type="submit" class="btn btn-default backColor btn-md pull-left">Actualizar Datos</button>
                                 
-                                ';
+                                ';          
                                 
                             }
                             
@@ -717,6 +730,401 @@ SECCIÓN PERFIL
                     $borrarUsuario -> ctrEliminarUsuario();
                     
                     ?>
+                    
+                </div>
+            </div>
+
+            <!--==================================
+            *==         PESTAÑA DIRECCIÓN      ==*
+            ===================================-->
+
+            
+            <div id="direccion" class="tab-pane fade">
+                <div class="row">
+                    
+                    <form method="post" enctype="multipart/form-data" onsubmit="return validarFormDireccion(this)">
+                        
+                        <div class="col-md-6 col-sm-5 col-xs-12">
+                            
+                            <br>
+                            
+                            <?php
+                                                          
+                                echo '
+
+                                <input type="hidden" value="'.$_SESSION["idUsuario"].'" id="idUsuario" name="idUsuario">
+
+                                <h3>Los campos marcados con * son obligatorios.</h3>
+
+                                <label class="control-label text-muted text-uppercase" for="nombreCompleto">Nombre completo *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" placeholder="Nombre completo" required>
+                                </div>
+
+                                <br>
+
+                                <label class="control-label text-muted text-uppercase" for="telefono">Telefono celular:</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-earphone"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono celular" pattern="[0-9]{10}" title="10 Digitos ej. 5546417896">
+                                </div>
+
+                                <br>
+
+                                <label class="control-label text-muted text-uppercase" for="cp">Código postal *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal" required>
+                                </div>
+
+                                <br>
+
+                                <label class="control-label text-muted text-uppercase" for="estado">Estado *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-map" aria-hidden="true"></i>
+
+                                    </span>
+                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                </div>
+                                
+                                <br>
+
+                                <label class="control-label text-muted text-uppercase" for="municipio">Municipio/Alcaldia *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-university" aria-hidden="true"></i>
+
+                                    </span>
+                                    <input type="text" class="form-control" id="municipio" name="municipio" placeholder="Municipio" required>
+                                </div>
+
+                                <br>
+
+                                <label class="control-label text-muted text-uppercase" for="colonia">Colonia *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
+
+                                    </span>
+                                    <input type="text" class="form-control" id="colonia" name="colonia" placeholder="Municipio" required>
+                                </div>
+                                
+                                <br>
+
+                                <label class="control-label text-muted text-uppercase" for="calle">Calle *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle de la dirección" required>
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-5 col-xs-12">
+                                        <label class="control-label text-muted text-uppercase" for="numext">Número exterior *</label>
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-home"></i>
+                                            </span>
+                                            <input type="text" class="form-control" id="numext" name="numext" placeholder="" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-5 col-xs-12">
+                                        <label class="control-label text-muted text-uppercase" for="numint">Núumero interior</label>
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-home"></i>
+                                            </span>
+                                            <input type="text" class="form-control" id="numint" name="numint" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <br>
+                                
+                                <button type="submit" class="btn btn-success btn-md pull-left">Agregar Dirección</button>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                ';
+                            
+                            ?>
+                            
+                        </div>
+                        <div class="col-md-6 col-sm-5 col-xs-12" style="padding: 3%;">
+                            <?php
+                            $item = $_SESSION["idUsuario"];
+
+                            $direcciones = ControladorUsuarios::ctrMostrarDirecciones($item);
+                
+                            if(!$direcciones){
+                                echo '
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                    <h3><small>No tiene direcciones agregadas</small></h3>
+                                    
+                                    
+                                </div>';
+                            }
+                            else{
+                    
+                                foreach ($direcciones as $key => $value) {
+                                        
+                                    echo "
+                                    <div class='panel panel-default'>
+                                        <div class='panel-heading'>Dirección ". ($key + 1). "</div>
+                                        <div class='panel-body'>
+                                            <div class='row'>
+                                                <div class='col-md-6'>
+                                                    <label>Nombre:</label>
+                                                    <p>{$value['nombre']}</p>
+                                                    <label>Teléfono:</label>
+                                                    <p>{$value['celular']}</p>
+                                                    <label>Código postal:</label>
+                                                    <p>{$value['cp']}</p>
+                                                    <label>Estado:</label>
+                                                    <p>{$value['estado']}</p>
+                                                </div>
+                                                <div class='col-md-6'>
+                                                    <label>Municipio / Alcaldía:</label>
+                                                    <p>{$value['municipio']}</p>
+                                                    <label>Colonia:</label>
+                                                    <p>{$value['colonia']}</p>
+                                                    <label>Calle:</label>
+                                                    <p>{$value['calle']}</p>
+                                                    <div class='row'>
+                                                        <div class='col-md-6'>
+                                                            <label>No. interior:</label>
+                                                            <p>{$value['numext']}</p>
+                                                        </div>
+                                                        <div class='col-md-6'>
+                                                            <label>No. exterior:</label>
+                                                            <p>{$value['numint']}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class='btn btn-danger btn-md pull-right delete-direccion' id='{$value['id']}'>Eliminar dirección</button>
+                                        </div>
+                                    </div>
+                                    ";
+                                    
+                                }
+                            }
+
+                            ?>
+
+                        </div>
+                        
+                        
+                        <?php
+
+                            $agregarDireccion = new ControladorUsuarios();
+                            $agregarDireccion->ctrAgregarDireccion();
+
+                        ?>
+                    </form>
+                    
+                    
+                    <?php
+                    
+                    $borrarDireccion = new ControladorUsuarios();
+                    $borrarDireccion -> ctrEliminarDireccion();
+                    
+                    ?>
+                    
+                </div>
+            </div>
+
+            <!--==================================
+            *==         PESTAÑA FACTURACCION      ==*
+            ===================================-->
+
+            
+            <div id="facturacion" class="tab-pane fade">
+                <div class="row">
+                    
+                    <form method="post">
+                                                   
+                        <br>
+                        
+                        <?php
+                                                      
+                            echo '
+
+                            <input type="hidden" value="'.$_SESSION["idUsuario"].'" id="idUsuario" name="idUsuario">
+
+                            <h3>Los campos marcados con * son obligatorios.</h3>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                <label class="control-label text-muted text-uppercase" for="">Nombre *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class=""></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="" name="" placeholder="" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                <label class="control-label text-muted text-uppercase" for="">Apellido paterno *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class=""></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="" name="" placeholder="" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                <label class="control-label text-muted text-uppercase" for="">Apellido Materno *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class=""></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="" name="" placeholder="" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                <label class="control-label text-muted text-uppercase" for="">RFC *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class=""></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="" name="" placeholder="Telefono celular">
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                <label class="control-label text-muted text-uppercase" for="cp">Código postal *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal" required>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                <label class="control-label text-muted text-uppercase" for="estado">Estado *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-map" aria-hidden="true"></i>
+
+                                    </span>
+                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                </div>
+                            
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                <label class="control-label text-muted text-uppercase" for="municipio">Municipio/Alcaldia *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-university" aria-hidden="true"></i>
+
+                                    </span>
+                                    <input type="text" class="form-control" id="municipio" name="municipio" placeholder="Municipio" required>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                <label class="control-label text-muted text-uppercase" for="colonia">Colonia *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
+
+                                    </span>
+                                    <input type="text" class="form-control" id="colonia" name="colonia" placeholder="Municipio" required>
+                                </div>
+                            
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                <label class="control-label text-muted text-uppercase" for="calle">Calle *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle de la dirección" required>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <label class="control-label text-muted text-uppercase" for="numext">Número exterior *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="numext" name="numext" placeholder="" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <label class="control-label text-muted text-uppercase" for="numint">Núumero interior</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="numint" name="numint" placeholder="">
+                                </div>
+                            </div>     
+                            <br>
+                            <br>
+                            <br>
+                            
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="margin:3%;">
+                                <button class="btn btn-success btn-md pull-left">Agregar Datos Facturación</button>
+                            </div>
+                            <br>
+                            ';
+                        
+                        ?>                     
+                        
+                    </form>
+                    
                     
                 </div>
             </div>

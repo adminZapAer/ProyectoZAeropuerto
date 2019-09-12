@@ -4,8 +4,8 @@ class Ruta{
                 Ruta Lado Cliente
     ---------------------------------------*/
     public function ctrRuta(){
-        
-        return "http://localhost/frontend/";
+        return "http://localhost/ProyectoZAeropuerto/frontend/"; //ruta para pruebas local
+        //return "http://localhost/frontend/";
         
     }
     /*---------------------------------------

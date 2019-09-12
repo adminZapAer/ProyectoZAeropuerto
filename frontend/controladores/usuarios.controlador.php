@@ -506,7 +506,6 @@ class ControladorUsuarios{
 			/*=============================================
 			VALIDAR IMAGEN
 			=============================================*/
-
 			$ruta = $_POST["fotoUsuario"];
             //Preguntamos si viene un archivo
 			if(isset($_FILES["datosImagen"]["tmp_name"]) && !empty($_FILES["datosImagen"]["tmp_name"])){
@@ -844,6 +843,118 @@ class ControladorUsuarios{
 		}
 
 	}
+
+    /*=============================================
+    AGREGAR DIRECCIÓN
+    =============================================*/
+
+    public function ctrAgregarDireccion(){
+
+        $tabla = "direccion";
+
+        if(isset($_POST["cp"])){
+            
+            $idUsuario = $_POST["idUsuario"];
+
+            // Guardamos los datos en un arreglo para manejarlo mejor.
+            $datos = [
+                'nombre'=>$_POST["nombreCompleto"],
+                'celular'=>$_POST["telefono"],
+                'cp'=>$_POST["cp"],
+                'estado'=>$_POST["estado"],
+                'municipio'=>$_POST["municipio"],
+                'colonia'=>$_POST["colonia"],
+                'calle'=>$_POST["calle"],
+                'numext'=>$_POST["numext"],
+                'numint'=>$_POST["numint"],
+                'id_usuario'=>$idUsuario
+            ];
+
+            $respuesta = ModeloUsuarios::mdlAgregarDireccion($tabla, $datos);
+            
+            if($respuesta == "ok"){
+
+                $url = Ruta::ctrRuta();
+
+                echo'<script>
+
+                        swal({
+                              title: "¡Agregada correctamente!",
+                              text: "Su dirección fue agregada",
+                              type: "success",
+                              confirmButtonText: "Cerrar",
+                              closeOnConfirm: false
+                        },
+
+                        function(isConfirm){
+                                 if (isConfirm) {      
+                                   window.location = "'.$url.'perfil";
+                                  } 
+                        });
+
+                      </script>';
+
+            }
+
+        }
+
+    }
+
+    /*=============================================
+    MOSTRAR LISTA DE DIRECCIONES
+    =============================================*/
+
+    static public function ctrMostrarDirecciones($item){
+
+        $tabla = "direccion";
+
+        $respuesta = ModeloUsuarios::mdlMostrarDirecciones($tabla, $item);
+
+        return $respuesta;
+
+    }
+
+    /*=============================================
+    ELIMINAR Direccion
+    =============================================*/
+
+    public function ctrEliminarDireccion(){
+
+        if(isset($_GET["deletedir"])){
+
+            $tabla = "direccion";
+
+            $idDireccion = $_GET["deletedir"];
+            
+            $respuesta = ModeloUsuarios::mdlEliminarDireccion($tabla, $idDireccion);
+
+            if($respuesta == "ok"){
+
+                $url = Ruta::ctrRuta();
+
+                echo'<script>
+
+                        swal({
+                              title: "¡SU DIRECCIÓN HA SIDO BORRADA!",
+                              text: "",
+                              type: "success",
+                              confirmButtonText: "Cerrar",
+                              closeOnConfirm: false
+                        },
+
+                        function(isConfirm){
+                                 if (isConfirm) {      
+                                   window.location = "'.$url.'perfil";
+                                  } 
+                        });
+
+                      </script>';
+
+            }
+
+        }
+
+    }
     
 }
 
