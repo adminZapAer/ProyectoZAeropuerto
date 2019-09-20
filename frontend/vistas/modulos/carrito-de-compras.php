@@ -3,7 +3,7 @@
 $url = Ruta::ctrRuta();
 
 ?>
-
+<script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_ENV['PAYPAL_SANDBOX_CLIENT_ID']?>&currency=USD"></script>
 <!--=====================================
 BREADCRUMB CARRITO DE COMPRAS
 ======================================-->
@@ -129,7 +129,7 @@ TABLA CARRITO DE COMPRAS
                     if($_SESSION["validarSesion"] == "ok"){
                         
                         echo '
-                        <a id="btnCheckout" href="#modalCheckout" data-toggle="modal" idUsuario="'.$_SESSION["idUsuario"].'">
+                        <a id="btnCheckout" href="'.$url.'proceder-pago" data-toggle="modal" idUsuario="'.$_SESSION["idUsuario"].'">
                             <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
                         </a>
                         ';
@@ -160,6 +160,7 @@ TABLA CARRITO DE COMPRAS
         VENTANA MODAL PARA CHECKOUT
 ======================================-->
 <div id="modalCheckout" class="modal fade modalFormulario" role="dialog">
+
     
     <div class="modal-content modal-dialog">
         
@@ -211,7 +212,7 @@ TABLA CARRITO DE COMPRAS
                             
                         </center>
                         
-                        <img src="<?php echo $url; ?>vistas/img/plantilla/paypal.jpg" alt="" class="img-thumbnail">
+                        <div id="paypal-button-container"></div>
                         
                     </figure>
                     
@@ -309,3 +310,47 @@ TABLA CARRITO DE COMPRAS
     </div>
     
 </div>
+
+<!--=====================================
+        script 
+======================================-->
+<script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      // Set up the transaction
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '0.01'
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // Capture the funds from the transaction
+      return actions.order.capture().then(function(details) {
+        // Show a success message to your buyer
+        alert('Transaction completed by ' + details.payer.name.given_name);
+        return fetch('/paypal-transaction-complete', {
+          method: 'post',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            orderID: data.orderID
+          })
+        });
+      });
+    }
+  }).render('#paypal-button-container');
+</script>
+<?php
+/*
+Client ID: ASK-tRIh-stMLfXorejvNakUiOMR7CPyGHlt1AanMtnozv986EPBg0WpjB3sfqtgEFPVhmqOisiXqFcz
+Secret: E0mFB4iHR2HFG-amSdXx3o4wjC0dUUfrEEjy56GDHCDUBb4ej97AxvmMk00rg5dwK6INrFtVorggLySm
+$_ENV['PAYPAL_APP_ID']
+
+sb-0eq1j132915@personal.example.com
+N>6#x+#>
+ */
+?>

@@ -5,9 +5,8 @@
     <head>
        
         <meta charset="utf-8">
-        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        
         <?php
         
         session_start();
@@ -231,10 +230,10 @@
                 include "modulos/infoproductos.php";
             }
             
-            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas"){
+            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas" || $rutas[0] === "proceder-pago"){
                 include "modulos/".$rutas[0].".php";
             }
-            
+
             else if($rutas[0] == "inicio"){
                 //include "modulos/slide.php";
 
@@ -286,8 +285,7 @@
                     href: '<?php echo $url.$cabeceras["ruta"]; ?>',
                 }, function(response){});
                 
-                );
-            })
+            });
             
         </script>
         
