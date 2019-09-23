@@ -241,19 +241,38 @@ TABLA CARRITO DE COMPRAS
 				}
 			}).then(function(res) {
 				//console.log('res',res.json());
-				res.text().then(res => {
-					console.log('res', res.toLocaleString());
+				// res.text().then(res => {
+				// 	console.log('res', res.toLocaleString());
 
-				})
+				// })
 				return res.json();
 			}).then(function(data) {
 				console.log('data', data);
-				return data.orderID; // Use the same key name for order ID on the client and server
+				return data.result.id; // Use the same key name for order ID on the client and server
 			}).catch(function(except) {
 				console.log('except', except);
 				return false;
 			});
-		},onError: function (err) {
+		},onApprove: function(data, actions) {
+	    	actions.order.get().then(function(data){
+	    		console.log(data);
+	    	});
+	    	// Capture the funds from the transaction
+	    	return actions.order.capture().then(function(details) {
+	        // Show a success message to your buyer
+	        console.log('details', details);
+	        alert('Transaction completed by ' + details.payer.name.given_name);
+	        return fetch('/paypal-transaction-complete', {
+	          method: 'post',
+	          headers: {
+	            'content-type': 'application/json'
+	          },
+	          body: JSON.stringify({
+	            orderID: data.orderID
+	          })
+	        })
+	      });
+	    },onError: function (err) {
 		    console.log('err', err);
 		}
 
