@@ -64,10 +64,10 @@ class AjaxCheckout{
 *        CREAR ORDEN DE COMPRA           *
 ========================================*/
 if(isset($_POST)){
-	$order = CreateOrder::createOrder(true);
+	$order = CreateOrder::createOrder(false);
     //print "Creating Order...\n";
 	$orderId = "";
-	if (is_null($order)) {
+	if (isset($order->statusCode)) {
 		return "null";
 	}
 	else{
