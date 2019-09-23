@@ -64,18 +64,11 @@ class AjaxCheckout{
 *        CREAR ORDEN DE COMPRA           *
 ========================================*/
 if(isset($_POST)){
-	$order = CreateOrder::createOrder(false);
+	$order = CreateOrder::createOrder(true);
     //print "Creating Order...\n";
 	$orderId = "";
-	if (isset($order->statusCode)) {
-		return "null";
-	}
-	else{
-		return $order;
-	}
 	if ($order->statusCode == 201)
 	{
-	    $orderId = $order->result->id;
 	    // print "Links:\n";
 	    // for ($i = 0; $i < count($order->result->links); ++$i)
 	    // {
@@ -84,7 +77,7 @@ if(isset($_POST)){
 	    // }
 	    // print "Created Successfully\n";
 	    // print "Copy approve link and paste it in browser. Login with buyer account and follow the instructions.\nOnce approved hit enter...\n";
-	    return $order;
+	    return json_encode($order);
 	}
 	else {
 		return json_encode(['error'=>$order]);

@@ -46,7 +46,6 @@ TABLA CARRITO DE COMPRAS
 			<div class="panel-heading cabeceraCarrito backColor">
 
 				<p >REALIZAR PAGO</p>
-				
 			</div>
 			
 			<!--=====================================
@@ -241,16 +240,11 @@ TABLA CARRITO DE COMPRAS
 					'content-type': 'application/json'
 				}
 			}).then(function(res) {
+				//console.log('res',res.json());
 				res.text().then(res => {
 					console.log('res', res.toLocaleString());
 
 				})
-				// res.body.getReader().read().then((done, value) => {
-				// 	if (done) {
-			 //            // Tell the browser that we have finished sending data
-			 //            console.log('done', done.value);
-			 //          }
-				// });
 				return res.json();
 			}).then(function(data) {
 				console.log('data', data);
