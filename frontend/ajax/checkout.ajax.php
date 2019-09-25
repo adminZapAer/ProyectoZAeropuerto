@@ -1,8 +1,12 @@
 <?php
 
 require_once "../../vendor/paypal/paypal-checkout-sdk/samples/CaptureIntentExamples/CreateOrder.php";
+require_once '../../vendor/autoload.php';
 use Sample\CaptureIntentExamples\CreateOrder;
 use Sample\CaptureIntentExamples\CaptureOrder;
+
+$dotenv = Dotenv\Dotenv::create('../../');
+$dotenv->load();
 
 class AjaxCheckout{
     
@@ -63,8 +67,12 @@ class AjaxCheckout{
 /*========================================
 *        CREAR ORDEN DE COMPRA           *
 ========================================*/
-if(isset($_POST)){
-	$order = CreateOrder::createOrder(false);
+if($_SERVER['REQUEST_METHOD'] === "POST"){
+	$request_body = file_get_contents('php://input');
+	$data = json_decode($request_body,true);
+	$order = CreateOrder::createOrder(false, $data);
+	// echo print_r($order);
+	// return false;
     //print "Creating Order...\n";
 	$orderId = "";
 	if ($order->statusCode == 201)
@@ -84,36 +92,25 @@ if(isset($_POST)){
 		return json_encode(['error'=>$order]);
 	    //exit(1);
 	}
-
-
-	// print "Capturing Order...\n";
-	// $response = CaptureOrder::captureOrder($orderId);
-	// if ($response->statusCode == 201)
-	// {
-	//     print "Captured Successfully\n";
-	//     print "Status Code: {$response->statusCode}\n";
-	//     print "Status: {$response->result->status}\n";
-	//     print "Order ID: {$response->result->id}\n";
-	//     print "Links:\n";
-	//     for ($i = 0; $i < count($response->result->links); ++$i){
-	//         $link = $response->result->links[$i];
-	//         print "\t{$link->rel}: {$link->href}\tCall Type: {$link->method}\n";
-	//     }
-	//     foreach($response->result->purchase_units as $purchase_unit)
-	//     {
-	//         foreach($purchase_unit->payments->captures as $capture)
-	//         {    
-	//             $captureId = $capture->id;
-	//         }
-	//     }
-	// }
-	// else {
-	//     exit(1);
-	// }
 }
 
 if(isset($_GET)){
 	echo "GET";
+	echo getenv('PAYPAL_SANDBOX_CLIENT_ID');
+	echo getenv('PAYPAL_SANDBOX_CLIENT_SECRET');
 }
+/*
+
+[0] => Array
+        (
+            [idProducto] => 4
+            [titulo] => Manguera para unidad O500
+            [precio] => 469.23
+            [tipo] => fisico
+            [cantidad] => 2
+        )
+
+
+*/
 
 ?>

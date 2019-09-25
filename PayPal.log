@@ -1,4 +1,0 @@
-[20-09-2019 18:13:08] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
-[20-09-2019 18:13:09] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
-[20-09-2019 18:13:09] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payment
-[20-09-2019 18:13:10] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201

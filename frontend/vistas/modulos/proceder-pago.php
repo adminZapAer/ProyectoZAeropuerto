@@ -4,7 +4,7 @@ $url = Ruta::ctrRuta();
 
 //disable-card=visa,mastercard
 ?>
-<script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_ENV['PAYPAL_SANDBOX_CLIENT_ID']?>&currency=USD&debug=false"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_ENV['PAYPAL_SANDBOX_CLIENT_ID']?>&currency=MXN&debug=false"></script>
 <!--=====================================
 BREADCRUMB CARRITO DE COMPRAS
 ======================================-->
@@ -57,33 +57,7 @@ TABLA CARRITO DE COMPRAS
 	            <button type="button" data-dismiss="modal" class="close">&times;</button>
 	            
 	            <div class="contenidoCheckout">
-	                
-	                <?php
-	                
-	                $respuesta = ControladorCarrito::ctrMostrarTarifas();
-	                
-	                echo'<input type="hidden" id="tasaImpuesto" value ="'.$respuesta["impuesto"].'">';
-	                echo'<input type="hidden" id="envioNacional" value ="'.$respuesta["envioNacional"].'">';
-	                echo'<input type="hidden" id="tasaMinimaNal" value ="'.$respuesta["tasaMinimaNal"].'">';
-	                echo'<input type="hidden" id="tasaPais" value ="'.$respuesta["pais"].'">';
-	                
-	                ?>
-	                
-	                <div class="formEnvio row">
-	                    
-	                    <h4 class="text-center well text-muted text-uppercase">Información de envío</h4>
-	                    
-	                    <div class="col-xs-12 seleccionePais">
-	                        
-	                        <select id="seleccionarPais" class="form-control" required>
-	                            <option value="">Seleccione Pais</option>
-	                        </select>
-	                        
-	                        
-	                    </div>
-	                    
-	                </div>
-	                
+	                	                
 	                <br>
 	                <!-- FORMAS DE PAGO -->
 	                <div class="formPago row">
@@ -110,7 +84,7 @@ TABLA CARRITO DE COMPRAS
 	                            
 	                        </center>
 	                        
-	                        <img src="<?php echo $url; ?>vistas/img/plantilla/paypal.jpg" alt="" class="img-thumbnail">
+	                        <img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">
 	                        
 	                    </figure>
 	                    
@@ -118,69 +92,8 @@ TABLA CARRITO DE COMPRAS
 	                
 	                <br>
 	                
-	                <div class="listaProductos row">
-	                    
-	                    <h4 class="text-center well text-muted text-uppercase">Productos a comprar</h4>
-	                    
-	                    <table class="table table-striped tablaProductos">
-	                        
-	                        <thead>
-	                            <tr>
-	                                <th>Producto</th>
-	                                <th>Cantidad</th>
-	                                <th>Precio</th>
-	                            </tr>
-	                        </thead>
-	                        <tbody>
-	                            
-	                        </tbody>
-	                        
-	                    </table>
-	                    
-	                    <div class="col-sm-6 col-xs-12 pull-right">
-	                        
-	                        <table class="table table-striped tablaTasas">
-	                            
-	                            <tbody>
-	                                
-	                                <tr>
-	                                    
-	                                    <td>Subtotal</td>
-	                                    <td>MXN $ <span class="valorSubtotal">0.00</span></td>
-	                                    
-	                                </tr>
-	                                <tr>
-	                                    
-	                                    <td>Envío</td>
-	                                    <td>MXN $ <span class ="valorTotalEnvio">0.00</span></td>
-	                                    
-	                                </tr>
-	                                <tr>
-	                                    
-	                                    <td><strong>Total</strong></td>
-	                                    <td><strong>MXN $ <span class="valorTotalCompra">0.00</span></strong></td>
-	                                    
-	                                </tr>
-	                            </tbody>
-	                            
-	                        </table>
-	                        
-	                        <div class="divisa" style = "display:none">
-	                            
-	                            <select name="divisa" id="cambiarDivisa" class="form-control">
-	                                <option value="MXN">MXN</option>
-	                            </select>
-	                            
-	                            <br>
-	                            
-	                        </div>
-	                        
-	                    </div>
-	                    
-	                    <div class="clearfix"></div>
-	                    
-	                    <button class="btn btn-block btn-lg btn-default backColor btnPagar">REALIZAR PAGO</button>
-	                    
+	                <div class="col-xs-12 col-md-4 col-md-offset-5">
+	                	<button class="btn btn-lg btn-default backColor btnPagar">REALIZAR PAGO</button>
 	                </div>
 	                
 	            </div>
@@ -232,19 +145,41 @@ TABLA CARRITO DE COMPRAS
         script 
 ======================================-->
 <script>
+  	/* OBTENCION DE LOS ELEMENTOS A COMPRAR */
+	function getItems() {
+	    if(localStorage.getItem("listaProductos") != null){	    
+		    let listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
+		    let data = [];
+		    listaCarrito.forEach((item, index) => {
+		    	data.push({
+		    		"idProducto": item.idProducto,
+		    		"titulo": item.titulo,
+		    		"precio": item.precio,
+		    		"tipo": item.tipo,
+		    		"cantidad": item.cantidad
+		    	});
+		    });
+
+		    console.log('data',JSON.stringify(data));
+		    return JSON.stringify(data);
+	    
+	    }
+	    else{
+	        $(".cuerpoCarrito").html('<div class="well">Aún no hay productos en el carrito de compras.</div>');
+	        $(".sumaCarrito").hide();
+	        $(".cabeceraCheckout").hide();
+	    }
+	}
+
 	paypal.Buttons({
 		createOrder: function() {
 			return fetch(rutaFrontEnd + 'ajax/checkout.ajax.php', {
 				method: 'post',
 				headers: {
 					'content-type': 'application/json'
-				}
+				},
+				body: getItems()
 			}).then(function(res) {
-				//console.log('res',res.json());
-				// res.text().then(res => {
-				// 	console.log('res', res.toLocaleString());
-
-				// })
 				return res.json();
 			}).then(function(data) {
 				console.log('data', data);
@@ -268,44 +203,15 @@ TABLA CARRITO DE COMPRAS
 	            'content-type': 'application/json'
 	          },
 	          body: JSON.stringify({
-	            orderID: data.orderID
+	            orderID: details.id
 	          })
 	        })
 	      });
 	    },onError: function (err) {
 		    console.log('err', err);
 		}
+  	}).render('#paypal-button-container');
 
-    // createOrder: function(data, actions) {
-    //   // Set up the transaction
-    //   return actions.order.create({
-    //     purchase_units: [{
-    //       amount: {
-    //         value: '0.01'
-    //       }
-    //     }]
-    //   });
-    // },
-    // onApprove: function(data, actions) {
-    // 	actions.order.get().then(function(data){
-    // 		console.log(data);
-    // 	});
-    // 	// Capture the funds from the transaction
-    // 	return actions.order.capture().then(function(details) {
-    //     // Show a success message to your buyer
-    //     console.log('details', details);
-    //     alert('Transaction completed by ' + details.payer.name.given_name);
-    //     return fetch('/paypal-transaction-complete', {
-    //       method: 'post',
-    //       headers: {
-    //         'content-type': 'application/json'
-    //       },
-    //       body: JSON.stringify({
-    //         orderID: data.orderID
-    //       })
-    //     });
-    //   });
-    // }
 
-  }).render('#paypal-button-container');
+	
 </script>

@@ -3,7 +3,6 @@
 $url = Ruta::ctrRuta();
 
 ?>
-<script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_ENV['PAYPAL_SANDBOX_CLIENT_ID']?>&currency=USD"></script>
 <!--=====================================
 BREADCRUMB CARRITO DE COMPRAS
 ======================================-->
@@ -308,42 +307,8 @@ TABLA CARRITO DE COMPRAS
         </div>
         
     </div>
-    
+     
 </div>
-
-<!--=====================================
-        script 
-======================================-->
-<script>
-  paypal.Buttons({
-    createOrder: function(data, actions) {
-      // Set up the transaction
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '0.01'
-          }
-        }]
-      });
-    },
-    onApprove: function(data, actions) {
-      // Capture the funds from the transaction
-      return actions.order.capture().then(function(details) {
-        // Show a success message to your buyer
-        alert('Transaction completed by ' + details.payer.name.given_name);
-        return fetch('/paypal-transaction-complete', {
-          method: 'post',
-          headers: {
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify({
-            orderID: data.orderID
-          })
-        });
-      });
-    }
-  }).render('#paypal-button-container');
-</script>
 <?php
 /*
 Client ID: ASK-tRIh-stMLfXorejvNakUiOMR7CPyGHlt1AanMtnozv986EPBg0WpjB3sfqtgEFPVhmqOisiXqFcz
@@ -352,5 +317,11 @@ $_ENV['PAYPAL_APP_ID']
 
 sb-0eq1j132915@personal.example.com
 N>6#x+#>
+
+Precio de arnes-de-cabina-para-fuso-1217
+13166.8
+
+Precio de arnes-de-motor-cummins
+7052.58
  */
 ?>

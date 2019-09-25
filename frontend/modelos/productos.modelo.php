@@ -151,6 +151,20 @@ class ModeloProductos{
         $stmt -> close();
         $stmt = null;
     }
+
+    static public function mdlGetProducto($id){
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM productos WHERE idProducto = :idProducto");
+        $stmt->bindParam(":idProducto", $id, PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return $stmt->fetch();
+        }else{
+            return "error";
+        }
+
+        $stmt -> close();
+        $stmt = null;
+    }
     
 }
 ?>
