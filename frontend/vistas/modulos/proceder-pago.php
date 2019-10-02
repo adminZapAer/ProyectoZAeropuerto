@@ -4,7 +4,7 @@ $url = Ruta::ctrRuta();
 
 //disable-card=visa,mastercard
 ?>
-<script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_ENV['PAYPAL_SANDBOX_CLIENT_ID']?>&currency=MXN&debug=false"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_ENV['PAYPAL_SANDBOX_CLIENT_ID']?>&currency=MXN&debug=false&disable-card=visa,mastercard,amex"></script>
 <!--=====================================
 BREADCRUMB CARRITO DE COMPRAS
 ======================================-->
@@ -52,7 +52,7 @@ TABLA CARRITO DE COMPRAS
 			CUERPO CARRITO DE COMPRAS
 			======================================-->
 			
-			<div class="panel-body cuerpoCarrito">
+			<div class="panel-body">
 	            
 	            <button type="button" data-dismiss="modal" class="close">&times;</button>
 	            
@@ -64,7 +64,7 @@ TABLA CARRITO DE COMPRAS
 	                    
 	                    <h4 class="text-center well text-muted text-uppercase">Elige una forma de pago</h4>
 	                    
-	                    <figure class="col-xs-6">
+	                    <figure class="col-xs-6 col-xs-offset-3">
 	                        
 	                        <center>
 	                           
@@ -76,7 +76,7 @@ TABLA CARRITO DE COMPRAS
 	                        
 	                    </figure>
 	                    
-	                    <figure class="col-xs-6">
+	                    <!-- <figure class="col-xs-6">
 	                        
 	                        <center>
 	                            
@@ -86,15 +86,11 @@ TABLA CARRITO DE COMPRAS
 	                        
 	                        <img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">
 	                        
-	                    </figure>
+	                    </figure> -->
 	                    
 	                </div>
 	                
 	                <br>
-	                
-	                <div class="col-xs-12 col-md-4 col-md-offset-5">
-	                	<button class="btn btn-lg btn-default backColor btnPagar">REALIZAR PAGO</button>
-	                </div>
 	                
 	            </div>
 				
@@ -104,36 +100,7 @@ TABLA CARRITO DE COMPRAS
 			<!--=====================================
 			BOTÓN CHECKOUT
 			======================================-->
-			
-			<div class="panel-heading cabeceraCheckout">
-				
-				<?php
-                
-                if(isset($_SESSION["validarSesion"])){
-                    
-                    if($_SESSION["validarSesion"] == "ok"){
-                        
-                        echo '
-                        <a id="btnCheckout" href="#modalCheckout" data-toggle="modal" idUsuario="'.$_SESSION["idUsuario"].'">
-                            <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
-                        </a>
-                        ';
-                        
-                    }
-                    
-                }
-				else{
-                    echo'
-                    <a href="#modalIngreso" data-toggle="modal">
-                        <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
-                    </a>
-                    ';
-                }
-                
-                
-				?>
-				
-			</div>
+
 
 		</div>
 
@@ -172,6 +139,13 @@ TABLA CARRITO DE COMPRAS
 	}
 
 	paypal.Buttons({
+		style: {
+		    layout:  'vertical',
+		    color:   'gold',
+		    shape:   'pill',
+		    size:    '55',
+		    label:   'paypal'
+		  },
 		createOrder: function() {
 			return fetch(rutaFrontEnd + 'ajax/checkout.ajax.php', {
 				method: 'post',
@@ -182,10 +156,10 @@ TABLA CARRITO DE COMPRAS
 			}).then(function(res) {
 				return res.json();
 			}).then(function(data) {
-				console.log('data', data);
+				// console.log('data', data);
 				return data.result.id; // Use the same key name for order ID on the client and server
 			}).catch(function(except) {
-				console.log('except', except);
+				// console.log('except', except);
 				return false;
 			});
 		},onApprove: function(data, actions) {
@@ -196,19 +170,47 @@ TABLA CARRITO DE COMPRAS
 	    	return actions.order.capture().then(function(details) {
 	        // Show a success message to your buyer
 	        console.log('details', details);
-	        alert('Transaction completed by ' + details.payer.name.given_name);
-	        return fetch('/paypal-transaction-complete', {
-	          method: 'post',
-	          headers: {
-	            'content-type': 'application/json'
-	          },
-	          body: JSON.stringify({
-	            orderID: details.id
-	          })
-	        })
+
+	        swal({
+			  title: "Transacción aceptada",
+			  text: "Compra realizada con éxito",
+			  type: "success",
+			  confirmButtonText: "Aceptar",
+			  closeOnConfirm: false
+			},function(isConfirm){
+				if (isConfirm) {
+					localStorage.removeItem("listaProductos");
+					localStorage.removeItem("sumaCesta");
+					localStorage.removeItem("cantidadCesta");
+					window.location = rutaFrontEnd;
+				} 
+			});
+	        // return fetch('/paypal-transaction-complete', {
+	        //   method: 'post',
+	        //   headers: {
+	        //     'content-type': 'application/json'
+	        //   },
+	        //   body: JSON.stringify({
+	        //     orderID: details.id
+	        //   })
+	        // })
 	      });
-	    },onError: function (err) {
+	    },onCancel: function (data) {
+		    window.location = rutaFrontEnd + 'carrito-de-compras';
+		},onError: function (err) {
 		    console.log('err', err);
+		    swal({
+			  title: "Ocurrio un error",
+			  text: "Favor de intentar de nuevo o más tarde, disculpe las molestias.",
+			  type: "warning",
+			  confirmButtonText: "¡Cerrar!",
+			  closeOnConfirm: false
+			},
+			function(isConfirm){
+				 if (isConfirm) {	   
+				    window.location = rutaFrontEnd;
+				  } 
+			});
 		}
   	}).render('#paypal-button-container');
 

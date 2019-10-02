@@ -15,7 +15,7 @@ BREADCRUMB CARRITO DE COMPRAS
 			
 			<ul class="breadcrumb fondoBreadcrumb text-uppercase">
 				
-				<li><a href="<?php echo $url;  ?>">Inicio</a></li>
+				<li><a href="<?php echo $url; ?>">Inicio</a></li>
 				<li class="active pagActiva"><?php echo $rutas[0] ?></li>
 
 			</ul>

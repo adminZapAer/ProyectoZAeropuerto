@@ -77,28 +77,15 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 	$orderId = "";
 	if ($order->statusCode == 201)
 	{
-	    // print "Links:\n";
-	    // for ($i = 0; $i < count($order->result->links); ++$i)
-	    // {
-	    //     $link = $order->result->links[$i];
-	    //     print "\t{$link->rel}: {$link->href}\tCall Type: {$link->method}\n";
-	    // }
-	    // print "Created Successfully\n";
-	    // print "Copy approve link and paste it in browser. Login with buyer account and follow the instructions.\nOnce approved hit enter...\n";
 	    echo json_encode($order, JSON_PRETTY_PRINT);
 	    return $order;
 	}
 	else {
 		return json_encode(['error'=>$order]);
-	    //exit(1);
 	}
 }
 
-if(isset($_GET)){
-	echo "GET";
-	echo getenv('PAYPAL_SANDBOX_CLIENT_ID');
-	echo getenv('PAYPAL_SANDBOX_CLIENT_SECRET');
-}
+   
 /*
 
 [0] => Array
