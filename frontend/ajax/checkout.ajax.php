@@ -1,10 +1,14 @@
 <?php
 
-require_once "../controladores/usuarios.controlador.php";
-require_once "../modelos/usuarios.modelo.php";
+require_once "../../vendor/paypal/paypal-checkout-sdk/samples/CaptureIntentExamples/CreateOrder.php";
+require_once '../../vendor/autoload.php';
+use Sample\CaptureIntentExamples\CreateOrder;
+use Sample\CaptureIntentExamples\CaptureOrder;
 
+$dotenv = Dotenv\Dotenv::create('../../');
+$dotenv->load();
 
-class AjaxUsuarios{
+class AjaxCheckout{
     
     /*========================================
     *        VALIDAR CORREO EXISTENTE        *
@@ -61,34 +65,39 @@ class AjaxUsuarios{
 }
 
 /*========================================
-*        VALIDAR CORREO EXISTENTE        *
+*        CREAR ORDEN DE COMPRA           *
 ========================================*/
-if(isset($_POST["validarEmail"])){
-    $valEmail = new AjaxUsuarios();
-    $valEmail -> validarEmail = $_POST["validarEmail"];
-    $valEmail -> ajaxValidarEmail();
+if($_SERVER['REQUEST_METHOD'] === "POST"){
+	$request_body = file_get_contents('php://input');
+	$data = json_decode($request_body,true);
+	$order = CreateOrder::createOrder(false, $data);
+	// echo print_r($order);
+	// return false;
+    //print "Creating Order...\n";
+	$orderId = "";
+	if ($order->statusCode == 201)
+	{
+	    echo json_encode($order, JSON_PRETTY_PRINT);
+	    return $order;
+	}
+	else {
+		return json_encode(['error'=>$order]);
+	}
 }
 
-/*=============================================
-AGREGAR A LISTA DE DESEOS
-=============================================*/	
+   
+/*
 
-if(isset($_POST["idUsuario"])){
+[0] => Array
+        (
+            [idProducto] => 4
+            [titulo] => Manguera para unidad O500
+            [precio] => 469.23
+            [tipo] => fisico
+            [cantidad] => 2
+        )
 
-	$deseo = new AjaxUsuarios();
-	$deseo -> idUsuario = $_POST["idUsuario"];
-	$deseo -> idProducto = $_POST["idProducto"];
-	$deseo ->ajaxAgregarDeseo();
-}
 
-/*=============================================
-QUITAR PRODUCTO DE LISTA DE DESEOS
-=============================================*/
+*/
 
-if(isset($_POST["idDeseo"])){
-
-	$quitarDeseo = new AjaxUsuarios();
-	$quitarDeseo -> idDeseo = $_POST["idDeseo"];
-	$quitarDeseo ->ajaxQuitarDeseo();
-}
->>>>>>> origin/paypal
+?>

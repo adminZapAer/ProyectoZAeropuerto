@@ -233,7 +233,7 @@
                 include "modulos/infoproductos.php";
             }
             
-            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas"){
+            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas" || $rutas[0] === "proceder-pago"){
                 include "modulos/".$rutas[0].".php";
             }
             

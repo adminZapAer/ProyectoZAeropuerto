@@ -3,7 +3,6 @@
 $url = Ruta::ctrRuta();
 
 ?>
-
 <!--=====================================
 BREADCRUMB CARRITO DE COMPRAS
 ======================================-->
@@ -16,7 +15,7 @@ BREADCRUMB CARRITO DE COMPRAS
 			
 			<ul class="breadcrumb fondoBreadcrumb text-uppercase">
 				
-				<li><a href="<?php echo $url;  ?>">Inicio</a></li>
+				<li><a href="<?php echo $url; ?>">Inicio</a></li>
 				<li class="active pagActiva"><?php echo $rutas[0] ?></li>
 
 			</ul>
@@ -129,7 +128,7 @@ TABLA CARRITO DE COMPRAS
                     if($_SESSION["validarSesion"] == "ok"){
                         
                         echo '
-                        <a id="btnCheckout" href="#modalCheckout" data-toggle="modal" idUsuario="'.$_SESSION["idUsuario"].'">
+                        <a id="btnCheckout" href="'.$url.'proceder-pago" data-toggle="modal" idUsuario="'.$_SESSION["idUsuario"].'">
                             <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
                         </a>
                         ';
@@ -160,6 +159,7 @@ TABLA CARRITO DE COMPRAS
         VENTANA MODAL PARA CHECKOUT
 ======================================-->
 <div id="modalCheckout" class="modal fade modalFormulario" role="dialog">
+
     
     <div class="modal-content modal-dialog">
         
@@ -203,7 +203,7 @@ TABLA CARRITO DE COMPRAS
                     
                     <h4 class="text-center well text-muted text-uppercase">Elige una forma de pago</h4>
                     
-                    <!--<figure class="col-xs-6">
+                    <figure class="col-xs-6">
                         
                         <center>
                            
@@ -211,9 +211,9 @@ TABLA CARRITO DE COMPRAS
                             
                         </center>
                         
-                        <img src="<?php echo $url; ?>vistas/img/plantilla/paypal.jpg" alt="" class="img-thumbnail">
+                        <div id="paypal-button-container"></div>
                         
-                    </figure>-->
+                    </figure>
                     
                     <figure class="col-xs-6">
                         
@@ -307,5 +307,21 @@ TABLA CARRITO DE COMPRAS
         </div>
         
     </div>
-    
+     
 </div>
+<?php
+/*
+Client ID: ASK-tRIh-stMLfXorejvNakUiOMR7CPyGHlt1AanMtnozv986EPBg0WpjB3sfqtgEFPVhmqOisiXqFcz
+Secret: E0mFB4iHR2HFG-amSdXx3o4wjC0dUUfrEEjy56GDHCDUBb4ej97AxvmMk00rg5dwK6INrFtVorggLySm
+$_ENV['PAYPAL_APP_ID']
+
+sb-0eq1j132915@personal.example.com
+N>6#x+#>
+
+Precio de arnes-de-cabina-para-fuso-1217
+13166.8
+
+Precio de arnes-de-motor-cummins
+7052.58
+ */
+?>

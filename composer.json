@@ -1,0 +1,13 @@
+{
+    "name": "proyecto/zaeropuerto",
+    "description": "e-commerce",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^3.6",
+        "paypal/rest-api-sdk-php": "*",
+        "paypal/paypal-checkout-sdk": "1.0.0"
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "^3.6"
+    }
+}

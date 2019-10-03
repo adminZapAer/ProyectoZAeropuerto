@@ -15,6 +15,16 @@ require_once "modelos/rutas.php";
 
 require_once "PHPMailer/PHPMailerAutoload.php";
 
+//Biblioteca para leer variables de entorno de archivo
+require('../vendor/autoload.php');
+
+/*========================================
+    CARGA DE VARIABLES DE ENTORNO
+========================================*/
+
+$dotenv = Dotenv\Dotenv::create('../');
+$dotenv->load();
+
 $template = new ControladorPlantilla();
 $template -> plantilla();
 
