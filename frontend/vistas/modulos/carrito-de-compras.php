@@ -203,7 +203,7 @@ TABLA CARRITO DE COMPRAS
                     
                     <h4 class="text-center well text-muted text-uppercase">Elige una forma de pago</h4>
                     
-                    <figure class="col-xs-6">
+                    <!--<figure class="col-xs-6">
                         
                         <center>
                            
@@ -213,7 +213,7 @@ TABLA CARRITO DE COMPRAS
                         
                         <img src="<?php echo $url; ?>vistas/img/plantilla/paypal.jpg" alt="" class="img-thumbnail">
                         
-                    </figure>
+                    </figure>-->
                     
                     <figure class="col-xs-6">
                         

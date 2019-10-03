@@ -136,6 +136,8 @@
         
         <link rel="stylesheet" href="<?php echo $url;?>vistas/css/ofertas.css">
         
+        <link rel="stylesheet" href="<?php echo $url;?>vistas/css/footer.css">
+        
         <!--==================================
                 PLUGGINS DE JAVASCRIPT
         ===================================-->
@@ -249,6 +251,7 @@
             
             include "modulos/destacados.php";
         }
+        include "modulos/footer.php";
         ?>
         
         <input type="hidden" value="<?php echo $url;?>" id = "rutaFrontend">

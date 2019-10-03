@@ -12,8 +12,8 @@ class Ruta{
                 Ruta Lado Servidor
     ---------------------------------------*/
     public function ctrRutaServidor(){
-        
-        return "http://localhost/backend/";
+        return "http://localhost/ProyectoZAeropuerto/backend/";
+        //return "http://localhost/backend/";
         
     }
     
