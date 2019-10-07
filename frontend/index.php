@@ -25,7 +25,6 @@ if (file_exists(__DIR__.'/../.env')){
 	$dotenv = Dotenv\Dotenv::create('../');
 	$dotenv->overload();
 }
-print_r($dotenv);
 
 $template = new ControladorPlantilla();
 $template -> plantilla();
