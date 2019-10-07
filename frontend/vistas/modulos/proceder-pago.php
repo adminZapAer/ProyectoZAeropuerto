@@ -4,7 +4,7 @@ $url = Ruta::ctrRuta();
 
 //disable-card=visa,mastercard
 ?>
-<script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_ENV['PAYPAL_SANDBOX_CLIENT_ID']?>&currency=MXN&debug=false&disable-card=visa,mastercard,amex"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=<?php if(getenv('PAYPAL_SANDBOX_CLIENT_ID')){echo getenv('CLIENT_ID');} else{echo getenv('PAYPAL_SANDBOX_CLIENT_ID');}?>&currency=MXN&disable-card=visa,mastercard,amex"></script>
 <!--=====================================
 BREADCRUMB CARRITO DE COMPRAS
 ======================================-->
@@ -156,20 +156,43 @@ TABLA CARRITO DE COMPRAS
 			}).then(function(res) {
 				return res.json();
 			}).then(function(data) {
-				// console.log('data', data);
 				return data.result.id; // Use the same key name for order ID on the client and server
 			}).catch(function(except) {
-				// console.log('except', except);
 				return false;
 			});
 		},onApprove: function(data, actions) {
 	    	actions.order.get().then(function(data){
-	    		console.log(data);
 	    	});
 	    	// Capture the funds from the transaction
 	    	return actions.order.capture().then(function(details) {
 	        // Show a success message to your buyer
 	        console.log('details', details);
+	        /*$.ajax({
+	        	url: rutaFrontEnd+'ajax/checkout.ajax.php',
+	        	type: 'POST',
+	        	dataType: 'json',
+	        	data: {detalles: details},
+	        })
+	        .done(function() {
+	        	console.log("success");
+	        	swal({
+				  title: "Transacción aceptada",
+				  text: "Compra realizada con éxito",
+				  type: "success",
+				  confirmButtonText: "Aceptar",
+				  closeOnConfirm: false
+				},function(isConfirm){
+					if (isConfirm) {
+						localStorage.removeItem("listaProductos");
+						localStorage.removeItem("sumaCesta");
+						localStorage.removeItem("cantidadCesta");
+						window.location = rutaFrontEnd;
+					} 
+				});
+	        })
+	        .fail(function() {
+	        	console.log("error saved");
+	        });*/
 
 	        swal({
 			  title: "Transacción aceptada",
@@ -185,15 +208,7 @@ TABLA CARRITO DE COMPRAS
 					window.location = rutaFrontEnd;
 				} 
 			});
-	        // return fetch('/paypal-transaction-complete', {
-	        //   method: 'post',
-	        //   headers: {
-	        //     'content-type': 'application/json'
-	        //   },
-	        //   body: JSON.stringify({
-	        //     orderID: details.id
-	        //   })
-	        // })
+	        
 	      });
 	    },onCancel: function (data) {
 		    window.location = rutaFrontEnd + 'carrito-de-compras';

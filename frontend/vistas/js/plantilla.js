@@ -14,7 +14,8 @@ $.ajax({
     url: rutaFrontEnd+"ajax/plantilla.ajax.php",
     
     success: function(respuesta){
-        
+        //console.log('url', url);
+        //console.log('resp: ', respuesta);
         var colorFondo = JSON.parse(respuesta).colorFondo;
         var colorTexto = JSON.parse(respuesta).colorTexto;
         var barraSuperior = JSON.parse(respuesta).barraSuperior;

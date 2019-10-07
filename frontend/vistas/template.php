@@ -289,8 +289,7 @@
                     href: '<?php echo $url.$cabeceras["ruta"]; ?>',
                 }, function(response){});
                 
-                );
-            })
+            });
             
         </script>
         

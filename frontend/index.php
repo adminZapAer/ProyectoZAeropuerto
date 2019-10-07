@@ -21,9 +21,11 @@ require('../vendor/autoload.php');
 /*========================================
     CARGA DE VARIABLES DE ENTORNO
 ========================================*/
-
-$dotenv = Dotenv\Dotenv::create('../');
-$dotenv->load();
+if (file_exists(__DIR__.'/../.env')){
+	$dotenv = Dotenv\Dotenv::create('../');
+	$dotenv->overload();
+}
+print_r($dotenv);
 
 $template = new ControladorPlantilla();
 $template -> plantilla();
