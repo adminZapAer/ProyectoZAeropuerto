@@ -4,7 +4,7 @@ $url = Ruta::ctrRuta();
 
 //disable-card=visa,mastercard
 ?>
-<script src="https://www.paypal.com/sdk/js?client-id=<?php if(getenv('PAYPAL_SANDBOX_CLIENT_ID')){echo getenv('CLIENT_ID');} else{echo getenv('PAYPAL_SANDBOX_CLIENT_ID');}?>&currency=MXN&disable-card=visa,mastercard,amex"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=<?php if(getenv('PAYPAL_SANDBOX_CLIENT_ID')){echo getenv('PAYPAL_SANDBOX_CLIENT_ID');} else{echo getenv('CLIENT_ID');}?>&currency=MXN&disable-card=visa,mastercard,amex"></script>
 <!--=====================================
 BREADCRUMB CARRITO DE COMPRAS
 ======================================-->
@@ -54,7 +54,7 @@ TABLA CARRITO DE COMPRAS
 			
 			<div class="panel-body">
 	            
-	            <button type="button" data-dismiss="modal" class="close">&times;</button>
+	            <button class="btn btn-success" id="email">Send email</button>
 	            
 	            <div class="contenidoCheckout">
 	                	                
@@ -112,6 +112,25 @@ TABLA CARRITO DE COMPRAS
         script 
 ======================================-->
 <script>
+	$('#email').on('click', function(event) {
+		event.preventDefault();
+		$.ajax({
+			url: rutaFrontEnd + 'ajax/checkout.ajax.php',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				detalles: getItems(),
+				usuario: JSON.stringify(localStorage.getItem("usuario"))
+			},
+		})
+		.done(function(res) {
+			console.log("success", res);
+		})
+		.fail(function(err) {
+			console.log("error", err);
+		});
+		
+	});
   	/* OBTENCION DE LOS ELEMENTOS A COMPRAR */
 	function getItems() {
 	    if(localStorage.getItem("listaProductos") != null){	    
@@ -167,15 +186,18 @@ TABLA CARRITO DE COMPRAS
 	    	return actions.order.capture().then(function(details) {
 	        // Show a success message to your buyer
 	        console.log('details', details);
-	        /*$.ajax({
-	        	url: rutaFrontEnd+'ajax/checkout.ajax.php',
-	        	type: 'POST',
-	        	dataType: 'json',
-	        	data: {detalles: details},
-	        })
-	        .done(function() {
-	        	console.log("success");
-	        	swal({
+	        $.ajax({
+				url: rutaFrontEnd + 'ajax/checkout.ajax.php',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					detalles: details,
+					usuario: JSON.stringify(localStorage.getItem("usuario"))
+				},
+			})
+			.done(function(res) {
+				console.log("success", res);
+				swal({
 				  title: "Transacción aceptada",
 				  text: "Compra realizada con éxito",
 				  type: "success",
@@ -189,25 +211,25 @@ TABLA CARRITO DE COMPRAS
 						window.location = rutaFrontEnd;
 					} 
 				});
-	        })
-	        .fail(function() {
-	        	console.log("error saved");
-	        });*/
-
-	        swal({
-			  title: "Transacción aceptada",
-			  text: "Compra realizada con éxito",
-			  type: "success",
-			  confirmButtonText: "Aceptar",
-			  closeOnConfirm: false
-			},function(isConfirm){
-				if (isConfirm) {
-					localStorage.removeItem("listaProductos");
-					localStorage.removeItem("sumaCesta");
-					localStorage.removeItem("cantidadCesta");
-					window.location = rutaFrontEnd;
-				} 
+			})
+			.fail(function(err) {
+				console.log("error", err);
 			});
+
+	  //       swal({
+			//   title: "Transacción aceptada",
+			//   text: "Compra realizada con éxito",
+			//   type: "success",
+			//   confirmButtonText: "Aceptar",
+			//   closeOnConfirm: false
+			// },function(isConfirm){
+			// 	if (isConfirm) {
+			// 		localStorage.removeItem("listaProductos");
+			// 		localStorage.removeItem("sumaCesta");
+			// 		localStorage.removeItem("cantidadCesta");
+			// 		window.location = rutaFrontEnd;
+			// 	} 
+			// });
 	        
 	      });
 	    },onCancel: function (data) {

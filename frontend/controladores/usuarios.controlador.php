@@ -172,7 +172,7 @@ class ControladorUsuarios{
     public function ctrIngresoUsuario(){
         if(isset($_POST["ingEmail"])){
             
-            if(preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["ingEmail"]) && preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])){
+            if(preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["ingEmail"]) && preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])){
                 
                 $encriptar = crypt($_POST["ingPassword"],'$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
                 
