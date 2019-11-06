@@ -192,7 +192,8 @@ TABLA CARRITO DE COMPRAS
 				dataType: 'json',
 				data: {
 					detalles: details,
-					usuario: JSON.stringify(localStorage.getItem("usuario"))
+					usuario: JSON.stringify(localStorage.getItem("usuario")),
+					productos: getItems()
 				},
 			})
 			.done(function(res) {

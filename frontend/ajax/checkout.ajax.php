@@ -4,6 +4,7 @@ require_once "../../vendor/paypal/paypal-checkout-sdk/samples/CaptureIntentExamp
 require_once '../../vendor/autoload.php';
 require_once __DIR__."/../PHPMailer/PHPMailerAutoload.php";
 require_once __DIR__ . '/../modelos/productos.modelo.php';
+require_once __DIR__ . '/../modelos/compras.modelo.php';
 require_once __DIR__ . '/../modelos/usuarios.modelo.php';
 use Sample\CaptureIntentExamples\CreateOrder;
 use Sample\CaptureIntentExamples\CaptureOrder;
@@ -21,30 +22,41 @@ class AjaxCheckout{
 	public $idProducto;
     
     //Creamos el metodo agregar deseo
-	public function ajaxAgregarCompra($detalles, $usuario){
-		print_r($detalles);
+	public function ajaxAgregarCompra($detalles, $usuario, $productos){
+		print_r($detalles['purchase_units'][0]);
 		$tabla = "usuarios";
 		$item = "idUsuario";
 		$user = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $usuario);
-		$productos = [];
-        $total = 0.0;
+		//print_r($user['idUsuario']);
+		//print_r($productos);
+		$i = 0;
+      	foreach ($detalles['purchase_units'][0]['items'] as $item) {
+			$producto = \ModeloProductos::mdlGetProducto($productos[$i]->idProducto);
+			print_r($producto);
+            if ($producto !== "error") {
+				$datos = [
+					'idUsuario' => $user['idUsuario'],
+					'metodo' => 'paypal',
+					'envio' => 1,
+					'direccion' => ModeloUsuarios::mdlMostrarDirecciones('direccion', $user['idUsuario'])[0]['colonia'],
+					'pais' => 'México',
+					'fecha' => date('Y-m-d'),
+					'statusCompraId' => 1 // en espera
+				];
+				$compra = ModeloCompras::mdlAgregarCompra('compras', $datos);
 
-      	// foreach ($detalles as $item) {
-       //      $producto = \ModeloProductos::mdlGetProducto($item['idProducto']);
-       //      if ($producto !== "error") {
-       //          $productos[] = [
-       //              'name'=>$producto['titulo'],
-       //              'description'=>$producto['descripcion'],
-       //              'unit_amount'=> array(
-       //                  'currency_code' => 'MXN',
-       //                  'value' =>strval($producto['precioOferta']),
-       //              ),
-       //              'quantity'=> $item['cantidad'],
-       //              'category'=> 'PHYSICAL_GOODS',
-       //          ];
-       //          $total += (floatval($item['cantidad']) * floatval($producto['precioOferta']));
-       //      }
-       //  }
+				$datos = [
+					'idCompra' => $compra->id,
+					'idProducto' => $producto->id,
+					'Cantidad' => $item['quantity'],
+					'precio' => $item['unit_amount']['value'],
+				];
+
+				$detalleVenta = ModeloCompras::mdlAgregarDetalleCompra('detalle_compra', $datos);
+
+			}
+			$i = $i++;
+        }
 		
       	$this->sendEmailCliente($user);
       	$this->sendEmailEmpleado($user);
@@ -191,7 +203,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 	$ajaxCheckout = new AjaxCheckout();
 
 	if (isset($_POST['detalles'])) {
-		$ajaxCheckout->ajaxAgregarCompra($_POST['detalles'], json_decode($_POST['usuario']) );
+		$ajaxCheckout->ajaxAgregarCompra($_POST['detalles'], json_decode($_POST['usuario']), json_decode($_POST['productos']) );
 
 	} else {
 		/*========================================
