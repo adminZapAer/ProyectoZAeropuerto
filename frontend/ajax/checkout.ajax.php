@@ -23,7 +23,6 @@ class AjaxCheckout{
     
     //Creamos el metodo agregar deseo
 	public function ajaxAgregarCompra($detalles, $usuario, $productos){
-		print_r($detalles['purchase_units'][0]);
 		$tabla = "usuarios";
 		$item = "idUsuario";
 		$user = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $usuario);
@@ -32,7 +31,8 @@ class AjaxCheckout{
 		$i = 0;
       	foreach ($detalles['purchase_units'][0]['items'] as $item) {
 			$producto = \ModeloProductos::mdlGetProducto($productos[$i]->idProducto);
-			print_r($producto);
+			// print_r($producto);
+			// return false;
             if ($producto !== "error") {
 				$datos = [
 					'idUsuario' => $user['idUsuario'],
@@ -43,11 +43,18 @@ class AjaxCheckout{
 					'fecha' => date('Y-m-d'),
 					'statusCompraId' => 1 // en espera
 				];
+
+				// print_r($datos);
+				// return false;
+
 				$compra = ModeloCompras::mdlAgregarCompra('compras', $datos);
 
+				// print_r($compra);
+				// return false;
+
 				$datos = [
-					'idCompra' => $compra->id,
-					'idProducto' => $producto->id,
+					'idCompra' => $compra,
+					'idProducto' => $productos[$i]->idProducto,
 					'Cantidad' => $item['quantity'],
 					'precio' => $item['unit_amount']['value'],
 				];
@@ -203,6 +210,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 	$ajaxCheckout = new AjaxCheckout();
 
 	if (isset($_POST['detalles'])) {
+		// print_r('si compro');
+		// return false;
 		$ajaxCheckout->ajaxAgregarCompra($_POST['detalles'], json_decode($_POST['usuario']), json_decode($_POST['productos']) );
 
 	} else {

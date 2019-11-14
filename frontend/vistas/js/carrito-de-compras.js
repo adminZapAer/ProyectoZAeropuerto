@@ -43,7 +43,7 @@ VISUALIZAR LOS PRODUCTOS EN LA PÁGINA CARRITO DE COMPRAS
 if(localStorage.getItem("listaProductos") != null){
     
     var listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
-    alert('Hola');
+    // alert('Hola');
     
     listaCarrito.forEach(funcionForEach);
     
@@ -130,6 +130,7 @@ if(localStorage.getItem("listaProductos") != null){
                             
                             '<p>'+
                                 
+                            // '<strong>MXN $<span>'+0+'</span></strong>'+
                                 '<strong>MXN $<span>'+costoEnvio+'</span></strong>'+
                                 
                             '</p>'+

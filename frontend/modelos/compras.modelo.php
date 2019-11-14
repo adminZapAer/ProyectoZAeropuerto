@@ -40,7 +40,8 @@ class ModeloCompras{
 
     static public function mdlAgregarCompra($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla 
+        $conexion = Conexion::conectar();
+		$stmt = $conexion->prepare("INSERT INTO $tabla 
 			(idUsuario, envio, metodo, direccion, pais, fecha, statusCompraId) 
 			VALUES (:idUsuario, :envio, :metodo, :direccion, :pais, :fecha, :statusCompraId)");
 
@@ -54,7 +55,7 @@ class ModeloCompras{
 
 		if($stmt -> execute()){
 
-			return "ok";
+			return $conexion->lastInsertId();
 
 		}else{
 
