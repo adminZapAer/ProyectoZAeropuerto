@@ -13,13 +13,25 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
         $dotenv->overload();
     }
 
+        session_start();
+
+        if(!isset($_SESSION['idUsuario'])){
+            print_r( 0 );
+            return false;
+        }
 
         $id = $_GET['id'];
+        $idUsuario = $_SESSION["idUsuario"];
 
         // print_r($id);
+        // return false;
 
         $producto = \ModeloProductos::mdlGetProducto($id);
-        $direcciones = \ModeloUsuarios::mdlMostrarDirecciones('direccion','4');
+
+        // print_r($producto);
+        // return false;
+
+        $direcciones = \ModeloUsuarios::mdlMostrarDirecciones('direccion',$idUsuario);
 
         $opts = array(
             'http' => array(
@@ -66,7 +78,10 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
             'datosDestino' => [$direcciones[0]['cp']],
         ]);
 
-        echo json_encode($response);
+        echo json_encode($response->FrecuenciaCotizadorResult->Respuesta->TipoServicio->TipoServicio[2]->CostoTotal);
+
+        // FrecuenciaCotizadorResult.Respuesta.TipoServicio.TipoServicio[2].CostoTotal
+        
 
 		// $data = json_decode($request_body,true);
 

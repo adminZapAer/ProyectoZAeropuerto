@@ -8,11 +8,19 @@
 
 luego retornamos la variable link
 */
+
+require_once __DIR__ . "/../../vendor/autoload.php";
+// // if (file_exists(__DIR__ . "/../../../.env")){
+//     $dotenv = Dotenv\Dotenv::create(__DIR__ . "/../../");
+//     $dotenv->overload();
+// // }
+
+
 class Conexion{
     public function conectar(){
-        $link = new PDO(getenv('STRING_CONECT'),
-                        getenv('DB_USER'),
-                        getenv('DB_PASSWORD'),
+        $link = new PDO($_SERVER['STRING_CONECT'],
+                        $_SERVER['DB_USER'],
+                        $_SERVER['DB_PASSWORD'],
                         array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 		                      PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
                        );

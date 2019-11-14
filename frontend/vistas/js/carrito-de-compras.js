@@ -6,12 +6,14 @@
 VISUALIZAR LA CESTA DEL CARRITO DE COMPRAS
 =============================================*/
 
+// var sumaTotal = arraySumaSubtotales.reduce(sumaArraySubtotales);
+// $(".sumaSubTotal").html('<strong>MXN $<span>'+(sumaTotal).toFixed(2)+'</span></strong>');
+
 if(localStorage.getItem("cantidadCesta") != null){
 
     $(".cantidadCesta").html(localStorage.getItem("cantidadCesta"));
     $(".sumaCesta").html(localStorage.getItem("sumaCesta"));
-    $(".sumaSubTotal span").html(localStorage.getItem("sumaCesta"));
-
+    // $(".sumaSubTotal span").html(localStorage.getItem("sumaCesta"));
 }
 else{
 
@@ -52,15 +54,16 @@ if(localStorage.getItem("listaProductos") != null){
 
         function getCostoEnvio(item){
 
+            console.log(item);
+
             $.ajax({
                 method: "GET",
                 url: rutaFrontEnd + 'ajax/costoEnvio.php',
                 data: { id: item.idProducto }
               })
-                .done(function( cotizacion ) {
-                  console.log(JSON.parse(cotizacion));
-                  costoEnvio = JSON.parse(cotizacion).FrecuenciaCotizadorResult.Respuesta.TipoServicio.TipoServicio[2].CostoTotal;
-                  console.log(costoEnvio);
+                .done(function( response ) {
+                  costoEnvio = response;
+                  console.log("COSTO ENVIO: ",costoEnvio);
                   $(".cuerpoCarrito").append(
                     '<div clas="row itemCarrito">'+
                         
@@ -741,3 +744,8 @@ $(".btnPagar").click(function(){
     console.log("PAGADO");
     
 })
+
+$(document).ready(function(){
+    sumaSubtotales();
+    console.log('FUNCION DOCUMENT READY');
+});
