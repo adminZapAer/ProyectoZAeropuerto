@@ -152,6 +152,7 @@ function getCostoEnvio(item, direccionId){
                     );
 
                     $(".cantidadItem[tipo='virtual']").attr("readonly","true");
+                    sumaSubtotales();
                 });
         }
 
@@ -789,6 +790,6 @@ $(document).on('click','.input-direccion', function(){
     sumaSubtotales();
 })
 
-$(document).ready(function(){
-    sumaSubtotales();
-});
+// $(document).ready(function(){
+//     sumaSubtotales();
+// });
