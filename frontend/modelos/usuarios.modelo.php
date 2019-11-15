@@ -424,6 +424,27 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
+	MOSTRAR UNA SOLA DIRECCION
+	=============================================*/
+
+	static public function mdlMostrarDireccion($tabla, $item, $id){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_usuario = :id_usuario AND id = :id ORDER BY id_usuario DESC");
+
+		$stmt -> bindParam(":id_usuario", $item, PDO::PARAM_INT);
+		$stmt -> bindParam(":id", $id, PDO::PARAM_INT);
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
 	ELIMINAR DIRECCION DE USUARIO
 	=============================================*/
 

@@ -31,10 +31,18 @@ BREADCRUMB CARRITO DE COMPRAS
 TABLA CARRITO DE COMPRAS
 ======================================-->
 
+
+
 <div class="container-fluid">
     
 	<div class="container">
-	    
+
+        <!-- <input type="text"> -->
+
+        <div class="row direcciones">
+            
+        </div>
+
 		<div class="panel panel-default">
             
 			<!--=====================================
@@ -128,7 +136,7 @@ TABLA CARRITO DE COMPRAS
 			======================================-->
 			
 			<div class="panel-heading cabeceraCheckout">
-				
+
 				<?php
                 
                 if(isset($_SESSION["validarSesion"])){

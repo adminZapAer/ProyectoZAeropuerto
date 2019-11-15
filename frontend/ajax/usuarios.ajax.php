@@ -91,4 +91,4 @@ if(isset($_POST["idDeseo"])){
 	$quitarDeseo -> idDeseo = $_POST["idDeseo"];
 	$quitarDeseo ->ajaxQuitarDeseo();
 }
->>>>>>> origin/paypal
+// >>>>>>> origin/paypal

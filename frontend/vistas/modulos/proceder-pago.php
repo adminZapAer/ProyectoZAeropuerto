@@ -36,16 +36,57 @@ TABLA CARRITO DE COMPRAS
 <div class="container-fluid">
     
 	<div class="container">
-	    
+
+		<p class="text-primary">Para activar el botón de pago, es necesario aceptar las politicas</p>
 		<div class="panel panel-default">
-            
+			<div class="panel-heading">
+				<small><center>TERMINOS Y CONDICIONES</center></small>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel panel-body">
+							<div class="form-check">
+								<input type="checkbox" class="politicas form-check-input" id="input-politicas-devolucion">
+								<label class="form-check-label" for="input-politicas-devolucion">He leido y acepto las políticas de devolución.</label>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel panel-body">
+								<div class="form-check">
+									<input type="checkbox" class="politicas form-check-input" id="input-terminos">
+									<label class="form-check-label" for="input-terminos">He leído y acepto los términos y condiciones.</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel panel-body">
+								<div class="form-check">
+									<input type="checkbox" class="politicas form-check-input" id="input-aviso">
+									<label class="form-check-label" for="input-aviso">He leído y acepto el aviso de privacidad.</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-default" id="componente-realizar-pago" style="display: none;">
+
 			<!--=====================================
 			CABECERA CARRITO DE COMPRAS
 			======================================-->
 			
-			<div class="panel-heading cabeceraCarrito backColor">
+			<div class="panel-heading cabeceraCarrito ">
 
-				<p >REALIZAR PAGO</p>
+				<p class="text-center" >REALIZAR PAGO</p>
 			</div>
 			
 			<!--=====================================
@@ -61,7 +102,7 @@ TABLA CARRITO DE COMPRAS
 	                <br>
 	                <!-- FORMAS DE PAGO -->
 	                <div class="formPago row">
-	                    
+
 	                    <h4 class="text-center well text-muted text-uppercase">Elige una forma de pago</h4>
 	                    
 	                    <figure class="col-xs-6 col-xs-offset-3">
@@ -73,7 +114,7 @@ TABLA CARRITO DE COMPRAS
 	                        </center>
 	                        
 	                        <div id="paypal-button-container"></div>
-	                        
+
 	                    </figure>
 	                    
 	                    <!-- <figure class="col-xs-6">
@@ -104,7 +145,7 @@ TABLA CARRITO DE COMPRAS
 
 		</div>
 
-	</div>
+	
 
 </div>
 
@@ -252,6 +293,23 @@ TABLA CARRITO DE COMPRAS
 		}
   	}).render('#paypal-button-container');
 
+
+	$(document).on('click','.politicas', function(){
+		
+			const politicas = $('.politicas');
+			// const politica_status = $.map( politicas, function(n,i){
+			// 	return n.attr('checked');
+			// } );
+
+			if( $('#input-politicas-devolucion').is(':checked') && $('#input-terminos').is(':checked') && $('#input-aviso').is(':checked') ){
+				$('#componente-realizar-pago').show('slow');
+			}else{
+				$('#componente-realizar-pago').hide('slow');
+			}
+
+
+
+	});
 
 	
 </script>

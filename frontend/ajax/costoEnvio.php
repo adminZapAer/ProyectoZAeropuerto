@@ -23,16 +23,18 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
         $id = $_GET['id'];
         $idUsuario = $_SESSION["idUsuario"];
 
-        // print_r($id);
-        // return false;
+        if(empty($_GET['direccionId'])){
+            $direcciones = \ModeloUsuarios::mdlMostrarDirecciones('direccion',$idUsuario);
+        }else{
+            $direcciones = \ModeloUsuarios::mdlMostrarDireccion('direccion',$idUsuario,$_GET['direccionId']);
+        }
+
+        if(empty($direcciones) || !count($direcciones)){
+            return 0;
+        }
 
         $producto = \ModeloProductos::mdlGetProducto($id);
-
-        // print_r($producto);
-        // return false;
-
-        $direcciones = \ModeloUsuarios::mdlMostrarDirecciones('direccion',$idUsuario);
-
+        
         $opts = array(
             'http' => array(
                 'header' => 'Content-Type:application/xml;charset=utf-8',
@@ -74,8 +76,8 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
                 'Alto' => $producto['alto'],
                 'Ancho' => $producto['ancho'],
             ],
-            'datosOrigen' => ['01000'],
-            'datosDestino' => [$direcciones[0]['cp']],
+            'datosOrigen' => ['56200'],
+            'datosDestino' => [end($direcciones)['cp']],
         ]);
 
         echo json_encode($response->FrecuenciaCotizadorResult->Respuesta->TipoServicio->TipoServicio[2]->CostoTotal);

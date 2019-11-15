@@ -9,11 +9,12 @@ VISUALIZAR LA CESTA DEL CARRITO DE COMPRAS
 // var sumaTotal = arraySumaSubtotales.reduce(sumaArraySubtotales);
 // $(".sumaSubTotal").html('<strong>MXN $<span>'+(sumaTotal).toFixed(2)+'</span></strong>');
 
+// sumaSubtotales();
+
 if(localStorage.getItem("cantidadCesta") != null){
 
     $(".cantidadCesta").html(localStorage.getItem("cantidadCesta"));
     $(".sumaCesta").html(localStorage.getItem("sumaCesta"));
-    // $(".sumaSubTotal span").html(localStorage.getItem("sumaCesta"));
 }
 else{
 
@@ -42,24 +43,15 @@ $(document).ready( function(){
 /*=============================================
 VISUALIZAR LOS PRODUCTOS EN LA PÁGINA CARRITO DE COMPRAS
 =============================================*/
-if(localStorage.getItem("listaProductos") != null){
-    
-    var listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
-    // alert('Hola');
-    
-    listaCarrito.forEach(funcionForEach);
-    
-    function funcionForEach(item, index){
 
-
-        function getCostoEnvio(item){
+function getCostoEnvio(item, direccionId){
 
             console.log(item);
 
             $.ajax({
                 method: "GET",
                 url: rutaFrontEnd + 'ajax/costoEnvio.php',
-                data: { id: item.idProducto }
+                data: { id: item.idProducto, direccionId: direccionId }
               })
                 .done(function( response ) {
                   costoEnvio = response;
@@ -161,12 +153,18 @@ if(localStorage.getItem("listaProductos") != null){
 
                     $(".cantidadItem[tipo='virtual']").attr("readonly","true");
                 });
-
-            
-
         }
 
-        getCostoEnvio(item);
+function showProducts(direccion = null){
+    // alert(direccion);
+    if(localStorage.getItem("listaProductos") != null){
+    
+    var listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
+    // alert('Hola');
+    
+    listaCarrito.forEach( function (item, index){
+
+        getCostoEnvio(item, direccion);
 
         /*=============================================
                 EVITAR MANIPULAR LA CANTIDAD EN 
@@ -174,7 +172,9 @@ if(localStorage.getItem("listaProductos") != null){
         =============================================*/
         $(".cantidadItem[tipo='virtual']").attr("readonly","true");
         
-    }
+    });
+    
+    
     
 }
 else{
@@ -182,6 +182,9 @@ else{
     $(".sumaCarrito").hide();
     $(".cabeceraCheckout").hide();
 }
+}
+
+showProducts();
 
 /*=============================================
 /*=============================================
@@ -745,7 +748,47 @@ $(".btnPagar").click(function(){
     
 })
 
+$.ajax({
+    method: "GET",
+    url: rutaFrontEnd + 'ajax/direcciones.php',
+  })
+    .done(function( response ) {
+
+        data = JSON.parse(response);
+
+        if( data.error ){
+            $(".direcciones").append(`
+            <div class="col-xs-12">
+                <div class="alert alert-danger">
+                    ${data.error}
+                </div>
+            </div>`);
+        }
+
+        console.log(JSON.parse(response));
+
+        data.direcciones.forEach( function(item){
+            console.log('ITEM DIR: ', item);
+            $(".direcciones").append(`
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="radio">
+                          <label><input type="radio" class="input-direccion" name="inputDireccion" value="${item.id}" checked>${item.colonia}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+        } );
+    });
+
+$(document).on('click','.input-direccion', function(){
+    const direcionId = $(this).val();
+    $('.cuerpoCarrito').html('');
+    showProducts(direcionId);
+    sumaSubtotales();
+})
+
 $(document).ready(function(){
     sumaSubtotales();
-    console.log('FUNCION DOCUMENT READY');
 });
