@@ -141,13 +141,13 @@ TABLA CARRITO DE COMPRAS
                 
                 if(isset($_SESSION["validarSesion"])){
                     
+                    $url = Ruta::ctrRuta();
+                    
                     if($_SESSION["validarSesion"] == "ok"){
                         
-                        echo '
-                        <a id="btnCheckout" href="'.$url.'proceder-pago" data-toggle="modal" idUsuario="'.$_SESSION["idUsuario"].'">
-                            <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
-                        </a>
-                        ';
+                        $idUsuario = $_SESSION["idUsuario"];
+                        $existeDatosFacturacion = new ControladorCarrito();
+                        $existeDatosFacturacion -> ctrComprobarDatosFacturacion();
                         
                     }
                     

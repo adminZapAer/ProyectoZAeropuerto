@@ -500,347 +500,84 @@ $ruta = $rutas[0];
             </div>
             
         </div>
-        
-        <!--==================================
-    *==          COMENTARIO            ==*
-    ===================================-->
-    
-    <br>
-    <div class="row">
-        
-        <?php
-        
-        $datos = array("idUsuario"=>"","idProducto"=>$infoProducto["idProducto"]);
-        
-        $comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
-        
-		$cantidad = 0;
-        
-        foreach ($comentarios as $key => $value){
-            
-            if($value["comentario"] != ""){
-                
-                //$cantidad += count($value["idComentario"]);
-                $cantidad += 1;
-                
-            }
-        }
-        
-        ?>
-        
-        <ul class="nav nav-tabs">
-            
-            <?php
-            
-            $cantidadCalificacion = 0;
-            
-            if($cantidad == 0){
-                
-                echo '
-                <li class="active"><a>ESTE PRODUCTO NO TIENE COMENTARIOS</a></li>
-				<l  i></li>';
-                
-            }
-            else{
-                echo '
-                <li class="active">
-                    <a>COMENTARIOS '.$cantidad.'</a>
-                </li>
-				<li>
-                    <a id="verMas" href="">Ver más</a>
-                </li>';
-                
-                $sumaCalificacion = 0;
-                
-                foreach ($comentarios as $key => $value) {
-                    
-                    if($value["calificacion"] != 0){
-                        
-                        //$cantidadCalificacion += count($value["idComentario"]);
-                        
-                        $sumaCalificacion += $value["calificacion"];
-                        
-                    }
-                    
-                }
-                //$promedio = round($sumaCalificacion/$cantidadCalificacion,1);
-                $promedio = round($sumaCalificacion/$cantidad,1);
-                
-                echo '
-                <li class="pull-right">
-                    <a class="text-muted">PROMEDIO DE CALIFICACIÓN: '.$promedio.' | ';
-                
-                if($promedio >= 0 && $promedio < 0.5){
-                    
-				    echo '
-                    <i class="fa fa-star-half-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-                    <i class="fa fa-star-o text-success"></i>';
-                    
-				}
-                else if($promedio >= 0.5 && $promedio < 1){
-                    
-                    echo '
-                    <i class="fa fa-star text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>';
-                    
-				}
-                else if($promedio >= 1 && $promedio < 1.5){
-                    echo '
-                    <i class="fa fa-star text-success"></i>
-					<i class="fa fa-star-half-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>';
-                    
-				}
-                else if($promedio >= 1.5 && $promedio < 2){
-                    
-					echo '
-                    <i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>';
-                    
-                }
-                else if($promedio >= 2 && $promedio < 2.5){
-                    
-					echo '
-                    <i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star-half-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>';
-                    
-                }
-                else if($promedio >= 2.5 && $promedio < 3){
-                    
-					echo '
-                    <i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>';
-                    
-                }
-                else if($promedio >= 3 && $promedio < 3.5){
-                    
-                    echo '
-                    <i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star-half-o text-success"></i>
-					<i class="fa fa-star-o text-success"></i>';
-                    
-				}
-                else if($promedio >= 3.5 && $promedio < 4){
-				    
-                    echo '
-                    <i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star-o text-success"></i>';
-                    
-				}
-                else if($promedio >= 4 && $promedio < 4.5){
-                    
-                    echo '
-                    <i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star-half-o text-success"></i>';
-                    
-				}
-                else{
-                    
-                    echo '
-                    <i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>
-					<i class="fa fa-star text-success"></i>';
-                    
-				}
-                
-            }
-            
-            ?>
-                </a>
-            </li>
-        </ul>
-        
         <br>
-        
-    </div>
-    
-    <div class="row comentarios">
-        
-        <?php
-        
-        foreach ($comentarios as $key => $value) {
+        <div class="clearfix"></div>
+        <!--===========================================
+        *==          TERMINOS Y CONDICIONES         ==*
+        ============================================-->
+        <div class="row politicas">
             
-            if($value["comentario"] != ""){
+            <div class="container">
                 
-                $item = "idUsuario";
-                $valor = $value["idUsuario"];
+                <ul class="nav nav-tabs">
+                    
+                    <li><a data-toggle="tab" href="#opc1">POLITICAS DE SEGURIDAD</a></li>
+                    <li><a data-toggle="tab" href="#opc2">GARANTIAS</a></li>
+                    <li><a data-toggle="tab" href="#opc3">DEVOLUCIONES</a></li>
+                    
+                    
+                </ul>
                 
-                $usuario = ControladorUsuarios::ctrMostrarUsuario($item, $valor);
-                echo '
-                <!-- Nos ayudara a agrupar el contenido de comentarios -->
-                <div class="panel-group col-md-3 col-sm-6 col-xs-12 alturaComentarios">
+                <div class="tab-content">
                     
-                    <div class="panel panel-default">
+                    <div id="opc1" class="tab-pane fade">
+                        <h3>POLITICAS DE SEGURIDAD</h3>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
                     
-                        <div class="panel-heading text-uppercase">
-                            
-                            '.$usuario["nombre"].'
-                            <span class="text-right">';
-                                
-                                if($usuario["modo"] == "directo"){
-                                    
-                                    if($usuario["foto"] == ""){
-                                        
-                                        echo '<img class="img-circle pull-right" src="'.$servidor.'vistas/img/usuarios/default/anonymous.png" width="20%">';
-                                        
-                                    }
-                                    else{
-                                        
-                                        echo '<img class="img-circle pull-right" src="'.$url.$usuario["foto"].'" width="20%">';	
-                                        
-                                    }
-                                    
-                                }
-                                else{
-                                    
-                                    echo '<img class="img-circle pull-right" src="'.$usuario["foto"].'" width="20%">';	
-                                    
-                                }
-                                
-                            echo'
-                            </span>
-                            
-                        </div>
+                    <div id="opc2" class="tab-pane fade">
                         
-                        <div class="panel-body" style="word-wrap:break-word">
-                            <small>'.$value["comentario"].'</small>
-                        </div>
+                        <h3>GRARANTIAS</h3>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
                         
-                        <div class="panel-footer">';
-                            
-                            switch($value["calificacion"]){
-                                case 0.5:
-                                    echo '
-                                    <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-								    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-								    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-								    <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-				                    break;
-                                    
-				                case 1.0:
-				                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
-								    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-								    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-								    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-								    <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-				                    break;
-                                    
-                                case 1.5:
-				                    echo '
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-				                    <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
-				                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-				                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-				                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                                    break;
-                                    
-                                case 2.0:
-                                    echo '
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                                    break;
-                                    
-                                case 2.5:
-                                    echo '
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                                    break;
-                                    
-                                case 3.0:
-                                    echo '
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                                    break;
-                                    
-                                case 3.5:
-                                    echo '
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                                    break;
-                                    
-                                case 4.0:
-                                    echo '
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                                    break;
-                                    
-                                case 4.5:
-                                    echo '
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>';
-                                    break;
-                                    
-                                case 5.0:
-                                    echo '
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                    <i class="fa fa-star text-success" aria-hidden="true"></i>';
-                                    break;
-                            }
-                            
-                        echo'
-                        </div>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.</p>
                         
                     </div>
                     
-                </div>';
+                    <div id="opc3" class="tab-pane fade">
+                        
+                        <h3>DEVOLUCIONES</h3>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                        
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.</p>
+                        
+                    </div>
+                    
+                </div>
                 
-                
-            }
+            </div>
             
-        }
-        
-        ?>
-        
         </div>
+        <br><br>
+    
         
     </div>
     

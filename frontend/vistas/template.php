@@ -220,7 +220,42 @@
                 
             }
             
+            /*-----------------------------------------------------------------------------*/
             
+            /*============================================
+                    URL´s AMIGABLES DE MARCAS
+            ============================================*/
+            $rutasMarcas = ControladorProductos::ctrMostrarRutaMarcas($item, $valor);
+            
+            if($rutas[0] == $rutasMarcas["ruta"]){
+                
+                $rutaMarca = $rutas[0];
+                
+            }
+            
+            /*============================================
+                    URL´s AMIGABLES DE TIPO DE SISTEMAS
+            ============================================*/
+            $rutasSistemas = ControladorProductos::ctrMostrarRutaSistemas($item, $valor);
+            
+            if($rutas[0] == $rutasSistemas["ruta"]){
+                
+                $rutaSistema = $rutas[0];
+                
+            }
+            
+            /*============================================
+                    URL´s AMIGABLES DE APLICACIONES
+            ============================================*/
+            $rutasAplicaciones = ControladorProductos::ctrMostrarRutaAplicaciones($item, $valor);
+            
+            if($rutas[0] == $rutasAplicaciones["ruta"]){
+                
+                $rutaAplicacion = $rutas[0];
+                
+            }
+            
+            /*-----------------------------------------------------------------------------*/
             
             /*===================================================
                 LISTA BLANCA DE URL´s AMIGABLES DE CATEGORIA
@@ -237,10 +272,27 @@
                 include "modulos/".$rutas[0].".php";
             }
             
+            /*-----------------------------------------------------------------------------*/
+            else if($rutas[0] == "marca"){
+                include "modulos/marcas.php";
+            }
+            
+            else if($rutas[0] == "tipo-de-sistema"){
+                include "modulos/sistemas.php";
+            }
+            
+            else if($rutas[0] == "aplicacion"){
+                include "modulos/aplicaciones.php";
+            }
+            else if($rutaMarca !=null || $rutaSistema !=null ||$rutaAplicacion !=null){
+                include "modulos/buscador.php";
+            }
+            /*-----------------------------------------------------------------------------*/
+            
             else if($rutas[0] == "inicio"){
                 //include "modulos/slide.php";
-
-                include "modulos/destacados.php";
+                //include "modulos/destacados.php";
+                include "modulos/familias.php";
             }
             else{
                 include "modulos/error404.php";
@@ -248,8 +300,8 @@
         }
         else{
             //include "modulos/slide.php";
-            
-            include "modulos/destacados.php";
+            //include "modulos/destacados.php";
+            include "modulos/familias.php";
         }
         include "modulos/footer.php";
         ?>

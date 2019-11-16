@@ -121,7 +121,7 @@ class ModeloProductos{
     }
     
     static public function mdlBuscarProductos($tabla, $busqueda, $ordenar, $modo, $base, $tope){
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%' OR detalles like '%$busqueda%' ORDER BY $ordenar $modo LIMIT $base, $tope");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%' OR detalles like '%$busqueda%' OR marca like '%$busqueda%' OR familia like '%$busqueda%' OR aplicacion like '%$busqueda%' OR sku like '%$busqueda%' ORDER BY $ordenar $modo LIMIT $base, $tope");
         $stmt -> execute();
         return $stmt -> fetchAll();
         $stmt -> close();
@@ -129,7 +129,7 @@ class ModeloProductos{
     }
     
     static public function mdlListarProductosBusqueda($tabla, $busqueda){
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%'");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%' OR detalles like '%$busqueda%' OR marca like '%$busqueda%' OR familia like '%$busqueda%' OR aplicacion like '%$busqueda%' OR sku like '%$busqueda%' ORDER BY $ordenar $modo LIMIT $base, $tope");
         $stmt -> execute();
         return $stmt -> fetchAll();
         $stmt -> close();
@@ -165,6 +165,262 @@ class ModeloProductos{
         $stmt -> close();
         $stmt = null;
     }
+    
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    
+    /*=======================================================
+                        MOSTRAR MARCAS
+    =======================================================*/
+    static public function mdlMostrarMarcas($tabla, $ordenar, $item, $valor, $base, $tope, $modo){
+        
+        if($item != null){
+            
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar $modo LIMIT $base, $tope");//hacemos una consulta a la tabla, el cual va a estar ordenado por la variable $ordenar en modo descendente, limitando a 4 registros
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+            
+        }
+        else{
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla LIMIT $base, $tope");//hacemos una consulta a la tabla, el cual va a estar ordenado por la variable $ordenar en modo descendente, limitando a 4 registros
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+        }
+        
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        LISTAR MARCAS
+    =======================================================*/
+    
+    static public function mdlListarMarcas($tabla, $ordenar, $item, $valor){
+        if($item != null){
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar DESC");
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt -> execute();
+            
+            return $stmt -> fetchAll();
+        }
+        else{
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla");
+            $stmt -> execute();
+            
+            return $stmt -> fetchAll();
+        }
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        MOSTRAR RUTA MARCA
+    =======================================================*/    
+    
+    static public function mdlMostrarRutaMarcas($tabla, $item, $valor){
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+        //Vamos a enlazar parámetros con el metodo bindParam en donde item es igual al parametro recibido :$item y decimos que el parametro es entero
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        $stmt -> execute();
+        
+        return $stmt -> fetch();
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        MOSTRAR SISTEMA
+    =======================================================*/
+    static public function mdlMostrarSistemas($tabla, $ordenar, $item, $valor, $base, $tope, $modo){
+        
+        if($item != null){
+            
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar $modo LIMIT $base, $tope");//hacemos una consulta a la tabla, el cual va a estar ordenado por la variable $ordenar en modo descendente, limitando a 4 registros
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+            
+        }
+        else{
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla LIMIT $base, $tope");//hacemos una consulta a la tabla, el cual va a estar ordenado por la variable $ordenar en modo descendente, limitando a 4 registros
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+        }
+        
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        LISTAR SISTEMA
+    =======================================================*/
+    
+    static public function mdlListarSistemas($tabla, $ordenar, $item, $valor){
+        if($item != null){
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar DESC");
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt -> execute();
+            
+            return $stmt -> fetchAll();
+        }
+        else{
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla");
+            $stmt -> execute();
+            
+            return $stmt -> fetchAll();
+        }
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        MOSTRAR RUTA SISTEMA
+    =======================================================*/    
+    
+    static public function mdlMostrarRutaSistemas($tabla, $item, $valor){
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+        //Vamos a enlazar parámetros con el metodo bindParam en donde item es igual al parametro recibido :$item y decimos que el parametro es entero
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        $stmt -> execute();
+        
+        return $stmt -> fetch();
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        MOSTRAR APLICACIONES
+    =======================================================*/
+    static public function mdlMostrarAplicaciones($tabla, $ordenar, $item, $valor, $base, $tope, $modo){
+        
+        if($item != null){
+            
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar $modo LIMIT $base, $tope");//hacemos una consulta a la tabla, el cual va a estar ordenado por la variable $ordenar en modo descendente, limitando a 4 registros
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+            
+        }
+        else{
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla LIMIT $base, $tope");//hacemos una consulta a la tabla, el cual va a estar ordenado por la variable $ordenar en modo descendente, limitando a 4 registros
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+        }
+        
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        LISTAR APLICACIONES
+    =======================================================*/
+    
+    static public function mdlListarAplicaciones($tabla, $ordenar, $item, $valor){
+        if($item != null){
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar DESC");
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt -> execute();
+            
+            return $stmt -> fetchAll();
+        }
+        else{
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla");
+            $stmt -> execute();
+            
+            return $stmt -> fetchAll();
+        }
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        MOSTRAR RUTA APLICACIONES
+    =======================================================*/    
+    
+    static public function mdlMostrarRutaAplicaciones($tabla, $item, $valor){
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+        //Vamos a enlazar parámetros con el metodo bindParam en donde item es igual al parametro recibido :$item y decimos que el parametro es entero
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        $stmt -> execute();
+        
+        return $stmt -> fetch();
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*======================================
+    *==        ACTUALIZAR PROMOCION PRODUCTO        ==*
+    ======================================*/
+    static public function mdlActualizarPromocionProd($tabla,$idProducto,$item,$valor){
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item = :$item WHERE idProducto = :idProducto");
+        
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        
+        $stmt -> bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+        
+        if($stmt -> execute()){
+            return "ok";
+        }
+        else{
+            return "error";
+        }
+        
+        $stmt -> close();
+        
+        $stmt = null;
+    }
+    
+    /*======================================
+    *==        ACTUALIZAR PROMOCION SUBCATEGORIA        ==*
+    ======================================*/
+    static public function mdlActualizarPromocionSub($tabla,$idSubcategoria,$item,$valor){
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item = :$item WHERE idSubcategoria = :idSubcategoria");
+        
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        
+        $stmt -> bindParam(":idSubcategoria", $idSubcategoria, PDO::PARAM_INT);
+        
+        if($stmt -> execute()){
+            return "ok";
+        }
+        else{
+            return "error";
+        }
+        
+        $stmt -> close();
+        
+        $stmt = null;
+    }
+    
+    /*======================================
+    *==        ACTUALIZAR PROMOCION CATEGORIA        ==*
+    ======================================*/
+    static public function mdlActualizarPromocionCat($tabla,$idCategoria,$item,$valor){
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item = :$item WHERE idCategoria = :idCategoria");
+        
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        
+        $stmt -> bindParam(":idCategoria", $idCategoria, PDO::PARAM_INT);
+        
+        if($stmt -> execute()){
+            return "ok";
+        }
+        else{
+            return "error";
+        }
+        
+        $stmt -> close();
+        
+        $stmt = null;
+    }
+    
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     
 }
 ?>
