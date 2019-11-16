@@ -116,5 +116,159 @@ class ControladorProductos{
         
         return $respuesta;
     }
+    
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    
+    /*=======================================================
+                        MOSTRAR MARCAS
+    =======================================================*/
+    static public function ctrMostrarMarcas($ordenar, $item, $valor, $base, $tope, $modo){
+        
+        $tabla = "marcas";
+        
+        $respuesta = ModeloProductos::mdlMostrarMarcas($tabla, $ordenar, $item, $valor, $base, $tope, $modo);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                        LISTAR MARCAS
+    =======================================================*/
+    static public function ctrListarMarcas($ordenar, $item, $valor){
+        
+        $tabla = "marcas";
+        
+        $respuesta = ModeloProductos::mdlListarMarcas($tabla, $ordenar, $item, $valor);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                    MOSTRAR RUTA MARCAS
+    =======================================================*/
+    static public function ctrMostrarRutaMarcas($item, $valor){
+        
+        $tabla = "marcas";
+        
+        $respuesta = ModeloProductos::mdlMostrarRutaMarcas($tabla, $item, $valor);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                        MOSTRAR SISTEMAS
+    =======================================================*/
+    static public function ctrMostrarSistemas($ordenar, $item, $valor, $base, $tope, $modo){
+        
+        $tabla = "sistemas";
+        
+        $respuesta = ModeloProductos::mdlMostrarSistemas($tabla, $ordenar, $item, $valor, $base, $tope, $modo);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                        LISTAR SISTEMAS
+    =======================================================*/
+    static public function ctrListarSistemas($ordenar, $item, $valor){
+        
+        $tabla = "sistemas";
+        
+        $respuesta = ModeloProductos::mdlListarSistemas($tabla, $ordenar, $item, $valor);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                    MOSTRAR RUTA SISTEMAS
+    =======================================================*/
+    static public function ctrMostrarRutaSistemas($item, $valor){
+        
+        $tabla = "sistemas";
+        
+        $respuesta = ModeloProductos::mdlMostrarRutaSistemas($tabla, $item, $valor);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                        MOSTRAR APLICACIONES
+    =======================================================*/
+    static public function ctrMostrarAplicaciones($ordenar, $item, $valor, $base, $tope, $modo){
+        
+        $tabla = "aplicaciones";
+        
+        $respuesta = ModeloProductos::mdlMostrarAplicaciones($tabla, $ordenar, $item, $valor, $base, $tope, $modo);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                        LISTAR APLICACIONES
+    =======================================================*/
+    static public function ctrListarAplicaciones($ordenar, $item, $valor){
+        
+        $tabla = "aplicaciones";
+        
+        $respuesta = ModeloProductos::mdlListarAplicaciones($tabla, $ordenar, $item, $valor);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                    MOSTRAR RUTA APLICACIONES
+    =======================================================*/
+    static public function ctrMostrarRutaAplicaciones($item, $valor){
+        
+        $tabla = "aplicaciones";
+        
+        $respuesta = ModeloProductos::mdlMostrarRutaAplicaciones($tabla, $item, $valor);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=============================================
+	               ACTUALIZAR ESTATUS PROMO PRODUCTOS
+	=============================================*/
+    static public function ctrActualizarPromocionProd($idProducto, $item, $valor){
+        $tabla = "productos";
+        
+        $respuesta = ModeloProductos::mdlActualizarPromocionProd($tabla,$idProducto,$item,$valor);
+        
+        return $respuesta;
+    }
+    
+    /*=============================================
+	               ACTUALIZAR ESTATUS PROMO SUBCATEGORIA
+	=============================================*/
+    static public function ctrActualizarPromocionSub($idSubcategoria, $item, $valor){
+        $tabla = "subcategorias";
+        
+        $respuesta = ModeloProductos::mdlActualizarPromocionSub($tabla,$idSubcategoria,$item,$valor);
+        
+        return $respuesta;
+    }
+    
+    /*=============================================
+	               ACTUALIZAR ESTATUS PROMO CATEGORIA
+	=============================================*/
+    static public function ctrActualizarPromocionCat($idCategoria, $item, $valor){
+        $tabla = "categorias";
+        
+        $respuesta = ModeloProductos::mdlActualizarPromocionCat($tabla,$idCategoria,$item,$valor);
+        
+        return $respuesta;
+    }
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    
 }
 ?>

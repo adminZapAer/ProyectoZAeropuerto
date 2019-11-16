@@ -50,7 +50,7 @@
                 
                 <h5>
                     
-                    <i class="fa fa-phone-square" aria-hidden="true"></i>&#160;&#160;(595) 555-55-55
+                    <i class="fa fa-phone-square" aria-hidden="true"></i>&#160;&#160;(595) 954-99-33
                     
                     <br><br>
                     

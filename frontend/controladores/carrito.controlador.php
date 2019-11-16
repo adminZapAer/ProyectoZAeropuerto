@@ -37,5 +37,59 @@ class ControladorCarrito{
         
 	}
     
+    /*=============================================
+    VERIFICAR SI EXISTEN DATOS FACTURACION
+    =============================================*/
+    
+    public function ctrComprobarDatosFacturacion(){
+        
+        $tabla = "facturacion";
+        
+        if(isset($_SESSION["validarSesion"])){
+            
+            $url = Ruta::ctrRuta();
+            
+            if($_SESSION["validarSesion"] == "ok"){
+                
+                $idUsuario = $_SESSION["idUsuario"];
+                
+                $respuesta = ModeloCarrito::mdlComprobarDatosFacturacion($idUsuario,$tabla);
+                
+                /*if($respuesta != null){
+                    echo "<br>esta bien<br>";
+                    //var_dump($respuesta);
+                    echo $respuesta["rfc"];
+                }
+                else{
+                    echo "<br>esta mal <br>";
+                    var_dump($respuesta);
+                }*/
+                
+                
+                if($respuesta != null){
+                    
+                    echo '
+                    <a id="btnCheckout" href="'.$url.'proceder-pago" data-toggle="modal" idUsuario="'.$_SESSION["idUsuario"].'">
+                        <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
+                    </a>
+                    ';
+                    
+                }
+                else{
+                    
+                    echo'
+                    <a class ="datosFacturacion" data-toggle="modal">
+                        <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
+                    </a>
+                    ';
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
 }
 

@@ -1,0 +1,194 @@
+<!------------------------------------
+                BANNER
+------------------------------------->
+<?php
+
+$servidor = Ruta::ctrRutaServidor();
+$url = Ruta::ctrRuta();
+
+$ruta = "sin-categoria";
+/*
+$banner = ControladorProductos::ctrMostrarBanner($ruta);
+
+$titulo1 = json_decode($banner["titulo1"],true);
+$titulo2 = json_decode($banner["titulo2"],true);
+$titulo3 = json_decode($banner["titulo3"],true);
+
+echo '
+<figure class="banner">
+    
+    <img src="'.$servidor.$banner["img"].'" class="img-responsive" style="width:100%;" alt="">
+    
+    <div class="textoBanner '.$banner["estilo"].'">
+        
+        <h1 style="color:'.$titulo1["color"].';">'.$titulo1["texto"].'</h1>
+        
+        <h2 style="color:'.$titulo2["color"].';"><strong>'.$titulo2["texto"].'</strong></h2>
+        
+        <h3 style="color:'.$titulo3["color"].'">'.$titulo3["texto"].'</h3>    
+        
+    </div>
+    
+</figure>
+';
+
+*/
+?>
+
+<?php
+
+$titulosModulos = array("APLICACION","MARCA","TIPO DE SISTEMA");
+
+$rutaModulos = array("aplicacion","marca","tipo-de-sistema");
+
+$base = 0;
+
+$tope = 4;
+
+if($titulosModulos[0] == "APLICACION"){
+    
+    $ordenar = "aplicaciones";//esta variable va a ser la que defina como va a ser ordenada la tabla
+    $item = null;
+    $valor = null;
+    $modo = "DESC";
+    
+    $aplicacion = ControladorProductos::ctrMostrarAplicaciones($ordenar, $item, $valor, $base, $tope, $modo);
+    
+}
+
+if($titulosModulos[1] == "MARCA"){
+    
+    $ordenar = "marcas";//esta variable va a ser la que defina como va a ser ordenada la tabla
+    $item = null;
+    $valor = null;
+    $modo = "DESC";
+    
+    $marca = ControladorProductos::ctrMostrarMarcas($ordenar, $item, $valor, $base, $tope, $modo);
+    
+}
+if($titulosModulos[2] == "TIPO DE SISTEMA"){
+    
+    $ordenar = "sistemas";//esta variable va a ser la que defina como va a ser ordenada la tabla
+    $item = null;
+    $valor = null;
+    $modo = "DESC";
+    
+    $tipoSistema = ControladorProductos::ctrMostrarSistemas($ordenar, $item, $valor, $base, $tope, $modo);
+    
+}
+
+$modulos = array($marca,$tipoSistema,$aplicacion);
+
+for ($i = 0; $i < count($titulosModulos); $i++){
+    echo '
+    <!--=======================================================================-->
+    
+    <!--=======================================================================-->
+    <div class="container-fluid productos">
+    
+        <div class="container">
+        
+            <div class="row">
+            
+                <!--=====================================
+                                BARRA TÍTULO
+                ======================================-->
+                
+                <div class="col-xs-12 tituloDestacado">
+                
+                    <!--===============================================-->
+                    
+                    <div class="col-sm-6 col-xs-12">
+                    
+                        <h1><small>'.$titulosModulos[$i].'</small></h1>
+                        
+                    </div>
+                    
+                    <!--===============================================-->
+                    
+                    <div class="col-sm-6 col-xs-12">
+                    
+                        <a href="'.$rutaModulos[$i].'">
+                        
+                            <button class="btn btn-default backColor pull-right">
+                            
+                                VER MÁS <span class="fa fa-chevron-right"></span>
+                                
+                            </button>
+                            
+                        </a>
+                        
+                    </div>
+                    
+                    <!--===============================================-->
+                    
+                </div>
+                
+                <div class="clearfix"></div>
+                
+                <hr>
+                
+            </div>
+            
+            <!--=====================================
+                VITRINA DE PRODUCTOS EN CUADRÍCULA
+            ======================================-->
+            
+            <ul class="grid'.$i.'">';
+            
+            foreach ($modulos[$i] as $key => $value)
+            {
+                echo '
+                
+                <!-- Producto -->
+                
+                <li class="col-md-3 col-sm-6 col-xs-12">
+                
+                    <!--===============================================-->
+                    
+                    <figure>
+                    
+                        <a href="'.$url."buscador/1/recientes/".$value["ruta"].'" class="pixelProducto">
+                        
+                            <img src="'.$servidor.$value["portada"].'" class="img-responsive">
+                            
+                        </a>
+                        
+                    </figure>
+                    
+                    <!--===============================================-->
+                    
+                    <h4>
+                    
+                        <small>
+                        
+                            <a href="'.$url."buscador/1/recientes/".$value["ruta"].'" class="pixelProducto">
+                            
+                                '.$value["titulo"].'<br>
+                                
+                            </a>
+                            
+                        </small>
+                        
+                    </h4>
+                    
+                    <!--===============================================-->
+                    
+                    
+                    <!--===============================================-->
+                    
+                    
+                </li>
+                ';
+            }
+            
+            echo '
+            </ul>
+            
+        </div>
+        
+    </div>
+    ';
+}
+
+?>

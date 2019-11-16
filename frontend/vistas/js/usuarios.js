@@ -497,7 +497,7 @@ $("#eliminarUsuario").click(function(){
 })
 
 /*=============================================
-VALIDAR EL COMENTARIO
+VALIDAR DATOS DE DIRECCION
 =============================================*/
 
 function validarFormDireccion(form) {
@@ -549,3 +549,153 @@ $(".delete-direccion").click(function(event){
     });
 
 })
+
+
+/*=============================================
+VALIDAR DATOS DE FACTURACION
+=============================================*/
+
+function validarFormFacturacion(form) {
+	console.log(form);
+	let nombre = $(form).find('input#nombreRazon').val();
+    let rfc = $(form).find('input#rfcPersona').val();
+    let tipoPersona = $(form).find('input#tipoPersona').val();
+    let calle = $(form).find('input#calle').val();
+	let colonia = $(form).find('input#colonia').val();
+    let municipio = $(form).find('input#municipio').val();
+    let estado = $(form).find('input#estado').val();
+	let codPostal = $(form).find('input#codigoPostal').val();
+	let telefono = $(form).find('input#telefono').val();
+    let email = $(form).find('input#email').val();
+
+	if (nombre != "" && rfc != "" && tipoPersona != "" && codPostal != "" && estado != "" && municipio != "" && calle != "") {
+        
+        if(rfc.length)
+        
+		if (telefono != "" && !isNaN(telefono)) 
+			return true;
+		else if(telefono == "")
+			return true;
+		else 
+			false;
+	}
+	else{
+		return false;
+	}
+	return false;
+}
+
+
+/*=============================================
+ELIMINAR DATOS DE FACTURACION
+=============================================*/
+
+$(".delete-facturacion").click(function(event){
+	event.preventDefault();
+	let  idUsuario = $("#idUsuario").val();
+	let idFactura = $(this).prop('id');
+    
+    console.log(idFactura);
+    
+	swal({
+        title: "¿Está usted seguro(a) de eliminar sus datos de facturación?",
+		text: "¡Si borrar sus datos ya no podrá recuperarlos!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "¡Si, borrar Datos de Facturacion!",
+		closeOnConfirm: false
+    },
+	function(isConfirm){
+        if (isConfirm) {	   
+		    window.location = "index.php?ruta=perfil&deletefact="+idFactura;
+		} 
+    });
+
+})
+
+/*=============================================
+VALIDAR RFC
+=============================================*/
+$("#tipoPersona").change(function(){
+    
+    var rfc = $("#rfcPersona").val();
+    var tipoPersona = ($("#tipoPersona").val()).toUpperCase();
+    console.log ("tipo persona");
+    console.log (tipoPersona);
+    console.log (rfc.length);
+    if(tipoPersona == "FISICA"){
+        if(rfc.length == 13 || rfc.length == 0){
+            $(".alerta").remove();
+        }
+        else if(rfc.length != 13){
+            $(".alerta").remove();
+            $(".valrfc").after('<span class="alerta"><div style="color:#ff0f00"><strong>El número de caracteres de tu RFC no concuerda con el tipo de PERSONA FISICA</strong></div></span>');
+        }
+        else if(rfc.length < 13 && rfc.length > 0){
+            $(".alerta").remove();
+            $(".valrfc").after('<span class="alerta"><div style="color:#ff0f00"><strong>El número de caracteres de tu RFC no concuerda con el tipo de PERSONA FISICA</strong></div></span>');
+        }
+    }
+    else if (tipoPersona == "MORAL"){
+        if(rfc.length == 12 || rfc.length == 0){
+            $(".alerta").remove();
+        }
+        else if(rfc.length < 12 && rfc.length > 0){
+            $(".alerta").remove();
+            $(".valrfc").after('<span class="alerta"><div style="color:#ff0f00"><strong>El número de caracteres de tu RFC no concuerda con el tipo de PERSONA MORAL</strong></div></span>');
+        }
+        else if(rfc.length > 12){
+            $(".alerta").remove();
+            $(".valrfc").after('<span class="alerta"><div style="color:#ff0f00"><strong>El número de caracteres de tu RFC no concuerda con el tipo de PERSONA MORAL</strong></div></span>');
+        }
+        
+    }
+    
+})
+
+$("#rfcPersona").change(function(){
+    var rfc = $("#rfcPersona").val();
+    var tipoPersona = ($("#tipoPersona").val()).toUpperCase();
+    console.log ("rfc persona");
+    console.log (tipoPersona);
+    console.log (rfc.length);
+    
+    if(rfc.length == 13){
+        if(tipoPersona == "FISICA"){
+            $(".alerta").remove();
+        }
+        else{
+            $(".alerta").remove();
+            $(".valrfc").after('<span class="alerta"><div style="color:#ff0f00"><strong>El número de caracteres de tu RFC no concuerda con el tipo de PERSONA MORAL</strong></div></span>');
+        }
+    }
+    else if(rfc.length == 12){
+        if(tipoPersona == "MORAL"){
+            $(".alerta").remove();
+        }
+        else{
+            $(".alerta").remove();
+            $(".valrfc").after('<span class="alerta"><div style="color:#ff0f00"><strong>El número de caracteres de tu RFC no concuerda con el tipo de PERSONA FISICA</strong></div></span>');
+        }
+    }
+    else if(rfc.length == 0){
+        $(".alerta").remove();
+    }
+    else{
+        if(rfc.length < 13 && tipoPersona == "FISICA"){
+            $(".alerta").remove();
+            $(".valrfc").after('<span class="alerta"><div style="color:#ff0f00"><strong>El número de caracteres de tu RFC no concuerda con el tipo de PERSONA FISICA</strong></div></span>');
+        }
+        else if(rfc.length < 12 && tipoPersona == "MORAL"){
+            $(".alerta").remove();
+            $(".valrfc").after('<span class="alerta"><div style="color:#ff0f00"><strong>El número de caracteres de tu RFC no concuerda con el tipo de PERSONA MORAL</strong></div></span>');
+        }
+        else if( rfc.length > 12 && tipoPersona == "MORAL"){
+            $(".alerta").remove();
+            $(".valrfc").after('<span class="alerta"><div style="color:#ff0f00"><strong>El número de caracteres de tu RFC no concuerda con el tipo de PERSONA MORAL</strong></div></span>');
+        }
+    }
+    
+})
+/*---------------------------------------------------------------------*/

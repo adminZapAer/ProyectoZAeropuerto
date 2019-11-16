@@ -790,6 +790,25 @@ $(document).on('click','.input-direccion', function(){
     sumaSubtotales();
 })
 
-// $(document).ready(function(){
-//     sumaSubtotales();
-// });
+$(document).ready(function(){
+    sumaSubtotales();
+});
+/*===============================================================*/
+$(".datosFacturacion").click(function(){
+    swal({
+        title: "¡Faltan Datos de Facturación!",
+        text: "Favor de registrar sus datos en la sección Perfil para continuar con la compra.",
+        type: "warning",
+        showCancelButton: false,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Cerrar",
+        closeOnConfirm: false
+        },
+        function(isConfirm){
+            if (isConfirm) {
+                window.location = rutaFrontEnd+"perfil";
+            }
+        }
+    );
+    return;
+})

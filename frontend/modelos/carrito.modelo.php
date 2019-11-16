@@ -55,4 +55,32 @@ class ModeloCarrito{
 		$tmt =null;
 	}
     
+    /*=============================================
+    VERIFICAR SI EXISTEN DATOS FACTURACION
+    =============================================*/
+    
+    static public function mdlComprobarDatosFacturacion($idUsuario, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT rfc FROM $tabla WHERE idUsuario = :idUsuario");
+
+		$stmt -> bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+
+		
+        if($stmt -> execute()){
+            //return "bien";
+            $stmt -> execute();
+            return $stmt -> fetch();
+        }
+        else{
+            return "error";
+        }
+
+		
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+    
 }

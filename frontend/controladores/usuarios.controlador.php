@@ -1094,6 +1094,127 @@ class ControladorUsuarios{
 
 	}
     
+    /*---------------------------------------------------------------*/
+    
+    /*=============================================
+    AGREGAR DATOS FACTURACION
+    =============================================*/
+
+    public function ctrAgregarFacturacion(){
+
+        $tabla = "facturacion";
+
+        if(isset($_POST["rfcPersona"])){
+            
+            $idUsuario = $_POST["idUsuario"];
+
+            // Guardamos los datos en un arreglo para manejarlo mejor.
+            $datos = [
+                'idUsuario'=>$idUsuario,
+                'nombreRazon'=>$_POST["nombreRazon"],
+                'rfc'=>$_POST["rfcPersona"],
+                'tipoPersona'=>$_POST["tipoPersona"],
+                'calle'=>$_POST["calle"],
+                'numExterior'=>$_POST["numext"],
+                'numInterior'=>$_POST["numint"],
+                'colonia'=>$_POST["colonia"],
+                'municipio'=>$_POST["municipio"],
+                'estado'=>$_POST["estado"],
+                'codigoPostal'=>$_POST["codigoPostal"],
+                'telefono'=>$_POST["telefono"],
+                'email'=>$_POST["email"]
+                
+                
+            ];
+            
+            $respuesta = ModeloUsuarios::mdlAgregarFacturacion($tabla, $datos);
+            
+            if($respuesta == "ok"){
+
+                $url = Ruta::ctrRuta();
+
+                echo'<script>
+
+                        swal({
+                              title: "¡Excelente!",
+                              text: "Sus datos de facturacion fueron agregados correctamente",
+                              type: "success",
+                              confirmButtonText: "Cerrar",
+                              closeOnConfirm: false
+                        },
+
+                        function(isConfirm){
+                                 if (isConfirm) {      
+                                   window.location = "'.$url.'perfil";
+                                  } 
+                        });
+
+                      </script>';
+
+            }
+
+        }
+
+    }
+    
+    /*=============================================
+    MOSTRAR LISTA DE FACTURACIÓN
+    =============================================*/
+    
+    static public function ctrMostrarDatosFacturacion($item){
+        
+        $tabla = "facturacion";
+        
+        $respuesta = ModeloUsuarios::mdlMostrarDatosFacturacion($tabla, $item);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=============================================
+    ELIMINAR DATOS CATURACION
+    =============================================*/
+
+    public function ctrEliminarDatosFacturacion(){
+        
+        if(isset($_GET["deletefact"])){
+            
+            $tabla = "facturacion";
+            
+            $idFactura = $_GET["deletefact"];
+            
+            $respuesta = ModeloUsuarios::mdlEliminarDatosFacturacion($tabla, $idFactura);
+            
+            
+            if($respuesta == "ok"){
+                
+                $url = Ruta::ctrRuta();
+                
+                echo'
+                <script>    
+                    swal({
+                        title: "¡SUS DATOS DE FACTURACIÓN HAN SIDO BORRADOS!",
+                        text: "",
+                        type: "success",
+                        confirmButtonText: "Cerrar",
+                        closeOnConfirm: false
+                    },
+                    function(isConfirm){
+                        if (isConfirm) {      
+                            window.location = "'.$url.'perfil";
+                        } 
+                    });
+                      
+                </script>';
+                
+            }
+
+        }
+        
+    }
+    
+    /*---------------------------------------------------------------*/
+    
 }
 
 ?>

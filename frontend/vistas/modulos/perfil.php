@@ -961,172 +961,244 @@ SECCIÓN PERFIL
 
             
             <div id="facturacion" class="tab-pane fade">
+                
                 <div class="row">
                     
-                    <form method="post">
-                                                   
-                        <br>
+                    <form method="post"enctype="multipart/form-data" onsubmit="return validarFormFacturacion(this)">
                         
-                        <?php
-                                                      
-                            echo '
-
-                            <input type="hidden" value="'.$_SESSION["idUsuario"].'" id="idUsuario" name="idUsuario">
-
-                            <h3>Los campos marcados con * son obligatorios.</h3>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-
-                                <label class="control-label text-muted text-uppercase" for="">Nombre *</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class=""></i>
-                                    </span>
-                                    <input type="text" class="form-control" id="" name="" placeholder="" required>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-
-                                <label class="control-label text-muted text-uppercase" for="">Apellido paterno *</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class=""></i>
-                                    </span>
-                                    <input type="text" class="form-control" id="" name="" placeholder="" required>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-
-                                <label class="control-label text-muted text-uppercase" for="">Apellido Materno *</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class=""></i>
-                                    </span>
-                                    <input type="text" class="form-control" id="" name="" placeholder="" required>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-
-                                <label class="control-label text-muted text-uppercase" for="">RFC *</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class=""></i>
-                                    </span>
-                                    <input type="text" class="form-control" id="" name="" placeholder="Telefono celular">
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-
-                                <label class="control-label text-muted text-uppercase" for="cp">Código postal *</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-envelope"></i>
-                                    </span>
-                                    <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal" required>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-
-                                <label class="control-label text-muted text-uppercase" for="estado">Estado *</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-map" aria-hidden="true"></i>
-
-                                    </span>
-                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                                </div>
+                        <br>
+                        <div class="col-md-6 col-sm-5 col-xs-12">
                             
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-
-                                <label class="control-label text-muted text-uppercase" for="municipio">Municipio/Alcaldia *</label>
-
+                            <?php
+                                
+                                echo '
+                                
+                                <input type="hidden" value="'.$_SESSION["idUsuario"].'" id="idUsuario" name="idUsuario">
+                                
+                                <h3>Los campos marcados con * son obligatorios.</h3>
+                                
+                                <br>
+                                
+                                <label class="control-label text-muted text-uppercase" for="nombreRazon">Nombre completo o Razón social *</label>
+                                
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <i class="fa fa-university" aria-hidden="true"></i>
-
+                                        <i class="glyphicon glyphicon-user"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="municipio" name="municipio" placeholder="Municipio" required>
+                                    <input type="text" class="form-control" id="nombreRazon" name="nombreRazon" placeholder="Nombre completo o Razón social" required>
                                 </div>
-
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-
-                                <label class="control-label text-muted text-uppercase" for="colonia">Colonia *</label>
-
-                                <div class="input-group">
+                                
+                                <label class="control-label text-muted text-uppercase" for="tipoPersona">Tipo de persona (Fisica o Moral) *</label>
+                                
+                                <div class="input-group col-md-4 col-sm-4 col-xs-12">
                                     <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
-
+                                        <i class=""></i>
                                     </span>
-                                    <input type="text" class="form-control" id="colonia" name="colonia" placeholder="Municipio" required>
+                                    <div class="form-group">
+                                        <select class="form-control" id="tipoPersona" name="tipoPersona" placeholder="Fisica o Moral">
+                                            <option>Elije una opción</option>
+                                            <option>Fisica</option>
+                                            <option>Moral</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-
+                                
+                                <label class="control-label text-muted text-uppercase" for="rfcPersona">RFC *</label>
+                                
+                                <div class="input-group col-md-4 col-sm-4 col-xs-12 valrfc">
+                                    <span class="input-group-addon">
+                                        <i class=""></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="rfcPersona" name="rfcPersona" placeholder="Ej: RAZE451124HM3" maxlength="13">
+                                </div>
+                                
                                 <label class="control-label text-muted text-uppercase" for="calle">Calle *</label>
-
+                                
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-home"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle de la dirección" required>
+                                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle" required>
                                 </div>
-
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                
                                 <label class="control-label text-muted text-uppercase" for="numext">Número exterior *</label>
-
-                                <div class="input-group">
+                                
+                                <div class="input-group col-md-4 col-sm-4 col-xs-12">
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-home"></i>
                                     </span>
                                     <input type="text" class="form-control" id="numext" name="numext" placeholder="" required>
                                 </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-                                <label class="control-label text-muted text-uppercase" for="numint">Núumero interior</label>
-
-                                <div class="input-group">
+                            
+                                <label class="control-label text-muted text-uppercase" for="numint">Número interior</label>
+                                
+                                <div class="input-group col-md-4 col-sm-4 col-xs-12">
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-home"></i>
                                     </span>
                                     <input type="text" class="form-control" id="numint" name="numint" placeholder="">
                                 </div>
-                            </div>     
-                            <br>
-                            <br>
-                            <br>
+                                
+                                <label class="control-label text-muted text-uppercase" for="colonia">Colonia *</label>
+                                
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
+                                        
+                                    </span>
+                                    <input type="text" class="form-control" id="colonia" name="colonia" placeholder="Colonia" required>
+                                </div>
+                                
+                                <label class="control-label text-muted text-uppercase" for="municipio">Municipio/Alcaldia *</label>
+                                
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-university" aria-hidden="true"></i>
+                                        
+                                    </span>
+                                    <input type="text" class="form-control" id="municipio" name="municipio" placeholder="Municipio" required>
+                                </div>
+                                
+                                <label class="control-label text-muted text-uppercase" for="estado">Estado *</label>
+                                
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                </div>
+                                
+                                <label class="control-label text-muted text-uppercase" for="codigoPostal">Código postal *</label>
+                                
+                                <div class="input-group col-md-4 col-sm-4 col-xs-12">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" placeholder="Código Postal" required>
+                                </div>
+                                
+                                <label class="control-label text-muted text-uppercase" for="telefono">Teléfono *</label>
+                                
+                                <div class="input-group col-md-4 col-sm-4 col-xs-12">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                    <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" required pattern="[0-9]{10}" title="El numero telefónico debe contener 10 digitos">
+                                </div>
+                                
+                                <label class="control-label text-muted text-uppercase" for="email">Correo Electrónico *</label>
+                                
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Ej: correo@mail.com" required>
+                                </div>
+                                    
+                                <br>
+                                <br>
+                                <br>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="margin:3%;">
+                                    <button class="btn btn-success btn-md pull-left enviarDatos">Agregar Datos Facturación</button>
+                                </div>
+                                <br>
+                                ';
+
+                            ?>
                             
-                            <div class="col-md-12 col-sm-12 col-xs-12" style="margin:3%;">
-                                <button class="btn btn-success btn-md pull-left">Agregar Datos Facturación</button>
-                            </div>
-                            <br>
-                            ';
+                        </div>
+                        <div class="col-md-6 col-sm-5 col-xs-12" style="padding: 3%;">
+                           
+                            <?php
+                            $item = $_SESSION["idUsuario"];
+                            
+                            $facturaciones = ControladorUsuarios::ctrMostrarDatosFacturacion($item);
+                            
+                            if(!$facturaciones){
+                                echo '
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                    <h3><small>No tiene direcciones agregadas</small></h3>
+                                    
+                                    
+                                </div>';
+                            }
+                            else{
+                                
+                                foreach ($facturaciones as $key => $value) {
+                                        
+                                    echo "
+                                    <div class='panel panel-default'>
+                                        <div class='panel-heading'>Datos de facturación ". ($key + 1). "</div>
+                                        <div class='panel-body'>
+                                            <div class='row'>
+                                                
+                                                <div class='col-md-6'>
+                                                    <label>Nombre o Razón Social:</label>
+                                                    <p>{$value['nombreRazon']}</p>
+                                                    <label>Tipo de Persona:</label>
+                                                    <p>{$value['tipoPersona']}</p>
+                                                    <label>Teléfono:</label>
+                                                    <p>{$value['telefono']}</p>
+                                                    <label>Colonia:</label>
+                                                    <p>{$value['colonia']}</p>
+                                                    <label>Municipio / Alcaldia:</label>
+                                                    <p>{$value['municipio']}</p>
+                                                    <label>Código Postal:</label>
+                                                    <p>{$value['codigoPostal']}</p>
+                                                </div>
+                                                
+                                                <div class='col-md-6'>
+                                                    <label>RFC:</label>
+                                                    <p>{$value['rfc']}</p>
+                                                    <label>Correo Electronico:</label>
+                                                    <p>{$value['email']}</p>
+                                                    <label>Calle:</label>
+                                                    <p>{$value['calle']}</p>
+                                                    <div class='row'>
+                                                        <div class='col-md-6'>
+                                                            <label>No. interior:</label>
+                                                            <p>{$value['numInterior']}</p>
+                                                        </div>
+                                                        <div class='col-md-6'>
+                                                            <label>No. exterior:</label>
+                                                            <p>{$value['numExterior']}</p>
+                                                        </div>
+                                                    </div>
+                                                    <label>Estado:</label>
+                                                    <p>{$value['estado']}</p>
+                                                </div>
+                                            </div>
+                                            <button class='btn btn-danger btn-md pull-right delete-facturacion' id='{$value['idFactura']}'>Eliminar dirección</button>
+                                        </div>
+                                    </div>
+                                    ";
+                                    
+                                }
+                            }
+                            
+                            ?>
+                            
+                        </div>
                         
-                        ?>                     
+                        <?php
+                        
+                        $agregarFacturacion = new ControladorUsuarios();
+                        $agregarFacturacion -> ctrAgregarFacturacion();
+                        
+                        ?>
                         
                     </form>
                     
+                    <?php
+                    
+                    $eliminarFacturacion = new ControladorUsuarios();
+                    $eliminarFacturacion -> ctrEliminarDatosFacturacion();
+                    
+                    ?>
                     
                 </div>
+                
             </div>
             
         </div>

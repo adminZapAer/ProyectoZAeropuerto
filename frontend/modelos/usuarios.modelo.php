@@ -469,7 +469,90 @@ class ModeloUsuarios{
 		$stmt = null;
 
 	}
-
-
+    
+    /*=============================================
+	AGREGAR DATOS DE FACTURACION
+	=============================================*/
+    
+	public function mdlAgregarFacturacion($tabla, $datos){
+        
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (idUsuario, nombreRazon, rfc, tipoPersona, calle, numExterior, numInterior, colonia, municipio, estado, codigoPostal, telefono, email) VALUES (:idUsuario, :nombreRazon, :rfc, :tipoPersona, :calle, :numExterior, :numInterior, :colonia, :municipio, :estado, :codigoPostal, :telefono, :email)");
+        
+		$stmt->bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
+		$stmt->bindParam(":nombreRazon", $datos["nombreRazon"], PDO::PARAM_STR);
+		$stmt->bindParam(":rfc", $datos["rfc"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipoPersona", $datos["tipoPersona"], PDO::PARAM_STR);
+		$stmt->bindParam(":calle", $datos["calle"], PDO::PARAM_STR);
+		$stmt->bindParam(":numExterior", $datos["numExterior"], PDO::PARAM_INT);
+		$stmt->bindParam(":numInterior", $datos["numInterior"], PDO::PARAM_INT);
+        $stmt->bindParam(":colonia", $datos["colonia"], PDO::PARAM_STR);
+        $stmt->bindParam(":municipio", $datos["municipio"], PDO::PARAM_STR);
+        $stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
+        $stmt->bindParam(":codigoPostal", $datos["codigoPostal"], PDO::PARAM_INT);
+        $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_INT);
+        $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+		
+        
+		if($stmt -> execute()){
+            
+			return "ok";
+            
+		}else{
+            
+			return "error";
+            
+		}
+        
+		$stmt-> close();
+        
+		$stmt = null;
+	}
+    
+    /*=============================================
+	MOSTRAR DATOS FACTURACION
+	=============================================*/
+    
+	static public function mdlMostrarDatosFacturacion($tabla, $item){
+        
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE idUsuario = :idUsuario ORDER BY idUsuario DESC");
+        
+		$stmt -> bindParam(":idUsuario", $item, PDO::PARAM_INT);
+        
+		$stmt -> execute();
+        
+		return $stmt -> fetchAll();
+        
+		$stmt -> close();
+        
+		$stmt = null;
+        
+	}
+    
+    /*=============================================
+	ELIMINAR DATOS FACTURACION
+	=============================================*/
+    
+	static public function mdlEliminarDatosFacturacion($tabla, $idFactura){
+        
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idFactura = :idFactura");
+        
+		$stmt -> bindParam(":idFactura", $idFactura, PDO::PARAM_INT);
+        
+		if($stmt -> execute()){
+            
+			return "ok";
+            
+		}else{
+            
+			return "error";
+            
+		}
+        
+		$stmt-> close();
+        
+		$stmt = null;
+        
+	}
+    
     
 }
