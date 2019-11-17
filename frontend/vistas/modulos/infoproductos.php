@@ -251,51 +251,51 @@ $ruta = $rutas[0];
                     
                     if($infoProducto["detalles"] != null){
                         
-                        $detalles = json_decode($infoProducto["detalles"],true);
+                        //$detalles = json_decode($infoProducto["detalles"],true);
                         
                         if($infoProducto["tipo"] == "fisico"){
                             echo'
                             <div class="col-xs-12">
                             ';
-                            if($detalles["Descripcion1"] != ""){
+                            if($infoProducto["sku"] != ""){
                                 echo'
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i> '.$detalles["Descripcion1"].'
+                                    <i style="margin-right:10px" class="fa fa-check"></i>SKU: '.$infoProducto["sku"].'
                                 </li>
                                 ';
                             }
-                            if($detalles["Descripcion2"] != ""){
+                            if($infoProducto["marca"] != ""){
                                 echo'
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i> '.$detalles["Descripcion2"].'
+                                    <i style="margin-right:10px" class="fa fa-check"></i>Marca: '.$infoProducto["marca"].'
                                 </li>
                                 ';
                             }
-                            if($detalles["Descripcion3"] != ""){
+                            if($infoProducto["tipoAplicacion"] != ""){
                                 echo'
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i> '.$detalles["Descripcion3"].'
+                                    <i style="margin-right:10px" class="fa fa-check"></i>Aplicación: '.$infoProducto["tipoAplicacion"].'
                                 </li>
                                 ';
                             }
-                            if($detalles["Descripcion4"] != ""){
+                            if($infoProducto["alto"]!="" && $infoProducto["largo"]!="" && $infoProducto["ancho"]!=""){
                                 echo'
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i> '.$detalles["Descripcion4"].'
+                                    <i style="margin-right:10px" class="fa fa-check"></i>Dimensiones: Alto '.round($infoProducto["alto"],1).' cm. Largo '.round($infoProducto["largo"],1).' cm. Ancho '.round($infoProducto["ancho"],1).' cm.
                                 </li>
                                 ';
                             }
-                            if($detalles["Descripcion5"] != ""){
+                            if($infoProducto["aplicacion"] != ""){
                                 echo'
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i> '.$detalles["Descripcion5"].'
+                                    <i style="margin-right:10px" class="fa fa-check"></i>Compatible con: '.$infoProducto["aplicacion"].'
                                 </li>
                                 ';
                             }
-                            if($detalles["Descripcion6"] != ""){
+                            if($infoProducto["stock"] != "0"){
                                 echo'
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i> '.$detalles["Descripcion6"].'
+                                    <i style="margin-right:10px" class="fa fa-check"></i> '.$infoProducto["stock"].'
                                 </li>
                                 ';
                             }
@@ -305,7 +305,7 @@ $ruta = $rutas[0];
                             
                         }
                         else{
-                            echo'producto virtual';
+                            //echo'producto virtual';
                         }
                         
                     }
