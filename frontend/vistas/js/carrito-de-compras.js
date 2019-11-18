@@ -790,9 +790,6 @@ $(document).on('click','.input-direccion', function(){
     sumaSubtotales();
 })
 
-$(document).ready(function(){
-    sumaSubtotales();
-});
 /*===============================================================*/
 $(".datosFacturacion").click(function(){
     swal({
