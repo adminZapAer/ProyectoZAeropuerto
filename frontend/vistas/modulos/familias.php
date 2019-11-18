@@ -66,6 +66,7 @@ if($titulosModulos[1] == "MARCA"){
     $marca = ControladorProductos::ctrMostrarMarcas($ordenar, $item, $valor, $base, $tope, $modo);
     
 }
+
 if($titulosModulos[2] == "TIPO DE SISTEMA"){
     
     $ordenar = "sistemas";//esta variable va a ser la que defina como va a ser ordenada la tabla
@@ -77,7 +78,7 @@ if($titulosModulos[2] == "TIPO DE SISTEMA"){
     
 }
 
-$modulos = array($marca,$tipoSistema,$aplicacion);
+$modulos = array($aplicacion,$marca,$tipoSistema);
 
 for ($i = 0; $i < count($titulosModulos); $i++){
     echo '

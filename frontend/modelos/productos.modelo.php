@@ -121,7 +121,7 @@ class ModeloProductos{
     }
     
     static public function mdlBuscarProductos($tabla, $busqueda, $ordenar, $modo, $base, $tope){
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%' OR detalles like '%$busqueda%' OR marca like '%$busqueda%' OR familia like '%$busqueda%' OR aplicacion like '%$busqueda%' OR sku like '%$busqueda%' ORDER BY $ordenar $modo LIMIT $base, $tope");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%' OR detalles like '%$busqueda%' OR marca like '%$busqueda%' OR tipoSistema like '%$busqueda%' OR aplicacion like '%$busqueda%' OR sku like '%$busqueda%' ORDER BY $ordenar $modo LIMIT $base, $tope");
         $stmt -> execute();
         return $stmt -> fetchAll();
         $stmt -> close();
@@ -129,7 +129,7 @@ class ModeloProductos{
     }
     
     static public function mdlListarProductosBusqueda($tabla, $busqueda){
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%' OR detalles like '%$busqueda%' OR marca like '%$busqueda%' OR familia like '%$busqueda%' OR aplicacion like '%$busqueda%' OR sku like '%$busqueda%' ORDER BY $ordenar $modo LIMIT $base, $tope");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%' OR detalles like '%$busqueda%' OR marca like '%$busqueda%' OR tipoSistema like '%$busqueda%' OR aplicacion like '%$busqueda%' OR sku like '%$busqueda%'");
         $stmt -> execute();
         return $stmt -> fetchAll();
         $stmt -> close();
