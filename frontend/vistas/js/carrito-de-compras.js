@@ -54,7 +54,66 @@ function getCostoEnvio(item, direccionId){
                 data: { id: item.idProducto, direccionId: direccionId }
               })
                 .done(function( response ) {
+                    
                   costoEnvio = response;
+
+
+                  $('.cantidadItem').each(function(){
+                    console.log('ENTRA EN 02', $(this).val());
+                    
+                    var cantidad = $(this).val();
+                    var precio = $(this).attr("precio");
+                    var idProducto = $(this).attr("idProducto");
+                    var costoEnvio = parseFloat($(this).attr("costoenvio"));
+                    var cantidadItem = $(".cantidadItem");
+                    
+                    $(".subTotal"+idProducto).html('<strong>MXN $<span>'+Number((cantidad*precio)+costoEnvio).toFixed(2)+'</span></strong>');
+                    
+                    console.log(costoEnvio);
+
+                    /*=============================================
+                    ACTUALIZAR LA CANTIDAD EN EL LOCALSTORAGE
+                    =============================================*/
+                    var idProducto = $(".cuerpoCarrito button");
+                    var imagen = $(".cuerpoCarrito img");
+                    var titulo = $(".cuerpoCarrito .tituloCarritoCompra");
+                    var precio = $(".cuerpoCarrito .precioCarritoCompra span");
+                    var cantidad = $(".cuerpoCarrito .cantidadItem");
+                    
+                    listaCarrito = [];
+                    
+                    // for(var i = 0; i < idProducto.length; i++){
+                        
+                    //     var idProductoArray = $(idProducto[i]).attr("idProducto");
+                    //     var imagenArray = $(imagen[i]).attr("src");
+                    //     var tituloArray = $(titulo[i]).html();
+                    //     var precioArray = $(precio[i]).html();
+                    //     var pesoArray = $(idProducto[i]).attr("peso");
+                    //     var tipoArray = $(cantidad[i]).attr("tipo");
+                    //     var cantidadArray = $(cantidad[i]).val();
+                        
+                    //     listaCarrito.push(
+                    //         {
+                    //             "idProducto":idProductoArray,
+                    //             "imagen":imagenArray,
+                    //             "titulo":tituloArray,
+                    //             "precio":precioArray,
+                    //             "tipo":tipoArray,
+                    //             "peso":pesoArray,
+                    //             "cantidad":cantidadArray,
+                    //             "costoEnvio": costoEnvio
+                    //         }
+                    //     );
+                    // }
+
+                    // localStorage.setItem("listaProductos",JSON.stringify(listaCarrito));
+                    
+                    // sumaSubtotales();
+                    // cestaCarrito(listaCarrito.length);
+
+                    
+
+                });
 
                   // if(envio = 0){
                   //   costoenvio = 0
@@ -165,61 +224,7 @@ function getCostoEnvio(item, direccionId){
                     $(".cantidadItem[tipo='virtual']").attr("readonly","true");
                     sumaSubtotales();
                     
-                    $('.cantidadItem').each(function(){
-                        console.log('ENTRA EN 02', $(this).val());
-                        
-                        var cantidad = $(this).val();
-                        var precio = $(this).attr("precio");
-                        var idProducto = $(this).attr("idProducto");
-                        var costoEnvio = parseFloat($(this).attr("costoenvio"));
-                        var cantidadItem = $(".cantidadItem");
-                        
-                        $(".subTotal"+idProducto).html('<strong>MXN $<span>'+Number((cantidad*precio)+costoEnvio).toFixed(2)+'</span></strong>');
-                        
-                        console.log(costoEnvio);
-
-                        /*=============================================
-                        ACTUALIZAR LA CANTIDAD EN EL LOCALSTORAGE
-                        =============================================*/
-                        var idProducto = $(".cuerpoCarrito button");
-                        var imagen = $(".cuerpoCarrito img");
-                        var titulo = $(".cuerpoCarrito .tituloCarritoCompra");
-                        var precio = $(".cuerpoCarrito .precioCarritoCompra span");
-                        var cantidad = $(".cuerpoCarrito .cantidadItem");
-                        
-                        listaCarrito = [];
-                        
-                        for(var i = 0; i < idProducto.length; i++){
-                            
-                            var idProductoArray = $(idProducto[i]).attr("idProducto");
-                            var imagenArray = $(imagen[i]).attr("src");
-                            var tituloArray = $(titulo[i]).html();
-                            var precioArray = $(precio[i]).html();
-                            var pesoArray = $(idProducto[i]).attr("peso");
-                            var tipoArray = $(cantidad[i]).attr("tipo");
-                            var cantidadArray = $(cantidad[i]).val();
-                            
-                            listaCarrito.push(
-                                {
-                                    "idProducto":idProductoArray,
-                                    "imagen":imagenArray,
-                                    "titulo":tituloArray,
-                                    "precio":precioArray,
-                                    "tipo":tipoArray,
-                                    "peso":pesoArray,
-                                    "cantidad":cantidadArray
-                                }
-                            );
-                        }
-    
-                        localStorage.setItem("listaProductos",JSON.stringify(listaCarrito));
-                        
-                        sumaSubtotales();
-                        cestaCarrito(listaCarrito.length);
-
-
-
-                    });
+                    
 
             });
         }
@@ -299,6 +304,8 @@ $(".agregarCarrito").click(function(){
           RECUPERAR ALMACENAMIENTO DEL LOCALSTORAGE
         =============================================*/
         
+        // listaCarrito = [];
+
         if(localStorage.getItem("listaProductos") == null){
             
             listaCarrito = [];
@@ -325,7 +332,8 @@ $(".agregarCarrito").click(function(){
                 }
             }
             
-            listaCarrito.concat(localStorage.getItem("listaProductos"));
+            listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
+            // listaCarrito.concat(localStorage.getItem("listaProductos"));
             
         }
         
