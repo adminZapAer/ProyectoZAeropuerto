@@ -57,12 +57,12 @@ $ruta = $rutas[0];
                 <figure class="visor">';
                 
                 if($multimedia != null){
-                for ($i = 0; $i < count($multimedia); $i++)
-                {
-                    echo'
-                    <img id="lupa'.($i+1).'" src="'.$servidor.$multimedia[$i]["foto"].'" alt="'.$infoProducto["titulo"].'" class="img-thumbnail">
-                    ';
-                }
+                    for ($i = 0; $i < count($multimedia); $i++)
+                    {
+                        echo'
+                        <img id="lupa'.($i+1).'" src="'.$servidor.$multimedia[$i]["foto"].'" alt="'.$infoProducto["titulo"].'" class="img-thumbnail">
+                        ';
+                    }
                 
                 echo'
                 </figure>
@@ -73,6 +73,17 @@ $ruta = $rutas[0];
                     for ($i = 0; $i < count($multimedia); $i++){
                         echo'<li><img value="'.($i+1).'" src="'.$servidor.$multimedia[$i]["foto"].'" alt="'.$infoProducto["titulo"].'" class="img-thumbnail"></li>';
                     }
+                }
+                else{
+                    echo'<img id="lupa1" src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg" alt="imagenMuestra" class="img-thumbnail">';
+                
+                echo'
+                </figure>
+                
+                <div class="flexslider">
+
+                    <ul class="slides">';
+                        echo'<li><img value="1" src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg" alt="imagenPrueba" class="img-thumbnail"></li>';
                 }
                     echo'
                     </ul>
@@ -122,7 +133,7 @@ $ruta = $rutas[0];
                 </div>
                 <!--===================================
                 *==   COMPARTIR EN REDES SOCIALES   ==*
-                ====================================-->
+                ====================================
                 <div class="col-xs-6">
                     <h6>
                         <a href="" class="dropdown.toggle pull-right text-muted" data-toggle="dropdown">
@@ -142,7 +153,7 @@ $ruta = $rutas[0];
                         </ul>
                     </h6>
                 </div>
-                
+                ====================================-->
                 <div class="clearfix"></div>
                 
                 <!--==================================
@@ -511,63 +522,41 @@ $ruta = $rutas[0];
                 
                 <ul class="nav nav-tabs">
                     
-                    <li><a data-toggle="tab" href="#opc1">POLITICAS DE SEGURIDAD</a></li>
+                    <li><a data-toggle="tab" href="#opc1">DEVOLUCIONES</a></li>
                     <li><a data-toggle="tab" href="#opc2">GARANTIAS</a></li>
-                    <li><a data-toggle="tab" href="#opc3">DEVOLUCIONES</a></li>
-                    
                     
                 </ul>
                 
                 <div class="tab-content">
                     
                     <div id="opc1" class="tab-pane fade">
-                        <h3>POLITICAS DE SEGURIDAD</h3>
+                        <h3>DEVOLUCIONES</h3>
                         <br>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p>Al momento de hacer una devolución por favor considere que al ser nuevo el producto, usted lo regresara intacto para que un nuevo comprador lo requiera, Puntos a tomar en consideración al aplicar una devolución.</p>
+                        <ul>
+                            <li>Puede devolver el producto, sin embargo, se le restara el 20% de su compra por manejo de tiempo y personal</li>
+                            <li>Si la caja al llegar esta dañada o rota <strong>NO ACEPTE POR NINGÚN MOTIVO LA ENTREGA</strong>, ya que si lo acepta perderá en automático <span style="text-decoration: underline">la garantía</span>, <span style="text-decoration: underline">la devolución</span> y por ende <span style="text-decoration: underline">su dinero</span></li>
+                            <li>El envió de devolución corre por su cuenta</li>
+                            <li>No dañar ni pegar cintas en la caja del producto y si lo hace que sea sobre la cinta antes cortada</li>
+                            <li>No instalar la refacción ya que si está sucia o dañada no se aceptará la devolución</li>
+                            <li>No se acepta material sin caja por ningún motivo</li>
+                        </ul>
                     </div>
                     
                     <div id="opc2" class="tab-pane fade">
                         
-                        <h3>GRARANTIAS</h3>
+                        <h3>GARANTIAS</h3>
                         <br>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
+                        <p>La garantía se puede aplicar antes de 6 meses de uso de la pieza, si pasa ese tiempo la garantía se perderá con nosotros y tendrá que llamar a proveedor directamente, esta garantía aplicara con las siguientes condiciones:</p>
                         
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.</p>
-                        
-                    </div>
-                    
-                    <div id="opc3" class="tab-pane fade">
-                        
-                        <h3>DEVOLUCIONES</h3>
-                        <br>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
-                        
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <ul>
+                            <li>La garantía puede tardar en ser aplicada</li>
+                            <li>Producto instalado incorrectamente, si el producto es colocado sin cuidado, a la fuerza, o sin las herramientas necesarias la garantía se pierde, sin embargo, si el producto es colocado en nuestras instalaciones <strong>la garantía se aplica al 100%</strong> si es falla de la pieza antes comprada</li>
+                            <li>Producto que se reparó, pierde en automático la garantía</li>
+                            <li>Favor de no limpiar el producto: es importante no limpiar le producto ya que si es lavada o limpiada la evidencia se perderá y tardará más el dictamen de garantía</li>
+                            <li>Si el producto contiene liquido como aceite, anticongelante, agua favor de drenarlo o se le penalizara monetariamente</li>
+                            <li>El producto al entrar en garantía será evaluado por el personal correspondiente y dependiendo del dictamen se aplicará la garantía.</li>
+                        </ul>
                         
                     </div>
                     

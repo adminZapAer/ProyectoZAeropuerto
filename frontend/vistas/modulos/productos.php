@@ -244,10 +244,17 @@ BARRA PRODUCTOS
                                 <!--===============================================-->
                                 <figure>
                                     
-                                    <a href="'.$url.$value["ruta"].'" class="pixelProducto">
+                                    <a href="'.$url.$value["ruta"].'" class="pixelProducto">';
                                         
-                                        <img src="'.$servidor.$value["portada"].'" class="img-responsive">
+                                        if($value["portada"] != ""){
+                                            echo '<img src="'.$servidor.$value["portada"].'" class="img-responsive">';
+                                        }
+                                        else{
+                                            echo '<img src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg" class="img-responsive">';
+                                        }
                                         
+                                        
+                                    echo'    
                                     </a>
                                     
                                 </figure>
@@ -400,8 +407,16 @@ BARRA PRODUCTOS
                                 
                                 <figure>
                                     
-                                    <a href="'.$url.$value["ruta"].'" class="pixelProducto">
-                                        <img src="'.$servidor.$value["portada"].'" alt="" class="img-responsive">
+                                    <a href="'.$url.$value["ruta"].'" class="pixelProducto">';
+                                        
+                                        if($value["portada"] != ""){
+                                            echo '<img src="'.$servidor.$value["portada"].'" alt="" class="img-responsive">';
+                                        }
+                                        else{
+                                            echo '<img src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg" alt="" class="img-responsive">';
+                                        }
+                                        
+                                    echo '
                                     </a>
                                     
                                 </figure>
