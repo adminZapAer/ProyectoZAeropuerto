@@ -4,6 +4,9 @@ $url = Ruta::ctrRuta();
 
 //disable-card=visa,mastercard
 ?>
+<script>
+	localStorage.setItem("paginaEnvio",1);
+</script>
 <script src="https://www.paypal.com/sdk/js?client-id=<?php if(getenv('PAYPAL_SANDBOX_CLIENT_ID')){echo getenv('PAYPAL_SANDBOX_CLIENT_ID');} else{echo getenv('CLIENT_ID');}?>&currency=MXN&disable-card=visa,mastercard,amex"></script>
 <!--=====================================
 BREADCRUMB CARRITO DE COMPRAS
@@ -36,6 +39,147 @@ TABLA CARRITO DE COMPRAS
 <div class="container-fluid">
     
 	<div class="container">
+
+			<!-- DIRECCIONES DEL USUARIO -->
+			<div class="row direccionesResumen">
+				<div class="panel panel-default">
+					<div class="panel panel-heading">
+						DIRECCIÓN DE ENVÍO
+					</div>
+					<div class="panel-body" id="direccionEnvioBody">
+
+					</div>
+				</div>
+			</div>
+	
+
+		<!-- .......................... -->
+
+		<div class="panel panel-default">
+            
+			<!--=====================================
+			CABECERA CARRITO DE COMPRAS
+			======================================-->
+			
+			<div class="panel-heading cabeceraCarrito">
+				
+				<div class="col-md-4 col-sm-7 col-xs-12 text-center">
+					
+					<h3>
+						<small>Producto</small>
+					</h3>
+					
+				</div>
+				
+				<div class="col-md-2 col-sm-1 col-xs-0 text-center">
+					
+					<h3>
+						<small>Precio</small>
+					</h3>
+					
+				</div>
+				
+				<div class="col-sm-2 col-xs-0 text-center">
+					
+					<h3>
+						<small>Cantidad</small>
+					</h3>
+					
+				</div>
+                
+                <div class="col-sm-2 col-xs-0 text-center">
+					
+					<h3>
+						<small>Envío</small>
+					</h3>
+					
+                </div>
+                
+                <div class="col-sm-2 col-xs-0 text-center">
+					
+					<h3>
+						<small>Subtotal</small>
+					</h3>
+					
+                </div>
+				
+			</div>
+			
+			<!--=====================================
+			CUERPO CARRITO DE COMPRAS
+			======================================-->
+			
+			<div class="panel-body cuerpoCarrito">
+			
+				
+				
+			</div>
+			
+			<!--=====================================
+			SUMA DEL TOTAL DE PRODUCTOS
+			======================================-->
+			
+			<div class="panel-body sumaCarrito">
+			    
+				<div class="col-md-4 col-sm-6 col-xs-12 pull-right well">
+					
+					<div class="col-xs-6">
+						
+						<h4>TOTAL:</h4>
+						
+					</div>
+					
+					<div class="col-xs-6">
+					
+						<h4 class="sumaSubTotal">
+							
+							<strong>MXN $<span>0.00</span></strong>
+                            
+						</h4>
+						
+					</div> 
+					
+				</div>
+				
+			</div>
+			
+			<!--=====================================
+			BOTÓN CHECKOUT
+			======================================-->
+			
+			<!-- <div class="panel-heading cabeceraCheckout">
+
+				<?php
+                
+                if(isset($_SESSION["validarSesion"])){
+                    
+                    $url = Ruta::ctrRuta();
+                    
+                    if($_SESSION["validarSesion"] == "ok"){
+                        
+                        $idUsuario = $_SESSION["idUsuario"];
+                        $existeDatosFacturacion = new ControladorCarrito();
+                        $existeDatosFacturacion -> ctrComprobarDatosFacturacion();
+                        
+                    }
+                    
+                }
+				else{
+                    // echo'
+                    // <a href="#modalIngreso" data-toggle="modal">
+                    //     <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
+                    // </a>
+                    // ';
+                }
+                
+                
+				?>
+				
+			</div> -->
+
+		</div>
+
+		<!-- .......................... -->
 
 		<p class="text-primary">Para activar el botón de pago, es necesario aceptar las politicas</p>
 		<div class="panel panel-default">
@@ -312,4 +456,25 @@ TABLA CARRITO DE COMPRAS
 	});
 
 	
+</script>
+
+<script>
+
+$(document).ready(function(){
+	
+	$('.cantidadItem').each(function(){
+		$(this).attr('readonly','true');
+	});
+
+	// MOSTRAMOS LA DIRECCION SELECCIONADA POR EL USUARIO PREVIAMENTE
+	console.log( 'DIRECCION DE USUARIO',JSON.parse(localStorage.getItem('direccionEnvio')) );
+	$('#direccionEnvioBody').html(`
+		<div class="panel panel-default">
+			${JSON.parse(localStorage.getItem('direccionEnvio'))[0].colonia}
+		</div>
+	`);
+
+});
+
+
 </script>

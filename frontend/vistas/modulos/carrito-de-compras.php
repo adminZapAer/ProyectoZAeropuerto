@@ -6,7 +6,9 @@ $url = Ruta::ctrRuta();
 <!--=====================================
 BREADCRUMB CARRITO DE COMPRAS
 ======================================-->
-
+<script>
+	localStorage.setItem("paginaEnvio",0);
+</script>
 <div class="container-fluid well well-sm">
 	
 	<div class="container">
