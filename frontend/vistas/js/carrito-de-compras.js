@@ -47,7 +47,7 @@ function getCostoEnvio(item, direccionId) {
     $.ajax({
         method: "GET",
         url: rutaFrontEnd + 'ajax/costoEnvio.php',
-        data: { id: item.idProducto, direccionId: direccionId }
+        data: { id: item.idProducto, direccionId: direccionId, cantidad:item.cantidad }
     })
         .done(function (response) {
 
