@@ -26,14 +26,10 @@ $(document).ready( function(){
     subtotales = $('.subtotales span');
     var total = 0;
 
-    console.log('subtotales',subtotales);
-
     $(subtotales).each( function(subtotal){
         total += parseFloat(subtotal.html());
     } );
 
-
-    console.log(total);
 } );
 
 /*=============================================
@@ -46,20 +42,38 @@ VISUALIZAR LOS PRODUCTOS EN LA PÁGINA CARRITO DE COMPRAS
 
 function getCostoEnvio(item, direccionId){
 
-            console.log(item);
-
             $.ajax({
                 method: "GET",
                 url: rutaFrontEnd + 'ajax/costoEnvio.php',
                 data: { id: item.idProducto, direccionId: direccionId }
               })
                 .done(function( response ) {
-                    
-                  costoEnvio = response;
+
+                    if(localStorage.getItem('paginaEnvio') != 1){
+                        
+                        item.costoEnvio = response;
+                        // console.log('ITEM', item);
+
+                        listaProductos =  JSON.parse(localStorage.getItem('listaProductos'));
+                        // console.log('LISTA SIN ITEM BORRADO', listaProductos);
+
+                        nueva = listaProductos.filter( obj => obj.idProducto != item.idProducto );
+                        // console.log('LISTA CON ITEM BORRADO', nueva);
+
+                        nueva.push(item);
+                        
+
+                        localStorage.setItem('listaProductos',JSON.stringify(nueva));
+                        // console.log('LISTA ACTUALIZADA CON COSTO ENVIO',nueva);
+                    }
 
 
-                  $('.cantidadItem').each(function(){
-                    console.log('ENTRA EN 02', $(this).val());
+                    // console.log('ITEM',item);
+                    // console.log('COSTO ENVÍO', response);
+                    costoEnvio = response;
+
+
+                $('.cantidadItem').each(function(){
                     
                     var cantidad = $(this).val();
                     var precio = $(this).attr("precio");
@@ -68,8 +82,6 @@ function getCostoEnvio(item, direccionId){
                     var cantidadItem = $(".cantidadItem");
                     
                     $(".subTotal"+idProducto).html('<strong>MXN $<span>'+Number((cantidad*precio)+costoEnvio).toFixed(2)+'</span></strong>');
-                    
-                    console.log(costoEnvio);
 
                     /*=============================================
                     ACTUALIZAR LA CANTIDAD EN EL LOCALSTORAGE
@@ -79,45 +91,40 @@ function getCostoEnvio(item, direccionId){
                     var titulo = $(".cuerpoCarrito .tituloCarritoCompra");
                     var precio = $(".cuerpoCarrito .precioCarritoCompra span");
                     var cantidad = $(".cuerpoCarrito .cantidadItem");
-                    
+
+
+                    // INICIAMOS PARA OBTENER EL PRIMER ELEMENTO
                     listaCarrito = [];
-                    
-                    // for(var i = 0; i < idProducto.length; i++){
-                        
-                    //     var idProductoArray = $(idProducto[i]).attr("idProducto");
-                    //     var imagenArray = $(imagen[i]).attr("src");
-                    //     var tituloArray = $(titulo[i]).html();
-                    //     var precioArray = $(precio[i]).html();
-                    //     var pesoArray = $(idProducto[i]).attr("peso");
-                    //     var tipoArray = $(cantidad[i]).attr("tipo");
-                    //     var cantidadArray = $(cantidad[i]).val();
-                        
-                    //     listaCarrito.push(
-                    //         {
-                    //             "idProducto":idProductoArray,
-                    //             "imagen":imagenArray,
-                    //             "titulo":tituloArray,
-                    //             "precio":precioArray,
-                    //             "tipo":tipoArray,
-                    //             "peso":pesoArray,
-                    //             "cantidad":cantidadArray,
-                    //             "costoEnvio": costoEnvio
-                    //         }
-                    //     );
-                    // }
 
-                    // localStorage.setItem("listaProductos",JSON.stringify(listaCarrito));
-                    
-                    // sumaSubtotales();
-                    // cestaCarrito(listaCarrito.length);
+                    for(var i = 0; i < idProducto.length; i++){
 
-                    
+                        
+                        var idProductoArray = $(idProducto[i]).attr("idProducto");
+                        var imagenArray = $(imagen[i]).attr("src");
+                        var tituloArray = $(titulo[i]).html();
+                        var precioArray = $(precio[i]).html();
+                        var pesoArray = $(idProducto[i]).attr("peso");
+                        var tipoArray = $(cantidad[i]).attr("tipo");
+                        var cantidadArray = $(cantidad[i]).val();
+                        
+                        listaCarrito.push(
+                            {
+                                "idProducto":idProductoArray,
+                                "imagen":imagenArray,
+                                "titulo":tituloArray,
+                                "precio":precioArray,
+                                "tipo":tipoArray,
+                                "peso":pesoArray,
+                                "cantidad":cantidadArray,
+                                "costoEnvio":costoEnvio
+                            }
+                        );
+
+                    }
 
                 });
 
-                  // if(envio = 0){
-                  //   costoenvio = 0
-                  // }
+
 
                   if(localStorage.getItem('paginaEnvio') != 1){
                     input = '<input type="number" class="form-control cantidadItem" min="1" value="'+item.cantidad+'" tipo="'+item.tipo+'" precio ="'+item.precio+'" idProducto="'+item.idProducto+'" costoEnvio="'+costoEnvio+'">';
@@ -125,7 +132,6 @@ function getCostoEnvio(item, direccionId){
                     input = '<input type="number" readonly class="form-control cantidadItem" min="1" value="'+item.cantidad+'" tipo="'+item.tipo+'" precio ="'+item.precio+'" idProducto="'+item.idProducto+'" costoEnvio="'+costoEnvio+'">';
                   }
 
-                  console.log("COSTO ENVIO: ",costoEnvio);
                   $(".cuerpoCarrito").append(
                     '<div clas="row itemCarrito">'+
                         
@@ -208,7 +214,7 @@ function getCostoEnvio(item, direccionId){
                             
                             '<p class="subTotal'+item.idProducto+' subtotales">'+
                                 
-                                '<strong>MXN $<span>'+( parseFloat(item.precio) + parseFloat(costoEnvio) ).toFixed(2) +'</span></strong>'+
+                                '<strong>MXN $<span>'+( parseFloat(item.precio)*parseInt(item.cantidad) + parseFloat(costoEnvio) ).toFixed(2) +'</span></strong>'+
                                 
                             '</p>'+
                             
@@ -238,7 +244,6 @@ function showProducts(direccion = null){
     
     listaCarrito.forEach( function (item, index){
 
-
         getCostoEnvio(item, direccion);
 
 
@@ -260,7 +265,17 @@ else{
 }
 }
 
-showProducts();
+// console.log(JSON.parse(localStorage.getItem("direccionEnvio"))[0].id);
+
+if(localStorage.getItem('paginaEnvio') == 0){
+    showProducts();
+}else{
+    direccionId =JSON.parse(localStorage.getItem("direccionEnvio"))[0].id;
+    console.log('ID DE LA DIRECCIÓN ELEGIDA',direccionId);
+    showProducts(direccionId);
+}
+
+
 
 /*=============================================
 /*=============================================
@@ -467,17 +482,20 @@ $(document).on("click", ".quitarItem", function(){
 GENERAR SUBTOTAL DESPUES DE CAMBIAR CANTIDAD
 =============================================*/
 
+// EVENTO QUE OCURRA AL CAMBIAR LA CANTIDAD DEL CARRITO
 $(document).on("change",".cantidadItem",function(){
     
+    // OBTENEMOS LOS DATOS DEL PRODUCTO
     var cantidad = $(this).val();
     var precio = $(this).attr("precio");
     var idProducto = $(this).attr("idProducto");
     var costoEnvio = parseFloat($(this).attr("costoenvio"));
     var cantidadItem = $(".cantidadItem");
     
+    // MOSTRAMOS EL SUBTOTAL ACTUALIZADO
     $(".subTotal"+idProducto).html('<strong>MXN $<span>'+Number((cantidad*precio)+costoEnvio).toFixed(2)+'</span></strong>');
     
-    console.log(costoEnvio);
+
 
     /*=============================================
     ACTUALIZAR LA CANTIDAD EN EL LOCALSTORAGE
@@ -532,7 +550,6 @@ function sumaSubtotales(){
     var subtotales = $(".subtotales span");
     
     var arraySumaSubtotales = [];
-    // console.log(arraySumaSubtotales);
     
     for(var i = 0; i < subtotales.length; i++){
         
@@ -543,7 +560,6 @@ function sumaSubtotales(){
     
     function sumaArraySubtotales(total, numero){
         
-        console.log(total, numero);
         return total + numero;
         
     }
@@ -575,6 +591,7 @@ function cestaCarrito(cantidadProductos){
     if(cantidadProductos != 0){
         
         var cantidadItem = $(".cuerpoCarrito .cantidadItem");
+        // console.log('CANTIDAD ITEM',cantidadItem);
         
         var arraySumaCantidades = [];
         
@@ -610,7 +627,6 @@ if(localStorage.getItem('paginaEnvio') == 0){
     var precioCarritoCompra = $(".cuerpoCarrito .precioCarritoCompra span");
     var cantidadItem = $(".cuerpoCarrito .cantidadItem");
     var costoEnvio = $(".cuerpoCarrito .cantidadItem");
-    console.log(costoEnvio);
     for(var i = 0; i < precioCarritoCompra.length; i++){
         var precioCarritoCompraArray = $(precioCarritoCompra[i]).html();
         var cantidadItemArray = $(cantidadItem[i]).val();
@@ -620,9 +636,6 @@ if(localStorage.getItem('paginaEnvio') == 0){
         sumaSubtotales();
         cestaCarrito(precioCarritoCompra.length);
     }
-    console.log('NO ES PAGINA DE ENVIO');
-}else{
-    console.log('ES PAGINA DE ENVIO');
 }
 
 /*=============================================
@@ -757,7 +770,6 @@ $("#btnCheckout").click(function(){
                 
                 //Nesecito multiplicar la tasa de envio nacional por la cantidad de kg del producto
                 var resultadoPeso = Number(sumaTotalPeso * $("#envioNacional").val());
-                //console.log("resultadoPeso",resultadoPeso);
                 //Valor de tasa minima
                 var valorTasaMin =Number($("#tasaMinimaNal").val());
                 
@@ -828,7 +840,6 @@ $(".btnPagar").click(function(){
         return;
         
     }
-    console.log("PAGADO");
     
 })
 
@@ -849,12 +860,9 @@ $.ajax({
             </div>`);
         }
 
-        console.log(JSON.parse(response));
-
         data.direcciones.forEach( function(item){
 
-            console.log('ITEM DIR: ', item);
-
+            // AGREGAMOS CADA UNA DE LAS DIRECCIONES DEL USUARIO
             $(".direcciones").append(`
             <div class="col-xs-12">
                 <div class="panel panel-default">
@@ -868,18 +876,17 @@ $.ajax({
                 </div>
             </div>`);
 
+            // GUARDAMOS LA DIRECCIÓN DE ENVÍO ACTUAL
             direccionEnvio = [];
             direccionEnvio.push({
                 "id":item.id,
                 "colonia":item.colonia
             });
 
-            if(localStorage.getItem('paginaEnvio') != 1){
+            // SI NO ES LA PAGINA PARA REALIZAR EL ENVÍO, ALMACENAMOS LA ULTIMA DIRECCIÓN
+            if(localStorage.getItem('paginaEnvio') == 0){
                 localStorage.setItem("direccionEnvio",JSON.stringify(direccionEnvio));
             }
-
-
-            console.log('.direcciones',$('.input-direccion')[$('.input-direccion').length-1]);
 
         } );
 
@@ -890,8 +897,6 @@ $(document).on('click','.input-direccion', function(){
     const direcionId = $(this).val();
     
     // ACTUALIZAMOS LA DIRECCION EN EL LOCAL STORAGE
-    
-    console.log('CAMBIO DE DIRECCION',$(this).attr('colonia'));
 
     direccionEnvio = [];
     direccionEnvio.push({
@@ -906,6 +911,7 @@ $(document).on('click','.input-direccion', function(){
     // REALIZAMOS UNA NUEVA COTIZACION PARA LA NUEVA DIRECCION
     $('.cuerpoCarrito').html('');
     showProducts(direcionId);
+
     sumaSubtotales();
 
 })

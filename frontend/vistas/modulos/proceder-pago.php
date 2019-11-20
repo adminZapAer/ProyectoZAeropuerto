@@ -327,7 +327,8 @@ TABLA CARRITO DE COMPRAS
 		    		"titulo": item.titulo,
 		    		"precio": item.precio,
 		    		"tipo": item.tipo,
-		    		"cantidad": item.cantidad
+					"cantidad": item.cantidad,
+					"costoEnvio":item.costoEnvio
 		    	});
 		    });
 
