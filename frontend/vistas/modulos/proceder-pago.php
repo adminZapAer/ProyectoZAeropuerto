@@ -42,14 +42,7 @@ TABLA CARRITO DE COMPRAS
 
 			<!-- DIRECCIONES DEL USUARIO -->
 			<div class="row direccionesResumen">
-				<div class="panel panel-default">
-					<div class="panel panel-heading">
-						DIRECCIÓN DE ENVÍO
-					</div>
-					<div class="panel-body" id="direccionEnvioBody">
-
-					</div>
-				</div>
+				
 			</div>
 	
 
@@ -468,12 +461,25 @@ $(document).ready(function(){
 	});
 
 	// MOSTRAMOS LA DIRECCION SELECCIONADA POR EL USUARIO PREVIAMENTE
-	console.log( 'DIRECCION DE USUARIO',JSON.parse(localStorage.getItem('direccionEnvio')) );
-	$('#direccionEnvioBody').html(`
-		<div class="panel panel-default">
+
+	if(JSON.parse(localStorage.getItem('direccionEnvio')) != null){
+		console.log( 'DIRECCION DE USUARIO',JSON.parse(localStorage.getItem('direccionEnvio')) );
+	$('#direccionesResumen').html(`
+	<div class="panel panel-default">
+					<div class="panel panel-heading">
+						DIRECCIÓN DE ENVÍO
+					</div>
+					<div class="panel-body" id="direccionEnvioBody">
+					<div class="panel panel-default">
 			${JSON.parse(localStorage.getItem('direccionEnvio'))[0].colonia}
 		</div>
+					</div>
+				</div>
+		
 	`);
+	}
+
+	
 
 });
 

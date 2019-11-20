@@ -20,6 +20,12 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
             return false;
         }
 
+        // SI EL ENVÍO ES ENTREGA PERSONAL
+        if( isset($_GET['direccionId']) && $_GET['direccionId'] == "no"){
+            print_r(0);
+            return false;
+        }
+
         $id = $_GET['id'];
         $idUsuario = $_SESSION["idUsuario"];
 
