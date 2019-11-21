@@ -875,35 +875,37 @@ $.ajax({
             </div>`);
         }
 
-        data.direcciones.forEach(function (item) {
+        if( typeof data.direcciones != 'undefined'){
+            data.direcciones.forEach(function (item) {
 
-            // AGREGAMOS CADA UNA DE LAS DIRECCIONES DEL USUARIO
-            $(".direcciones").append(`
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="radio">
-                            <label><input type="radio" class="input-direccion" name="inputDireccion" value="${item.id}" colonia="${item.colonia}" checked>
-                                <span>${item.colonia}</span>
-                            </label>
+                // AGREGAMOS CADA UNA DE LAS DIRECCIONES DEL USUARIO
+                $(".direcciones").append(`
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="radio">
+                                <label><input type="radio" class="input-direccion" name="inputDireccion" value="${item.id}" colonia="${item.colonia}" checked>
+                                    <span>${item.colonia}</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>`);
-
-            // GUARDAMOS LA DIRECCIÓN DE ENVÍO ACTUAL
-            direccionEnvio = [];
-            direccionEnvio.push({
-                "id": item.id,
-                "colonia": item.colonia
+                </div>`);
+    
+                // GUARDAMOS LA DIRECCIÓN DE ENVÍO ACTUAL
+                direccionEnvio = [];
+                direccionEnvio.push({
+                    "id": item.id,
+                    "colonia": item.colonia
+                });
+    
+                // SI NO ES LA PAGINA PARA REALIZAR EL ENVÍO, ALMACENAMOS LA ULTIMA DIRECCIÓN
+                if (localStorage.getItem('paginaEnvio') == 0) {
+                    localStorage.setItem("direccionEnvio", JSON.stringify(direccionEnvio));
+                }
+    
             });
-
-            // SI NO ES LA PAGINA PARA REALIZAR EL ENVÍO, ALMACENAMOS LA ULTIMA DIRECCIÓN
-            if (localStorage.getItem('paginaEnvio') == 0) {
-                localStorage.setItem("direccionEnvio", JSON.stringify(direccionEnvio));
-            }
-
-        });
+        }
 
         // AGREGAMOS CADA UNA DE LAS DIRECCIONES DEL USUARIO
         $(".direcciones").append(`
@@ -918,6 +920,13 @@ $.ajax({
                 </div>
             </div>
         </div>`);
+
+        if( typeof data.direcciones === 'undefined'){
+            $('.recoleccionPersonal').prop('checked',true)
+            if (localStorage.getItem('paginaEnvio') != 1) {
+                localStorage.setItem("direccionEnvio", JSON.stringify(null));
+            }
+        }
 
     });
 

@@ -38,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
     }
 
     if (empty($direcciones) || !count($direcciones)) {
-        return 0;
+        print_r(0);
+        return false;
     }
 
     $producto = \ModeloProductos::mdlGetProducto($id);
@@ -88,15 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
         'datosDestino' => [end($direcciones)['cp']],
     ]);
 
-    // echo json_encode($response->FrecuenciaCotizadorResult->Respuesta->TipoServicio);
     echo json_encode((float) $response->FrecuenciaCotizadorResult->Respuesta->TipoServicio->TipoServicio[2]->CostoTotal * (int) $cantidad);
-
-    // FrecuenciaCotizadorResult.Respuesta.TipoServicio.TipoServicio[2].CostoTotal
-
-
-    // $data = json_decode($request_body,true);
-
-
-    // return json_encode(['error'=>$data]);
 
 }
