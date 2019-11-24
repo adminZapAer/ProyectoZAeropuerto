@@ -232,8 +232,6 @@ TABLA CARRITO DE COMPRAS
 			
 			<div class="panel-body">
 	            
-	            <button class="btn btn-success" id="email">Send email</button>
-	            
 	            <div class="contenidoCheckout">
 	                	                
 	                <br>
@@ -309,10 +307,20 @@ TABLA CARRITO DE COMPRAS
 		});
 		
 	});
+
+
+	/*OBTENCIÓN DE LA DIRECCIÓN DE ENVIO*/
+	function getDireccionEnvio(){
+		return JSON.parse(
+			localStorage.getItem("direccionEnvio")
+		);
+	}
+	
   	/* OBTENCION DE LOS ELEMENTOS A COMPRAR */
 	function getItems() {
 	    if(localStorage.getItem("listaProductos") != null){	    
-		    let listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
+			let listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
+
 		    let data = [];
 		    listaCarrito.forEach((item, index) => {
 		    	data.push({
@@ -372,14 +380,15 @@ TABLA CARRITO DE COMPRAS
 				data: {
 					detalles: details,
 					usuario: JSON.stringify(localStorage.getItem("usuario")),
-					productos: getItems()
+					productos: getItems(),
+					direccion: getDireccionEnvio()
 				},
 			})
 			.done(function(res) {
 				console.log("success", res);
 				swal({
-				  title: "Transacción aceptada",
-				  text: "Compra realizada con éxito",
+				  title: "¡Tu compra ha sido realizada con éxito!",
+				  text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
 				  type: "success",
 				  confirmButtonText: "Aceptar",
 				  closeOnConfirm: false
