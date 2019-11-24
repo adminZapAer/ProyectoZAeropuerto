@@ -260,66 +260,63 @@ $ruta = $rutas[0];
                 <div class="form group row">
                     <?php
                     
-                    if($infoProducto["detalles"] != null){
-                        
-                        //$detalles = json_decode($infoProducto["detalles"],true);
-                        
-                        if($infoProducto["tipo"] == "fisico"){
+                    //$detalles = json_decode($infoProducto["detalles"],true);
+                    
+                    if($infoProducto["tipo"] == "fisico"){
+                        echo'
+                        <div class="col-xs-12">
+                        ';
+                        if($infoProducto["sku"] != ""){
                             echo'
-                            <div class="col-xs-12">
+                            <li>
+                                <i style="margin-right:10px" class="fa fa-check"></i>SKU: '.$infoProducto["sku"].'
+                            </li>
                             ';
-                            if($infoProducto["sku"] != ""){
-                                echo'
-                                <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i>SKU: '.$infoProducto["sku"].'
-                                </li>
-                                ';
-                            }
-                            if($infoProducto["marca"] != ""){
-                                echo'
-                                <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i>Marca: '.$infoProducto["marca"].'
-                                </li>
-                                ';
-                            }
-                            if($infoProducto["tipoAplicacion"] != ""){
-                                echo'
-                                <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i>Aplicación: '.$infoProducto["tipoAplicacion"].'
-                                </li>
-                                ';
-                            }
-                            if($infoProducto["alto"]!="" && $infoProducto["largo"]!="" && $infoProducto["ancho"]!=""){
-                                echo'
-                                <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i>Dimensiones: Alto '.round($infoProducto["alto"],1).' cm. Largo '.round($infoProducto["largo"],1).' cm. Ancho '.round($infoProducto["ancho"],1).' cm.
-                                </li>
-                                ';
-                            }
-                            if($infoProducto["aplicacion"] != ""){
-                                echo'
-                                <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i>Compatible con: '.$infoProducto["aplicacion"].'
-                                </li>
-                                ';
-                            }
-                            if($infoProducto["stock"] != "0"){
-                                echo'
-                                <li>
-                                    <i style="margin-right:10px" class="fa fa-check"></i> '.$infoProducto["stock"].'
-                                </li>
-                                ';
-                            }
+                        }
+                        if($infoProducto["marca"] != ""){
                             echo'
-                            </div>
+                            <li>
+                                <i style="margin-right:10px" class="fa fa-check"></i>Marca: '.$infoProducto["marca"].'
+                            </li>
                             ';
-                            
                         }
-                        else{
-                            //echo'producto virtual';
+                        if($infoProducto["tipoAplicacion"] != ""){
+                            echo'
+                            <li>
+                                <i style="margin-right:10px" class="fa fa-check"></i>Aplicación: '.$infoProducto["tipoAplicacion"].'
+                            </li>
+                            ';
                         }
+                        if($infoProducto["alto"]!="" && $infoProducto["largo"]!="" && $infoProducto["ancho"]!=""){
+                            echo'
+                            <li>
+                                <i style="margin-right:10px" class="fa fa-check"></i>Dimensiones: Alto '.round($infoProducto["alto"],1).' cm. Largo '.round($infoProducto["largo"],1).' cm. Ancho '.round($infoProducto["ancho"],1).' cm.
+                            </li>
+                            ';
+                        }
+                        if($infoProducto["aplicacion"] != ""){
+                            echo'
+                            <li>
+                                <i style="margin-right:10px" class="fa fa-check"></i>Compatible con: '.$infoProducto["aplicacion"].'
+                            </li>
+                            ';
+                        }
+                        if($infoProducto["stock"] != "0"){
+                            echo'
+                            <li>
+                                <i style="margin-right:10px" class="fa fa-check"></i>Stock: '.$infoProducto["stock"].'
+                            </li>
+                            ';
+                        }
+                        echo'
+                        </div>
+                        ';
                         
                     }
+                    else{
+                        //echo'producto virtual';
+                    }
+                    
                     
                     /*====================================
                     *==            ENTREGA             ==*
@@ -451,7 +448,7 @@ $ruta = $rutas[0];
                     <?php
                     
                     if($infoProducto["precio"] == 0){
-                        
+                        /*
                         echo'
                         <div class="col-md-6 col-xs-12">';
                             
@@ -463,11 +460,11 @@ $ruta = $rutas[0];
                         }
                         echo'
                         </div>
-                        ';
+                        ';*/
                     }
                     else{
                         if($infoProducto["tipo"]=="virtual"){
-                            echo'
+                            /*echo'
                             <div class="col-md-6 col-xs-12">
                                 <button class="btn btn-default btn-block btn-lg"><small>COMPRAR AHORA</small></button>
                             </div>
@@ -478,7 +475,7 @@ $ruta = $rutas[0];
                                     <small>&#160;&#160;AGREGAR AL CARRITO</small>
                                 </button>
                             </div>
-                            ';
+                            ';*/
                         }
                         else{
                             $precioProducto = 0;
@@ -488,9 +485,19 @@ $ruta = $rutas[0];
                             else{
                                 $precioProducto = $infoProducto["precioOferta"];
                             }
+                            
+                            $imagenProducto = "";
+                            
+                            if($infoProducto["portada"] != "" || $infoProducto["portada"] != null){
+                                $imagenProducto = $infoProducto["portada"];
+                            }
+                            else{
+                                $imagenProducto = "/vistas/img/plantilla/imagenProducto.jpg";
+                            }
+                            
                             echo'
                             <div class="col-lg-6 col-md-8 col-xs-12">
-                                <button class="btn btn-default btn-block btn-lg backColor agregarCarrito" idProducto ="'.$infoProducto["idProducto"].'" imagen="'.$servidor.$infoProducto["portada"].'" titulo="'.$infoProducto["titulo"].'" precio="'.$precioProducto.'" tipo="'.$infoProducto["tipo"].'" peso="'.$infoProducto["peso"].'">
+                                <button class="btn btn-default btn-block btn-lg backColor agregarCarrito" idProducto ="'.$infoProducto["idProducto"].'" imagen="'.$servidor.$imagenProducto.'" titulo="'.$infoProducto["titulo"].'" precio="'.$precioProducto.'" tipo="'.$infoProducto["tipo"].'" peso="'.$infoProducto["peso"].'">
                                     <i class="fa fa-shopping-cart col-xs-0"></i>
                                     &#160;&#160;AGREGAR AL CARRITO
                                 </button>

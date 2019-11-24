@@ -158,7 +158,7 @@ function getCostoEnvio(item, direccionId) {
                 '<div class="col-sm-1 col-xs-12">' +
 
                 '<figure>' +
-
+                
                 '<img src="' + item.imagen + '" class="img-thumbnail">' +
 
                 '</figure>' +
