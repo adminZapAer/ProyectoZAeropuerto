@@ -914,7 +914,7 @@ $.ajax({
                 <div class="panel-body">
                     <div class="radio">
                         <label><input type="radio" class="recoleccionPersonal" name="inputDireccion" value="-1">
-                            <span>Recoger personalmente</span>
+                            <span>Recoger en Zapata Camiones Aeropuerto</span>
                         </label>
                     </div>
                 </div>

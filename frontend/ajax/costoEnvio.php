@@ -89,6 +89,15 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
         'datosDestino' => [end($direcciones)['cp']],
     ]);
 
-    echo json_encode((float) $response->FrecuenciaCotizadorResult->Respuesta->TipoServicio->TipoServicio[2]->CostoTotal * (int) $cantidad);
+    $costoEnvio =  $response
+        ->FrecuenciaCotizadorResult
+        ->Respuesta
+        ->TipoServicio
+        ->TipoServicio[2]
+        ->CostoTotal;
+    $costoEnvio = $costoEnvio  * (int) $cantidad;
+    $costoEnvio = (float) $costoEnvio;
+    $costoEnvio = round($costoEnvio, 2);
 
+    echo json_encode($costoEnvio);
 }
