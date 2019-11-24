@@ -551,6 +551,8 @@ $(document).on("change", ".cantidadItem", function () {
     sumaSubtotales();
     cestaCarrito(listaCarrito.length);
 
+    $('.cuerpoCarrito').html('');
+    showProducts();
 })
 
 /*=============================================
