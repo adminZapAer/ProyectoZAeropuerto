@@ -435,7 +435,15 @@ $(document).on("change", ".cantidadItem", function () {
     cestaCarrito(listaCarrito.length);
 
     $('.cuerpoCarrito').html('');
-    showProducts();
+
+    direccionEnvio = JSON.parse(localStorage.getItem("direccionEnvio"));
+    if (direccionEnvio != null) {
+        direccionId = direccionEnvio[0].id;
+    }else{
+        direccionId = "no";
+    }
+
+    showProducts(direccionId);
 })
 
 
