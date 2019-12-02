@@ -26,6 +26,12 @@ class AjaxCheckout
 	//Creamos el metodo agregar deseo
 	public function ajaxAgregarCompra($detalles, $usuario, $productos, $direccion)
 	{
+
+		// $sku = ModeloProductos::mdlGetProducto(1)["sku"];
+		// print_r($sku);
+		// print_r(ModeloProductos::mdlGetProducto(1));
+		// return false;
+
 		$tabla = "usuarios";
 		$item = "idUsuario";
 		$user = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $usuario);
@@ -113,7 +119,10 @@ class AjaxCheckout
 
 			$listaProductos = "";
 			foreach ($productos as $producto) {
-				$listaProductos = $listaProductos . "<p>" . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
+
+				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
+
+				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
 			}
 
 			$direccionHTML = "";
@@ -141,11 +150,11 @@ class AjaxCheckout
 		                    
 		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">Nos complace informarle que su pedido ha sido procesado.</h4>
 		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">Los siguientes artículos enlistado han sido adquiridos.</h4>
-		                    '.$listaProductos.'
+		                    ' . $listaProductos . '
 		                    <br>
 		                    
 		                    <hr style="border:1px solid #ccc; width:80%;">
-							'.$direccionHTML.'
+							' . $direccionHTML . '
 							<hr style="border:1px solid #ccc; width:80%;">
 
 		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">¡Gracias por elegir Refacciones Zapata Camiones!.</h4>
@@ -188,8 +197,10 @@ class AjaxCheckout
 
 			$listaProductos = "";
 			foreach ($productos as $producto) {
-				$listaProductos = $listaProductos . "<p>" . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
+				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
+				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
 			}
+
 
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
