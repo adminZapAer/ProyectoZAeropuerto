@@ -119,9 +119,7 @@ class AjaxCheckout
 
 			$listaProductos = "";
 			foreach ($productos as $producto) {
-
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
-
 				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
 			}
 
@@ -221,7 +219,10 @@ class AjaxCheckout
 		                <center>
 		                    <img src="https://www.zapataaeropuerto.com/img/mail/icon-email.png" alt="icono-mail" style="padding: 20px; width: 10%;">
 		                    
-		                    <h3 style="font-weight: 100; color: #000;">Se ha realizado una compra por el cliente:' . $user['nombre'] . '</h3>
+							<h3 style="font-weight: 100; color: #000;">
+								Se ha realizado una compra por el cliente:' . $user['nombre'] . 
+								'<br> Con el correo: ' . $user['email'] . 
+							'</h3>
 		                    
 		                    <hr style="border:1px solid #ccc; width:80%;">
 		                    
