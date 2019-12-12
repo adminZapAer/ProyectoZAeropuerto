@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
     // // dd($client->__getTypes());
     // // dd($client->__getLastResponseHeaders());
 
-    $response = $client->FrecuenciaCotizador([
+    $response = $client->frecuenciacotizador([
         'idusuario' => 1,
         'usuario' => 'AdminUser',
         'contra' => ',1,B(vVi',
@@ -89,6 +89,29 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
         'datosDestino' => [end($direcciones)['cp']],
     ]);
 
+    // print_r(end($direcciones)['cp']);
+    // return false;
+
+    // print_r('PESO: ' . $producto['peso']);
+    // print_r(' LARGO: ' . $producto['largo']);
+    // print_r(' ALTO: ' .  $producto['alto']);
+    // print_r(' ANCHO: ' . $producto['ancho']);
+    // print_r(' CP: ' . end($direcciones)['cp'] ." " );
+    // return false;
+    // print_r($producto['peso']);
+    // return false;
+
+    // print_r($producto['alto']);
+    // return false;
+
+    // print_r($producto['ancho']);
+    // return false;
+
+    // print_r(end($direcciones));
+    // return false;
+
+    // print_r($response->FrecuenciaCotizadorResult->Respuesta->TipoServicio);
+    // return false;
 
     $costoEnvio =  $response
         ->FrecuenciaCotizadorResult
@@ -96,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
         ->TipoServicio
         ->TipoServicio[2]
         ->CostoTotal;
+
     $costoEnvio = $costoEnvio  * (int) $cantidad;
     $costoEnvio = (float) $costoEnvio;
     $costoEnvio = round($costoEnvio, 2);

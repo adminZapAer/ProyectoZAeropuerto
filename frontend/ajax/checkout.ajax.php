@@ -27,6 +27,8 @@ class AjaxCheckout
 	public function ajaxAgregarCompra($detalles, $usuario, $productos, $direccion)
 	{
 
+		
+
 		// $sku = ModeloProductos::mdlGetProducto(1)["sku"];
 		// print_r($sku);
 		// print_r(ModeloProductos::mdlGetProducto(1));
@@ -49,7 +51,7 @@ class AjaxCheckout
 			$direccionEnvio = null;
 		}
 
-		// print_r($detalles);
+		// print_r(json_encode($direccionEnvio));
 		// return false;
 
 		// ALMACENAMOS LA COMPRA REALIZADA
@@ -57,7 +59,7 @@ class AjaxCheckout
 			'idUsuario' => $user['idUsuario'],
 			'metodo' => 'paypal',
 			'envio' => $envio,
-			'direccion' => $direccionEnvio ? $direccionEnvio[0]["cp"] : null,
+			'direccion' => $direccionEnvio ? json_encode($direccionEnvio[0]) : null,
 			'pais' => 'México',
 			'fecha' => date('Y-m-d'),
 			'statusCompraId' => 1 // en espera

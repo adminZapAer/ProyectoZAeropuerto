@@ -757,7 +757,7 @@ $.ajax({
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="radio">
-                                <label><input type="radio" class="input-direccion" name="inputDireccion" value="${item.id}" colonia="${item.colonia}" checked>
+                                <label><input type="radio" class="input-direccion" name="inputDireccion" value="${item.id}" colonia="${item.colonia}" cp="${item.cp}" estado="${item.estado}" municipio="${item.municipio}" calle="${item.calle}" numext="${item.numext}" numint="${item.numint}" checked>
                                     <span>${item.colonia}</span>
                                 </label>
                             </div>
@@ -769,7 +769,14 @@ $.ajax({
                 direccionEnvio = [];
                 direccionEnvio.push({
                     "id": item.id,
-                    "colonia": item.colonia
+                    "colonia": item.colonia,
+                    "cp": item.cp,
+                    "estado": item.estado,
+                    "municipio": item.municipio,
+                    "calle": item.calle,
+                    "colonia":item.colonia,
+                    "numext":item.numext,
+                    "numint":item.numint
                 });
     
                 // SI NO ES LA PAGINA PARA REALIZAR EL ENVÍO, ALMACENAMOS LA ULTIMA DIRECCIÓN
@@ -835,7 +842,13 @@ $(document).on('click', '.input-direccion', function () {
     direccionEnvio = [];
     direccionEnvio.push({
         "id": $(this).val(),
-        "colonia": $(this).attr('colonia')
+        "colonia": $(this).attr('colonia'),
+        "cp": $(this).attr('cp'),
+        "estado": $(this).attr('estado'),
+        "municipio": $(this).attr('municipio'),
+        "calle": $(this).attr('calle'),
+        "numext": $(this).attr('numext'),
+        "numint": $(this).attr('numint')
     });
 
     if (localStorage.getItem('paginaEnvio') != 1) {
