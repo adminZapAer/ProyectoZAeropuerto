@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
 
     if(!isset($_SESSION['idUsuario'])){
         print_r(json_encode([
-            'error' => 'Para cotizar el envío, es necesario iniciar sesión'
+            'error' => 'Para hacer la compra, es necesario <a href="#modalIngreso" data-toggle="modal">Iniciar Sesión</a> o <a href="#modalRegistro" data-toggle="modal">Registrarse</a>'
         ]));
         return false;
     }
@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
 
     if(is_null($direcciones) || !count($direcciones)){
         print_r(json_encode([
-            'error' => 'No cuentas con ningúna dirección para cotizar el envío.'
+            'error' => 'No cuentas con ningúna dirección para cotizar el envío. Ve a la sección <a href="'.$url.'perfil">Mi perfil</a> y registra una dirección'
         ]));
         return false;
     }
@@ -32,3 +32,4 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
     ]));
     return false;
 }
+?>

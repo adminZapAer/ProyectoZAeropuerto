@@ -98,7 +98,7 @@ if(isset($_SESSION["validarSesion"])){
                     else{
                         echo '
                         
-                        <li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
+                        <li><a href="#modalIngreso" data-toggle="modal">Iniciar Sesión</a></li>
                         <li>|</li>
                         <li><a href="#modalRegistro" data-toggle="modal">Crear Cuenta</a></li>
                         
@@ -234,14 +234,14 @@ if(isset($_SESSION["validarSesion"])){
         
         <div class="modal-body modalTitulo">
             
-            <h3 class="backColor">REGISTRARSE</h3>
+            <h3 class="backColor">REGISTRO</h3>
             
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             
             <!--==================================
             *==   VENTANA MODAL PARA REGISTRO  ==*
             ===================================-->
-            
+            <!--
             <div class="col-sm-6 col-xs-12 facebook" >
                 
                 <p>
@@ -255,7 +255,7 @@ if(isset($_SESSION["validarSesion"])){
                 
             <!--==================================
             *==   VENTANA MODAL PARA REGISTRO  ==*
-            ===================================-->
+            ===================================--
             
             <div class="col-sm-6 col-xs-12 google" >
                 
@@ -267,6 +267,7 @@ if(isset($_SESSION["validarSesion"])){
                 </p>
                 
             </div>
+            -->
             <!--=====================================
 			REGISTRO DIRECTO
 			======================================-->
@@ -352,7 +353,7 @@ if(isset($_SESSION["validarSesion"])){
             
         <div class="modal-footer">
             
-            ¿Ya tienes una cuenta registrada? | <strong><a href="#modalIngreso" data-dismiss="modal" data-toggle="modal">Ingresar</a></strong>
+            ¿Ya tienes una cuenta registrada? | <strong><a href="#modalIngreso" data-dismiss="modal" data-toggle="modal">Inicia Sesión</a></strong>
             
         </div>
         
@@ -370,7 +371,7 @@ if(isset($_SESSION["validarSesion"])){
         
         <div class="modal-body modalTitulo">
             
-            <h3 class="backColor">INGRESAR</h3>
+            <h3 class="backColor">Iniciar Sesión</h3>
             
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             
@@ -464,7 +465,7 @@ if(isset($_SESSION["validarSesion"])){
             
         <div class="modal-footer">
             
-            ¿No tienes una cuenta registrada? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Registrarse</a></strong>
+            ¿No tienes una cuenta? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Regístrate</a></strong>
             
         </div>
         
@@ -484,7 +485,7 @@ if(isset($_SESSION["validarSesion"])){
         
         <div class="modal-body modalTitulo">
             
-            <h3 class="backColor">SOLICITUD DE NUEVA CONTRASEÑA</h3>
+            <h3 class="backColor">SOLICITA UNA NUEVA CONTRASEÑA</h3>
             
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             
@@ -529,7 +530,7 @@ if(isset($_SESSION["validarSesion"])){
             
         <div class="modal-footer">
             
-            ¿No tienes una cuenta registrada? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Registrarse</a></strong>
+            ¿No tienes una cuenta? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Regístrate</a></strong>
             
         </div>
         
