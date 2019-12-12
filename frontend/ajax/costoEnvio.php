@@ -89,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
         'datosDestino' => [end($direcciones)['cp']],
     ]);
 
+
     $costoEnvio =  $response
         ->FrecuenciaCotizadorResult
         ->Respuesta
