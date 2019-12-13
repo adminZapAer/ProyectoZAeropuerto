@@ -22,6 +22,7 @@ class AjaxCheckout
 
 	public $idUsuario;
 	public $idProducto;
+    public $usuario;
 
 	//Creamos el metodo agregar deseo
 	public function ajaxAgregarCompra($detalles, $usuario, $productos, $direccion)
@@ -37,12 +38,14 @@ class AjaxCheckout
 		$tabla = "usuarios";
 		$item = "idUsuario";
 		$user = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $usuario);
-
+        
+        $usuario = $user['idUsuario'];
 
 		// print_r($direccion);
 		// return false;
-
-
+        
+        
+        
 		$envio = 0;
 		if (isset($direccion) && !is_null($direccion) && !empty($direccion)) {
 			$direccionEnvio = ModeloUsuarios::mdlMostrarDireccion('direccion', $user['idUsuario'], $direccion[0]["id"]);
@@ -70,7 +73,7 @@ class AjaxCheckout
 
 		foreach ($detalles['purchase_units'][0]['items'] as $key => $item) {
 			$producto = \ModeloProductos::mdlGetProducto($productos[$key]->idProducto);
-
+            
 			if ($producto !== "error") {
 				$datos = [
 					'idCompra' => $compra,
@@ -81,10 +84,10 @@ class AjaxCheckout
 				ModeloCompras::mdlAgregarDetalleCompra('detalle_compra', $datos);
 			}
 		}
-
+        
 		$this->sendEmailCliente($user, $productos, $datosCompra);
 		$this->sendEmailEmpleado($user, $productos, $datosCompra);
-
+        
 		print_r(true);
 		return false;
 	}
@@ -194,22 +197,43 @@ class AjaxCheckout
 			$mail->addAddress($_SERVER['MAIL_VENDEDOR']); //'jmolina@zapata.com.mx'
 
 			$mail->Subject = 'Notificación de compra por un cliente';
+            
+            $item = $_SESSION["idUsuario"];
+            
+            $facturaciones = ModeloUsuarios::mdlMostrarDatosFacturacion("facturacion", $compra['idUsuario']);
 
 			$listaProductos = "";
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
 				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
 			}
-
-
+            
+            $direccionDestino = json_decode($compra['direccion'],true);
+            
+            
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
 				$direccionHTML = "
-					<p>
-						<b>DIRECCIÓN DE ENVÍO</b><br>" .
-					$compra['direccion'] .
-					"</p>";
-			}
+					<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
+                    <p><b>Nombre: </b>".$direccionDestino[0]["1"]."</p>
+                    <p><b>Dirección: </b>".$direccionDestino[6]["7"]." | <b>Numero Exterior: </b>".$direccionDestino[7]["8"]." | <b>Numero Interior: </b>".$direccionDestino[8]["9"]."</p>
+                    <p><b>Colonia: </b>".$direccionDestino[5]["6"]." | <b>Municipio: </b>".$direccionDestino[4]["5"]." | <b>Estado: </b>".$direccionDestino[3]["4"]." | <b>Código Postal: </b>".$direccionDestino[2]["3"]."</p>
+                    <p><b>Teléfono: </b>".$direccionDestino[1]["2"]."</p>
+                    ";
+            }
+            
+            $facturacionHTML = "";
+            foreach ($facturaciones as $key => $value) {
+
+                $facturacionHTML = "
+                <p><b>Nombre / Razón Social: </b>".$value["nombreRazon"]."</p>
+                <p><b>RFC: </b>".$value["rfc"]." | <b>Tipo de Persona: </b>".$value["tipoPersona"]."</p>
+                <p><b>Dirección: </b>".$value["calle"]." | <b>Numero Exterior: </b>".$value["numExterior"]." | <b>Numero Interior: </b>".$value["numInterior"]."</p>
+                <p><b>Colonia: </b>".$value["colonia"]." | <b>Municipio: </b>".$value["municipio"]." | <b>Estado: </b>".$value["estado"]." | <b>Codigo Postal: </b>".$value["codigoPostal"]."</p>
+                <p><b>Teléfono: </b>".$value["telefono"]." | <b>Correo Electrónico: </b>".$value["email"]."</p>
+                ";
+            }
+            
 
 			$mail->msgHTML('
 		        <div style="width:100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px;">
@@ -240,9 +264,16 @@ class AjaxCheckout
 		                    
 		                    <hr style="border:1px solid #ccc; width:80%;">
 							
-							'
-				. $direccionHTML .
-				'
+							'. $direccionHTML .'
+                            <br>
+		                    
+		                    <hr style="border:1px solid #ccc; width:80%;">
+                            
+                            <h4 style="font-weight: 100; color: #000; padding: 0 20px;">
+		                    	<p><b>DATOS DE FACTURACION</b></p>
+                                '. $facturacionHTML .'
+		                    </h4>
+                            
 
 		                </center>
 		                

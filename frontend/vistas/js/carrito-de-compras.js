@@ -86,7 +86,7 @@ function insertarProductoAListaHTML(item){
         '<p>' +
 
         // '<strong>MXN $<span>'+0+'</span></strong>'+
-        '<strong>MXN $<span>' + item.costoEnvio + '</span></strong>' +
+        '<strong>MXN $<span>' + (parseFloat(item.costoEnvio)).toFixed(2) + '</span></strong>' +
 
         '</p>' +
 
