@@ -170,9 +170,9 @@ TABLA CARRITO DE COMPRAS
         </div>
         
         <div class="row ">
-        <div class="panel panel-default bg-secondary aviso" style="padding: 2em;">
-        
-        </div>
+            <div class="panel panel-default bg-secondary aviso" style="padding: 2em;">
+            
+            </div>
         </div>
 
 	</div>
