@@ -45,10 +45,6 @@ TABLA CARRITO DE COMPRAS
             
         </div>
 
-        <div class="row aviso">
-            
-        </div>
-
 		<div class="panel panel-default">
             
 			<!--=====================================
@@ -171,7 +167,13 @@ TABLA CARRITO DE COMPRAS
 				
 			</div>
 
-		</div>
+        </div>
+        
+        <div class="row ">
+        <div class="panel panel-default bg-secondary aviso" style="padding: 2em;">
+        
+        </div>
+        </div>
 
 	</div>
 
@@ -329,6 +331,8 @@ TABLA CARRITO DE COMPRAS
         </div>
         
     </div>
+
+    
      
 </div>
 <?php

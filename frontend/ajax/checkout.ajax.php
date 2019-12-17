@@ -131,9 +131,15 @@ class AjaxCheckout
 			$mail->Subject = 'Gracias por comprar en refaccioneszapatacamiones.com';
 
 			$listaProductos = "";
+			$productosEnviadosDesdePlanta = '';
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
 				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
+				if($producto->origen == 'planta'){
+					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
+					// print_r($productosEnviadosDesdePlanta);
+					// return false;
+				}
 			}
 
 			$direccionHTML = "";
@@ -163,6 +169,17 @@ class AjaxCheckout
 		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">Los siguientes artículos enlistado han sido adquiridos.</h4>
 		                    ' . $listaProductos . '
 		                    <br>
+							
+							<hr style="border:1px solid #ccc; width:80%;">
+		                    
+		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">
+		                    	<p>
+		                    		Los siguientes productos serán enviados desde planta:
+								</p>
+								' . $productosEnviadosDesdePlanta . '
+		                    </h4>
+		                    
+							<br>
 		                    
 		                    <hr style="border:1px solid #ccc; width:80%;">
 							' . $direccionHTML . '
@@ -211,24 +228,31 @@ class AjaxCheckout
             $facturaciones = ModeloUsuarios::mdlMostrarDatosFacturacion("facturacion", $compra['idUsuario']);
 
 			$listaProductos = "";
+			$productosEnviadosDesdePlanta = '';
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
 				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
+
+				if($producto->origen == 'planta'){
+					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
+					// print_r($productosEnviadosDesdePlanta);
+					// return false;
+				}
 			}
             
             $direccionDestino = json_decode($compra['direccion'],true);
             
             
 			$direccionHTML = "";
-			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
-				$direccionHTML = "
-					<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
-                    <p><b>Nombre: </b>".$direccionDestino[0]["1"]."</p>
-                    <p><b>Dirección: </b>".$direccionDestino[6]["7"]." | <b>Numero Exterior: </b>".$direccionDestino[7]["8"]." | <b>Numero Interior: </b>".$direccionDestino[8]["9"]."</p>
-                    <p><b>Colonia: </b>".$direccionDestino[5]["6"]." | <b>Municipio: </b>".$direccionDestino[4]["5"]." | <b>Estado: </b>".$direccionDestino[3]["4"]." | <b>Código Postal: </b>".$direccionDestino[2]["3"]."</p>
-                    <p><b>Teléfono: </b>".$direccionDestino[1]["2"]."</p>
-                    ";
-            }
+			// if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
+			// 	$direccionHTML = "
+			// 		<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
+            //         <p><b>Nombre: </b>".$direccionDestino[0]["1"]."</p>
+            //         <p><b>Dirección: </b>".$direccionDestino[6]["7"]." | <b>Numero Exterior: </b>".$direccionDestino[7]["8"]." | <b>Numero Interior: </b>".$direccionDestino[8]["9"]."</p>
+            //         <p><b>Colonia: </b>".$direccionDestino[5]["6"]." | <b>Municipio: </b>".$direccionDestino[4]["5"]." | <b>Estado: </b>".$direccionDestino[3]["4"]." | <b>Código Postal: </b>".$direccionDestino[2]["3"]."</p>
+            //         <p><b>Teléfono: </b>".$direccionDestino[1]["2"]."</p>
+            //         ";
+            // }
 
             $facturacionHTML = "";
             foreach ($facturaciones as $key => $value) {
@@ -268,12 +292,18 @@ class AjaxCheckout
 								' . $listaProductos . '
 		                    </h4>
 		                    
-		                    <br>
-		                    
-		                    <hr style="border:1px solid #ccc; width:80%;">
+							<br>
 							
-							'. $direccionHTML .'
-                            <br>
+							<hr style="border:1px solid #ccc; width:80%;">
+		                    
+		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">
+		                    	<p>
+		                    		Los siguientes productos serán enviados desde planta:
+								</p>
+								' . $productosEnviadosDesdePlanta . '
+		                    </h4>
+		                    
+							<br>
 		                    
 		                    <hr style="border:1px solid #ccc; width:80%;">
                             

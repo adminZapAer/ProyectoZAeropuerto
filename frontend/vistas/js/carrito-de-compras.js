@@ -164,15 +164,11 @@ function getCostoEnvio(item, direccionId) {
             const origen = JSON.parse(response).origen;
 
 
-            // if(origen == 'planta'  ){
-            //     $('.aviso').html(`
-            //         <div class="panel panel-default bg-secondary avisoPlanta" style="padding: 2em;">
-            //             Tu pedido será solicitado desde planta
-            //         </div>
-            //     `);
-            // }else{
-            //     $('.aviso').html('');
-            // }
+            if(origen == 'planta'  ){
+                $('.aviso').append(`
+                    - El producto ${item.titulo} será enviado desde planta<hr>
+                `);
+            }
 
             // console.log('RESPONSE ENVIO',JSON.parse(response).origen);
 
@@ -192,6 +188,8 @@ function getCostoEnvio(item, direccionId) {
 }
 
 async function showProducts(direccion = null) {
+
+    $('.aviso').html('');
 
     // SI NO HAY PRODUCTOS EN LA CESTA, MOSTRAMOS MENSAJE
     if(localStorage.getItem("listaProductos") == null){

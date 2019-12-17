@@ -8,6 +8,13 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 
 if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
+    // $envio = array(
+    //     'costoEnvio' => 0,
+    //     'origen' => 'planta',
+    // );
+
+    // echo json_encode($envio);
+    // return false;
     
     if (file_exists(__DIR__ . "/../../.env")) {
         $dotenv = Dotenv\Dotenv::create(__DIR__ . "/../../");
