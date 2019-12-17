@@ -152,6 +152,25 @@ class ModeloProductos{
         $stmt = null;
     }
 
+    static public function mdlActualizarProducto($tabla, $item, $valor, $idProducto){
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item = :$item WHERE idProducto = :idProducto");
+        
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        
+        $stmt -> bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+        
+        if($stmt -> execute()){
+            return "ok";
+        }
+        else{
+            return "error";
+        }
+        
+        $stmt -> close();
+        
+        $stmt = null;
+    }
+
     static public function mdlGetProducto($id){
         $stmt = Conexion::conectar()->prepare("SELECT * FROM productos WHERE idProducto = :idProducto");
         $stmt->bindParam(":idProducto", $id, PDO::PARAM_STR);
@@ -423,4 +442,3 @@ class ModeloProductos{
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     
 }
-?>

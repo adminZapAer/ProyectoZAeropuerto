@@ -45,6 +45,10 @@ TABLA CARRITO DE COMPRAS
             
         </div>
 
+        <div class="row aviso">
+            
+        </div>
+
 		<div class="panel panel-default">
             
 			<!--=====================================

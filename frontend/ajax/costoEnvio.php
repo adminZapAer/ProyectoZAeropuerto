@@ -8,6 +8,7 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 
 if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
+    
     if (file_exists(__DIR__ . "/../../.env")) {
         $dotenv = Dotenv\Dotenv::create(__DIR__ . "/../../");
         $dotenv->overload();
@@ -16,13 +17,23 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
     session_start();
 
     if (!isset($_SESSION['idUsuario'])) {
-        print_r(0);
+        $envio = array(
+            'costoEnvio' => 0,
+            'origen' => '',
+        );
+    
+        echo json_encode($envio);
         return false;
     }
 
     // SI EL ENVÍO ES ENTREGA PERSONAL
     if (isset($_GET['direccionId']) && $_GET['direccionId'] == "no") {
-        print_r(0);
+        $envio = array(
+            'costoEnvio' => 0,
+            'origen' => '',
+        );
+    
+        echo json_encode($envio);
         return false;
     }
 
@@ -38,11 +49,32 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
     }
 
     if (empty($direcciones) || !count($direcciones)) {
-        print_r(0);
+        $envio = array(
+            'costoEnvio' => 0,
+            'origen' => '',
+        );
+    
+        echo json_encode($envio);
         return false;
     }
 
     $producto = \ModeloProductos::mdlGetProducto($id);
+
+    // print_r('PRODUCTOS SOLICITADOS ' . $cantidad . ' PRODUCTOS EN STOCK' . $producto['stock']);
+    // return false;
+
+    if ($producto['stock'] - $cantidad < 0) {
+        // 32500
+        $cpOrigen = '78390'; // CODIGO POSTAL DE PLANTA
+        $origen = 'planta';
+    } else {
+        $cpOrigen = '56200'; // CODIGO POSTAL DE ZAPATA
+        $origen = 'zapata';
+    }
+    // return false;
+
+
+
 
     $opts = array(
         'http' => array(
@@ -85,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
             'Alto' => $producto['alto'],
             'Ancho' => $producto['ancho'],
         ],
-        'datosOrigen' => ['56200'],
+        'datosOrigen' => [$cpOrigen],
         'datosDestino' => [end($direcciones)['cp']],
     ]);
 
@@ -124,5 +156,10 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
     $costoEnvio = (float) $costoEnvio;
     $costoEnvio = round($costoEnvio, 2);
 
-    echo json_encode($costoEnvio);
+    $envio = array(
+        'costoEnvio' => $costoEnvio,
+        'origen' => $origen,
+    );
+
+    echo json_encode($envio);
 }

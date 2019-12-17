@@ -28,7 +28,10 @@ class AjaxCheckout
 	public function ajaxAgregarCompra($detalles, $usuario, $productos, $direccion)
 	{
 
-		
+		session_start();
+
+		// print_r($productos);
+		// return false;
 
 		// $sku = ModeloProductos::mdlGetProducto(1)["sku"];
 		// print_r($sku);
@@ -73,6 +76,11 @@ class AjaxCheckout
 
 		foreach ($detalles['purchase_units'][0]['items'] as $key => $item) {
 			$producto = \ModeloProductos::mdlGetProducto($productos[$key]->idProducto);
+
+			// print_r($producto);
+			// return false;
+
+			\ModeloProductos::mdlActualizarProducto('productos', 'stock', $producto['stock'] - $item['quantity'], $producto['idProducto']);
             
 			if ($producto !== "error") {
 				$datos = [
@@ -221,7 +229,7 @@ class AjaxCheckout
                     <p><b>Teléfono: </b>".$direccionDestino[1]["2"]."</p>
                     ";
             }
-            
+
             $facturacionHTML = "";
             foreach ($facturaciones as $key => $value) {
 

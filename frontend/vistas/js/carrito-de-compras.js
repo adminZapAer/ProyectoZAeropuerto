@@ -161,9 +161,25 @@ function getCostoEnvio(item, direccionId) {
     })
         .done(function (response) {
 
+            const origen = JSON.parse(response).origen;
+
+
+            // if(origen == 'planta'  ){
+            //     $('.aviso').html(`
+            //         <div class="panel panel-default bg-secondary avisoPlanta" style="padding: 2em;">
+            //             Tu pedido será solicitado desde planta
+            //         </div>
+            //     `);
+            // }else{
+            //     $('.aviso').html('');
+            // }
+
+            // console.log('RESPONSE ENVIO',JSON.parse(response).origen);
+
             // ACTUALIZAMOS EL PRODUCTO CON EL NUEVO COSTO DE ENVIO
             if (localStorage.getItem('paginaEnvio') != 1) {
-                item.costoEnvio = response;
+                item.costoEnvio = JSON.parse(response).costoEnvio;
+                item.origen = JSON.parse(response).origen;
                 actualizarProducto(item);
             }
 
@@ -175,7 +191,7 @@ function getCostoEnvio(item, direccionId) {
         });
 }
 
-function showProducts(direccion = null) {
+async function showProducts(direccion = null) {
 
     // SI NO HAY PRODUCTOS EN LA CESTA, MOSTRAMOS MENSAJE
     if(localStorage.getItem("listaProductos") == null){
@@ -187,12 +203,27 @@ function showProducts(direccion = null) {
 
     var listaCarrito = LocalStorageJSON.getItems("listaProductos");
 
-    listaCarrito.forEach(
+    await listaCarrito.forEach(
         function (item, index) {
             getCostoEnvio(item, direccion);
             $(".cantidadItem[tipo='virtual']").attr("readonly", "true");
         }
     );
+
+    // $('.aviso').html('');
+    // listaCarrito.forEach(
+    //     function (item, index) {
+    //         console.log('ORIGEN: ',item.origen);
+    //         console.log('ORIGEN: ',item);
+    //         if(item.origen == 'planta'){
+    //             $('.aviso').html(`
+    //                 <div class="panel panel-default">
+    //                     Tu pedido será solicitado desde planta
+    //                 </div>
+    //             `);
+    //         }
+    //     }
+    // );
 
 }
 
