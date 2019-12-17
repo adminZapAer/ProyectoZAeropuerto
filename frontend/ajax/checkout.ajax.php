@@ -141,15 +141,19 @@ class AjaxCheckout
 					// return false;
 				}
 			}
-
+            
+            $direccionDestinoCliente = json_decode($compra['direccion'],true);
+            
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
 				$direccionHTML = "
-					<p>
-						<b>DIRECCIÓN DE ENVÍO</b><br>" .
-					$compra['direccion'] .
-					"</p>";
-			}
+					<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
+                    <p><b>Nombre: </b>".$direccionDestinoCliente['nombre']."</p>
+                    <p><b>Dirección: </b>".$direccionDestinoCliente['calle']." | <b>Numero Exterior: </b>".$direccionDestinoCliente['numext']." | <b>Numero Interior: </b>".$direccionDestinoCliente['numint']."</p>
+                    <p><b>Colonia: </b>".$direccionDestinoCliente['colonia']." | <b>Municipio: </b>".$direccionDestinoCliente['municipio']." | <b>Estado: </b>".$direccionDestinoCliente['estado']." | <b>Código Postal: </b>".$direccionDestinoCliente['cp']."</p>
+                    <p><b>Teléfono: </b>".$direccionDestinoCliente['celular']."</p>
+                    ";
+            }
 
 			$mail->msgHTML('
 		        <div style="width:100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px;">
@@ -226,6 +230,7 @@ class AjaxCheckout
             $item = $_SESSION["idUsuario"];
             
             $facturaciones = ModeloUsuarios::mdlMostrarDatosFacturacion("facturacion", $compra['idUsuario']);
+            //$facturaciones = ControladorUsuarios::ctrMostrarDatosFacturacion($compra['idUsuario']);
 
 			$listaProductos = "";
 			$productosEnviadosDesdePlanta = '';
@@ -242,18 +247,17 @@ class AjaxCheckout
             
             $direccionDestino = json_decode($compra['direccion'],true);
             
-            
 			$direccionHTML = "";
-			// if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
-			// 	$direccionHTML = "
-			// 		<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
-            //         <p><b>Nombre: </b>".$direccionDestino[0]["1"]."</p>
-            //         <p><b>Dirección: </b>".$direccionDestino[6]["7"]." | <b>Numero Exterior: </b>".$direccionDestino[7]["8"]." | <b>Numero Interior: </b>".$direccionDestino[8]["9"]."</p>
-            //         <p><b>Colonia: </b>".$direccionDestino[5]["6"]." | <b>Municipio: </b>".$direccionDestino[4]["5"]." | <b>Estado: </b>".$direccionDestino[3]["4"]." | <b>Código Postal: </b>".$direccionDestino[2]["3"]."</p>
-            //         <p><b>Teléfono: </b>".$direccionDestino[1]["2"]."</p>
-            //         ";
-            // }
-
+			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
+				$direccionHTML = "
+					<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
+                    <p><b>Nombre: </b>".$direccionDestino['nombre']."</p>
+                    <p><b>Dirección: </b>".$direccionDestino['calle']." | <b>Numero Exterior: </b>".$direccionDestino['numext']." | <b>Numero Interior: </b>".$direccionDestino['numint']."</p>
+                    <p><b>Colonia: </b>".$direccionDestino['colonia']." | <b>Municipio: </b>".$direccionDestino['municipio']." | <b>Estado: </b>".$direccionDestino['estado']." | <b>Código Postal: </b>".$direccionDestino['cp']."</p>
+                    <p><b>Teléfono: </b>".$direccionDestino['celular']."</p>
+                    ";
+            }
+            
             $facturacionHTML = "";
             foreach ($facturaciones as $key => $value) {
 
