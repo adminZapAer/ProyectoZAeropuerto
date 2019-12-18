@@ -153,6 +153,31 @@ if(isset($_SESSION["validarSesion"])){
                         </a>
                     </span>
                 </div>
+                
+                <br>
+                <div class="col-md-3 col-sm-3" id="freightliner">
+                    <figure>
+                        <a href="<?php echo $url."buscador/1/recientes/freightliner"; ?>">
+                            <img src="<?php echo $servidor; ?>vistas/img/freightliner-logo.png" style="display:flex;  align-items: center; ">
+                        </a>
+                    </figure>
+                </div>
+                <div class="col-md-3 col-sm-3" id="mercedes">
+                    <figure>
+                        <a href="<?php echo $url."buscador/1/recientes/mercedes-benz"; ?>">
+                            <img src="<?php echo $servidor; ?>vistas/img/logo-mercedes.png" style="display:flex;  align-items: center;">
+                        </a>
+                    </figure>
+                </div>
+                
+                <div class="col-md-3 col-sm-3" id="greatdane">
+                    <figure>
+                        <a href="<?php echo $url."buscador/1/recientes/great-dane"; ?>">
+                            <img src="<?php echo $servidor; ?>vistas/img/logo-great-dane.png" style="display:flex;  align-items: center;">
+                        </a>
+                    </figure>
+                </div>
+                
             </div>
             <!--=================================
                       CARRITO DE COMPRAS

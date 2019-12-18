@@ -158,7 +158,7 @@ BARRA PRODUCTOS
                             echo '
                             <!-- Producto -->
                             
-                            <li class="col-md-3 col-sm-6 col-xs-12">
+                            <li class="col-md-3 col-sm-6 col-xs-12" style =" width:292.5px; height:393.6px;">
                             
                                 <!--===============================================-->
                                 <figure>
@@ -166,9 +166,9 @@ BARRA PRODUCTOS
                                     <a href="'.$url.$value["ruta"].'" class="pixelProducto">';
                                         
                                         if($value["portada"] != ""){
-                                            echo '<img src="'.$servidor.$value["portada"].'" class="img-responsive">';
+                                            echo '<img src="'.$servidor.$value["portada"].'" class="img-responsive" style="width: 287px; height: 215px;">';
                                         }else{
-                                            echo '<img src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg" class="img-responsive">';
+                                            echo '<img src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg" class="img-responsive" style="width: 287px; height: 215px;">';
                                         }
                                     
                                     echo '    

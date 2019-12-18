@@ -143,7 +143,7 @@ for ($i = 0; $i < count($titulosModulos); $i++){
                 
                 <!-- Producto -->
                 
-                <li class="col-md-3 col-sm-6 col-xs-12">
+                <li class="col-md-3 col-sm-6 col-xs-12 familias">
                 
                     <!--===============================================-->
                     

@@ -678,7 +678,7 @@ $ruta = $rutas[0];
 
                 <!-- Producto -->
 
-                <li class="col-md-3 col-sm-6 col-xs-12">
+                <li class="col-md-3 col-sm-6 col-xs-12" style =" width:292.5px; height:393.6px;">
 
                     <!--===============================================-->
 
@@ -686,7 +686,7 @@ $ruta = $rutas[0];
 
                         <a href="'.$url.$value["ruta"].'" class="pixelProducto">
 
-                            <img src="'.$servidor.$value["portada"].'" class="img-responsive">
+                            <img src="'.$servidor.$value["portada"].'" class="img-responsive" style="width: 287px; height: 215px;">
 
                         </a>
 
