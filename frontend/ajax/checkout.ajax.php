@@ -28,6 +28,9 @@ class AjaxCheckout
 	public function ajaxAgregarCompra($detalles, $usuario, $productos, $direccion)
 	{
 
+		print_r($productos);
+		return false;
+
 		session_start();
 
 		// print_r($productos);

@@ -1,6 +1,6 @@
-class LocalStorageJSON{
+class LocalStorageJSON {
 
-    static getItems(key){
+    static getItems(key) {
         return JSON.parse(
             localStorage.getItem(key)
         );
@@ -8,7 +8,7 @@ class LocalStorageJSON{
 
 }
 
-function insertarProductoAListaHTML(item){
+function insertarProductoAListaHTML(item) {
 
     if (localStorage.getItem('paginaEnvio') != 1) {
         input = '<input type="number" class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '" precio ="' + item.precio + '" idProducto="' + item.idProducto + '" costoEnvio="' + item.costoEnvio + '">';
@@ -38,7 +38,7 @@ function insertarProductoAListaHTML(item){
         '<div class="col-sm-1 col-xs-12">' +
 
         '<figure>' +
-        
+
         '<img src="' + item.imagen + '" class="img-thumbnail">' +
 
         '</figure>' +
@@ -112,11 +112,11 @@ function insertarProductoAListaHTML(item){
     );
 }
 
-function actualizarProducto(item){
-    
+function actualizarProducto(item) {
+
     // OBTENEMOS PRODUCTOS EN FORMATO JSON
     productos = LocalStorageJSON.getItems('listaProductos');
-    
+
     // ARREGLO CON EL PRODUCTO ACTUALIZADO
     productosActualizados = productos.filter(
         producto => producto.idProducto != item.idProducto
@@ -157,14 +157,14 @@ function getCostoEnvio(item, direccionId) {
     $.ajax({
         method: "GET",
         url: rutaFrontEnd + 'ajax/costoEnvio.php',
-        data: { id: item.idProducto, direccionId: direccionId, cantidad:item.cantidad }
+        data: { id: item.idProducto, direccionId: direccionId, cantidad: item.cantidad }
     })
         .done(function (response) {
 
             const origen = JSON.parse(response).origen;
 
 
-            if(origen == 'planta'  ){
+            if (origen == 'planta') {
                 $('.aviso').append(`
                     - El producto ${item.titulo} será enviado desde planta<hr>
                 `);
@@ -192,7 +192,7 @@ async function showProducts(direccion = null) {
     $('.aviso').html('');
 
     // SI NO HAY PRODUCTOS EN LA CESTA, MOSTRAMOS MENSAJE
-    if(localStorage.getItem("listaProductos") == null){
+    if (localStorage.getItem("listaProductos") == null) {
         $(".cuerpoCarrito").html('<div class="well">Aún no hay productos en el carrito de compras.</div>');
         $(".sumaCarrito").hide();
         $(".cabeceraCheckout").hide();
@@ -232,7 +232,7 @@ if (localStorage.getItem('paginaEnvio') == 0) {
     direccionEnvio = JSON.parse(localStorage.getItem("direccionEnvio"));
     if (direccionEnvio != null) {
         direccionId = direccionEnvio[0].id;
-    }else{
+    } else {
         direccionId = "no";
     }
 
@@ -245,12 +245,15 @@ AGREGAR AL CARRITO
 
 $(".agregarCarrito").click(function () {
 
-    var idProducto = $(this).attr("idProducto");
-    var imagen = $(this).attr("imagen");
-    var titulo = $(this).attr("titulo");
-    var precio = $(this).attr("precio");
-    var tipo = $(this).attr("tipo");
-    var peso = $(this).attr("peso");
+    nuevoProducto = {
+        "idProducto":$(this).attr("idProducto"),
+        "imagen":$(this).attr("imagen"),
+        "titulo":$(this).attr("titulo"),
+        "precio":$(this).attr("precio"),
+        "tipo":$(this).attr("tipo"),
+        "peso":$(this).attr("peso"),
+        "cantidad":"1"
+    };
 
     var agregarAlCarrito = false;
 
@@ -258,7 +261,7 @@ $(".agregarCarrito").click(function () {
                    CAPTURAR DETALLES
     =============================================*/
 
-    if (tipo == "fisico") {
+    if (nuevoProducto.tipo == "fisico") {
 
         agregarAlCarrito = true;
 
@@ -273,52 +276,32 @@ $(".agregarCarrito").click(function () {
     =============================================*/
     if (agregarAlCarrito) {
 
+        if (CarritoComprasService.tieneProducto(nuevoProducto.idProducto)) {
+            swal({
+                title: "El producto ya está agregado al carrito de compras",
+                text: "",
+                type: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "¡Volver!",
+                closeOnConfirm: false
+            })
+            return;
+        }
+
         /*=============================================
           RECUPERAR ALMACENAMIENTO DEL LOCALSTORAGE
         =============================================*/
 
         // listaCarrito = [];
 
-        if (localStorage.getItem("listaProductos") == null) {
-
+        if (CarritoComprasService.estaVacio()) {
             listaCarrito = [];
-
         }
         else {
-
-            var listaProductos = JSON.parse(localStorage.getItem("listaProductos"));
-
-            for (var i = 0; i < listaProductos.length; i++) {
-
-                if (listaProductos[i]["idProducto"] == idProducto) {
-
-                    swal({
-                        title: "El producto ya está agregado al carrito de compras",
-                        text: "",
-                        type: "warning",
-                        showCancelButton: false,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "¡Volver!",
-                        closeOnConfirm: false
-                    })
-                    return;
-                }
-            }
-
             listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
-            // listaCarrito.concat(localStorage.getItem("listaProductos"));
-
         }
-
-        listaCarrito.push({
-            "idProducto": idProducto,
-            "imagen": imagen,
-            "titulo": titulo,
-            "precio": precio,
-            "tipo": tipo,
-            "peso": peso,
-            "cantidad": "1"
-        });
+        listaCarrito.push(nuevoProducto);
 
         localStorage.setItem("listaProductos", JSON.stringify(listaCarrito));
 
@@ -326,7 +309,7 @@ $(".agregarCarrito").click(function () {
                     ACTUALIZAR LA CESTA
         =============================================*/
         var cantidadCesta = Number($(".cantidadCesta").html()) + 1;
-        var sumaCesta = Number($(".sumaCesta").html()) + Number(precio);
+        var sumaCesta = Number($(".sumaCesta").html()) + Number(nuevoProducto.precio);
 
         $(".cantidadCesta").html(cantidadCesta);
         $(".sumaCesta").html(sumaCesta.toFixed(2));
@@ -348,11 +331,11 @@ $(".agregarCarrito").click(function () {
             confirmButtonText: "¡Ir a mi carrito de compras!",
             closeOnConfirm: false
         },
-        function (isConfirm) {
-            if (isConfirm) {
-                window.location = rutaFrontEnd + "carrito-de-compras";
-            }
-        });
+            function (isConfirm) {
+                if (isConfirm) {
+                    window.location = rutaFrontEnd + "carrito-de-compras";
+                }
+            });
 
     }
 
@@ -468,7 +451,7 @@ $(document).on("change", ".cantidadItem", function () {
     direccionEnvio = JSON.parse(localStorage.getItem("direccionEnvio"));
     if (direccionEnvio != null) {
         direccionId = direccionEnvio[0].id;
-    }else{
+    } else {
         direccionId = "no";
     }
 
@@ -777,23 +760,52 @@ $.ajax({
             </div>`);
         }
 
-        if( typeof data.direcciones != 'undefined'){
+        if (typeof data.direcciones != 'undefined') {
             data.direcciones.forEach(function (item) {
 
                 // AGREGAMOS CADA UNA DE LAS DIRECCIONES DEL USUARIO
                 $(".direcciones").append(`
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-md-6">
                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <input type="radio" class="input-direccion" name="inputDireccion" value="${item.id}" colonia="${item.colonia}" cp="${item.cp}" estado="${item.estado}" municipio="${item.municipio}" calle="${item.calle}" numext="${item.numext}" numint="${item.numint}" checked>
+                            DIRECCION
+                        </div>
                         <div class="panel-body">
-                            <div class="radio">
-                                <label><input type="radio" class="input-direccion" name="inputDireccion" value="${item.id}" colonia="${item.colonia}" cp="${item.cp}" estado="${item.estado}" municipio="${item.municipio}" calle="${item.calle}" numext="${item.numext}" numint="${item.numint}" checked>
-                                    <span>${item.colonia}</span>
-                                </label>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                                    <label>Colonia</label>
+                                    <input type="text" class="form-control" readonly value="${item.colonia}">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                                    <label>Estado</label>
+                                    <input type="text" class="form-control" readonly value="${item.estado}">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                                    <label>Municipio</label>
+                                    <input type="text" class="form-control" readonly value="${item.municipio}">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                                    <label>CP</label>
+                                    <input type="text" class="form-control" readonly value="${item.cp}">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                                    <label>Calle</label>
+                                    <input type="text" class="form-control" readonly value="${item.calle}">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                                    <label>Num. exterior</label>
+                                    <input type="text" class="form-control" readonly value="${item.numext}">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                                    <label>Num. interior</label>
+                                    <input type="text" class="form-control" readonly value="${item.numint}">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>`);
-    
+
                 // GUARDAMOS LA DIRECCIÓN DE ENVÍO ACTUAL
                 direccionEnvio = [];
                 direccionEnvio.push({
@@ -803,16 +815,16 @@ $.ajax({
                     "estado": item.estado,
                     "municipio": item.municipio,
                     "calle": item.calle,
-                    "colonia":item.colonia,
-                    "numext":item.numext,
-                    "numint":item.numint
+                    "colonia": item.colonia,
+                    "numext": item.numext,
+                    "numint": item.numint
                 });
-    
+
                 // SI NO ES LA PAGINA PARA REALIZAR EL ENVÍO, ALMACENAMOS LA ULTIMA DIRECCIÓN
                 if (localStorage.getItem('paginaEnvio') == 0) {
                     localStorage.setItem("direccionEnvio", JSON.stringify(direccionEnvio));
                 }
-    
+
             });
         }
 
@@ -830,8 +842,8 @@ $.ajax({
             </div>
         </div>`);
 
-        if( typeof data.direcciones === 'undefined'){
-            $('.recoleccionPersonal').prop('checked',true)
+        if (typeof data.direcciones === 'undefined') {
+            $('.recoleccionPersonal').prop('checked', true)
             if (localStorage.getItem('paginaEnvio') != 1) {
                 localStorage.setItem("direccionEnvio", JSON.stringify(null));
             }
