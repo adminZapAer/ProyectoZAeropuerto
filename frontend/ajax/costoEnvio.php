@@ -23,10 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
     session_start();
 
+    // SI EL USUARIO NO HA INICIADO SESIÓN
     if (!isset($_SESSION['idUsuario'])) {
         $envio = array(
             'costoEnvio' => 0,
             'origen' => '',
+            'error' => null,
         );
     
         echo json_encode($envio);
@@ -38,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
         $envio = array(
             'costoEnvio' => 0,
             'origen' => '',
+            'error' => null
         );
     
         echo json_encode($envio);
@@ -55,10 +58,24 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
         $direcciones = \ModeloUsuarios::mdlMostrarDireccion('direccion', $idUsuario, $_GET['direccionId']);
     }
 
+    // SI NO TIENE NINGUNA DIRECCION
     if (empty($direcciones) || !count($direcciones)) {
         $envio = array(
             'costoEnvio' => 0,
             'origen' => '',
+            'error' => null
+        );
+    
+        echo json_encode($envio);
+        return false;
+    }
+
+    // SI EL CODIGO POSTAL NO ESTÁ BIEN COLOCADO
+    if( strlen(end($direcciones)['cp']) != 5 ){
+        $envio = array(
+            'costoEnvio' => 0,
+            'origen' => '',
+            'error' => 'El codigo postal para la dirección seleccionada no es válido'
         );
     
         echo json_encode($envio);
@@ -150,14 +167,34 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
     // return false;
 
     // print_r($response->FrecuenciaCotizadorResult->Respuesta->TipoServicio);
-    // return false;
 
-    $costoEnvio =  $response
-        ->FrecuenciaCotizadorResult
-        ->Respuesta
-        ->TipoServicio
-        ->TipoServicio[2]
-        ->CostoTotal;
+    // print_r($response);
+    // return false;
+    
+    foreach($response->FrecuenciaCotizadorResult->Respuesta->TipoServicio->TipoServicio as $tipoServicio){
+        
+        if($tipoServicio->DescripcionServicio == '2 Dias'){
+            $servicio = $tipoServicio;
+        }
+        
+    }
+
+    // SI NO EXISTE EL SERVICIO O NO APLICA
+    if( !isset($servicio) || $servicio->AplicaServicio != "Si" ){
+        $envio = array(
+            'costoEnvio' => 0,
+            'origen' => '',
+            'error' => 'El servicio de paquetería no aplica para la dirección deseada.'
+        );
+    
+        echo json_encode($envio);
+        return false;
+    }
+
+    $costoEnvio =  $servicio->CostoTotal;
+
+    // print_r($costoEnvio);
+    // return false;
 
     $costoEnvio = $costoEnvio  * (int) $cantidad;
     $costoEnvio = (float) $costoEnvio;
@@ -166,6 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
     $envio = array(
         'costoEnvio' => $costoEnvio,
         'origen' => $origen,
+        'error' => null,
     );
 
     echo json_encode($envio);

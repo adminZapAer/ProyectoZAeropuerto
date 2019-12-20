@@ -161,8 +161,28 @@ function getCostoEnvio(item, direccionId) {
     })
         .done(function (response) {
 
-            const origen = JSON.parse(response).origen;
+            respuesta = JSON.parse(response);
 
+            if( respuesta.error != null ){
+                swal({
+                    title: "Error al cotizar",
+                    text: respuesta.error,
+                    type: "warning",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "¡Volver!",
+                    closeOnConfirm: true
+                })
+
+                $('.cabeceraCheckout #btnCheckout').hide();
+
+            }else{
+                $('.cabeceraCheckout #btnCheckout').show();
+            }
+
+            console.log('RESPUESTA',JSON.parse(response));
+
+            const origen = JSON.parse(response).origen;
 
             if (origen == 'planta') {
                 $('.aviso').append(`

@@ -157,7 +157,7 @@ TABLA CARRITO DE COMPRAS
 				else{
                     echo'
                     <a href="#modalIngreso" data-toggle="modal">
-                        <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
+                        <button class="btn btn-default backColor btn-lg pull-right" id="botonRealizarPago">REALIZAR PAGO</button>
                     </a>
                     ';
                 }
