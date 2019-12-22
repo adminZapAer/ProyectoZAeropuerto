@@ -107,7 +107,7 @@ AGREGAR VISTA DE PRODUCTO
 =============================================*/
 
 
-if( isset($_POST['usuario_id'])  && isset($_POST['producto_id']) ){
+if( isset($_POST['usuario_id']) && !is_null($_POST['usuario_id']) && !empty($_POST['usuario_id'])  && isset($_POST['producto_id'])  ){
 
 	$ajax = new AjaxUsuarios();
 	$ajax->idUsuario = $_POST['usuario_id'];
