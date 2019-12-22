@@ -22,7 +22,7 @@ class AjaxCheckout
 
 	public $idUsuario;
 	public $idProducto;
-    public $usuario;
+	public $usuario;
 
 	//Creamos el metodo agregar deseo
 	public function ajaxAgregarCompra($detalles, $usuario, $productos, $direccion)
@@ -44,14 +44,14 @@ class AjaxCheckout
 		$tabla = "usuarios";
 		$item = "idUsuario";
 		$user = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $usuario);
-        
-        $usuario = $user['idUsuario'];
+
+		$usuario = $user['idUsuario'];
 
 		// print_r($direccion);
 		// return false;
-        
-        
-        
+
+
+
 		$envio = 0;
 		if (isset($direccion) && !is_null($direccion) && !empty($direccion)) {
 			$direccionEnvio = ModeloUsuarios::mdlMostrarDireccion('direccion', $user['idUsuario'], $direccion[0]["id"]);
@@ -80,11 +80,15 @@ class AjaxCheckout
 		foreach ($detalles['purchase_units'][0]['items'] as $key => $item) {
 			$producto = \ModeloProductos::mdlGetProducto($productos[$key]->idProducto);
 
-			// print_r($producto);
-			// return false;
+			// ELIMINAMOS LA OFERTA EN CASO DE QUE ESTE VACÍO EL STOCK.
+			$nuevoStock =  $producto['stock'] - $item['quantity'];
+			if ($nuevoStock <= 0) {
+				$tendraOferta = 0;
+				\ModeloProductos::mdlActualizarProducto('productos', 'oferta', $tendraOferta, $producto['idProducto']);
+			}
 
-			\ModeloProductos::mdlActualizarProducto('productos', 'stock', $producto['stock'] - $item['quantity'], $producto['idProducto']);
-            
+			\ModeloProductos::mdlActualizarProducto('productos', 'stock', $nuevoStock, $producto['idProducto']);
+
 			if ($producto !== "error") {
 				$datos = [
 					'idCompra' => $compra,
@@ -95,10 +99,10 @@ class AjaxCheckout
 				ModeloCompras::mdlAgregarDetalleCompra('detalle_compra', $datos);
 			}
 		}
-        
+
 		$this->sendEmailCliente($user, $productos, $datosCompra);
 		$this->sendEmailEmpleado($user, $productos, $datosCompra);
-        
+
 		print_r(true);
 		return false;
 	}
@@ -138,25 +142,25 @@ class AjaxCheckout
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
 				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
-				if($producto->origen == 'planta'){
+				if ($producto->origen == 'planta') {
 					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
 					// print_r($productosEnviadosDesdePlanta);
 					// return false;
 				}
 			}
-            
-            $direccionDestinoCliente = json_decode($compra['direccion'],true);
-            
+
+			$direccionDestinoCliente = json_decode($compra['direccion'], true);
+
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
 				$direccionHTML = "
 					<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
-                    <p><b>Nombre: </b>".$direccionDestinoCliente['nombre']."</p>
-                    <p><b>Dirección: </b>".$direccionDestinoCliente['calle']." | <b>Numero Exterior: </b>".$direccionDestinoCliente['numext']." | <b>Numero Interior: </b>".$direccionDestinoCliente['numint']."</p>
-                    <p><b>Colonia: </b>".$direccionDestinoCliente['colonia']." | <b>Municipio: </b>".$direccionDestinoCliente['municipio']." | <b>Estado: </b>".$direccionDestinoCliente['estado']." | <b>Código Postal: </b>".$direccionDestinoCliente['cp']."</p>
-                    <p><b>Teléfono: </b>".$direccionDestinoCliente['celular']."</p>
+                    <p><b>Nombre: </b>" . $direccionDestinoCliente['nombre'] . "</p>
+                    <p><b>Dirección: </b>" . $direccionDestinoCliente['calle'] . " | <b>Numero Exterior: </b>" . $direccionDestinoCliente['numext'] . " | <b>Numero Interior: </b>" . $direccionDestinoCliente['numint'] . "</p>
+                    <p><b>Colonia: </b>" . $direccionDestinoCliente['colonia'] . " | <b>Municipio: </b>" . $direccionDestinoCliente['municipio'] . " | <b>Estado: </b>" . $direccionDestinoCliente['estado'] . " | <b>Código Postal: </b>" . $direccionDestinoCliente['cp'] . "</p>
+                    <p><b>Teléfono: </b>" . $direccionDestinoCliente['celular'] . "</p>
                     ";
-            }
+			}
 
 			$mail->msgHTML('
 		        <div style="width:100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px;">
@@ -229,11 +233,11 @@ class AjaxCheckout
 			$mail->addAddress($_SERVER['MAIL_VENDEDOR']); //'jmolina@zapata.com.mx'
 
 			$mail->Subject = 'Notificación de compra por un cliente';
-            
-            $item = $_SESSION["idUsuario"];
-            
-            $facturaciones = ModeloUsuarios::mdlMostrarDatosFacturacion("facturacion", $compra['idUsuario']);
-            //$facturaciones = ControladorUsuarios::ctrMostrarDatosFacturacion($compra['idUsuario']);
+
+			$item = $_SESSION["idUsuario"];
+
+			$facturaciones = ModeloUsuarios::mdlMostrarDatosFacturacion("facturacion", $compra['idUsuario']);
+			//$facturaciones = ControladorUsuarios::ctrMostrarDatosFacturacion($compra['idUsuario']);
 
 			$listaProductos = "";
 			$productosEnviadosDesdePlanta = '';
@@ -241,38 +245,38 @@ class AjaxCheckout
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
 				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
 
-				if($producto->origen == 'planta'){
+				if ($producto->origen == 'planta') {
 					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
 					// print_r($productosEnviadosDesdePlanta);
 					// return false;
 				}
 			}
-            
-            $direccionDestino = json_decode($compra['direccion'],true);
-            
+
+			$direccionDestino = json_decode($compra['direccion'], true);
+
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
 				$direccionHTML = "
 					<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
-                    <p><b>Nombre: </b>".$direccionDestino['nombre']."</p>
-                    <p><b>Dirección: </b>".$direccionDestino['calle']." | <b>Numero Exterior: </b>".$direccionDestino['numext']." | <b>Numero Interior: </b>".$direccionDestino['numint']."</p>
-                    <p><b>Colonia: </b>".$direccionDestino['colonia']." | <b>Municipio: </b>".$direccionDestino['municipio']." | <b>Estado: </b>".$direccionDestino['estado']." | <b>Código Postal: </b>".$direccionDestino['cp']."</p>
-                    <p><b>Teléfono: </b>".$direccionDestino['celular']."</p>
+                    <p><b>Nombre: </b>" . $direccionDestino['nombre'] . "</p>
+                    <p><b>Dirección: </b>" . $direccionDestino['calle'] . " | <b>Numero Exterior: </b>" . $direccionDestino['numext'] . " | <b>Numero Interior: </b>" . $direccionDestino['numint'] . "</p>
+                    <p><b>Colonia: </b>" . $direccionDestino['colonia'] . " | <b>Municipio: </b>" . $direccionDestino['municipio'] . " | <b>Estado: </b>" . $direccionDestino['estado'] . " | <b>Código Postal: </b>" . $direccionDestino['cp'] . "</p>
+                    <p><b>Teléfono: </b>" . $direccionDestino['celular'] . "</p>
                     ";
-            }
-            
-            $facturacionHTML = "";
-            foreach ($facturaciones as $key => $value) {
+			}
 
-                $facturacionHTML = "
-                <p><b>Nombre / Razón Social: </b>".$value["nombreRazon"]."</p>
-                <p><b>RFC: </b>".$value["rfc"]." | <b>Tipo de Persona: </b>".$value["tipoPersona"]."</p>
-                <p><b>Dirección: </b>".$value["calle"]." | <b>Numero Exterior: </b>".$value["numExterior"]." | <b>Numero Interior: </b>".$value["numInterior"]."</p>
-                <p><b>Colonia: </b>".$value["colonia"]." | <b>Municipio: </b>".$value["municipio"]." | <b>Estado: </b>".$value["estado"]." | <b>Codigo Postal: </b>".$value["codigoPostal"]."</p>
-                <p><b>Teléfono: </b>".$value["telefono"]." | <b>Correo Electrónico: </b>".$value["email"]."</p>
+			$facturacionHTML = "";
+			foreach ($facturaciones as $key => $value) {
+
+				$facturacionHTML = "
+                <p><b>Nombre / Razón Social: </b>" . $value["nombreRazon"] . "</p>
+                <p><b>RFC: </b>" . $value["rfc"] . " | <b>Tipo de Persona: </b>" . $value["tipoPersona"] . "</p>
+                <p><b>Dirección: </b>" . $value["calle"] . " | <b>Numero Exterior: </b>" . $value["numExterior"] . " | <b>Numero Interior: </b>" . $value["numInterior"] . "</p>
+                <p><b>Colonia: </b>" . $value["colonia"] . " | <b>Municipio: </b>" . $value["municipio"] . " | <b>Estado: </b>" . $value["estado"] . " | <b>Codigo Postal: </b>" . $value["codigoPostal"] . "</p>
+                <p><b>Teléfono: </b>" . $value["telefono"] . " | <b>Correo Electrónico: </b>" . $value["email"] . "</p>
                 ";
-            }
-            
+			}
+
 
 			$mail->msgHTML('
 		        <div style="width:100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px;">
@@ -285,9 +289,9 @@ class AjaxCheckout
 		                    <img src="https://www.zapataaeropuerto.com/img/mail/icon-email.png" alt="icono-mail" style="padding: 20px; width: 10%;">
 		                    
 							<h3 style="font-weight: 100; color: #000;">
-								Se ha realizado una compra por el cliente:' . $user['nombre'] . 
-								'<br> Con el correo: ' . $user['email'] . 
-							'</h3>
+								Se ha realizado una compra por el cliente:' . $user['nombre'] .
+				'<br> Con el correo: ' . $user['email'] .
+				'</h3>
 		                    
 		                    <hr style="border:1px solid #ccc; width:80%;">
 		                    
@@ -316,7 +320,7 @@ class AjaxCheckout
                             
                             <h4 style="font-weight: 100; color: #000; padding: 0 20px;">
 		                    	<p><b>DATOS DE FACTURACION</b></p>
-                                '. $facturacionHTML .'
+                                ' . $facturacionHTML . '
 		                    </h4>
                             
 

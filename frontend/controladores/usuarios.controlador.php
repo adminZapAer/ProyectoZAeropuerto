@@ -1212,9 +1212,19 @@ class ControladorUsuarios{
         }
         
     }
+
+    /*=============================================
+    ANADIR VISTAS DE PRODUCTO
+    =============================================*/
+
+    public function ctrAnadirVistaProducto($datos){
+        $tabla = "vistas_usuarios";
+
+		$respuesta = ModeloUsuarios::mdlAgregarVistaProducto($tabla, $datos);
+
+		return $respuesta;
+    }
     
     /*---------------------------------------------------------------*/
     
 }
-
-?>

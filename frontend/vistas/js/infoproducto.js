@@ -108,7 +108,23 @@ $(window).on("load",function(){
         processData:false,
         success: function(respuesta){}
     });
-    
+
+    data = new FormData();
+
+    data.append("producto_id", $('#inputProductoId').val());
+    data.append("usuario_id", $('#inputUsuarioId').val());
+
+    $.ajax({
+        url:rutaFrontEnd+"ajax/usuarios.ajax.php",
+        method: "POST",
+        data: data,
+        cache: false,
+        contentType:false,
+        processData:false,
+        success: function(respuesta){
+            console.log('¿Vista agreada?',respuesta);
+        }
+    });
     
 })
 

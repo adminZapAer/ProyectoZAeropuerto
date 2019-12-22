@@ -6,10 +6,18 @@ $servidor = Ruta::ctrRutaServidor();
 $ruta = $rutas[0];
 
 ?>
+
+<?php
+
+$infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
+
+?>
+
 <!--==================================
 *==   BREADCRUMB INFOPRODUCTO      ==*
 ===================================-->
-
+<input type="hidden" id="inputProductoId" value="<?php echo $infoProducto["idProducto"] ?>">
+<input type="hidden" id="inputUsuarioId" value="<?php echo isset($_SESSION['idUsuario']) ? $_SESSION['idUsuario'] : '' ?>">
 
 <div class="container-fluid well well-sm">
     
@@ -43,7 +51,6 @@ $ruta = $rutas[0];
             
             $item = "ruta";
             $valor = $rutas[0];
-            $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
             $multimedia = json_decode($infoProducto["multimedia"],true);
             
             if($infoProducto["tipo"] == "fisico"){

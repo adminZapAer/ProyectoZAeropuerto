@@ -2,168 +2,165 @@
 
 require_once "conexion.php";
 
-class ModeloUsuarios{
-    
-    /*======================================
+class ModeloUsuarios
+{
+
+	/*======================================
     *==        REGISTRO DE USUARIO       ==*
     ======================================*/
-    
-    static public function mdlRegistroUsuario($tabla, $datos){
-        
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, password, email, modo, foto, verificacion, emailEncriptado) VALUES (:nombre, :password, :email, :modo, :foto, :verificacion, :emailEncriptado)");
-        $stmt->bindParam(":nombre",$datos["nombre"],PDO::PARAM_STR);
-        $stmt->bindParam(":password",$datos["password"],PDO::PARAM_STR);
-        $stmt->bindParam(":email",$datos["email"],PDO::PARAM_STR);
-        $stmt->bindParam(":modo",$datos["modo"],PDO::PARAM_STR);
-        $stmt->bindParam(":foto",$datos["foto"],PDO::PARAM_STR);
-        $stmt->bindParam(":verificacion",$datos["verificacion"],PDO::PARAM_INT);
-        $stmt->bindParam(":emailEncriptado",$datos["emailEncriptado"],PDO::PARAM_STR);
-        
-        //si se ejecuta la operacion
-        if($stmt -> execute()){
-            return "ok";
-        }
-        else{
-            return "error";
-        }
-        $stmt -> close();
-        $stmt = null;
-        
-    }
-    
-    /*======================================
+
+	static public function mdlRegistroUsuario($tabla, $datos)
+	{
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, password, email, modo, foto, verificacion, emailEncriptado) VALUES (:nombre, :password, :email, :modo, :foto, :verificacion, :emailEncriptado)");
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+		$stmt->bindParam(":modo", $datos["modo"], PDO::PARAM_STR);
+		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		$stmt->bindParam(":verificacion", $datos["verificacion"], PDO::PARAM_INT);
+		$stmt->bindParam(":emailEncriptado", $datos["emailEncriptado"], PDO::PARAM_STR);
+
+		//si se ejecuta la operacion
+		if ($stmt->execute()) {
+			return "ok";
+		} else {
+			return "error";
+		}
+		$stmt->close();
+		$stmt = null;
+	}
+
+	/*======================================
     *==         MOSTRAR USUARIO          ==*
     ======================================*/
-    
-    static public function mdlMostrarUsuario($tabla, $item, $valor){
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
-        
-        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-        
-        if($stmt -> execute()){
-        	return $stmt->fetch();
-    	}
-    	else {
-    		return $stmt->errorInfo();
-    	}
-        
-        $stmt -> close();
-        
-        $stmt = null;
-    }
-    
-    /*======================================
+
+	static public function mdlMostrarUsuario($tabla, $item, $valor)
+	{
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+
+		$stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
+
+		if ($stmt->execute()) {
+			return $stmt->fetch();
+		} else {
+			return $stmt->errorInfo();
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
+
+	/*======================================
     *==        ACTUALIZAR USUARIO        ==*
     ======================================*/
-    static public function mdlActualizarUsuario($tabla,$idUsuario,$item,$valor){
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item = :$item WHERE idUsuario = :idUsuario");
-        
-        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-        
-        $stmt -> bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
-        
-        if($stmt -> execute()){
-            return "ok";
-        }
-        else{
-            return "error";
-        }
-        
-        $stmt -> close();
-        
-        $stmt = null;
-    }
-    
-    /*=============================================
+	static public function mdlActualizarUsuario($tabla, $idUsuario, $item, $valor)
+	{
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item = :$item WHERE idUsuario = :idUsuario");
+
+		$stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
+
+		$stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+			return "ok";
+		} else {
+			return "error";
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
+
+	/*=============================================
 	ACTUALIZAR PERFIL
 	=============================================*/
 
-	static public function mdlActualizarPerfil($tabla, $datos){
+	static public function mdlActualizarPerfil($tabla, $datos)
+	{
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, email = :email, password = :password, foto = :foto WHERE idUsuario = :idUsuario");
 
-		$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-		$stmt -> bindParam(":email", $datos["email"], PDO::PARAM_STR);
-		$stmt -> bindParam(":password", $datos["password"], PDO::PARAM_STR);
-		$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
-		$stmt -> bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+		$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
+		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		$stmt->bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
-    
-    /*=============================================
+
+	/*=============================================
 	MOSTRAR COMPRAS
 	=============================================*/
 
-	static public function mdlMostrarCompras($tabla, $item, $valor){
+	static public function mdlMostrarCompras($tabla, $item, $valor)
+	{
 
 		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 
-		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 
-		$stmt -> execute();
+		$stmt->execute();
 
-		return $stmt -> fetchAll();
+		return $stmt->fetchAll();
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
-    
-    /*=============================================
+
+	/*=============================================
 	MOSTRAR COMENTARIOS EN PERFIL
 	=============================================*/
 
-	static public function mdlMostrarComentariosPerfil($tabla, $datos){
+	static public function mdlMostrarComentariosPerfil($tabla, $datos)
+	{
 
-		if($datos["idUsuario"] != ""){
+		if ($datos["idUsuario"] != "") {
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE idUsuario = :idUsuario AND idProducto = :idProducto");
 
-			$stmt -> bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
-			$stmt -> bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);
+			$stmt->bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
+			$stmt->bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);
 
-			$stmt -> execute();
+			$stmt->execute();
 
-			return $stmt -> fetch();
-
-		}else{
+			return $stmt->fetch();
+		} else {
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE idProducto = :idProducto ORDER BY Rand()");
 
-			$stmt -> bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);
+			$stmt->bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);
 
-			$stmt -> execute();
+			$stmt->execute();
 
-			return $stmt -> fetchAll();
-
+			return $stmt->fetchAll();
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	ACTUALIZAR COMENTARIO
 	=============================================*/
 
-	static public function mdlActualizarComentario($tabla, $datos){
+	static public function mdlActualizarComentario($tabla, $datos)
+	{
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET calificacion = :calificacion, comentario = :comentario WHERE idComentario = :idComentario");
 
@@ -171,119 +168,110 @@ class ModeloUsuarios{
 		$stmt->bindParam(":comentario", $datos["comentario"], PDO::PARAM_STR);
 		$stmt->bindParam(":idComentario", $datos["idComentario"], PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	AGREGAR A LISTA DE DESEOS
 	=============================================*/
 
-	static public function mdlAgregarDeseo($tabla, $datos){
+	static public function mdlAgregarDeseo($tabla, $datos)
+	{
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (idUsuario, idProducto) VALUES (:idUsuario, :idProducto)");
 
 		$stmt->bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
-		$stmt->bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);	
+		$stmt->bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	MOSTRAR LISTA DE DESEOS
 	=============================================*/
 
-	static public function mdlMostrarDeseos($tabla, $item){
+	static public function mdlMostrarDeseos($tabla, $item)
+	{
 
 		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE idUsuario = :idUsuario ORDER BY idUsuario DESC");
 
-		$stmt -> bindParam(":idUsuario", $item, PDO::PARAM_INT);
+		$stmt->bindParam(":idUsuario", $item, PDO::PARAM_INT);
 
-		$stmt -> execute();
+		$stmt->execute();
 
-		return $stmt -> fetchAll();
+		return $stmt->fetchAll();
 
-		$stmt -> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	QUITAR PRODUCTO DE LISTA DE DESEOS
 	=============================================*/
 
-	static public function mdlQuitarDeseo($tabla, $datos){
+	static public function mdlQuitarDeseo($tabla, $datos)
+	{
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idDeseo = :idDeseo");
 
-		$stmt -> bindParam(":idDeseo", $datos, PDO::PARAM_INT);
+		$stmt->bindParam(":idDeseo", $datos, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	ELIMINAR USUARIO
 	=============================================*/
 
-	static public function mdlEliminarUsuario($tabla, $idUsuario){
+	static public function mdlEliminarUsuario($tabla, $idUsuario)
+	{
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idUsuario = :idUsuario");
 
-		$stmt -> bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+		$stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 
@@ -291,26 +279,24 @@ class ModeloUsuarios{
 	ELIMINAR COMENTARIOS DE USUARIO
 	=============================================*/
 
-	static public function mdlEliminarComentarios($tabla, $idUsuario){
+	static public function mdlEliminarComentarios($tabla, $idUsuario)
+	{
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idUsuario = :idUsuario");
 
-		$stmt -> bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+		$stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 
@@ -318,26 +304,24 @@ class ModeloUsuarios{
 	ELIMINAR COMPRAS DE USUARIO
 	=============================================*/
 
-	static public function mdlEliminarCompras($tabla, $idUsuario){
+	static public function mdlEliminarCompras($tabla, $idUsuario)
+	{
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idUsuario = :idUsuario");
 
-		$stmt -> bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+		$stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 
@@ -345,33 +329,32 @@ class ModeloUsuarios{
 	ELIMINAR LISTA DE DESEOS DE USUARIO
 	=============================================*/
 
-	static public function mdlEliminarListaDeseos($tabla, $idUsuario){
+	static public function mdlEliminarListaDeseos($tabla, $idUsuario)
+	{
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idUsuario = :idUsuario");
 
-		$stmt -> bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+		$stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	AGREGAR DIRECCIÓN DE USUARIO
 	=============================================*/
 
-	public function mdlAgregarDireccion($tabla, $datos){
+	public function mdlAgregarDireccion($tabla, $datos)
+	{
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla 
 			(nombre, celular, cp, estado, municipio, colonia, calle, numext, numint, id_usuario) 
@@ -388,17 +371,15 @@ class ModeloUsuarios{
 		$stmt->bindParam(":numint", $datos["numint"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_usuario", $datos["id_usuario"], PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
 	}
@@ -407,77 +388,76 @@ class ModeloUsuarios{
 	MOSTRAR LISTA DE DIRECCIONES
 	=============================================*/
 
-	static public function mdlMostrarDirecciones($tabla, $item){
+	static public function mdlMostrarDirecciones($tabla, $item)
+	{
 
 		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_usuario = :id_usuario ORDER BY id_usuario DESC");
 
-		$stmt -> bindParam(":id_usuario", $item, PDO::PARAM_INT);
+		$stmt->bindParam(":id_usuario", $item, PDO::PARAM_INT);
 
-		$stmt -> execute();
+		$stmt->execute();
 
-		return $stmt -> fetchAll();
+		return $stmt->fetchAll();
 
-		$stmt -> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	MOSTRAR UNA SOLA DIRECCION
 	=============================================*/
 
-	static public function mdlMostrarDireccion($tabla, $item, $id){
+	static public function mdlMostrarDireccion($tabla, $item, $id)
+	{
 
 		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_usuario = :id_usuario AND id = :id ORDER BY id_usuario DESC");
 
-		$stmt -> bindParam(":id_usuario", $item, PDO::PARAM_INT);
-		$stmt -> bindParam(":id", $id, PDO::PARAM_INT);
+		$stmt->bindParam(":id_usuario", $item, PDO::PARAM_INT);
+		$stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
-		$stmt -> execute();
+		$stmt->execute();
 
-		return $stmt -> fetchAll();
+		return $stmt->fetchAll();
 
-		$stmt -> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	ELIMINAR DIRECCION DE USUARIO
 	=============================================*/
 
-	static public function mdlEliminarDireccion($tabla, $idDireccion){
+	static public function mdlEliminarDireccion($tabla, $idDireccion)
+	{
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
-		$stmt -> bindParam(":id", $idDireccion, PDO::PARAM_INT);
+		$stmt->bindParam(":id", $idDireccion, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-
 		}
 
-		$stmt-> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
-    
-    /*=============================================
+
+	/*=============================================
 	AGREGAR DATOS DE FACTURACION
 	=============================================*/
-    
-	public function mdlAgregarFacturacion($tabla, $datos){
-        
+
+	public function mdlAgregarFacturacion($tabla, $datos)
+	{
+
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (idUsuario, nombreRazon, rfc, tipoPersona, calle, numExterior, numInterior, colonia, municipio, estado, codigoPostal, telefono, email) VALUES (:idUsuario, :nombreRazon, :rfc, :tipoPersona, :calle, :numExterior, :numInterior, :colonia, :municipio, :estado, :codigoPostal, :telefono, :email)");
-        
+
 		$stmt->bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
 		$stmt->bindParam(":nombreRazon", $datos["nombreRazon"], PDO::PARAM_STR);
 		$stmt->bindParam(":rfc", $datos["rfc"], PDO::PARAM_STR);
@@ -485,75 +465,93 @@ class ModeloUsuarios{
 		$stmt->bindParam(":calle", $datos["calle"], PDO::PARAM_STR);
 		$stmt->bindParam(":numExterior", $datos["numExterior"], PDO::PARAM_INT);
 		$stmt->bindParam(":numInterior", $datos["numInterior"], PDO::PARAM_INT);
-        $stmt->bindParam(":colonia", $datos["colonia"], PDO::PARAM_STR);
-        $stmt->bindParam(":municipio", $datos["municipio"], PDO::PARAM_STR);
-        $stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
-        $stmt->bindParam(":codigoPostal", $datos["codigoPostal"], PDO::PARAM_INT);
-        $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_INT);
-        $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
-		
-        
-		if($stmt -> execute()){
-            
+		$stmt->bindParam(":colonia", $datos["colonia"], PDO::PARAM_STR);
+		$stmt->bindParam(":municipio", $datos["municipio"], PDO::PARAM_STR);
+		$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
+		$stmt->bindParam(":codigoPostal", $datos["codigoPostal"], PDO::PARAM_INT);
+		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_INT);
+		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+
+
+		if ($stmt->execute()) {
+
 			return "ok";
-            
-		}else{
-            
+		} else {
+
 			return "error";
-            
 		}
-        
-		$stmt-> close();
-        
+
+		$stmt->close();
+
 		$stmt = null;
 	}
-    
-    /*=============================================
+
+	/*=============================================
 	MOSTRAR DATOS FACTURACION
 	=============================================*/
-    
-	static public function mdlMostrarDatosFacturacion($tabla, $item){
-        
+
+	static public function mdlMostrarDatosFacturacion($tabla, $item)
+	{
+
 		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE idUsuario = :idUsuario ORDER BY idUsuario DESC");
-        
-		$stmt -> bindParam(":idUsuario", $item, PDO::PARAM_INT);
-        
-		$stmt -> execute();
-        
-		return $stmt -> fetchAll();
-        
-		$stmt -> close();
-        
+
+		$stmt->bindParam(":idUsuario", $item, PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
 		$stmt = null;
-        
 	}
-    
-    /*=============================================
+
+	/*=============================================
 	ELIMINAR DATOS FACTURACION
 	=============================================*/
-    
-	static public function mdlEliminarDatosFacturacion($tabla, $idFactura){
-        
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idFactura = :idFactura");
-        
-		$stmt -> bindParam(":idFactura", $idFactura, PDO::PARAM_INT);
-        
-		if($stmt -> execute()){
-            
-			return "ok";
-            
-		}else{
-            
-			return "error";
-            
-		}
-        
-		$stmt-> close();
-        
-		$stmt = null;
-        
-	}
-    
-    
-}
 
+	static public function mdlEliminarDatosFacturacion($tabla, $idFactura)
+	{
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idFactura = :idFactura");
+
+		$stmt->bindParam(":idFactura", $idFactura, PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+
+			return "ok";
+		} else {
+
+			return "error";
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
+
+	/*=============================================
+	ANADIR VISTA DE PRODUCTO
+	=============================================*/
+
+	static public function mdlAgregarVistaProducto($tabla, $datos)
+	{
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (usuario_id, producto_id) VALUES (:usuario_id, :producto_id)");
+
+		$stmt->bindParam(":usuario_id", $datos["usuario_id"], PDO::PARAM_INT);
+		$stmt->bindParam(":producto_id", $datos["producto_id"], PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+
+			return "ok";
+		} else {
+
+			return "error";
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
+}
