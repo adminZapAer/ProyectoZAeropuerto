@@ -42,12 +42,13 @@ class ModeloCompras{
 
         $conexion = Conexion::conectar();
 		$stmt = $conexion->prepare("INSERT INTO $tabla 
-			(idUsuario, envio, metodo, direccion, pais, fecha, statusCompraId) 
-			VALUES (:idUsuario, :envio, :metodo, :direccion, :pais, :fecha, :statusCompraId)");
+			(idUsuario, envio, costo_envio, metodo, direccion, pais, fecha, statusCompraId) 
+			VALUES (:idUsuario, :envio, :costo_envio, :metodo, :direccion, :pais, :fecha, :statusCompraId)");
 
 		$stmt->bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
 		$stmt->bindParam(":metodo", $datos["metodo"], PDO::PARAM_STR);
 		$stmt->bindParam(":envio", $datos["envio"], PDO::PARAM_INT);
+		$stmt->bindParam(":costo_envio", $datos["costo_envio"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":pais", $datos["pais"], PDO::PARAM_STR);
 		$stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
@@ -103,16 +104,16 @@ class ModeloCompras{
     static public function mdlAgregarDetalleCompra($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla 
-			(idCompra, idProducto, Cantidad, precio) 
-			VALUES (:idCompra, :idProducto, :Cantidad, :precio)");
+			(idCompra, idProducto, Cantidad, precio, origen) 
+			VALUES (:idCompra, :idProducto, :Cantidad, :precio, :origen)");
 
 		$stmt->bindParam(":idCompra", $datos["idCompra"], PDO::PARAM_INT);
 		$stmt->bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);
 		$stmt->bindParam(":Cantidad", $datos["Cantidad"], PDO::PARAM_STR);
 		$stmt->bindParam(":precio", $datos["precio"], PDO::PARAM_STR);
+		$stmt->bindParam(":origen", $datos["origen"], PDO::PARAM_STR);
 
 		if($stmt -> execute()){
-
 			return "ok";
 
 		}else{

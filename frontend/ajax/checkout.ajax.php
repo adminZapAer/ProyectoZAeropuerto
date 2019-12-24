@@ -68,6 +68,7 @@ class AjaxCheckout
 			'idUsuario' => $user['idUsuario'],
 			'metodo' => 'paypal',
 			'envio' => $envio,
+			'costo_envio' => $detalles['purchase_units'][0]['amount']['breakdown']['shipping']['value'],
 			'direccion' => $direccionEnvio ? json_encode($direccionEnvio[0]) : null,
 			'pais' => 'México',
 			'fecha' => date('Y-m-d'),
@@ -87,6 +88,18 @@ class AjaxCheckout
 				\ModeloProductos::mdlActualizarProducto('productos', 'oferta', $tendraOferta, $producto['idProducto']);
 			}
 
+			// OBTENEMOS EL ORIGEN DE DEL PRODUCTO
+			if($envio == 1 && $nuevoStock <= 0){
+				$origen = 'planta';
+			}else if($envio == 1 && $nuevoStock > 0){
+				$origen = 'zapata';
+			}else{
+				$origen = 'zapata';
+			}
+
+			// print_r($origen);
+			// return false;
+
 			\ModeloProductos::mdlActualizarProducto('productos', 'stock', $nuevoStock, $producto['idProducto']);
 
 			if ($producto !== "error") {
@@ -95,13 +108,19 @@ class AjaxCheckout
 					'idProducto' => $productos[$key]->idProducto,
 					'Cantidad' => $item['quantity'],
 					'precio' => $item['unit_amount']['value'],
+					'origen' => $origen,
 				];
+
 				ModeloCompras::mdlAgregarDetalleCompra('detalle_compra', $datos);
 			}
 		}
 
 		$this->sendEmailCliente($user, $productos, $datosCompra);
 		$this->sendEmailEmpleado($user, $productos, $datosCompra);
+
+
+		// print_r('compra finalizada');
+		// return false;
 
 		print_r(true);
 		return false;
