@@ -1280,3 +1280,36 @@ VENTANA MODAL PARA COMENTARIOS
 	</div>
 
 </div>
+
+<script>
+
+$(document).on( 'change', '#cp', function(){
+
+    const cp = $(this).val();
+
+    $.ajax({
+        method: "GET",
+        url: rutaFrontEnd + 'ajax/codigoPostal.php',
+        data: { cp: cp  }
+    })
+        .done(function (response) {
+            respuesta = JSON.parse(response);
+            console.log( respuesta );
+
+            if(respuesta.status == 'success'){
+                $('#estado').val(respuesta.direccion.estado);
+                $('#municipio').val(respuesta.direccion.municipio);
+                $('#colonia').val(respuesta.direccion.poblacion);
+                return;
+            }
+
+            $('#estado').val('');
+            $('#municipio').val('');
+            $('#colonia').val('');
+            
+
+        });
+
+} );
+
+</script>
