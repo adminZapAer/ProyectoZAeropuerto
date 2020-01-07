@@ -250,29 +250,41 @@ class AjaxCheckout
 
 			$mail->setFrom($_SERVER['MAIL_FROM'], 'Refacciones Zapata Camiones');
 			$mail->addAddress($_SERVER['MAIL_VENDEDOR']); //'jmolina@zapata.com.mx'
-
+            
 			$mail->Subject = 'Notificación de compra por un cliente';
-
+            
 			$item = $_SESSION["idUsuario"];
-
+            
 			$facturaciones = ModeloUsuarios::mdlMostrarDatosFacturacion("facturacion", $compra['idUsuario']);
 			//$facturaciones = ControladorUsuarios::ctrMostrarDatosFacturacion($compra['idUsuario']);
-
+            
+            $facturacionHTML = "";
+			foreach ($facturaciones as $key => $value) {
+                
+				$facturacionHTML = "
+                <p><b>Nombre / Razón Social: </b>" . $value["nombreRazon"] . "</p>
+                <p><b>RFC: </b>" . $value["rfc"] . " | <b>Tipo de Persona: </b>" . $value["tipoPersona"] . "</p>
+                <p><b>Dirección: </b>" . $value["calle"] . " | <b>Numero Exterior: </b>" . $value["numExterior"] . " | <b>Numero Interior: </b>" . $value["numInterior"] . "</p>
+                <p><b>Colonia: </b>" . $value["colonia"] . " | <b>Municipio: </b>" . $value["municipio"] . " | <b>Estado: </b>" . $value["estado"] . " | <b>Codigo Postal: </b>" . $value["codigoPostal"] . "</p>
+                <p><b>Teléfono: </b>" . $value["telefono"] . " | <b>Correo Electrónico: </b>" . $value["email"] . "</p>
+                ";
+			}
+            
 			$listaProductos = "";
 			$productosEnviadosDesdePlanta = '';
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
 				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
-
+                
 				if ($producto->origen == 'planta') {
 					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
 					// print_r($productosEnviadosDesdePlanta);
 					// return false;
 				}
 			}
-
+            
 			$direccionDestino = json_decode($compra['direccion'], true);
-
+            
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
 				$direccionHTML = "
@@ -283,20 +295,7 @@ class AjaxCheckout
                     <p><b>Teléfono: </b>" . $direccionDestino['celular'] . "</p>
                     ";
 			}
-
-			$facturacionHTML = "";
-			foreach ($facturaciones as $key => $value) {
-
-				$facturacionHTML = "
-                <p><b>Nombre / Razón Social: </b>" . $value["nombreRazon"] . "</p>
-                <p><b>RFC: </b>" . $value["rfc"] . " | <b>Tipo de Persona: </b>" . $value["tipoPersona"] . "</p>
-                <p><b>Dirección: </b>" . $value["calle"] . " | <b>Numero Exterior: </b>" . $value["numExterior"] . " | <b>Numero Interior: </b>" . $value["numInterior"] . "</p>
-                <p><b>Colonia: </b>" . $value["colonia"] . " | <b>Municipio: </b>" . $value["municipio"] . " | <b>Estado: </b>" . $value["estado"] . " | <b>Codigo Postal: </b>" . $value["codigoPostal"] . "</p>
-                <p><b>Teléfono: </b>" . $value["telefono"] . " | <b>Correo Electrónico: </b>" . $value["email"] . "</p>
-                ";
-			}
-
-
+            
 			$mail->msgHTML('
 		        <div style="width:100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px;">
 		            <center>
@@ -342,7 +341,7 @@ class AjaxCheckout
                                 ' . $facturacionHTML . '
 		                    </h4>
                             
-
+                            
 		                </center>
 		                
 		            </div>
@@ -350,7 +349,7 @@ class AjaxCheckout
 		        </div>
 		    ');
 			$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
+            
 			$mail->send();
 		} catch (Exception $e) {
 			echo "<br>Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

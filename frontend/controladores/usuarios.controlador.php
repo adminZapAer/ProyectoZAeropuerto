@@ -649,6 +649,19 @@ class ControladorUsuarios{
 	}
     
     /*=============================================
+	           MOSTRAR DETALLES DE COMPRAS
+	=============================================*/
+    
+    static public function ctrMostrarDetallesCompras($idCompra){
+        
+        $tabla = "detalle_compra";
+        
+        $respuesta = ModeloUsuarios::mdlMostrarDetallesCompras($tabla, $idCompra);
+        
+        return $respuesta;
+    }
+    
+    /*=============================================
 	MOSTRAR COMENTARIOS EN PERFIL
 	=============================================*/
 
@@ -867,7 +880,10 @@ class ControladorUsuarios{
                 'calle'=>$_POST["calle"],
                 'numext'=>$_POST["numext"],
                 'numint'=>$_POST["numint"],
-                'id_usuario'=>$idUsuario
+                'id_usuario'=>$idUsuario,
+                'entreCalle'=>$_POST["entreCalle"],
+                'yCalle'=>$_POST["yCalle"],
+                'referencia'=>$_POST["referencia"]
             ];
 
             $respuesta = ModeloUsuarios::mdlAgregarDireccion($tabla, $datos);
@@ -881,6 +897,61 @@ class ControladorUsuarios{
                         swal({
                               title: "¡Agregada correctamente!",
                               text: "Su dirección fue agregada",
+                              type: "success",
+                              confirmButtonText: "Cerrar",
+                              closeOnConfirm: false
+                        },
+
+                        function(isConfirm){
+                                 if (isConfirm) {      
+                                   window.location = "'.$url.'perfil";
+                                  } 
+                        });
+
+                      </script>';
+
+            }
+
+        }
+
+    }
+    
+    static public function ctrModificarDireccion($idDireccion){
+
+        $tabla = "direccion";
+
+        if(isset($_POST["cp"])){
+            
+            $idUsuario = $_POST["idUsuario"];
+
+            // Guardamos los datos en un arreglo para manejarlo mejor.
+            $datos = [
+                'nombre'=>$_POST["nombreCompleto"],
+                'celular'=>$_POST["telefono"],
+                'cp'=>$_POST["cp"],
+                'estado'=>$_POST["estado"],
+                'municipio'=>$_POST["municipio"],
+                'colonia'=>$_POST["colonia"],
+                'calle'=>$_POST["calle"],
+                'numext'=>$_POST["numext"],
+                'numint'=>$_POST["numint"],
+                'id_usuario'=>$idUsuario,
+                'entreCalle'=>$_POST["entreCalle"],
+                'yCalle'=>$_POST["yCalle"],
+                'referencia'=>$_POST["referencia"]
+            ];
+
+            $respuesta = ModeloUsuarios::mdlModificarDireccion($tabla, $datos, $idDireccion);
+            
+            if($respuesta == "ok"){
+
+                $url = Ruta::ctrRuta();
+
+                echo'<script>
+
+                        swal({
+                              title: "¡Modificado correctamente!",
+                              text: "Su dirección fue modificada",
                               type: "success",
                               confirmButtonText: "Cerrar",
                               closeOnConfirm: false
@@ -913,7 +984,28 @@ class ControladorUsuarios{
         return $respuesta;
 
     }
+    
+    static public function ctrMostrarDireccion($item, $idDireccion){
 
+        $tabla = "direccion";
+
+        $respuesta = ModeloUsuarios::mdlMostrarDireccion($tabla, $item, $idDireccion);
+
+        return $respuesta;
+
+    }
+    
+    /*=============================================
+            MOSTRAR LISTA DE CODIGO POSTAL
+    =============================================*/
+    static public function ctrMostrarCP($item){
+        
+        $tabla = "codigo_postal";
+        
+        $respuesta = ModeloUsuarios::mdlMostrarCP($item, $tabla);
+        
+        return $respuesta;
+    }
     /*=============================================
     ELIMINAR Direccion
     =============================================*/
@@ -1120,7 +1212,7 @@ class ControladorUsuarios{
                 'colonia'=>$_POST["colonia"],
                 'municipio'=>$_POST["municipio"],
                 'estado'=>$_POST["estado"],
-                'codigoPostal'=>$_POST["codigoPostal"],
+                'codigoPostal'=>$_POST["cp"],
                 'telefono'=>$_POST["telefono"],
                 'email'=>$_POST["email"]
                 
@@ -1225,6 +1317,21 @@ class ControladorUsuarios{
 		return $respuesta;
     }
     
+    /*=============================================
+	ELIMINAR DATOS FACTURACION TEMPORAL
+	=============================================*/
+    static public function ctrEliminarFacturacionTemporal($rfcTemp, $idUsuario){
+        
+        $tabla = "facturacion";
+        
+        $respuesta = ModeloUsuarios::mdlEliminarFacturacionTemporal($tabla, $rfcTemp, $idUsuario);
+        
+        return $respuesta;
+        
+    }
+    
+    
     /*---------------------------------------------------------------*/
+    
     
 }

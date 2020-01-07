@@ -46,8 +46,6 @@
                 
                 <h5>Dudas e inquietudes, contactenos en:</h5>
                 
-                <br>
-                
                 <h5>
                     
                     <i class="fa fa-phone-square" aria-hidden="true"></i>&#160;&#160;(595) 954-99-33
@@ -58,7 +56,7 @@
                     
                     <br><br>
                     
-                    <i class="fa fa-map-marker" aria-hidden="true"></i>&#160;Carretera Los Reyes - Lechería Km. 23
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>&#160;   Carretera Los Reyes - Lechería Km. 23
                     <br>
                     &#160;&#160;&#160;Colonia La Magdalena Panoaya
                     <br>

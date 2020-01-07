@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
     echo json_encode(array(
         'status' => 'success',
-        'direccion' => $direccion
+        'direccion' => $direccion,
     ));
 
 

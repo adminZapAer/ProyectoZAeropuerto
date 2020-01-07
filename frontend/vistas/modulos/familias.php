@@ -7,6 +7,10 @@ $servidor = Ruta::ctrRutaServidor();
 $url = Ruta::ctrRuta();
 
 $ruta = "sin-categoria";
+
+$eliminarFactTemp = new ControladorCarrito();
+$eliminarFactTemp -> ctrComprobarFactTemporal();
+
 /*
 $banner = ControladorProductos::ctrMostrarBanner($ruta);
 
@@ -85,7 +89,7 @@ for ($i = 0; $i < count($titulosModulos); $i++){
     <!--=======================================================================-->
     
     <!--=======================================================================-->
-    <div class="container-fluid productos">
+    <div class="container-fluid productos" style="background-image: url('.$servidor.'vistas/img/fondo'.$i.'.png); background-repeat:no-repeat; background-position:center; background-size: cover; width:100%; max-width:1903px;">
     
         <div class="container">
         

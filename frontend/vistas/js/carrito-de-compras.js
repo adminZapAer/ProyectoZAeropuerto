@@ -839,7 +839,8 @@ $.ajax({
                     "numext": item.numext,
                     "numint": item.numint
                 });
-
+                
+                
                 // SI NO ES LA PAGINA PARA REALIZAR EL ENVÍO, ALMACENAMOS LA ULTIMA DIRECCIÓN
                 if (localStorage.getItem('paginaEnvio') == 0) {
                     localStorage.setItem("direccionEnvio", JSON.stringify(direccionEnvio));
@@ -925,8 +926,37 @@ $(document).on('click', '.input-direccion', function () {
 })
 
 /*===============================================================*/
+/*===============================================================*/
 $(".datosFacturacion").click(function () {
-    swal({
+    swal(
+        {
+            title: "FACTURACIÓN",
+            text: "¿Desea usted facturar su compra?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Si. ¡Deseo Factura!",
+            cancelButtonText: "No deseo Facturar.",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function(isConfirm){
+            if(isConfirm){
+                swal("Muy bien", "Dirijase a Perfil > Facturación para llenar los datos correspondientes.","success");
+                setTimeout(function(){
+                    window.location = rutaFrontEnd + "perfil";
+                },2000);
+            }
+            else{
+                swal("OK", "Continue con su compra","success");
+                setTimeout(function(){
+                    window.location = rutaFrontEnd + "proceder-pago";
+                },2000);
+            }
+        }
+    );
+    
+    /*swal({
         title: "¡Faltan Datos de Facturación!",
         text: "Favor de registrar sus datos en la sección Perfil para continuar con la compra.",
         type: "warning",
@@ -941,5 +971,5 @@ $(".datosFacturacion").click(function () {
             }
         }
     );
-    return;
+    return;*/
 })

@@ -37,6 +37,50 @@ BREADCRUMB CARRITO DE COMPRAS
 </div>
 
 <!--=====================================
+			BOTÓN CHECKOUT
+======================================-->
+<?php
+if (isset($_SESSION["validarSesion"])) {
+	
+	$url = Ruta::ctrRuta();
+	
+	if ($_SESSION["validarSesion"] == "ok") {
+		$idUsuario = $_SESSION["idUsuario"];
+        
+		$usuarioTemp = $_SESSION["idUsuario"];
+        
+		$compruebaFacturacion = ModeloCarrito::mdlComprobarDatosFacturacion($idUsuario,"facturacion");
+        
+		if($compruebaFacturacion != false){
+            
+		}
+        
+		else{
+			$datos = [
+				'idUsuario'=>$idUsuario,
+                'nombreRazon'=>"Usuario".$idUsuario,
+                'rfc'=>"XAXX010101000",
+                'tipoPersona'=>"Fisica",
+                'calle'=>"Carretera Los Reyes - Lechería Km. 23",
+                'numExterior'=>"0",
+                'numInterior'=>"0",
+                'colonia'=>"La Magdalena Panoaya",
+                'municipio'=>"Texcoco",
+                'estado'=>"Estado de México",
+                'codigoPostal'=>"56200",
+                'telefono'=>"5959549933",
+                'email'=>"jmolina@zapata.com.mx"
+			];
+			
+			$factTemp = ModeloUsuarios::mdlAgregarFacturacion("facturacion", $datos);
+		}
+        
+	}
+    
+}
+?>
+
+<!--=====================================
 TABLA CARRITO DE COMPRAS
 ======================================-->
 

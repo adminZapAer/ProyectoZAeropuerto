@@ -34,7 +34,7 @@ if(isset($_SESSION["validarSesion"])){
             REDES SOCIALES
             ==============================-->
             <!--En escritorio grande ocupara 9 columnas, en escritorio mediano 9 columnas, en escritorio pequeño ocupara 8 columnas y en dispositivos moviles ocupara 12 columnas -->
-            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 social">
+            <div class="col-lg-8 col-md-7 col-sm-8 col-xs-12 social">
                 <ul>
                     <!--==========CAMBIAR LOS ESTILOS DE LA SECCION SOCIAL Y LAS URL-->
                     <?php
@@ -57,7 +57,7 @@ if(isset($_SESSION["validarSesion"])){
             <!--==============================
             REGISTRO DE USUARIOS
             ==============================-->
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 registro">
+            <div class="col-lg-4 col-md-5 col-sm-4 col-xs-12 registro">
                 <ul>
                     
                     <?php
@@ -82,7 +82,7 @@ if(isset($_SESSION["validarSesion"])){
                                     ';
                                 }
                                 echo'
-                                <li> | </li>
+                                <li>Bienvenido '.strtok($_SESSION["nombre"]," ").' |</li>
                                 <li>
                                     <a href="'.$url.'perfil">Ver perfil</a>
                                 </li>
@@ -183,7 +183,7 @@ if(isset($_SESSION["validarSesion"])){
                       CARRITO DE COMPRAS
             ==================================-->
             <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="carrito">
-                <a href="<?php $url;?>carrito-de-compras">
+                <a href="<?php echo $url;?>carrito-de-compras">
                     <button class="btn btn-default pull-left backColor">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     </button>
@@ -194,6 +194,15 @@ if(isset($_SESSION["validarSesion"])){
                     MXN $ <span class="sumaCesta"></span>
                 </p>
             </div>
+            
+            <br>
+                
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12">
+                
+                <a href="https://bit.ly/2EX1eXS" class="pull-right" target="_blank"><img src="<?php echo $servidor?>vistas/img/contacto.png" style="width: 100%; max-width: 240px;"></a>
+                
+            </div>
+            
         </div>
         <!--=================================
                       CATEGORIAS

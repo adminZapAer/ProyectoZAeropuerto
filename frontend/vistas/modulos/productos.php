@@ -342,7 +342,7 @@ BARRA PRODUCTOS
                                     
                                     <div class="btn-group pull-right">
                                         
-                                        <button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["idProducto"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+                                        <button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["idProducto"].'" data-toggle="tooltip" title="Agregar a mis favoritos">
                                             
                                             <i class="fa fa-heart" aria-hidden="true"></i>
                                             
@@ -499,7 +499,7 @@ BARRA PRODUCTOS
                                 echo '
                                 <div class="btn-group pull-left enlaces">
                                     
-                                    <button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["idProducto"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+                                    <button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["idProducto"].'" data-toggle="tooltip" title="Agregar a mis favoritos">
                                         
                                         <i class="fa fa-heart" aria-hidden="true"></i>
                                         

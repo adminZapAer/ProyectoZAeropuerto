@@ -121,7 +121,16 @@ class ModeloProductos{
     }
     
     static public function mdlBuscarProductos($tabla, $busqueda, $ordenar, $modo, $base, $tope){
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%' OR detalles like '%$busqueda%' OR marca like '%$busqueda%' OR tipoSistema like '%$busqueda%' OR aplicacion like '%$busqueda%' OR sku like '%$busqueda%' ORDER BY $ordenar $modo LIMIT $base, $tope");
+        
+        $query = "ruta like '%$busqueda[0]%' OR titulo like '%$busqueda[0]%' OR titular like '%$busqueda[0]%' OR descripcion like '%$busqueda[0]%' OR detalles like '%$busqueda[0]%' OR marca like '%$busqueda[0]%' OR tipoSistema like '%$busqueda[0]%' OR aplicacion like '%$busqueda[0]%' OR sku like '%$busqueda[0]%'";
+        
+        for($i = 1; $i < sizeof($busqueda); $i++){
+            if(!empty($busqueda[$i])){
+                $query .= " OR ruta like '%$busqueda[$i]%' OR titulo like '%$busqueda[$i]%' OR titular like '%$busqueda[$i]%' OR descripcion like '%$busqueda[$i]%' OR detalles like '%$busqueda[$i]%' OR marca like '%$busqueda[$i]%' OR tipoSistema like '%$busqueda[$i]%' OR aplicacion like '%$busqueda[$i]%' OR sku like '%$busqueda[$i]%'";
+            }
+        }
+        
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $query ORDER BY $ordenar $modo LIMIT $base, $tope");
         $stmt -> execute();
         return $stmt -> fetchAll();
         $stmt -> close();
@@ -129,7 +138,16 @@ class ModeloProductos{
     }
     
     static public function mdlListarProductosBusqueda($tabla, $busqueda){
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta like '%$busqueda%' OR titulo like '%$busqueda%' OR titular like '%$busqueda%' OR descripcion like '%$busqueda%' OR detalles like '%$busqueda%' OR marca like '%$busqueda%' OR tipoSistema like '%$busqueda%' OR aplicacion like '%$busqueda%' OR sku like '%$busqueda%'");
+        
+        $query = "ruta like '%$busqueda[0]%' OR titulo like '%$busqueda[0]%' OR titular like '%$busqueda[0]%' OR descripcion like '%$busqueda[0]%' OR detalles like '%$busqueda[0]%' OR marca like '%$busqueda[0]%' OR tipoSistema like '%$busqueda[0]%' OR aplicacion like '%$busqueda[0]%' OR sku like '%$busqueda[0]%'";
+        
+        for ($i = 1; $i < sizeof($busqueda); $i++){
+            if(!empty($busqueda[$i])){
+                $query .= " OR ruta like '%$busqueda[$i]%' OR titulo like '%$busqueda[$i]%' OR titular like '%$busqueda[$i]%' OR descripcion like '%$busqueda[$i]%' OR detalles like '%$busqueda[$i]%' OR marca like '%$busqueda[$i]%' OR tipoSistema like '%$busqueda[$i]%' OR aplicacion like '%$busqueda[$i]%' OR sku like '%$busqueda[$i]%'";
+            }
+        }
+        
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $query");
         $stmt -> execute();
         return $stmt -> fetchAll();
         $stmt -> close();

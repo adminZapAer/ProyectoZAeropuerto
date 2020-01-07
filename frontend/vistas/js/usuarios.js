@@ -550,6 +550,27 @@ $(".delete-direccion").click(function(event){
 
 })
 
+$(".update-direccion").click(function(event){
+	event.preventDefault();
+	let  idUsuario = $("#idUsuario").val();
+	let idDireccion = $(this).prop('id');
+	console.log(idDireccion);
+	swal({
+        title: "¿Está usted seguro(a) de editar esta dirección?",
+		text: "¡Actualizará los datos de dirección!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "¡Si, Actualizar!",
+		closeOnConfirm: false
+    },
+	function(isConfirm){
+        if (isConfirm) {	   
+		    window.location = "index.php?ruta=editarDireccion&updatedir="+idDireccion;
+		} 
+    });
+
+})
 
 /*=============================================
 VALIDAR DATOS DE FACTURACION

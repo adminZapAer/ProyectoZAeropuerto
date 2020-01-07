@@ -767,7 +767,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                     <!--===============================================-->
                     <div class="col-xs-6 enlaces">
                         <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["idProducto"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+                            <button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["idProducto"].'" data-toggle="tooltip" title="Agregar a mis favoritos">
                                 <i class="fa fa-heart" aria-hidden="true"></i>
                             </button>';
                             if($value["tipo"] == "virtual" && $value["precio"] != 0){

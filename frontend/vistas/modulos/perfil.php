@@ -62,7 +62,7 @@ SECCIÓN PERFIL
             
             <li>
                 <a data-toggle="tab" href="#deseos">
-                    <i class="fa fa-gift"></i> MI LISTA DE DESEOS
+                    <i class="fa fa-gift"></i> MIS FAVORITOS
                 </a>
             </li>
             
@@ -74,7 +74,7 @@ SECCIÓN PERFIL
 
             <li>                
                 <a data-toggle="tab" href="#direccion">
-                    <i class="fa fa-map-marker"></i>  MIS DIRECCIONES
+                    <i class="fa fa-map-marker"></i>  DIRECCIÓN DE ENVÍO
                 </a>
             </li>
 
@@ -108,6 +108,7 @@ SECCIÓN PERFIL
                     
                     $compras = ControladorUsuarios::ctrMostrarCompras($item, $valor);
                     
+                    
                     if(!$compras){
                         echo '
                         <div class="col-xs-12 text-center error404">
@@ -119,278 +120,328 @@ SECCIÓN PERFIL
                     }
                     else{
                         
-                        foreach ($compras as $key => $value1) {
+                        //foreach ($compras as $key => $value1) {
+                        for($i=0; $i < count($compras); $i++){
                             
-                            $ordenar = "idProducto";
-                            $item = "idProducto";
-                            $valor = $value1["idProducto"];
+                            //var_dump("idUsuario: ",$valor);
                             
-                            $productos = ControladorProductos::ctrListarProductos($ordenar, $item, $valor);
+                            //var_dump("idCompra: ",$compras[$i]["idCompra"]);
                             
-                            foreach ($productos as $key => $value2) {
+                            $idCompra = $compras[$i]["idCompra"];
+                            
+                            $idProducto = ControladorUsuarios::ctrMostrarDetallesCompras($idCompra);
+                            
+                            for($j = 0; $j < count($idProducto); $j++){
                                 
-                                echo '
-                                <div class="panel panel-default">
-                                    
-                                    <div class="panel-body">
-                                        
-                                        <div class="col-md-2 col-sm-6 col-xs-12">
-                                            
-                                            <figure>
-                                                
-                                                <img class="img-thumbnail" src="'.$servidor.$value2["portada"].'">
-                                                
-                                            </figure>
-                                            
-                                        </div>
-                                        
-                                        <div class="col-sm-6 col-xs-12">
-                                            
-                                            <h1>
-                                                <small>'.$value2["titulo"].'</small>
-                                            </h1>
-                                            
-                                            <p>'.$value2["titular"].'</p>';
-                                            
-                                            if($value2["tipo"] == "virtual"){
-                                                
-                                                echo'
-                                                
-                                                <a href="'.$url.'curso">
-                                                    
-                                                    <button class="btn btn-default pull-left">Ir al curso</button>
-                                                
-                                                </a>
-                                                
-                                                ';
-                                                
-                                            }
-                                            else{
-                                                
-                                                echo '<h6>Proceso de entrega: '.$value2["entrega"].' días hábiles</h6>';
-                                                
-                                                if($value1["envio"] == 0){
-                                                    
+                                //var_dump("idProducto: ", $idProducto[$j]["idProducto"]);
+                                
+                                $ordenar = "idProducto";
+                                $item = "idProducto";
+                                $valor = $idProducto[$j]["idProducto"];
+
+                                $productos = ControladorProductos::ctrListarProductos($ordenar, $item, $valor);
+
+                                foreach ($productos as $key => $value2) {
+
+                                    echo '
+                                    <div class="panel panel-default">
+
+                                        <div class="panel-body">
+
+                                            <div class="col-md-2 col-sm-6 col-xs-12">
+
+                                                <figure>
+
+                                                    <img class="img-thumbnail" src="'.$servidor.$value2["portada"].'">
+
+                                                </figure>
+
+                                            </div>
+
+                                            <div class="col-sm-6 col-xs-12">
+
+                                                <h1>
+                                                    <small>'.$value2["titulo"].'</small>
+                                                </h1>
+
+                                                <p>'.$value2["titular"].'</p>';
+
+                                                if($value2["tipo"] == "virtual"){
+
                                                     echo'
-                                                    <div class="progress">
-                                                        
-                                                        <div class="progress-bar progress-bar-info" role="progressbar" style="width:33.33%">
-                                                            <i class="fa fa-check"></i> Despachado
-                                                        </div>
-                                                        
-                                                        <div class="progress-bar progress-bar-default" role="progressbar" style="width:33.33%">
-                                                            <i class="fa fa-clock-o"></i> Enviando
-                                                        </div>
-                                                        
-                                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:33.33%">
-                                                            <i class="fa fa-clock-o"></i> Entregado
-                                                        </div>
-                                                        
-                                                    </div>
+
+                                                    <a href="'.$url.'curso">
+
+                                                        <button class="btn btn-default pull-left">Ir al curso</button>
+
+                                                    </a>
+
                                                     ';
-                                                    
+
                                                 }
-                                                if($value1["envio"] == 1){
-                                                    echo'
-                                                    <div class="progress">
-                                                        
-                                                        <div class="progress-bar progress-bar-info" role="progressbar" style="width:33.33%">
-                                                            <i class="fa fa-check"></i> Despachado
-                                                        </div>
-                                                        
-                                                        <div class="progress-bar progress-bar-default" role="progressbar" style="width:33.33%">
-                                                            <i class="fa fa-check"></i> Enviando
-                                                        </div>
-                                                        
-                                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:33.33%">
-                                                            <i class="fa fa-clock-o"></i> Entregado
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    ';
-                                                }
-                                                if($value1["envio"] == 2){
-                                                        
+                                                else{
+
+                                                    echo '<h6>Proceso de entrega: '.$value2["diasEntrega"].' días hábiles</h6>';
+
+                                                    if($compras[$i]["envio"] == 0){
+
                                                         echo'
                                                         <div class="progress">
-                                                        
+
                                                             <div class="progress-bar progress-bar-info" role="progressbar" style="width:33.33%">
                                                                 <i class="fa fa-check"></i> Despachado
                                                             </div>
-                                                            
+
+                                                            <div class="progress-bar progress-bar-default" role="progressbar" style="width:33.33%">
+                                                                <i class="fa fa-clock-o"></i> Enviando
+                                                            </div>
+
+                                                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:33.33%">
+                                                                <i class="fa fa-clock-o"></i> Entregado
+                                                            </div>
+
+                                                        </div>
+                                                        ';
+
+                                                    }
+                                                    if($compras[$i]["envio"] == 1){
+                                                        echo'
+                                                        <div class="progress">
+
+                                                            <div class="progress-bar progress-bar-info" role="progressbar" style="width:33.33%">
+                                                                <i class="fa fa-check"></i> Despachado
+                                                            </div>
+
                                                             <div class="progress-bar progress-bar-default" role="progressbar" style="width:33.33%">
                                                                 <i class="fa fa-check"></i> Enviando
                                                             </div>
-                                                            
+
                                                             <div class="progress-bar progress-bar-success" role="progressbar" style="width:33.33%">
-                                                                <i class="fa fa-check"></i> Entregado
+                                                                <i class="fa fa-clock-o"></i> Entregado
                                                             </div>
-                                                            
+
                                                         </div>
                                                         ';
-                                                        
                                                     }
-                                                    
-                                                }
-                                            
-                                            echo'
-                                                <h4 class="pull-right">
-                                                    <small>
-                                                        Comprado el '.substr($value1["fecha"],0,-8).'
-                                                    </small>
-                                                </h4>
-                                                
-                                            </div>
-                                            
-                                            <div class="col-md-4 col-xs-12">';
-                                            
-                                            $datos = array("idUsuario"=>$_SESSION["idUsuario"], "idProducto"=>$value2["idProducto"] );
-                                            
-                                            $comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
-                                            
-                                            echo '
-                                            
-                                            <div class="pull-right">
-                                                
-                                                <a class="calificarProducto" href="#modalComentarios" data-toggle="modal" idComentario="'.$comentarios["idComentario"].'">
-                                                    <button class="btn btn-default backColor">Calificar Producto</button>
-                                                </a>
-                                                
-                                            </div>
-                                            
-                                            <br><br>
-                                            
-                                            <div class="pull-right">
-                                                
-                                                <h3 class="text-right">';
-                                                
-                                                if($comentarios["calificacion"] == 0 && $comentarios["comentario"] == ""){
-                                                    echo'
-                                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                    <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                    ';
-                                                }
-                                                else{
-                                                    
-                                                    switch($comentarios["calificacion"]){
-                                                        case 0.5:
-                                                            echo '
-                                                            <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i><i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>'; 
-                                                        break;
-                                                        
-                                                        case 1.0:
-                                                            echo '
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-															break;
-                                                        
-                                                        case 1.5:
-															echo '
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-															break;
+                                                    if($compras[$i]["envio"] == 2){
 
-												        case 2.0:
-															echo '
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-															break;
+                                                            echo'
+                                                            <div class="progress">
 
-												        case 2.5:
-															echo '
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-															break;
+                                                                <div class="progress-bar progress-bar-info" role="progressbar" style="width:33.33%">
+                                                                    <i class="fa fa-check"></i> Despachado
+                                                                </div>
 
-												        case 3.0:
-															echo '
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-															break;
+                                                                <div class="progress-bar progress-bar-default" role="progressbar" style="width:33.33%">
+                                                                    <i class="fa fa-check"></i> Enviando
+                                                                </div>
 
-												        case 3.5:
-                                                            echo '
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-															break;
+                                                                <div class="progress-bar progress-bar-success" role="progressbar" style="width:33.33%">
+                                                                    <i class="fa fa-check"></i> Entregado
+                                                                </div>
 
-												        case 4.0:
-															echo '
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-															break;
+                                                            </div>
+                                                            ';
 
-												        case 4.5:
-                                                            echo '
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>';
-															break;
+                                                        }
 
-												        case 5.0:
-                                                            echo '
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>
-                                                            <i class="fa fa-star text-success" aria-hidden="true"></i>';
-															break;
-                                                        
                                                     }
-                                                    
-                                                }
-                                            echo'
-                                                </h3>
-                                                
-                                                <p class="panel panel-default text-right" style="padding:5px">
-                                                    
-                                                    <small>
-                                                        '.$comentarios["comentario"].'
-                                                    </small>
-                                                    
-                                                </p>
-                                                
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                                
-                                </div>
-                                ';
+
+                                                echo'
+                                                    <h4 class="pull-right">
+                                                        <small>
+                                                            Comprado el '.substr($compras[$i]["fecha"],0,-8).'
+                                                        </small>
+                                                    </h4>
+
+                                                </div>
+
+                                                <div class="col-md-4 col-xs-12">';
+
+                                                $datos = array("idUsuario"=>$_SESSION["idUsuario"], "idProducto"=>$value2["idProducto"] );
+
+                                                $comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
+
+                                                echo '
+
+                                                <div class="pull-right">
+
+                                                    <a class="calificarProducto" href="#modalComentarios" data-toggle="modal" idComentario="'.$comentarios["idComentario"].'">
+                                                        <button class="btn btn-default backColor">Calificar Producto</button>
+                                                    </a>
+
+                                                </div>
+
+                                                <br><br>
+
+                                                <div class="pull-right">
+
+                                                    <h3 class="text-right">';
+
+                                                    if($comentarios["calificacion"] == 0 && $comentarios["comentario"] == ""){
+                                                        echo'
+                                                        <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                        ';
+                                                    }
+                                                    else{
+
+                                                        switch($comentarios["calificacion"]){
+                                                            case 0.5:
+                                                                echo '
+                                                                <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i><i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>'; 
+                                                            break;
+
+                                                            case 1.0:
+                                                                echo '
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+                                                                break;
+
+                                                            case 1.5:
+                                                                echo '
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+                                                                break;
+
+                                                            case 2.0:
+                                                                echo '
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+                                                                break;
+
+                                                            case 2.5:
+                                                                echo '
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+                                                                break;
+
+                                                            case 3.0:
+                                                                echo '
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+                                                                break;
+
+                                                            case 3.5:
+                                                                echo '
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+                                                                break;
+
+                                                            case 4.0:
+                                                                echo '
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+                                                                break;
+
+                                                            case 4.5:
+                                                                echo '
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>';
+                                                                break;
+
+                                                            case 5.0:
+                                                                echo '
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>
+                                                                <i class="fa fa-star text-success" aria-hidden="true"></i>';
+                                                                break;
+
+                                                        }
+
+                                                    }
+                                                echo'
+                                                    </h3>
+
+                                                    <p class="panel panel-default text-right" style="padding:5px">
+
+                                                        <small>
+                                                            '.$comentarios["comentario"].'
+                                                        </small>
+
+                                                    </p>
+                                                    '; 
+
+                                                    //$archivoPDF = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf';
+                                                    //$archivoXML = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.xml';
                                     
-                                }
+                                                    //echo file_exists('D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf');
+                                                    $archivoPDF = $servidor.'cfdi/compra-'.$idCompra.'.pdf';
+                                                    $archivoXML = $servidor.'cfdi/compra-'.$idCompra.'.xml';
+                                                    
+                                                    //echo file_exists('/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.pdf');
+                                                    
+                                                    //$file_pointer = '/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.pdf'; 
+                                                    //$file_pointer2 = '/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.xml';
+                                                    
+                                                    $file_pointer = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf'; 
+                                                    $file_pointer2 = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.xml';
+                                                    
+                                                    if(is_file($file_pointer) && is_file($file_pointer2)){
+                                                        //echo 'El archivo '.$archivoPDF.' y '.$archivoXML.'si existe.';
+                                                        echo'<a href="'.$archivoPDF.'" class="btn btn-primary btn-lg activate pull-" role="button" aria-pressed="true" download>Factura PDF</a>
+
+                                                            <a href="'.$archivoXML.'" class="btn btn-primary btn-lg activate pull-right" role="button" aria-pressed="true" download>Factura XML</a>';
+
+                                                    }
+                                                    else{
+                                                        //echo 'El archivo '.$archivoPDF.' y '.$archivoXML.' no existe.';
+                                                        echo'
+                                                            <button type="button" class="btn btn-primary btn-lg pull-right" disabled>Factura PDF</button>
+                                                            
+                                                            <button type="button" class="btn btn-primary btn-lg pull-right" disabled>Factura XML</button>';
+                                                    }
+
+                                                    echo'
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    ';
+
+                                    }
+                                
                             }
+                            
                         }
+                        
+                    }
                         
                         
                     ?>
@@ -400,7 +451,7 @@ SECCIÓN PERFIL
             </div>
             
             <!--==================================
-            *==         PESTAÑA DESEOS         ==*
+            *==        PESTAÑA FAVORITOS       ==*
             ===================================-->
             
             <div id="deseos" class="tab-pane fade">
@@ -504,7 +555,7 @@ SECCIÓN PERFIL
                                 
                                     <div class="btn-group pull-right">
                                         
-                                        <button type="button" class="btn btn-danger btn-xs quitarDeseo" idDeseo="'.$value1["idDeseo"].'" data-toggle="tooltip" title="Quitar de mi lista de deseos">
+                                        <button type="button" class="btn btn-danger btn-xs quitarDeseo" idDeseo="'.$value1["idDeseo"].'" data-toggle="tooltip" title="Quitar de mis favoritos">
                                             <i class="fa fa-heart" aria-hidden="true"></i>
                                         </button>';
                                         
@@ -756,7 +807,7 @@ SECCIÓN PERFIL
 
                                 <h3>Los campos marcados con * son obligatorios.</h3>
 
-                                <label class="control-label text-muted text-uppercase" for="nombreCompleto">Nombre completo *</label>
+                                <label class="control-label text-muted text-uppercase" for="nombreCompleto">Nombre de la persona quien recibirá el pedido *</label>
 
                                 <div class="input-group">
                                     <span class="input-group-addon">
@@ -764,76 +815,29 @@ SECCIÓN PERFIL
                                     </span>
                                     <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" placeholder="Nombre completo" required>
                                 </div>
-
+                                
                                 <br>
-
-                                <label class="control-label text-muted text-uppercase" for="telefono">Telefono celular:</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-earphone"></i>
-                                    </span>
-                                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono celular" pattern="[0-9]{10}" title="10 Digitos ej. 5546417896">
-                                </div>
-
-                                <br>
-
+                                
                                 <label class="control-label text-muted text-uppercase" for="cp">Código postal *</label>
-
+                                
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-envelope"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal" required>
-                                </div>
-
-                                <br>
-
-                                <label class="control-label text-muted text-uppercase" for="estado">Estado *</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-map" aria-hidden="true"></i>
-
-                                    </span>
-                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                    <input type="text" class="form-control cp" id="cp" name="cp" placeholder="Código postal" required>
                                 </div>
                                 
                                 <br>
-
-                                <label class="control-label text-muted text-uppercase" for="municipio">Municipio/Alcaldia *</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-university" aria-hidden="true"></i>
-
-                                    </span>
-                                    <input type="text" class="form-control" id="municipio" name="municipio" placeholder="Municipio" required>
-                                </div>
-
-                                <br>
-
-                                <label class="control-label text-muted text-uppercase" for="colonia">Colonia *</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
-
-                                    </span>
-                                    <input type="text" class="form-control" id="colonia" name="colonia" placeholder="Municipio" required>
-                                </div>
                                 
-                                <br>
-
                                 <label class="control-label text-muted text-uppercase" for="calle">Calle *</label>
-
+                                
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-home"></i>
                                     </span>
                                     <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle de la dirección" required>
                                 </div>
-
+                                
                                 <br>
 
                                 <div class="row">
@@ -848,7 +852,7 @@ SECCIÓN PERFIL
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-5 col-xs-12">
-                                        <label class="control-label text-muted text-uppercase" for="numint">Núumero interior</label>
+                                        <label class="control-label text-muted text-uppercase" for="numint">Número interior</label>
 
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -857,6 +861,91 @@ SECCIÓN PERFIL
                                             <input type="text" class="form-control" id="numint" name="numint" placeholder="">
                                         </div>
                                     </div>
+                                </div>
+                                
+                                <br>
+
+                                <label class="control-label text-muted text-uppercase" for="colonia">Colonia *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
+
+                                    </span>
+                                    <input type="text" class="form-control" id="colonia" name="colonia" placeholder="Municipio" required>
+                                </div>
+                                
+                                <br>
+                                
+                                <label class="control-label text-muted text-uppercase" for="municipio">Municipio/Alcaldia *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-university" aria-hidden="true"></i>
+
+                                    </span>
+                                    <input type="text" class="form-control" id="municipio" name="municipio" placeholder="Municipio" required>
+                                </div>
+                                
+                                <br>
+                                
+                                <label class="control-label text-muted text-uppercase" for="estado">Estado *</label>
+                                
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-map" aria-hidden="true"></i>
+                                        
+                                    </span>
+                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                </div>
+                                
+                                <br>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-5 col-xs-12">
+                                        <label class="control-label text-muted text-uppercase" for="entreCalle">Entre Calle *</label>
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-home"></i>
+                                            </span>
+                                            <input type="text" class="form-control" id="entreCalle" name="entreCalle" placeholder="Cerrada, Avenida, Calle" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 col-sm-5 col-xs-12">
+                                        
+                                        <label class="control-label text-muted text-uppercase" for="yCalle">Y Calle</label>
+                                        
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-home"></i>
+                                            </span>
+                                            <input type="text" class="form-control" id="yCalle" name="yCalle" placeholder="Cerrada, Avenida, Calle">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <br>
+                                
+                                <label class="control-label text-muted text-uppercase" for="referencia">Alguna Referencia *</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="referencia" name="referencia" placeholder="Caracteristica del lugar" required>
+                                </div>
+                                
+                                <br>
+                                
+                                <label class="control-label text-muted text-uppercase" for="telefono">Telefono celular:</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-earphone"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono celular" pattern="[0-9]{10}" title="10 Digitos ej. 5546417896">
                                 </div>
                                 
                                 <br>
@@ -897,32 +986,41 @@ SECCIÓN PERFIL
                                                 <div class='col-md-6'>
                                                     <label>Nombre:</label>
                                                     <p>{$value['nombre']}</p>
-                                                    <label>Teléfono:</label>
-                                                    <p>{$value['celular']}</p>
-                                                    <label>Código postal:</label>
-                                                    <p>{$value['cp']}</p>
-                                                    <label>Estado:</label>
-                                                    <p>{$value['estado']}</p>
-                                                </div>
-                                                <div class='col-md-6'>
-                                                    <label>Municipio / Alcaldía:</label>
-                                                    <p>{$value['municipio']}</p>
-                                                    <label>Colonia:</label>
-                                                    <p>{$value['colonia']}</p>
                                                     <label>Calle:</label>
                                                     <p>{$value['calle']}</p>
+                                                    <label>Colonia:</label>
+                                                    <p>{$value['colonia']}</p>
+                                                    <label>Estado:</label>
+                                                    <p>{$value['estado']}</p>
+                                                    <label>Entre Calle:</label>
+                                                    <p>{$value['entreCalle']}</p>
+                                                    <label>Referencias:</label>
+                                                    <p>{$value['referencia']}</p>
+                                                </div>
+                                                <div class='col-md-6'>
+                                                    <label>Teléfono:</label>
+                                                    <p>{$value['celular']}</p>
                                                     <div class='row'>
                                                         <div class='col-md-6'>
-                                                            <label>No. interior:</label>
+                                                            <label>No. Exterior:</label>
                                                             <p>{$value['numext']}</p>
                                                         </div>
                                                         <div class='col-md-6'>
-                                                            <label>No. exterior:</label>
+                                                            <label>No. Interior:</label>
                                                             <p>{$value['numint']}</p>
                                                         </div>
                                                     </div>
+                                                    <label>Municipio / Alcaldía:</label>
+                                                    <p>{$value['municipio']}</p>
+                                                    <label>Código postal:</label>
+                                                    <p>{$value['cp']}</p>
+                                                    <label>Y Calle:</label>
+                                                    <p>{$value['yCalle']}</p>
+                                                    
                                                 </div>
                                             </div>
+                                            <br>
+                                            <button class='btn btn-md pull-right update-direccion' id='{$value['id']}'>Editar Dirección</button>
                                             <button class='btn btn-danger btn-md pull-right delete-direccion' id='{$value['id']}'>Eliminar dirección</button>
                                         </div>
                                     </div>
@@ -959,7 +1057,6 @@ SECCIÓN PERFIL
             *==         PESTAÑA FACTURACCION      ==*
             ===================================-->
 
-            
             <div id="facturacion" class="tab-pane fade">
                 
                 <div class="row">
@@ -967,9 +1064,36 @@ SECCIÓN PERFIL
                     <form method="post"enctype="multipart/form-data" onsubmit="return validarFormFacturacion(this)">
                         
                         <br>
-                        <div class="col-md-6 col-sm-5 col-xs-12">
+                        <div class="col-md-6 col-sm-5 col-xs-12 datosFactura">
                             
                             <?php
+                                
+                                $item = $_SESSION["idUsuario"];
+
+                                $direccionFact = ControladorUsuarios::ctrMostrarDirecciones($item);
+                                
+                                /*if($direccionFact != null){
+                                    $calle = $direccionFact[0]["calle"];
+                                    $numExterior = $direccionFact[0]["numext"];
+                                    $numInterior = $direccionFact[0]["numint"];
+                                    $colonia = $direccionFact[0]["colonia"];
+                                    $municipio = $direccionFact[0]["municipio"];
+                                    $estado = $direccionFact[0]["estado"];
+                                    $telefono = $direccionFact[0]["celular"];
+                                    $codPostal = $direccionFact[0]["cp"];
+                                }
+                                else{
+                                    $calle = "";
+                                    $numExterior = "";
+                                    $numInterior = "";
+                                    $colonia = "";
+                                    $municipio = "";
+                                    $estado = "";
+                                    $telefono = "";
+                                    $codPostal = "";
+                                }*/
+                            
+                                
                                 
                                 echo '
                                 
@@ -1001,6 +1125,15 @@ SECCIÓN PERFIL
                                             <option>Moral</option>
                                         </select>
                                     </div>
+                                </div>
+                                
+                                <label class="control-label text-muted text-uppercase" for="cp">Código postal *</label>
+                                
+                                <div class="input-group col-md-4 col-sm-4 col-xs-12">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="cp" name="cp" placeholder="Código Postal" required>
                                 </div>
                                 
                                 <label class="control-label text-muted text-uppercase" for="rfcPersona">RFC *</label>
@@ -1066,15 +1199,6 @@ SECCIÓN PERFIL
                                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                                     </span>
                                     <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                                </div>
-                                
-                                <label class="control-label text-muted text-uppercase" for="codigoPostal">Código postal *</label>
-                                
-                                <div class="input-group col-md-4 col-sm-4 col-xs-12">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-envelope"></i>
-                                    </span>
-                                    <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" placeholder="Código Postal" required>
                                 </div>
                                 
                                 <label class="control-label text-muted text-uppercase" for="telefono">Teléfono *</label>
@@ -1179,6 +1303,7 @@ SECCIÓN PERFIL
                             
                             ?>
                             
+                            
                         </div>
                         
                         <?php
@@ -1198,6 +1323,7 @@ SECCIÓN PERFIL
                     ?>
                     
                 </div>
+                
                 
             </div>
             
