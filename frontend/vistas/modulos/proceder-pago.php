@@ -284,7 +284,7 @@ TABLA CARRITO DE COMPRAS
 
 						</figure>
                         <br>
-						<figure class="col-xs-6">
+						<figure class="col-xs-6 col-xs-offset-3">
 	                        
 	                        <center>
 	                            
@@ -293,8 +293,8 @@ TABLA CARRITO DE COMPRAS
 	                        </center>
 	                        
                             <!--<img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">-->
-	                        
-	                        <a href="#modalTransferencia" data-toggle="modal"><button type="button" class="btn btn-warning" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">TRANSFERENCIA ELECTRONICA</button></a>
+	                        <center>
+	                        <a href="#modalTransferencia" data-toggle="modal"><button type="button" class="btn btn-warning" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">TRANSFERENCIA ELECTRONICA</button></a></center>
 	                        
 	                    </figure>
 
