@@ -314,6 +314,12 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 <i style="margin-right:10px" class="fa fa-check"></i>Stock: '.$infoProducto["stock"].'
                             </li>
                             ';
+                        }else{
+                            echo'
+                            <li>
+                                <i style="margin-right:10px" class="fa fa-check"></i>Stock: 1
+                            </li>
+                            ';
                         }
                         echo'
                         </div>
@@ -329,67 +335,9 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                     *==            ENTREGA             ==*
                     ====================================*/
                     //Si entrega es igual a 0, la entrega es inmediata
-                    if($infoProducto["entrega"] == 0){
-                        
-                        //si el producto es gratis
-                        if($infoProducto["precio"] == 0){
-                            echo'
-                            <h4 class="col-md-12 col-sm-0 col-xs-0">
-                                <hr>
-                                <span class="label label-default" style="font-weight:100">
-                                    <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    Entrega Inmediata |
-                                    <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
-                                    '.$infoProducto["ventasGratis"].' inscritos |
-                                    <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
-                                    Visto por <span class="vistas" tipo = "'.$infoProducto["precio"].'">'.$infoProducto["vistasGratis"].'</span> personas |
-                                </span>
-                            </h4>
-                            
-                            <h4 class="col-lg-0 col-md-0 col-xs-12">
-                                <hr>
-                                <small>
-                                    <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    Entrega Inmediata <br>
-                                    <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
-                                    '.$infoProducto["ventasGratis"].' inscritos <br>
-                                    <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
-                                    Visto por <span class="vistas" tipo = "'.$infoProducto["precio"].'">'.$infoProducto["vistasGratis"].'</span> personas
-                                </small>
-                            </h4>
-                            ';
-                        }
-                        else{
-                            echo'
-                            <h4 class="col-md-12 col-sm-0 col-xs-0">
-                                <hr>
-                                <span class="label label-default" style="font-weight:100">
-                                    <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    Entrega Inmediata |
-                                    <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
-                                    '.$infoProducto["ventas"].' ventas |
-                                    <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
-                                    Visto por <span class="vistas" tipo = "'.$infoProducto["precio"].'">'.$infoProducto["vistas"].'</span> personas |
-                                </span>
-                            </h4>
-                            
-                            <h4 class="col-lg-0 col-md-0 col-xs-12">
-                                <hr>
-                                <small>
-                                    <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    Entrega Inmediata <br>
-                                    <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
-                                    '.$infoProducto["ventas"].' ventas <br>
-                                    <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
-                                    Visto por <span class="vistas" tipo = "'.$infoProducto["precio"].'">'.$infoProducto["vistas"].'</span> personas
-                                </small>
-                            </h4>
-                            ';
-                        }
-                        
-                    }
+                    
                     //si tiene dias de entrega 
-                    else{
+                    
                         //si el producto es gratis
                         if($infoProducto["precio"] == 0){
                             echo'
@@ -397,7 +345,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 <hr>
                                 <span class="label label-default" style="font-weight:100">
                                     <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    '.$infoProducto["entrega"].' dias habiles para la entrega |
+                                    '.$infoProducto["diasEntrega"].' dias habiles para la entrega |
                                     <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
                                     '.$infoProducto["ventasGratis"].' solicitudes |
                                     <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
@@ -409,7 +357,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 <hr>
                                 <small>
                                     <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    '.$infoProducto["entrega"].' dias habiles para la entrega <br>
+                                    '.$infoProducto["diasEntrega"].' dias habiles para la entrega <br>
                                     <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
                                     '.$infoProducto["ventasGratis"].' solicitudes <br>
                                     <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
@@ -423,7 +371,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 <hr>
                                 <span class="label label-default" style="font-weight:100">
                                     <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    '.$infoProducto["entrega"].' dias habiles para la entrega |
+                                    '.$infoProducto["diasEntrega"].' dias habiles para la entrega |
                                     <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
                                     '.$infoProducto["ventas"].' ventas |
                                     <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
@@ -435,7 +383,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 <hr>
                                 <small>
                                     <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    '.$infoProducto["entrega"].' dias habiles para la entrega <br>
+                                    '.$infoProducto["diasEntrega"].' dias habiles para la entrega <br>
                                     <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
                                     '.$infoProducto["ventas"].' ventas <br>
                                     <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
@@ -444,7 +392,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                             </h4>
                             ';
                         }
-                    }
+                    
                     ?>
                 </div>
                 <!--==================================
@@ -768,7 +716,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                     <div class="col-xs-6 enlaces">
                         <div class="btn-group pull-right">
                             <button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["idProducto"].'" data-toggle="tooltip" title="Agregar a mis favoritos">
-                                <i class="fa fa-heart" aria-hidden="true"></i>
+                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                             </button>';
                             if($value["tipo"] == "virtual" && $value["precio"] != 0){
                                 if($value["oferta"] != 0){

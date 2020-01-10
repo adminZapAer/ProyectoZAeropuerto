@@ -105,6 +105,7 @@ SECCIÓN PERFIL
                     
                     $item = "idUsuario";
                     $valor = $_SESSION["idUsuario"];
+                    $validarCompra=0;
                     
                     $compras = ControladorUsuarios::ctrMostrarCompras($item, $valor);
                     
@@ -128,6 +129,8 @@ SECCIÓN PERFIL
                             //var_dump("idCompra: ",$compras[$i]["idCompra"]);
                             
                             $idCompra = $compras[$i]["idCompra"];
+                            
+                            $validarCompra = $compras[$i]["validarCompra"];;
                             
                             $idProducto = ControladorUsuarios::ctrMostrarDetallesCompras($idCompra);
                             
@@ -393,36 +396,42 @@ SECCIÓN PERFIL
 
                                                     </p>
                                                     '; 
-
-                                                    //$archivoPDF = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf';
-                                                    //$archivoXML = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.xml';
-                                    
-                                                    //echo file_exists('D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf');
-                                                    $archivoPDF = $servidor.'cfdi/compra-'.$idCompra.'.pdf';
-                                                    $archivoXML = $servidor.'cfdi/compra-'.$idCompra.'.xml';
                                                     
-                                                    //echo file_exists('/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.pdf');
-                                                    
-                                                    //$file_pointer = '/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.pdf'; 
-                                                    //$file_pointer2 = '/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.xml';
-                                                    
-                                                    $file_pointer = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf'; 
-                                                    $file_pointer2 = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.xml';
-                                                    
-                                                    if(is_file($file_pointer) && is_file($file_pointer2)){
-                                                        //echo 'El archivo '.$archivoPDF.' y '.$archivoXML.'si existe.';
-                                                        echo'<a href="'.$archivoPDF.'" class="btn btn-primary btn-lg activate pull-" role="button" aria-pressed="true" download>Factura PDF</a>
-
-                                                            <a href="'.$archivoXML.'" class="btn btn-primary btn-lg activate pull-right" role="button" aria-pressed="true" download>Factura XML</a>';
-
+                                                    if($validarCompra == 1){
+                                                        //$archivoPDF = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf';
+                                                        //$archivoXML = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.xml';
+                                                        
+                                                        //echo file_exists('D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf');
+                                                        $archivoPDF = $servidor.'cfdi/compra-'.$idCompra.'.pdf';
+                                                        $archivoXML = $servidor.'cfdi/compra-'.$idCompra.'.xml';
+                                                        
+                                                        //echo file_exists('/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.pdf');
+                                                        
+                                                        //$file_pointer = '/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.pdf'; 
+                                                        //$file_pointer2 = '/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.xml';
+                                                        
+                                                        $file_pointer = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf'; 
+                                                        $file_pointer2 = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.xml';
+                                                        
+                                                        if(is_file($file_pointer) && is_file($file_pointer2)){
+                                                            //echo 'El archivo '.$archivoPDF.' y '.$archivoXML.'si existe.';
+                                                            echo'<a href="'.$archivoPDF.'" class="btn btn-primary btn-lg activate pull-" role="button" aria-pressed="true" download>Factura PDF</a>
+                                                                
+                                                                <a href="'.$archivoXML.'" class="btn btn-primary btn-lg activate pull-right" role="button" aria-pressed="true" download>Factura XML</a>';
+                                                            
+                                                        }
+                                                        else{
+                                                            //echo 'El archivo '.$archivoPDF.' y '.$archivoXML.' no existe.';
+                                                            echo'
+                                                                <button type="button" class="btn btn-primary btn-lg pull-right" disabled>Factura PDF</button>
+                                                                
+                                                                <button type="button" class="btn btn-primary btn-lg pull-right" disabled>Factura XML</button>';
+                                                        }
                                                     }
                                                     else{
-                                                        //echo 'El archivo '.$archivoPDF.' y '.$archivoXML.' no existe.';
-                                                        echo'
-                                                            <button type="button" class="btn btn-primary btn-lg pull-right" disabled>Factura PDF</button>
-                                                            
-                                                            <button type="button" class="btn btn-primary btn-lg pull-right" disabled>Factura XML</button>';
+                                                        echo '<p>Procesando Pago</p>';
                                                     }
+                                                    
 
                                                     echo'
 
@@ -556,7 +565,7 @@ SECCIÓN PERFIL
                                     <div class="btn-group pull-right">
                                         
                                         <button type="button" class="btn btn-danger btn-xs quitarDeseo" idDeseo="'.$value1["idDeseo"].'" data-toggle="tooltip" title="Quitar de mis favoritos">
-                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                                         </button>';
                                         
                                         if($value2["tipo"] == "virtual" && $value2["precio"] != 0){
@@ -1127,13 +1136,13 @@ SECCIÓN PERFIL
                                     </div>
                                 </div>
                                 
-                                <label class="control-label text-muted text-uppercase" for="cp">Código postal *</label>
+                                <label class="control-label text-muted text-uppercase" for="codigoPostal">Código postal *</label>
                                 
                                 <div class="input-group col-md-4 col-sm-4 col-xs-12">
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-envelope"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="cp" name="cp" placeholder="Código Postal" required>
+                                    <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" placeholder="Código Postal" required>
                                 </div>
                                 
                                 <label class="control-label text-muted text-uppercase" for="rfcPersona">RFC *</label>
@@ -1406,6 +1415,7 @@ VENTANA MODAL PARA COMENTARIOS
 	</div>
 
 </div>
+
 
 <script>
 

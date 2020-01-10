@@ -1,6 +1,7 @@
 <?php
 
 $url = Ruta::ctrRuta();
+$servidor = Ruta::ctrRutaServidor();
 
 //disable-card=visa,mastercard
 ?>
@@ -282,8 +283,8 @@ TABLA CARRITO DE COMPRAS
 							<div id="paypal-button-container"></div>
 
 						</figure>
-
-						<!-- <figure class="col-xs-6">
+                        <br>
+						<figure class="col-xs-6">
 	                        
 	                        <center>
 	                            
@@ -291,9 +292,11 @@ TABLA CARRITO DE COMPRAS
 	                            
 	                        </center>
 	                        
-	                        <img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">
+                            <!--<img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">-->
 	                        
-	                    </figure> -->
+	                        <a href="#modalTransferencia" data-toggle="modal"><button type="button" class="btn btn-warning" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">TRANSFERENCIA ELECTRONICA</button></a>
+	                        
+	                    </figure>
 
 					</div>
 
@@ -517,3 +520,147 @@ TABLA CARRITO DE COMPRAS
 
 		});
 	</script>
+	<!--=====================================
+        VENTANA MODAL PARA CHECKOUT
+======================================-->
+<div id="modalTransferencia" class="modal fade modalFormulario" role="dialog">
+
+    
+    <div class="modal-content modal-dialog">
+        
+        <div class="modal-body modalTitulo">
+            
+            <h3 class="backColor">PAGO CON TRANSFERENCIA</h3>
+            
+            <button type="button" data-dismiss="modal" class="close">&times;</button>
+            
+            <div class="contenidoCheckout">
+                
+                <h4>Puede realizar su pago con transferencia a cualquiera de nuestras cuentas bancarias:</h4>
+                
+                <!-- FORMAS DE PAGO -->
+                <div class="formPago row">
+                    
+                    <h4 class="text-center well text-muted text-uppercase">BBVA Bancomer</h4>
+                    
+                    <figure class="col-xs-6">
+                        
+                        <center>
+                           
+                            <img src="<?php echo $servidor; ?>vistas/img/logo-bancomer.jpg" alt="" style ="width:100%; max-width:200px; min-width"> 
+                            
+                        </center>
+                        
+                    </figure>
+                    
+                    <figure class="col-xs-6">
+                        
+                        <center>
+                            
+                            <ul>
+                                <li><b>Sucursal:</b> BANCOMER</li>
+                                <li><b>N° de Cuenta:</b> 0191032844</li>
+                                <li><b>CLABE INTERVANCARIA:</b> 012580001910328444</li>
+                                <li><b>Sucursal:</b> 1838</li>
+                            </ul>
+                            
+                        </center>
+                        
+                    </figure>
+                    
+                </div>
+                
+                <br>
+                
+                <div class="formPago row">
+                    
+                    <h4 class="text-center well text-muted text-uppercase">Banamex</h4>
+                    
+                    <figure class="col-xs-6">
+                        
+                        <center>
+                           
+                            <img src="<?php echo $servidor; ?>vistas/img/logo-citibanamex.png" alt="" style ="width:100%; max-width:200px; min-width"> 
+                            
+                        </center>
+                        
+                        
+                    </figure>
+                    
+                    <figure class="col-xs-6">
+                        
+                        <center>
+                            
+                            <ul>
+                                <li><b>Sucursal:</b> BANAMEX</li>
+                                <li><b>N° de Cuenta:</b> 4375127</li>
+                                <li><b>CLABE INTERVANCARIA:</b> 002180025843751273</li>
+                            </ul>
+                            
+                        </center>
+                        
+                    </figure>
+                    
+                </div>
+                
+                <br>
+                
+                <div class="formPago row">
+                    
+                    <h4 class="text-center well text-muted text-uppercase">Datos de la Empresa</h4>
+                    
+                    <figure class="col-xs-6">
+                        
+                        <center>
+                           
+                            <ul>
+                                <li><b>Beneficiario:</b> ZAPATA CAMIONES S.A. DE C.V. (AEROPUERTO)</li>
+                                <li><b>R.F.C.:</b> ZCA861009RX3</li>
+                                <li><b>Dirección:</b> Carretera Los Reyes - Lechería Km. 23 Localidad La Magdalena Panoay, Texcoco Edo. de México.</li>
+                                <li><b>Codigo Postal:</b> 56200</li>
+                            </ul>
+                            
+                        </center>
+                        
+                        
+                        
+                    </figure>
+                    
+                    <figure class="col-xs-6">
+                        
+                        <center>
+                            
+                            <ul>
+                                <li><b>Teeléfono:</b> 595 106 9120</li>
+                                <li><b>Contacto:</b> José Antonio Molina Botello</li>
+                                <li><b>Email:</b> jmolina@zapata.com.mx</li>
+                                <li><b>Sucursal:</b> 1838</li>
+                            </ul>
+                            
+                        </center>
+                        
+                    </figure>
+                    
+                    <div class="clearfix"></div>
+                    
+                    
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <div class="modal-footer">
+            
+            <p>* Si ya realizó su pago, favor de continuar con el proceso de pago</p>
+            
+            <button class="btn btn-block btn-lg btn-default backColor btnPagarTransferencia" id ="<?php echo $_SESSION["idUsuario"]; ?>">REALIZAR PAGO</button>
+            
+        </div>
+        
+    </div>
+
+    
+     
+</div>

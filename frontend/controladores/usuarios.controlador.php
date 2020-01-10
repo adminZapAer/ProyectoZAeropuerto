@@ -1212,7 +1212,7 @@ class ControladorUsuarios{
                 'colonia'=>$_POST["colonia"],
                 'municipio'=>$_POST["municipio"],
                 'estado'=>$_POST["estado"],
-                'codigoPostal'=>$_POST["cp"],
+                'codigoPostal'=>$_POST["codigoPostal"],
                 'telefono'=>$_POST["telefono"],
                 'email'=>$_POST["email"]
                 

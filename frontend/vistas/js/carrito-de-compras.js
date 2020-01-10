@@ -973,3 +973,72 @@ $(".datosFacturacion").click(function () {
     );
     return;*/
 })
+
+$(".btnPagarTransferencia").click(function () {
+    
+	let  idUsuario = $(this).prop('id');
+    
+    window.location = "index.php?ruta=pagoTransferencia&pagoTransf="+idUsuario;
+    
+})
+
+$("#datosRecibo").change(function(){
+    
+    var imagen = this.files[0];
+    
+    /*=============================================
+	VALIDAMOS EL FORMATO DE LA IMAGEN
+	=============================================*/
+    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
+        
+        $("#datosRecibo").val("");
+        
+        swal({
+            title: "Error al subir la imagen",
+            text: "¡La imagen debe estar en formato JPG o PNG!",
+            type: "error",
+            confirmButtonText: "¡Cerrar!",
+            closeOnConfirm: false
+        },
+        function(isConfirm){
+            if (isConfirm) {	   
+                window.location = rutaFrontEnd+"perfil";
+            } 
+        });
+        
+    }
+    /*Si la imagen es superior a los 2 MB*/
+    else if(Number(imagen["size"]) > 8000000){
+        $("#datosRecibo").val("");
+        
+        swal({
+            title: "Error al subir la imagen",
+            text: "¡La imagen no debe pesar más de 8 MB!",
+            type: "error",
+            confirmButtonText: "¡Cerrar!",
+            closeOnConfirm: false
+        },
+        function(isConfirm){
+            if (isConfirm) {	   
+                //window.location = rutaFrontEnd+"perfil";
+            } 
+        });
+    }
+    /*Si cumple con las condiciones la imagen, se sube la imagen*/
+    else{
+        
+        var datosImagen = new FileReader;
+        
+        datosImagen.readAsDataURL(imagen);/*Leer como dato url*/
+        
+        $(datosImagen).on("load", function(event){
+            
+            var rutaImagen = event.target.result;
+            
+            $(".previsualizarRecibo").attr("src",  rutaImagen);
+            
+        })
+        
+    }
+
+})

@@ -80,4 +80,33 @@ class ModeloCarrito{
         
 	}
     
+    /*=============================================
+	REGISTRAR COMPROBANTE
+	=============================================*/
+
+	static public function mdlCargarComprobante($tabla, $datos)
+	{
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (idUsuario, fechaPago, banco, monto, referencia, rutaIMG) VALUES (:idUsuario, :fechaPago, :banco, :monto, :referencia, :rutaIMG)");
+
+		$stmt->bindParam(":idUsuario", $datos["usuario"], PDO::PARAM_INT);
+		$stmt->bindParam(":fechaPago", $datos["fechaPago"], PDO::PARAM_STR);
+		$stmt->bindParam(":banco", $datos["banco"], PDO::PARAM_STR);
+		$stmt->bindParam(":monto", $datos["monto"], PDO::PARAM_STR);
+		$stmt->bindParam(":referencia", $datos["referencia"], PDO::PARAM_STR);
+        $stmt->bindParam(":rutaIMG", $datos["foto"], PDO::PARAM_STR);
+
+		if ($stmt->execute()) {
+
+			return "ok";
+		} else {
+
+			return "error";
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
+    
 }

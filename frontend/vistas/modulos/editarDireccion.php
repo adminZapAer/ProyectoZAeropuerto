@@ -284,9 +284,3 @@ $(document).on( 'change', '#cp', function(){
 } );
 
 </script>
-
-<?php 
-
-
-
-?>

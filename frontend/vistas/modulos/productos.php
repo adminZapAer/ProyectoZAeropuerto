@@ -344,7 +344,7 @@ BARRA PRODUCTOS
                                         
                                         <button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["idProducto"].'" data-toggle="tooltip" title="Agregar a mis favoritos">
                                             
-                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                                             
                                         </button>';
                                         
@@ -501,7 +501,7 @@ BARRA PRODUCTOS
                                     
                                     <button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["idProducto"].'" data-toggle="tooltip" title="Agregar a mis favoritos">
                                         
-                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                                         
                                     </button>';
                                     

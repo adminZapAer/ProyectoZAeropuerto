@@ -13,30 +13,7 @@
             
             <div class="col-lg-5 col-md-6 col-sm-4 col-xs-12 footerCategorias">
                 
-                <?php
                 
-                $url = Ruta::ctrRuta();
-                
-                $servidor = Ruta::ctrRutaServidor();
-                
-                $item = null;
-                
-                $valor = null;
-                
-                $categorias = ControladorProductos::ctrMostrarCategorias($item, $valor);
-                
-                foreach ($categorias as $key => $value) {
-
-					echo 
-                    '<div class="col-lg-4 col-md-3 col-sm-4 col-xs-12">
-
-						<h4><a href="'.$url.$value["ruta"].'" class="pixelCategorias" titulo="'.$value["categoria"].'">'.$value["categoria"].'</a></h4>
-
-					</div>';
-
-				}
-                
-                ?>
             </div>
             
             <!--==================================

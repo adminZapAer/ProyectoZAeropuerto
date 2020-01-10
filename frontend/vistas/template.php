@@ -112,6 +112,8 @@
         
         <link rel="stylesheet" href="<?php echo $url;?>vistas/css/plugins/dscountdown.css">
         
+        <link rel="stylesheet" href="<?php echo $url;?>vistas/css/plugins/bootstrap-datetimepicker.min.css">
+        
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
         
         <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
@@ -155,6 +157,10 @@
         <script src="<?php echo $url;?>vistas/js/plugins/sweetalert.min.js"></script>
         
         <script src="<?php echo $url;?>vistas/js/plugins/dscountdown.min.js"></script>
+        
+        <script src="<?php echo $url;?>vistas/js/plugins/moment.min.js"></script>
+        
+        <script src="<?php echo $url;?>vistas/js/plugins/bootstrap-datetimepicker.min.js"></script>
         
         <!-- WhatsHelp.io widget -->
         <script type="text/javascript">
@@ -285,7 +291,7 @@
                 include "modulos/infoproductos.php";
             }
             
-            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas" || $rutas[0] === "proceder-pago" || $rutas[0] == "editarDireccion"){
+            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas" || $rutas[0] === "proceder-pago" || $rutas[0] == "editarDireccion" || $rutas[0] == "pagoTransferencia"){
                 include "modulos/".$rutas[0].".php";
             }
             
