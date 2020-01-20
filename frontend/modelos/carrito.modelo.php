@@ -87,9 +87,10 @@ class ModeloCarrito{
 	static public function mdlCargarComprobante($tabla, $datos)
 	{
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (idUsuario, fechaPago, banco, monto, referencia, rutaIMG) VALUES (:idUsuario, :fechaPago, :banco, :monto, :referencia, :rutaIMG)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (idUsuario, idCompra, fechaPago, banco, monto, referencia, rutaIMG) VALUES (:idUsuario, :idCompra, :fechaPago, :banco, :monto, :referencia, :rutaIMG)");
 
 		$stmt->bindParam(":idUsuario", $datos["usuario"], PDO::PARAM_INT);
+        $stmt->bindParam(":idCompra", $datos["idCompra"], PDO::PARAM_INT);
 		$stmt->bindParam(":fechaPago", $datos["fechaPago"], PDO::PARAM_STR);
 		$stmt->bindParam(":banco", $datos["banco"], PDO::PARAM_STR);
 		$stmt->bindParam(":monto", $datos["monto"], PDO::PARAM_STR);
@@ -108,5 +109,48 @@ class ModeloCarrito{
 
 		$stmt = null;
 	}
+    
+    static public function mdlMostrarComprobante($idUsuario, $tabla){
+        
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE idUsuario = :idUsuario");
+        
+        $stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+            
+        if($stmt -> execute()){
+            //return "bien";
+            $stmt -> execute();
+            return $stmt -> fetch();
+        }
+        else{
+            return "error";
+        }
+        
+		$stmt -> close();
+        
+		$stmt = null;
+        
+    }
+    
+    static public function mdlEliminarComprobante($idPagoT, $idUsuario, $tabla){
+        
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idUsuario = $idUsuario AND idPagoT = $idPagoT");
+        
+        $stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+        
+        $stmt->bindParam(":idPagoT", $idPagoT, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+
+			return "ok";
+		} else {
+
+			return "error";
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+        
+    }
     
 }

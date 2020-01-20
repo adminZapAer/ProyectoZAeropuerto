@@ -11,6 +11,8 @@ $ruta = "sin-categoria";
 $eliminarFactTemp = new ControladorCarrito();
 $eliminarFactTemp -> ctrComprobarFactTemporal();
 
+//var_dump($_GET["datosT"]);
+
 /*
 $banner = ControladorProductos::ctrMostrarBanner($ruta);
 

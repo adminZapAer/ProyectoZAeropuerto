@@ -154,7 +154,7 @@ BREADCRUMB TRANSFERENCIA
                                     <br>
                                     <br>
                                     
-                                    <button class="btn btn-success btn-md pull-left">Cargar Datos de Recibo</button>
+                                    <button class="btn btn-success btn-md pull-left updat">Cargar Datos de Recibo</button>
                                     
                                     <br>
                                     <br>

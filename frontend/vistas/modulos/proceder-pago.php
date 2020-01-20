@@ -52,6 +52,8 @@ if (isset($_SESSION["validarSesion"])) {
         
 		$compruebaFacturacion = ModeloCarrito::mdlComprobarDatosFacturacion($idUsuario,"facturacion");
         
+        $user = ModeloUsuarios::mdlMostrarUsuario("usuarios", $idUsuario, $idUsuario);
+        
 		if($compruebaFacturacion != false){
             
 		}
@@ -59,10 +61,10 @@ if (isset($_SESSION["validarSesion"])) {
 		else{
 			$datos = [
 				'idUsuario'=>$idUsuario,
-                'nombreRazon'=>"Usuario".$idUsuario,
+                'nombreRazon'=>$user["nombre"],
                 'rfc'=>"XAXX010101000",
                 'tipoPersona'=>"Fisica",
-                'calle'=>"Carretera Los Reyes - Lechería Km. 23",
+                'calle'=>"Carretera Los Reyes Lechería Km 23",
                 'numExterior'=>"0",
                 'numInterior'=>"0",
                 'colonia'=>"La Magdalena Panoaya",
@@ -631,7 +633,7 @@ TABLA CARRITO DE COMPRAS
                         <center>
                             
                             <ul>
-                                <li><b>Teeléfono:</b> 595 106 9120</li>
+                                <li><b>Teléfono:</b> 595 106 9120</li>
                                 <li><b>Contacto:</b> José Antonio Molina Botello</li>
                                 <li><b>Email:</b> jmolina@zapata.com.mx</li>
                                 <li><b>Sucursal:</b> 1838</li>

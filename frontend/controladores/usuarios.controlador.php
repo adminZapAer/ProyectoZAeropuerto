@@ -1065,7 +1065,7 @@ class ControladorUsuarios{
 				ENVÍO CORREO ELECTRÓNICO
 				=============================================*/
 
-					date_default_timezone_set("America/Bogota");
+					date_default_timezone_set("America/Mexico_City");
 
 					$url = Ruta::ctrRuta();	
 
@@ -1075,25 +1075,25 @@ class ControladorUsuarios{
 
 					$mail->isMail();
 
-					$mail->setFrom('cursos@tutorialesatualcance.com', 'Tutoriales a tu Alcance');
+					$mail->setFrom('noreply@refaccioneszapatacamiones.com', 'Refacciones Zapata Camiones');
 
-					$mail->addReplyTo('cursos@tutorialesatualcance.com', 'Tutoriales a tu Alcance');
+					$mail->addReplyTo('cursos@tutorialesatualcance.com', 'Refacciones Zapata Camiones');
 
 					$mail->Subject = "Ha recibido una consulta";
 
-					$mail->addAddress("contacto@tiendaenlinea.com");
+					$mail->addAddress("jmolina@zapata.com.mx");
 
 					$mail->msgHTML('
 
 						<div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">
 
-						<center><img style="padding:20px; width:10%" src="http://www.tutorialesatualcance.com/tienda/logo.png"></center>
+						<img src="https://www.zapataaeropuerto.com/img/logo/logoZapataNegro.png" alt="logo-zapata" style="width: 20%; padding: 20px;">
 
 						<div style="position:relative; margin:auto; width:600px; background:white; padding-bottom:20px">
 
 							<center>
 
-							<img style="padding-top:20px; width:15%" src="http://www.tutorialesatualcance.com/tienda/icon-email.png">
+							<img src="https://www.zapataaeropuerto.com/img/mail/icon-email.png" alt="icono-mail" style="padding: 20px; width: 10%;">
 
 
 							<h3 style="font-weight:100; color:#999;">HA RECIBIDO UNA CONSULTA</h3>
@@ -1137,7 +1137,8 @@ class ControladorUsuarios{
 
 						</script>';
 
-					}else{
+					}
+                    else{
 
 						echo '<script> 
 

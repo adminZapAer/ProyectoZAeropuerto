@@ -42,8 +42,8 @@ class ModeloCompras{
 
         $conexion = Conexion::conectar();
 		$stmt = $conexion->prepare("INSERT INTO $tabla 
-			(idUsuario, envio, costo_envio, metodo, direccion, pais, fecha, statusCompraId) 
-			VALUES (:idUsuario, :envio, :costo_envio, :metodo, :direccion, :pais, :fecha, :statusCompraId)");
+			(idUsuario, envio, costo_envio, metodo, direccion, pais, fecha, statusCompraId, validarCompra) 
+			VALUES (:idUsuario, :envio, :costo_envio, :metodo, :direccion, :pais, :fecha, :statusCompraId, :validarCompra)");
 
 		$stmt->bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
 		$stmt->bindParam(":metodo", $datos["metodo"], PDO::PARAM_STR);
@@ -53,6 +53,7 @@ class ModeloCompras{
 		$stmt->bindParam(":pais", $datos["pais"], PDO::PARAM_STR);
 		$stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
 		$stmt->bindParam(":statusCompraId", $datos["statusCompraId"], PDO::PARAM_INT);
+        $stmt->bindParam(":validarCompra", $datos["validarCompra"], PDO::PARAM_INT);
 
 		if($stmt -> execute()){
 
@@ -68,6 +69,7 @@ class ModeloCompras{
 
 		$stmt = null;
 	}
+    
     
     static public function mdlListarCompras($tabla, $ordenar, $item, $valor){
         if($item != null){

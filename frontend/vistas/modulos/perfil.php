@@ -109,7 +109,6 @@ SECCIÓN PERFIL
                     
                     $compras = ControladorUsuarios::ctrMostrarCompras($item, $valor);
                     
-                    
                     if(!$compras){
                         echo '
                         <div class="col-xs-12 text-center error404">
