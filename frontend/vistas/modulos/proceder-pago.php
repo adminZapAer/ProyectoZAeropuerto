@@ -4,6 +4,7 @@ $url = Ruta::ctrRuta();
 $servidor = Ruta::ctrRutaServidor();
 
 //disable-card=visa,mastercard
+
 ?>
 <script>
 	localStorage.setItem("paginaEnvio", 1);
@@ -47,6 +48,8 @@ if (isset($_SESSION["validarSesion"])) {
 	
 	if ($_SESSION["validarSesion"] == "ok") {
 		$idUsuario = $_SESSION["idUsuario"];
+        
+        
         
 		$usuarioTemp = $_SESSION["idUsuario"];
         
@@ -219,37 +222,37 @@ TABLA CARRITO DE COMPRAS
 			</div> -->
 
 		</div>
-
-		<!-- .......................... -->
-
-		<p class="text-primary">Para activar el botón de pago, es necesario aceptar las politicas de términos y condiciones</p>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<small>
-					<center>TERMINOS Y CONDICIONES</center>
-				</small>
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-4"></div>
-					<div class="col-md-4">
-						<div class="panel panel-default">
-							<div class="panel panel-body">
-								<div class="form-check">
-									<input type="checkbox" class="politicas form-check-input" id="input-terminos">
-									<label class="form-check-label" for="input-terminos">
-										He leído y acepto los <a href="#">términos y condiciones.</a>
-
-									</label>
-								</div>
-							</div>
-						</div>
-					</div>
+    
+    <!-- .......................... -->
+   
+    <p class="text-primary">Para activar el botón de pago, es necesario aceptar las politicas de términos y condiciones</p>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+		    <small>
+				<center>TERMINOS Y CONDICIONES</center>
+			</small>
+        </div>
+		<div class="panel-body">
+            <div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+				    <div class="panel panel-default">
+				        <div class="panel panel-body">
+				            <div class="form-check">
+								<input type="checkbox" class="politicas form-check-input" id="input-terminos">
+								<label class="form-check-label" for="input-terminos">
+									He leído y acepto los <a href="#">términos y condiciones.</a>
+								</label>
+				            </div>
+				        </div>
+				    </div>
 				</div>
-			</div>
-		</div>
-
-		<div class="panel panel-default" id="componente-realizar-pago" style="display: none;">
+            </div>
+        </div>
+        
+    </div>
+   
+    <div class="panel panel-default" id="componente-realizar-pago" style="display: none;">
 
 			<!--=====================================
 			CABECERA CARRITO DE COMPRAS
@@ -312,218 +315,13 @@ TABLA CARRITO DE COMPRAS
 			<!--=====================================
 			BOTÓN CHECKOUT
 			======================================-->
+			
+    </div>
+    
+</div>
 
-
-		</div>
-
-
-
-	</div>
-
-	<!--=====================================
-        script 
-======================================-->
-	<script>
-		$('#email').on('click', function(event) {
-			event.preventDefault();
-			$.ajax({
-					url: rutaFrontEnd + 'ajax/checkout.ajax.php',
-					type: 'POST',
-					dataType: 'json',
-					data: {
-						detalles: getItems(),
-						usuario: JSON.stringify(localStorage.getItem("usuario"))
-					},
-				})
-				.done(function(res) {
-					console.log("success", res);
-				})
-				.fail(function(err) {
-					console.log("error", err);
-				});
-
-		});
-
-
-		/*OBTENCIÓN DE LA DIRECCIÓN DE ENVIO*/
-		function getDireccionEnvio() {
-			return JSON.parse(
-				localStorage.getItem("direccionEnvio")
-			);
-		}
-
-		/* OBTENCION DE LOS ELEMENTOS A COMPRAR */
-		function getItems() {
-			if (localStorage.getItem("listaProductos") != null) {
-				let listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
-
-				let data = [];
-				listaCarrito.forEach((item, index) => {
-					data.push({
-						"idProducto": item.idProducto,
-						"titulo": item.titulo,
-						"precio": item.precio,
-						"tipo": item.tipo,
-						"cantidad": item.cantidad,
-						"costoEnvio": item.costoEnvio,
-						"origen": item.origen,
-					});
-				});
-
-				console.log('data', JSON.stringify(data));
-				return JSON.stringify(data);
-
-			} else {
-				$(".cuerpoCarrito").html('<div class="well">Aún no hay productos en el carrito de compras.</div>');
-				$(".sumaCarrito").hide();
-				$(".cabeceraCheckout").hide();
-			}
-		}
-
-		paypal.Buttons({
-			style: {
-				layout: 'vertical',
-				color: 'gold',
-				shape: 'pill',
-				size: '55',
-				label: 'paypal'
-			},
-			createOrder: function() {
-				return fetch(rutaFrontEnd + 'ajax/checkout.ajax.php', {
-					method: 'post',
-					headers: {
-						'content-type': 'application/json'
-					},
-					body: getItems()
-				}).then(function(res) {
-					return res.json();
-				}).then(function(data) {
-					return data.result.id; // Use the same key name for order ID on the client and server
-				}).catch(function(except) {
-					return false;
-				});
-			},
-			onApprove: function(data, actions) {
-				actions.order.get().then(function(data) {});
-				// Capture the funds from the transaction
-				return actions.order.capture().then(function(details) {
-					// Show a success message to your buyer
-					console.log('details', details);
-					$.ajax({
-							url: rutaFrontEnd + 'ajax/checkout.ajax.php',
-							type: 'POST',
-							dataType: 'json',
-							data: {
-								detalles: details,
-								usuario: JSON.stringify(localStorage.getItem("usuario")),
-								productos: getItems(),
-								direccion: getDireccionEnvio()
-							},
-						})
-						.done(function(res) {
-							console.log("success", res);
-							swal({
-								title: "¡Tu compra ha sido realizada con éxito!",
-								text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
-								type: "success",
-								confirmButtonText: "Aceptar",
-								closeOnConfirm: false
-							}, function(isConfirm) {
-								if (isConfirm) {
-									localStorage.removeItem("listaProductos");
-									localStorage.removeItem("sumaCesta");
-									localStorage.removeItem("cantidadCesta");
-									window.location = rutaFrontEnd;
-								}
-							});
-						})
-						.fail(function(err) {
-							console.log("error", err);
-						});
-
-					//       swal({
-					//   title: "Transacción aceptada",
-					//   text: "Compra realizada con éxito",
-					//   type: "success",
-					//   confirmButtonText: "Aceptar",
-					//   closeOnConfirm: false
-					// },function(isConfirm){
-					// 	if (isConfirm) {
-					// 		localStorage.removeItem("listaProductos");
-					// 		localStorage.removeItem("sumaCesta");
-					// 		localStorage.removeItem("cantidadCesta");
-					// 		window.location = rutaFrontEnd;
-					// 	} 
-					// });
-
-				});
-			},
-			onCancel: function(data) {
-				window.location = rutaFrontEnd + 'carrito-de-compras';
-			},
-			onError: function(err) {
-				console.log('err', err);
-				swal({
-						title: "Ocurrio un error",
-						text: "Favor de intentar de nuevo o más tarde, disculpe las molestias.",
-						type: "warning",
-						confirmButtonText: "¡Cerrar!",
-						closeOnConfirm: false
-					},
-					function(isConfirm) {
-						if (isConfirm) {
-							window.location = rutaFrontEnd;
-						}
-					});
-			}
-		}).render('#paypal-button-container');
-
-
-		$(document).on('click', '.politicas', function() {
-
-			if ($('#input-terminos').is(':checked')) {
-				$('#componente-realizar-pago').show('slow');
-			} else {
-				$('#componente-realizar-pago').hide('slow');
-			}
-
-
-
-		});
-	</script>
-
-	<script>
-		$(document).ready(function() {
-
-			$('.cantidadItem').each(function() {
-				$(this).attr('readonly', 'true');
-			});
-
-			// MOSTRAMOS LA DIRECCION SELECCIONADA POR EL USUARIO PREVIAMENTE
-
-			if (JSON.parse(localStorage.getItem('direccionEnvio')) != null) {
-				console.log('DIRECCION DE USUARIO', JSON.parse(localStorage.getItem('direccionEnvio')));
-				$('#direccionesResumen').html(`
-	<div class="panel panel-default">
-					<div class="panel panel-heading">
-						DIRECCIÓN DE ENVÍO
-					</div>
-					<div class="panel-body" id="direccionEnvioBody">
-					<div class="panel panel-default">
-			${JSON.parse(localStorage.getItem('direccionEnvio'))[0].colonia}
-		</div>
-					</div>
-				</div>
-		
-	`);
-			}
-
-
-
-		});
-	</script>
-	<!--=====================================
-        VENTANA MODAL PARA CHECKOUT
+<!--=====================================
+    VENTANA MODAL PARA CHECKOUT
 ======================================-->
 <div id="modalTransferencia" class="modal fade modalFormulario" role="dialog">
 
@@ -662,7 +460,210 @@ TABLA CARRITO DE COMPRAS
         </div>
         
     </div>
-
     
-     
 </div>
+
+<!--=====================================
+    script 
+======================================-->
+<script>
+	$('#email').on('click', function(event) {
+		event.preventDefault();
+		$.ajax({
+            url: rutaFrontEnd + 'ajax/checkout.ajax.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                detalles: getItems(),
+                usuario: JSON.stringify(localStorage.getItem("usuario"))
+            },
+        })
+        .done(function(res) {
+            console.log("success", res);
+        })
+        .fail(function(err) {
+            console.log("error", err);
+        });
+        
+    });
+        
+    $('.btnPagarTransferencia').on('click', function() {
+        $.ajax({
+            url: rutaFrontEnd + 'pagoTransferencia.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                detalles: getItems()
+            }
+        });
+        
+    });
+
+    /*OBTENCIÓN DE LA DIRECCIÓN DE ENVIO*/
+    function getDireccionEnvio() {
+        return JSON.parse(
+            localStorage.getItem("direccionEnvio")
+        );
+    }
+
+    /* OBTENCION DE LOS ELEMENTOS A COMPRAR */
+    function getItems() {
+        if (localStorage.getItem("listaProductos") != null) {
+            let listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
+            let data = [];
+            listaCarrito.forEach((item, index) => {
+                data.push({
+                    "idProducto": item.idProducto,
+                    "titulo": item.titulo,
+                    "precio": item.precio,
+                    "tipo": item.tipo,
+                    "cantidad": item.cantidad,
+                    "costoEnvio": item.costoEnvio,
+                    "origen": item.origen,
+                });
+            });
+            
+            console.log('data', JSON.stringify(data));
+            return JSON.stringify(data);
+            
+        }
+        else {
+            $(".cuerpoCarrito").html('<div class="well">Aún no hay productos en el carrito de compras.</div>');
+            $(".sumaCarrito").hide();
+            $(".cabeceraCheckout").hide();
+        }
+    }
+    
+    /*paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color: 'gold',
+            shape: 'pill',
+            size: '55',
+            label: 'paypal'
+        },
+        createOrder: function() {
+            return fetch(rutaFrontEnd + 'ajax/checkout.ajax.php', {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: getItems()
+            }).then(function(res) {
+                return res.json();
+            }).then(function(data) {
+                return data.result.id; // Use the same key name for order ID on the client and server
+            }).catch(function(except) {
+                return false;
+            });
+        },
+        onApprove: function(data, actions) {
+            actions.order.get().then(function(data) {});
+            // Capture the funds from the transaction
+            return actions.order.capture().then(function(details) {
+                // Show a success message to your buyer
+                console.log('details', details);
+                $.ajax({
+                    url: rutaFrontEnd + 'ajax/checkout.ajax.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        detalles: details,
+                        usuario: JSON.stringify(localStorage.getItem("usuario")),
+                        productos: getItems(),
+                        direccion: getDireccionEnvio()
+                    },
+                }).done(function(res) {
+                    console.log("success", res);
+                    swal({
+                        title: "¡Tu compra ha sido realizada con éxito!",
+                        text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
+                        type: "success",
+                        confirmButtonText: "Aceptar",
+                        closeOnConfirm: false
+                    },function(isConfirm) {
+                        if (isConfirm) {
+                            localStorage.removeItem("listaProductos");
+                            localStorage.removeItem("sumaCesta");
+                            localStorage.removeItem("cantidadCesta");
+                            window.location = rutaFrontEnd;
+                        }
+                    });
+                }).fail(function(err) {
+                    console.log("error", err);
+                });
+                
+                //swal({
+                    //title: "Transacción aceptada",
+					//text: "Compra realizada con éxito",
+					//type: "success",
+					//confirmButtonText: "Aceptar",
+					//closeOnConfirm: false
+					//},function(isConfirm){
+					   //if (isConfirm) {
+					       //localStorage.removeItem("listaProductos");
+					       //localStorage.removeItem("sumaCesta");
+					       //localStorage.removeItem("cantidadCesta");
+					       //window.location = rutaFrontEnd;
+					   //} 
+				//});
+                
+            });
+        },
+        onCancel: function(data) {
+            window.location = rutaFrontEnd + 'carrito-de-compras';
+        },
+        onError: function(err) {
+            console.log('err', err);
+            swal({
+                title: "Ocurrio un error",
+                text: "Favor de intentar de nuevo o más tarde, disculpe las molestias.",
+                type: "warning",
+                confirmButtonText: "¡Cerrar!",
+                closeOnConfirm: false
+            },function(isConfirm) {
+                if (isConfirm) {
+                    window.location = rutaFrontEnd;
+                }
+            });
+        }
+    }).render('#paypal-button-container');*/
+    
+    $(document).on('click', '.politicas', function() {
+        if ($('#input-terminos').is(':checked')) {
+            $('#componente-realizar-pago').show('slow');
+        }
+        else {
+            $('#componente-realizar-pago').hide('slow');
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.cantidadItem').each(function() {
+            $(this).attr('readonly', 'true');
+        });
+        
+        // MOSTRAMOS LA DIRECCION SELECCIONADA POR EL USUARIO PREVIAMENTE
+        if (JSON.parse(localStorage.getItem('direccionEnvio')) != null) {
+            console.log('DIRECCION DE USUARIO', JSON.parse(localStorage.getItem('direccionEnvio')));
+            $('#direccionesResumen').html(`
+            <div class="panel panel-default">
+                <div class="panel panel-heading">
+                    DIRECCIÓN DE ENVÍO
+                </div>
+                <div class="panel-body" id="direccionEnvioBody">
+                    <div class="panel panel-default">
+                        ${JSON.parse(localStorage.getItem('direccionEnvio'))[0].colonia}
+                    </div>
+                </div>
+            </div>`
+            );
+        }
+    });
+    
+    //enviar datos
+    
+    $(document).ready(function() {});
+</script>

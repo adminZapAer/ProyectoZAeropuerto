@@ -153,9 +153,15 @@ SECCIÓN PERFIL
                                             <div class="col-md-2 col-sm-6 col-xs-12">
 
                                                 <figure>
-
-                                                    <img class="img-thumbnail" src="'.$servidor.$value2["portada"].'">
-
+                                                    ';
+                                                if($value2["portada"] != ""){
+                                                    echo '<img class="img-thumbnail" src="'.$servidor.$value2["portada"].'">';
+                                                }
+                                                else{
+                                                    echo '<img class="img-thumbnail" src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg">';
+                                                }
+                                                    
+                                                echo'
                                                 </figure>
 
                                             </div>

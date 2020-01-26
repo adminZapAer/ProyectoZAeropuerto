@@ -974,13 +974,29 @@ $(".datosFacturacion").click(function () {
     return;*/
 })
 
-$(".btnPagarTransferencia").click(function () {
+$(document).ready(function(){
     
-	let  idUsuario = $(this).prop('id');
+    $(".btnPagarTransferencia").click(function () {
     
-    window.location = "index.php?ruta=pagoTransferencia&pagoTransf="+idUsuario;
+        let listaProducto = JSON.parse(localStorage.getItem('listaProductos'));
+        
+        /*$.ajax({
+            type: "POST",
+            url: rutaFrontEnd + "pagoTransferencia.php",
+            data: {datosProductos:listaProducto},
+            success: function(msj){
+                console.log(msj);
+            }
+        });*/
+        
+        $.post(rutaFrontEnd + "pagoTransferencia.php",{"data": listaProducto, "success":true,"error":null},function(data){});
+        
+        window.location = rutaFrontEnd + "pagoTransferencia";
+        //window.location = "index.php?ruta=pagoTransferencia&lsprt="+listaProducto;
+
+    })
     
-})
+});
 
 $("#datosRecibo").change(function(){
     

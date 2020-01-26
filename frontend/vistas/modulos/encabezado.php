@@ -34,7 +34,7 @@ if(isset($_SESSION["validarSesion"])){
             REDES SOCIALES
             ==============================-->
             <!--En escritorio grande ocupara 9 columnas, en escritorio mediano 9 columnas, en escritorio pequeño ocupara 8 columnas y en dispositivos moviles ocupara 12 columnas -->
-            <div class="col-lg-8 col-md-7 col-sm-8 col-xs-12 social">
+            <div class="col-lg-7 col-md-7 col-sm-8 col-xs-12 social">
                 <ul>
                     <!--==========CAMBIAR LOS ESTILOS DE LA SECCION SOCIAL Y LAS URL-->
                     <?php
@@ -57,7 +57,7 @@ if(isset($_SESSION["validarSesion"])){
             <!--==============================
             REGISTRO DE USUARIOS
             ==============================-->
-            <div class="col-lg-4 col-md-5 col-sm-4 col-xs-12 registro">
+            <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12 registro">
                 <ul>
                     
                     <?php
@@ -70,7 +70,7 @@ if(isset($_SESSION["validarSesion"])){
                                 if($_SESSION["foto"] != ""){
                                     echo'
                                     <li>
-                                        <img class="img-circle" src="'.$url.$_SESSION["foto"].'" width="10%">
+                                        <img class="img-circle" src="'.$url.$_SESSION["foto"].'" width="8%">
                                     </li>
                                     ';
                                 }
@@ -143,7 +143,7 @@ if(isset($_SESSION["validarSesion"])){
                                 BUSCADOR
                 ==================================-->
                 <div class="input-group col-lg-8 col-md-8 col-sm-8 col-xs-12" id="buscador">
-                    <input type="search" name="buscar" class="form-control" placeholder="Buscar...">
+                    <input type="search" name="buscar" class="form-control" id="busca" placeholder="Buscar..." value="">
                     <span class="input-group-btn">
                         <a href="<?php echo $url; ?>buscador/1/recientes">
                            

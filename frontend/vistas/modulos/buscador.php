@@ -78,6 +78,7 @@ BARRA PRODUCTOS
                 
                 <li><a href="<?php echo $url; ?>">Inicio</a></li>
                 <li class = "active pagActiva"><?php echo $rutas[0]; ?></li>
+                <li class = "active"><?php echo str_replace("_"," ",$rutas[3]); ?></li>
                 
             </ul>
             
@@ -236,7 +237,7 @@ BARRA PRODUCTOS
                                         <h2>
                                             
                                             <small>
-                                                <strong class = "oferta">MXN $'.$value["precio"].'</strong>
+                                                <strong class = "oferta">MXN $'.number_format($value["precio"],2).'</strong>
                                             </small>  
                                             
                                             <small>$'.$value["precioOferta"].'</small>
@@ -249,7 +250,7 @@ BARRA PRODUCTOS
                                         <h2>
                                             
                                             <small>
-                                               MXN $'.$value["precio"].'
+                                               MXN $'.number_format($value["precio"],2).'
                                             </small>
                                             
                                         </h2>
@@ -396,10 +397,10 @@ BARRA PRODUCTOS
                                         <h2>
                                             
                                             <small>
-                                                <strong class = "oferta">MXN $'.$value["precio"].'</strong>
+                                                <strong class = "oferta">MXN $'.number_format($value["precio"],2).'</strong>
                                             </small>
                                             
-                                            <small>MXN $'.$value["precioOferta"].'</small>
+                                            <small>MXN $'.number_format($value["precioOferta"],2).'</small>
                                             
                                         </h2>
                                         ';
@@ -410,7 +411,7 @@ BARRA PRODUCTOS
                                         <h2>
                                             
                                             <small>
-                                               MXN $'.$value["precio"].'
+                                               MXN $'.number_format($value["precio"],2).'
                                             </small>
                                             
                                         </h2>

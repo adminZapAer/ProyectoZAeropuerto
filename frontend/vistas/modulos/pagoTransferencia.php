@@ -58,14 +58,11 @@ BREADCRUMB TRANSFERENCIA
                             <br>
                             
                             <?php
-                                
-                                if(isset($_GET["pagoTransf"])){
                                     
                                     $item = $_SESSION["idUsuario"];
                                     
-                                    //var_dump("idDireccion: ",$_GET["updatedir"]);
-                                    
                                     $user = ControladorUsuarios::ctrMostrarUsuario("idUsuario", $item);
+                                    //var_dump($user);
                                     
                                     //var_dump($direccion[0]);
                                     
@@ -160,7 +157,6 @@ BREADCRUMB TRANSFERENCIA
                                     <br>
                                     ';
                                     
-                                }
                                 
                                 
                             
@@ -185,4 +181,23 @@ BREADCRUMB TRANSFERENCIA
     </div>
     
 </div>
+
+<script>
+    let listaProducto = JSON.parse(localStorage.getItem('listaProductos'));
+    console.log(listaProducto);
+    /*$(document).ready(function() {
+        $.ajax({
+            url: rutaFrontEnd + "pagoTransferencia.php",
+            type: 'POST',
+            dataType: 'json',
+            data:{productos: listaProducto},
+            success: function(data){
+                alert('datos enviados a php correctamente');
+            }
+        });
+
+        console.log(listaProducto);
+    }*/
+</script>
+
 

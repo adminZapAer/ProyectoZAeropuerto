@@ -122,12 +122,62 @@ class ModeloProductos{
     
     static public function mdlBuscarProductos($tabla, $busqueda, $ordenar, $modo, $base, $tope){
         
-        $query = "ruta like '%$busqueda[0]%' OR titulo like '%$busqueda[0]%' OR titular like '%$busqueda[0]%' OR descripcion like '%$busqueda[0]%' OR detalles like '%$busqueda[0]%' OR marca like '%$busqueda[0]%' OR tipoSistema like '%$busqueda[0]%' OR aplicacion like '%$busqueda[0]%' OR sku like '%$busqueda[0]%'";
+        $query = "";
         
-        for($i = 1; $i < sizeof($busqueda); $i++){
-            if(!empty($busqueda[$i])){
-                $query .= " OR ruta like '%$busqueda[$i]%' OR titulo like '%$busqueda[$i]%' OR titular like '%$busqueda[$i]%' OR descripcion like '%$busqueda[$i]%' OR detalles like '%$busqueda[$i]%' OR marca like '%$busqueda[$i]%' OR tipoSistema like '%$busqueda[$i]%' OR aplicacion like '%$busqueda[$i]%' OR sku like '%$busqueda[$i]%'";
+        $palabras = array("y","además","también","más","aún","para","con","en","de","que","un","del");
+        
+        $tamano = count($palabras);
+        
+        $x = 0;
+        
+        while ($x < $tamano){
+            
+            if($palabras[$x] == $busqueda[0]){
+                
+                $query = "titulo = '$palabras[$x]'";
+                break;
+                
             }
+            
+            if($x == ($tamano - 1)){
+                
+                $query = "ruta LIKE '%$busqueda[0]%' OR titulo LIKE '%$busqueda[0]%' OR titular LIKE '%$busqueda[0]%' OR descripcion LIKE '%$busqueda[0]%' OR detalles LIKE '%$busqueda[0]%' OR marca LIKE '%$busqueda[0]%' OR tipoSistema LIKE '%$busqueda[0]%' OR aplicacion LIKE '%$busqueda[0]%' OR sku LIKE '%$busqueda[0]%' OR tipoAplicacion LIKE '%$busqueda[0]%'";
+                
+            }
+            
+            $x++;
+            
+        }
+        
+        $x = 0;
+        
+        for ($i = 1; $i < sizeof($busqueda); $i++){
+            
+            if(!empty($busqueda[$i])){
+                
+                while($x < $tamano){
+                    
+                    if($palabras[$x] == $busqueda[$i]){
+                        
+                        $query .= " OR titulo = '$palabras[$x]'";
+                        break;
+                        
+                    }
+                    
+                    if($x == ($tamano - 1)){
+                        
+                        $query .= " OR ruta LIKE '%$busqueda[$i]%' OR titulo LIKE '%$busqueda[$i]%' OR titular LIKE '%$busqueda[$i]%' OR descripcion LIKE '%$busqueda[$i]%' OR detalles LIKE '%$busqueda[$i]%' OR marca LIKE '%$busqueda[$i]%' OR tipoSistema LIKE '%$busqueda[$i]%' OR aplicacion LIKE '%$busqueda[$i]%' OR sku LIKE '%$busqueda[$i]%' OR tipoAplicacion LIKE '%$busqueda[$i]%'";
+                        
+                    }
+                    
+                    $x++;
+                    
+                }
+                
+                $x = 0;
+                
+            }
+            
         }
         
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $query ORDER BY $ordenar $modo LIMIT $base, $tope");
@@ -139,12 +189,62 @@ class ModeloProductos{
     
     static public function mdlListarProductosBusqueda($tabla, $busqueda){
         
-        $query = "ruta like '%$busqueda[0]%' OR titulo like '%$busqueda[0]%' OR titular like '%$busqueda[0]%' OR descripcion like '%$busqueda[0]%' OR detalles like '%$busqueda[0]%' OR marca like '%$busqueda[0]%' OR tipoSistema like '%$busqueda[0]%' OR aplicacion like '%$busqueda[0]%' OR sku like '%$busqueda[0]%'";
+        $query = "";
+        
+        $palabras = array("y","además","también","más","aún","para","con","en","de","que","un","del");
+        
+        $tamano = count($palabras);
+        
+        $x = 0;
+        
+        while ($x < $tamano){
+            
+            if($palabras[$x] == $busqueda[0]){
+                
+                $query = "titulo = '$palabras[$x]'";
+                break;
+                
+            }
+            
+            if($x == ($tamano - 1)){
+                
+                $query = "ruta LIKE '%$busqueda[0]%' OR titulo LIKE '%$busqueda[0]%' OR titular LIKE '%$busqueda[0]%' OR descripcion LIKE '%$busqueda[0]%' OR detalles LIKE '%$busqueda[0]%' OR marca LIKE '%$busqueda[0]%' OR tipoSistema LIKE '%$busqueda[0]%' OR aplicacion LIKE '%$busqueda[0]%' OR sku LIKE '%$busqueda[0]%' OR tipoAplicacion LIKE '%$busqueda[0]%'";
+                
+            }
+            
+            $x++;
+            
+        }
+        
+        $x = 0;
         
         for ($i = 1; $i < sizeof($busqueda); $i++){
+            
             if(!empty($busqueda[$i])){
-                $query .= " OR ruta like '%$busqueda[$i]%' OR titulo like '%$busqueda[$i]%' OR titular like '%$busqueda[$i]%' OR descripcion like '%$busqueda[$i]%' OR detalles like '%$busqueda[$i]%' OR marca like '%$busqueda[$i]%' OR tipoSistema like '%$busqueda[$i]%' OR aplicacion like '%$busqueda[$i]%' OR sku like '%$busqueda[$i]%'";
+                
+                while($x < $tamano){
+                    
+                    if($palabras[$x] == $busqueda[$i]){
+                        
+                        $query .= " OR titulo = '$palabras[$x]'";
+                        break;
+                        
+                    }
+                    
+                    if($x == ($tamano - 1)){
+                        
+                        $query .= " OR ruta LIKE '%$busqueda[$i]%' OR titulo LIKE '%$busqueda[$i]%' OR titular LIKE '%$busqueda[$i]%' OR descripcion LIKE '%$busqueda[$i]%' OR detalles LIKE '%$busqueda[$i]%' OR marca LIKE '%$busqueda[$i]%' OR tipoSistema LIKE '%$busqueda[$i]%' OR aplicacion LIKE '%$busqueda[$i]%' OR sku LIKE '%$busqueda[$i]%' OR tipoAplicacion LIKE '%$busqueda[$i]%'";
+                        
+                    }
+                    
+                    $x++;
+                    
+                }
+                
+                $x = 0;
+                
             }
+            
         }
         
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $query");

@@ -345,7 +345,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 <hr>
                                 <span class="label label-default" style="font-weight:100">
                                     <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    '.$infoProducto["diasEntrega"].' dias habiles para la entrega |
+                                    De 3 a 5 dias habiles para la entrega |
                                     <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
                                     '.$infoProducto["ventasGratis"].' solicitudes |
                                     <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
@@ -357,7 +357,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 <hr>
                                 <small>
                                     <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    '.$infoProducto["diasEntrega"].' dias habiles para la entrega <br>
+                                    De 3 a 5 dias habiles para la entrega <br>
                                     <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
                                     '.$infoProducto["ventasGratis"].' solicitudes <br>
                                     <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
@@ -371,7 +371,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 <hr>
                                 <span class="label label-default" style="font-weight:100">
                                     <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    '.$infoProducto["diasEntrega"].' dias habiles para la entrega |
+                                    De 3 a 5 dias habiles para la entrega |
                                     <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
                                     '.$infoProducto["ventas"].' ventas |
                                     <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
@@ -383,7 +383,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 <hr>
                                 <small>
                                     <i class="fa fa-clock-o" style="margin-right: 5px"></i>
-                                    '.$infoProducto["diasEntrega"].' dias habiles para la entrega <br>
+                                    De 3 a 5 dias habiles para la entrega <br>
                                     <i class="fa fa-shopping-cart" style="margin-right: 0px 5px"></i>
                                     '.$infoProducto["ventas"].' ventas <br>
                                     <i class="fa fa-eye" style="margin-right: 0px 5px"></i>
