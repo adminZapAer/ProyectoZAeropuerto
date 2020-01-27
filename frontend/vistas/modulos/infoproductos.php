@@ -486,6 +486,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                     
                     <li><a data-toggle="tab" href="#opc1">DEVOLUCIONES</a></li>
                     <li><a data-toggle="tab" href="#opc2">GARANTIAS</a></li>
+                    <li><a data-toggle="tab" href="#opc3">CORES</a></li>
                     
                 </ul>
                 
@@ -496,12 +497,12 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                         <br>
                         <p>Al momento de hacer una devolución por favor considere que al ser nuevo el producto, usted lo regresara intacto para que un nuevo comprador lo requiera, Puntos a tomar en consideración al aplicar una devolución.</p>
                         <ul>
-                            <li>Puede devolver el producto, sin embargo, se le restara el 20% de su compra por manejo de tiempo y personal</li>
-                            <li>Si la caja al llegar esta dañada o rota <strong>NO ACEPTE POR NINGÚN MOTIVO LA ENTREGA</strong>, ya que si lo acepta perderá en automático <span style="text-decoration: underline">la garantía</span>, <span style="text-decoration: underline">la devolución</span> y por ende <span style="text-decoration: underline">su dinero</span></li>
-                            <li>El envió de devolución corre por su cuenta</li>
-                            <li>No dañar ni pegar cintas en la caja del producto y si lo hace que sea sobre la cinta antes cortada</li>
-                            <li>No instalar la refacción ya que si está sucia o dañada no se aceptará la devolución</li>
-                            <li>No se acepta material sin caja por ningún motivo</li>
+                            <li><strong>-</strong> Puede devolver el producto, sin embargo, se le restara el 20% de su compra por manejo de tiempo y personal</li>
+                            <li><strong>-</strong> Si la caja al llegar esta dañada o rota <strong>NO ACEPTE POR NINGÚN MOTIVO LA ENTREGA</strong>, ya que si lo acepta perderá en automático <span style="text-decoration: underline">la garantía</span>, <span style="text-decoration: underline">la devolución</span> y por ende <span style="text-decoration: underline">su dinero</span></li>
+                            <li><strong>-</strong> El envió de devolución corre por su cuenta</li>
+                            <li><strong>-</strong> No dañar ni pegar cintas en la caja del producto y si lo hace que sea sobre la cinta antes cortada</li>
+                            <li><strong>-</strong> No instalar la refacción ya que si está sucia o dañada no se aceptará la devolución</li>
+                            <li><strong>-</strong> No se acepta material sin caja por ningún motivo</li>
                         </ul>
                     </div>
                     
@@ -512,13 +513,41 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                         <p>La garantía se puede aplicar antes de 6 meses de uso de la pieza, si pasa ese tiempo la garantía se perderá con nosotros y tendrá que llamar a proveedor directamente, esta garantía aplicara con las siguientes condiciones:</p>
                         
                         <ul>
-                            <li>La garantía puede tardar en ser aplicada</li>
-                            <li>Producto instalado incorrectamente, si el producto es colocado sin cuidado, a la fuerza, o sin las herramientas necesarias la garantía se pierde, sin embargo, si el producto es colocado en nuestras instalaciones <strong>la garantía se aplica al 100%</strong> si es falla de la pieza antes comprada</li>
-                            <li>Producto que se reparó, pierde en automático la garantía</li>
-                            <li>Favor de no limpiar el producto: es importante no limpiar le producto ya que si es lavada o limpiada la evidencia se perderá y tardará más el dictamen de garantía</li>
-                            <li>Si el producto contiene liquido como aceite, anticongelante, agua favor de drenarlo o se le penalizara monetariamente</li>
-                            <li>El producto al entrar en garantía será evaluado por el personal correspondiente y dependiendo del dictamen se aplicará la garantía.</li>
+                            <li><strong>-</strong> La garantía puede tardar en ser aplicada</li>
+                            <li><strong>-</strong> Producto instalado incorrectamente, si el producto es colocado sin cuidado, a la fuerza, o sin las herramientas necesarias la garantía se pierde, sin embargo, si el producto es colocado en nuestras instalaciones <strong>la garantía se aplica al 100%</strong> si es falla de la pieza antes comprada</li>
+                            <li><strong>-</strong> Producto que se reparó, pierde en automático la garantía</li>
+                            <li><strong>-</strong> Favor de no limpiar el producto: es importante no limpiar le producto ya que si es lavada o limpiada la evidencia se perderá y tardará más el dictamen de garantía</li>
+                            <li><strong>-</strong> Si el producto contiene liquido como aceite, anticongelante, agua favor de drenarlo o se le penalizara monetariamente</li>
+                            <li><strong>-</strong> El producto al entrar en garantía será evaluado por el personal correspondiente y dependiendo del dictamen se aplicará la garantía.</li>
                         </ul>
+                        
+                    </div>
+                    
+                    <div id="opc3" class="tab-pane fade">
+                        
+                        <h3>CORES</h3>
+                        <br>
+                        <p>Nuestros cores son las piezas viejas que dejaron de funcionar por algún motivo y se reemplaza por otra pieza re-manufacturada, al adquirir una refacción con core, tanto <strong>ELÉCTRICA</strong> o <strong>MECÁNICA</strong> tendrás el derecho de poder reclamar cierto porcentaje de tu pieza si es que <strong>NO ES RECHAZADA</strong> por estos criterios:</p>
+                        
+                        <ul>
+                            <li><strong>-</strong> Daño por mal manejo (Golpeada, Rota, Dobladas, Barridas o Rayadas)</li>
+                            <li><strong>-</strong> Han sido reparadas (Soldadas o Esmeriladas)</li>
+                            <li><strong>-</strong> Desarmadas o que le falten piezas</li>
+                            <li><strong>-</strong> Que no coincida con la pieza vendida</li>
+                            <li><strong>-</strong> Que no giren sus partes móviles al 100% (No gira la propela del turbo, No da vuelta la bomba de agua o de aceite y por último que no gire 360° alguna pieza que lo tenga que hacer)</li>
+                            <li><strong>-</strong> Que no tenga demasiado oxido (Que el óxido no esté tan profundo)</li>
+                            <li><strong>-</strong> Que los dientes de la pieza no estén rotos</li>
+                            <li><strong>-</strong> Que no tenga borrado el número de serie o de forja</li>
+                            <li><strong>-</strong> Deben venir las piezas completas sin ningún faltante</li>
+                            <li><strong>-</strong> No tienen que estar perforadas, torcidas, barridas o abocardadas en la parte de los sujetadores</li>
+                            <li><strong>-</strong> Que no estén dañados los conectores (Doblados, Torcidos o Rotos)</li>
+                            <li><strong>-</strong> Que no estén quemados</li>
+                            <li><strong>-</strong> <strong>TODOS LOS CORES TENDRÁN QUE ESTAR SIN NINGÚN LIQUIDO</strong></li>
+                            <li><strong>-</strong> <strong>QUE NO ESTÉN LIMPIOS (SI ESTÁN LIMPIOS NO SE PUEDE VER EL DAÑO)</strong></li>
+                            <li><strong>-</strong> <strong>TODOS LOS CORES DEBERÁN SER ENVIADOS EN LA MISMA CAJA DE LAS PIEZAS NUEVAS</strong></li>
+                        </ul>
+                        
+                        <p>PARA EVITAR GASTOS INNECESARIOS EN EL ENVIÓ VERIFIQUE QUE EL CORE CUMPLA CON LOS ANTERIORES REQUISITOS</p>
                         
                     </div>
                     

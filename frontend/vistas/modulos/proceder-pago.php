@@ -534,7 +534,7 @@ TABLA CARRITO DE COMPRAS
         }
     }
     
-    /*paypal.Buttons({
+    paypal.Buttons({
         style: {
             layout: 'vertical',
             color: 'gold',
@@ -627,7 +627,7 @@ TABLA CARRITO DE COMPRAS
                 }
             });
         }
-    }).render('#paypal-button-container');*/
+    }).render('#paypal-button-container');
     
     $(document).on('click', '.politicas', function() {
         if ($('#input-terminos').is(':checked')) {
