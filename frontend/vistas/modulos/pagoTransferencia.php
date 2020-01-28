@@ -16,6 +16,8 @@ if(!isset($_SESSION["validarSesion"])){
     
 }
 
+$listaProductos="";
+
 ?>
 
 <!--=====================================
@@ -65,6 +67,9 @@ BREADCRUMB TRANSFERENCIA
                             //var_dump($user);
                             
                             //var_dump($direccion[0]);
+                            
+                            $listaProductos = json_decode($_REQUEST["lsprt"],true);
+                            var_dump($listaProductos[1]);
                             
                             echo '
                             

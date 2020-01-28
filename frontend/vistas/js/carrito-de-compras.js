@@ -978,7 +978,7 @@ $(document).ready(function(){
     
     $(".btnPagarTransferencia").click(function () {
     
-        let listaProducto = JSON.parse(localStorage.getItem('listaProductos'));
+        var listaProducto = JSON.parse(localStorage.getItem('listaProductos'));
         
         /*$.ajax({
             type: "POST",
@@ -989,10 +989,11 @@ $(document).ready(function(){
             }
         });*/
         
-        $.post(rutaFrontEnd + "pagoTransferencia.php",{"data": listaProducto, "success":true,"error":null},function(data){});
+        //$.post(rutaFrontEnd + "pagoTransferencia.php",{"data": listaProducto, "success":true,"error":null},function(data){});
         
-        window.location = rutaFrontEnd + "pagoTransferencia";
+        //window.location = rutaFrontEnd + "pagoTransferencia";
         //window.location = "index.php?ruta=pagoTransferencia&lsprt="+listaProducto;
+        window.location = ("index.php?ruta=pagoTransferencia&lsprt="+JSON.stringify(listaProducto));
 
     })
     
