@@ -12,7 +12,7 @@ $("#buscador input").change(function(){
    
     var busqueda = $("#buscador input").val();
     
-    var expresion = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ -]*$/;
+    var expresion = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ-]*$/;
     
     if(!expresion.test(busqueda)){
         //Si no coinciden con la busqueda  va a limpiar el buscador

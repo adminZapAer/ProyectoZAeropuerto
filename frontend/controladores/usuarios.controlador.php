@@ -1311,10 +1311,9 @@ class ControladorUsuarios{
     =============================================*/
 
     public function ctrAnadirVistaProducto($datos){
+        
         $tabla = "vistas_usuarios";
-
 		$respuesta = ModeloUsuarios::mdlAgregarVistaProducto($tabla, $datos);
-
 		return $respuesta;
     }
     

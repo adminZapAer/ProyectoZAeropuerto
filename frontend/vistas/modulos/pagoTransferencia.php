@@ -17,6 +17,7 @@ if(!isset($_SESSION["validarSesion"])){
 }
 
 $listaProductos="";
+$direccion="";
 
 ?>
 
@@ -25,22 +26,22 @@ BREADCRUMB TRANSFERENCIA
 ======================================-->
 
 <div class="container-fluid well well-sm">
-	
-	<div class="container">
-		
-		<div class="row">
-			
-			<ul class="breadcrumb fondoBreadcrumb text-uppercase">
-				
-				<li><a href="<?php echo $url;  ?>">INICIO</a></li>
-				<li class="active pagActiva"><?php echo "TRANSFERENCIA ELECTRÓNICA" ?></li>
-
-			</ul>
-
-		</div>
-
-	</div>
-
+    
+    <div class="container">
+        
+        <div class="row">
+            
+            <ul class="breadcrumb fondoBreadcrumb text-uppercase">
+                
+                <li><a href="<?php echo $url;  ?>">INICIO</a></li>
+                <li class="active pagActiva"><?php echo "TRANSFERENCIA ELECTRÓNICA" ?></li>
+                
+            </ul>
+            
+        </div>   
+        
+    </div>
+    
 </div>
 
 <div class="container-fluid">
@@ -60,16 +61,21 @@ BREADCRUMB TRANSFERENCIA
                             <br>
                             
                             <?php
-                                    
+                            
                             $item = $_SESSION["idUsuario"];
                             
                             $user = ControladorUsuarios::ctrMostrarUsuario("idUsuario", $item);
                             //var_dump($user);
-                            
                             //var_dump($direccion[0]);
                             
                             $listaProductos = json_decode($_REQUEST["lsprt"],true);
-                            var_dump($listaProductos[1]);
+                            var_dump($listaProductos[0]["cantidad"]);
+                    
+                    $producto = ModeloProductos::mdlGetProducto($listaProductos[0]["idProducto"]);
+                    var_dump("<br><br><br>");
+                    var_dump($producto["stock"]);
+                            
+                            $direccion = json_decode($_REQUEST["dir"],true);
                             
                             echo '
                             
@@ -166,7 +172,7 @@ BREADCRUMB TRANSFERENCIA
                         <?php
                         
                         $cargarComprobante = new ControladorCarrito();
-                        $cargarComprobante->ctrCargarComprobante();
+                        $cargarComprobante->ctrCargarComprobante($listaProductos, $direccion);
                         
                         ?>
                     </form>
@@ -180,23 +186,4 @@ BREADCRUMB TRANSFERENCIA
     </div>
     
 </div>
-
-<script>
-    let listaProducto = JSON.parse(localStorage.getItem('listaProductos'));
-    console.log(listaProducto);
-    /*$(document).ready(function() {
-        $.ajax({
-            url: rutaFrontEnd + "pagoTransferencia.php",
-            type: 'POST',
-            dataType: 'json',
-            data:{productos: listaProducto},
-            success: function(data){
-                alert('datos enviados a php correctamente');
-            }
-        });
-
-        console.log(listaProducto);
-    }*/
-</script>
-
 

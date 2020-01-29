@@ -979,6 +979,7 @@ $(document).ready(function(){
     $(".btnPagarTransferencia").click(function () {
     
         var listaProducto = JSON.parse(localStorage.getItem('listaProductos'));
+        var direccionEnvio = JSON.parse(localStorage.getItem("direccionEnvio"));
         
         /*$.ajax({
             type: "POST",
@@ -993,7 +994,7 @@ $(document).ready(function(){
         
         //window.location = rutaFrontEnd + "pagoTransferencia";
         //window.location = "index.php?ruta=pagoTransferencia&lsprt="+listaProducto;
-        window.location = ("index.php?ruta=pagoTransferencia&lsprt="+JSON.stringify(listaProducto));
+        window.location = ("index.php?ruta=pagoTransferencia&lsprt="+JSON.stringify(listaProducto)+"&dir="+JSON.stringify(direccionEnvio));
 
     })
     

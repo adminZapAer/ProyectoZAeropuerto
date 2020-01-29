@@ -128,7 +128,7 @@ class ControladorCarrito{
     /*=============================================
 	ACTUALIZAR PERFIL
 	=============================================*/
-	public function ctrCargarComprobante(){
+	static public function ctrCargarComprobante($listaProductos, $direccion){
 
 		if(isset($_POST["usuarioComprobante"])){
 
@@ -191,7 +191,82 @@ class ControladorCarrito{
 				}
                 
 			}
-
+            
+            /*---------------------------------------------------------------------------------*/
+            $envio = 0;
+            
+            $costoEnvio = 0;
+            
+            if(isset($direccion) && !is_null($direccion) && !empty($direccion)){
+                $direccionEnvio = ControladorUsuarios::ctrMostrarDireccion($_SESSION["idUsuario"], $direccion[0]["id"]);
+                $envio = 1;
+            }
+            else{
+                $direccionEnvio = null;
+            }
+            
+            foreach($listaProductos as $value1){
+                $costoEnvio += floatval($value1["costoEnvio"]);
+            }
+            
+            $datosCompra = [
+                'idUsuario' => $user['idUsuario'],
+                'metodo' => 'Transferencia',
+                'envio' => $envio,
+                'costo_envio' => $costoEnvio,
+                'direccion' => $direccionEnvio ? json_encode($direccionEnvio[0]) : null,
+                'pais' => 'México',
+                'fecha' => date('Y-m-d'),
+                'statusCompraId' => 1 // en espera
+            ];
+            
+            foreach($listaProductos as $value){
+                
+                //Se registra la compra
+                $compra = ControladorCompras::ctrAgregarCompra($datosCompra);
+                
+                //Obtenemos el id del producto = 
+                $producto = ModeloProductos::mdlGetProducto($value["idProducto"]);
+                
+                // ELIMINAMOS LA OFERTA EN CASO DE QUE ESTE VACÍO EL STOCK.
+                
+                $nuevoStock = $producto["stock"] - $value["cantidad"];
+                
+                if ($nuevoStock <= 0) {
+                    
+                    $tendraOferta = 0;
+                    ModeloProductos::mdlActualizarProducto("productos","oferta",$tendraOferta,$producto["idProducto"]);
+                    
+                }
+                
+                // OBTENEMOS EL ORIGEN DE DEL PRODUCTO
+                if($envio == 1 && $nuevoStock <= 0){
+                    $origen = "planta";
+                }
+                else if($envio == 1 && $nuevoStock > 0){
+                    $origen = 'zapata';
+                }
+                else{
+                    $origen = 'zapata';
+                }
+                
+                ModeloProductos::mdlActualizarProducto("productos","stock",$nuevoStock,$producto["idProducto"]);
+                
+                if ($producto !== "error") {
+                    
+                    $datos = [
+                        'idCompra' => $compra,
+                        'idProducto' => $value["idProducto"],
+                        'Cantidad' => $value["cantidad"],
+                        'precio' => $item['unit_amount']['value'],
+                        'origen' => $origen,
+                    ];
+                    
+                }
+                
+            }
+            
+            /*---------------------------------------------------------------------------------*/
 			$datosT = array("usuario" => $_SESSION["idUsuario"],
                            "idCompra" => 0,
 						   "fechaPago" => $fechaPago,
