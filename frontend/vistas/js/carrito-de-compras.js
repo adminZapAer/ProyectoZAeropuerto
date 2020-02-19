@@ -154,6 +154,7 @@ VISUALIZAR LOS PRODUCTOS EN LA PÁGINA CARRITO DE COMPRAS
 function getCostoEnvio(item, direccionId) {
 
     // SOLICITAR COSTO DE ENVIO DE PRODUCTO
+
     $.ajax({
         method: "GET",
         url: rutaFrontEnd + 'ajax/costoEnvio.php',

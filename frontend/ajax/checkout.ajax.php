@@ -28,6 +28,7 @@ class AjaxCheckout
 	public function ajaxAgregarCompra($detalles, $usuario, $productos, $direccion)
 	{
 
+
 		// print_r($productos);
 		// return false;
 
@@ -63,12 +64,21 @@ class AjaxCheckout
 		// print_r(json_encode($direccionEnvio));
 		// return false;
 
+		if ($_POST['metodo'] == 'paypal') {
+			$costoEnvio = $detalles['purchase_units'][0]['amount']['breakdown']['shipping']['value'];
+		}
+
+		if ($_POST['metodo'] == 'netpay') {
+			$costoEnvio = 0;
+		}
+
+
 		// ALMACENAMOS LA COMPRA REALIZADA
 		$datosCompra = [
 			'idUsuario' => $user['idUsuario'],
 			'metodo' => 'paypal',
 			'envio' => $envio,
-			'costo_envio' => $detalles['purchase_units'][0]['amount']['breakdown']['shipping']['value'],
+			'costo_envio' => $costoEnvio,
 			'direccion' => $direccionEnvio ? json_encode($direccionEnvio[0]) : null,
 			'pais' => 'México',
 			'fecha' => date('Y-m-d'),
@@ -78,40 +88,99 @@ class AjaxCheckout
 
 		// ALMACENAMOS EL DETALLE DE LA COMPRA (CADA UNO DE LOS PRODUCTOS Y SU CANTIDAD)
 
-		foreach ($detalles['purchase_units'][0]['items'] as $key => $item) {
-			$producto = \ModeloProductos::mdlGetProducto($productos[$key]->idProducto);
+		if ($_POST['metodo'] == 'netpay') {
 
-			// ELIMINAMOS LA OFERTA EN CASO DE QUE ESTE VACÍO EL STOCK.
-			$nuevoStock =  $producto['stock'] - $item['quantity'];
-			if ($nuevoStock <= 0) {
-				$tendraOferta = 0;
-				\ModeloProductos::mdlActualizarProducto('productos', 'oferta', $tendraOferta, $producto['idProducto']);
-			}
+			// AQUI VOY
+			// print_r( json_decode($_POST['productos']) );
+			// print_r($detalles);
 
-			// OBTENEMOS EL ORIGEN DE DEL PRODUCTO
-			if($envio == 1 && $nuevoStock <= 0){
-				$origen = 'planta';
-			}else if($envio == 1 && $nuevoStock > 0){
-				$origen = 'zapata';
-			}else{
-				$origen = 'zapata';
-			}
-
-			// print_r($origen);
 			// return false;
 
-			\ModeloProductos::mdlActualizarProducto('productos', 'stock', $nuevoStock, $producto['idProducto']);
+			foreach( json_decode($_POST['productos']) as $producto){
+				// print_r($producto->idProducto);
+				$product = \ModeloProductos::mdlGetProducto($producto->idProducto);
+			
+				// ELIMINAMOS LA OFERTA EN CASO DE QUE ESTE VACÍO EL STOCK.
+				$nuevoStock =  $product['stock'] - $producto->cantidad;
+				if ($nuevoStock <= 0) {
+					$tendraOferta = 0;
+					\ModeloProductos::mdlActualizarProducto('productos', 'oferta', $tendraOferta, $producto->idProducto);
+				}
 
-			if ($producto !== "error") {
-				$datos = [
-					'idCompra' => $compra,
-					'idProducto' => $productos[$key]->idProducto,
-					'Cantidad' => $item['quantity'],
-					'precio' => $item['unit_amount']['value'],
-					'origen' => $origen,
-				];
+				// OBTENEMOS EL ORIGEN DE DEL PRODUCTO
+				if ($envio == 1 && $nuevoStock <= 0) {
+					$origen = 'planta';
+				} else if ($envio == 1 && $nuevoStock > 0) {
+					$origen = 'zapata';
+				} else {
+					$origen = 'zapata';
+				}
 
-				ModeloCompras::mdlAgregarDetalleCompra('detalle_compra', $datos);
+				\ModeloProductos::mdlActualizarProducto('productos', 'stock', $nuevoStock, $producto->idProducto);
+
+				if ($product !== "error") {
+					$datos = [
+						'idCompra' => $compra,
+						'idProducto' => $producto->idProducto,
+						'Cantidad' => $producto->cantidad,
+						'precio' => $producto->precio + $producto->costoEnvio,
+						'origen' => $origen,
+					];
+
+					ModeloCompras::mdlAgregarDetalleCompra('detalle_compra', $datos);
+				}
+			
+			}
+
+			// print_r($_POST['metodo']);
+			// return false;
+		}
+		// print_r($_POST['metodo']);
+		// return false;
+
+		// print_r($_POST['metodo']);
+		// print_r('aqui');
+		// print_r('aqui');
+		// print_r('aqui');
+// 		print_r('aqui');
+// 		return false;
+
+		if ($_POST['metodo'] == 'paypal') {
+			foreach ($detalles['purchase_units'][0]['items'] as $key => $item) {
+				$producto = \ModeloProductos::mdlGetProducto($productos[$key]->idProducto);
+
+				// ELIMINAMOS LA OFERTA EN CASO DE QUE ESTE VACÍO EL STOCK.
+				$nuevoStock =  $producto['stock'] - $item['quantity'];
+				if ($nuevoStock <= 0) {
+					$tendraOferta = 0;
+					\ModeloProductos::mdlActualizarProducto('productos', 'oferta', $tendraOferta, $producto['idProducto']);
+				}
+
+				// OBTENEMOS EL ORIGEN DE DEL PRODUCTO
+				if ($envio == 1 && $nuevoStock <= 0) {
+					$origen = 'planta';
+				} else if ($envio == 1 && $nuevoStock > 0) {
+					$origen = 'zapata';
+				} else {
+					$origen = 'zapata';
+				}
+
+				// print_r($origen);
+				// return false;
+
+				\ModeloProductos::mdlActualizarProducto('productos', 'stock', $nuevoStock, $producto['idProducto']);
+
+				if ($producto !== "error") {
+					$datos = [
+						'idCompra' => $compra,
+						'idProducto' => $productos[$key]->idProducto,
+						'Cantidad' => $item['quantity'],
+						'precio' => $item['unit_amount']['value'],
+						'origen' => $origen,
+					];
+
+					ModeloCompras::mdlAgregarDetalleCompra('detalle_compra', $datos);
+				}
 			}
 		}
 
@@ -122,6 +191,7 @@ class AjaxCheckout
 		// print_r('compra finalizada');
 		// return false;
 
+// 		print_r('paypal');
 		print_r(true);
 		return false;
 	}
@@ -250,17 +320,17 @@ class AjaxCheckout
 
 			$mail->setFrom($_SERVER['MAIL_FROM'], 'Refacciones Zapata Camiones');
 			$mail->addAddress($_SERVER['MAIL_VENDEDOR']); //'jmolina@zapata.com.mx'
-            
+
 			$mail->Subject = 'Notificación de compra por un cliente';
-            
+
 			$item = $_SESSION["idUsuario"];
-            
+
 			$facturaciones = ModeloUsuarios::mdlMostrarDatosFacturacion("facturacion", $compra['idUsuario']);
 			//$facturaciones = ControladorUsuarios::ctrMostrarDatosFacturacion($compra['idUsuario']);
-            
-            $facturacionHTML = "";
+
+			$facturacionHTML = "";
 			foreach ($facturaciones as $key => $value) {
-                
+
 				$facturacionHTML = "
                 <p><b>Nombre / Razón Social: </b>" . $value["nombreRazon"] . "</p>
                 <p><b>RFC: </b>" . $value["rfc"] . " | <b>Tipo de Persona: </b>" . $value["tipoPersona"] . "</p>
@@ -269,22 +339,22 @@ class AjaxCheckout
                 <p><b>Teléfono: </b>" . $value["telefono"] . " | <b>Correo Electrónico: </b>" . $value["email"] . "</p>
                 ";
 			}
-            
+
 			$listaProductos = "";
 			$productosEnviadosDesdePlanta = '';
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
 				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
-                
+
 				if ($producto->origen == 'planta') {
 					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
 					// print_r($productosEnviadosDesdePlanta);
 					// return false;
 				}
 			}
-            
+
 			$direccionDestino = json_decode($compra['direccion'], true);
-            
+
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
 				$direccionHTML = "
@@ -295,7 +365,7 @@ class AjaxCheckout
                     <p><b>Teléfono: </b>" . $direccionDestino['celular'] . "</p>
                     ";
 			}
-            
+
 			$mail->msgHTML('
 		        <div style="width:100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px;">
 		            <center>
@@ -349,7 +419,7 @@ class AjaxCheckout
 		        </div>
 		    ');
 			$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-            
+
 			$mail->send();
 		} catch (Exception $e) {
 			echo "<br>Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

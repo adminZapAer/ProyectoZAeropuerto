@@ -77,6 +77,7 @@ if (isset($_SESSION["validarSesion"])) {
 
             $factTemp = ModeloUsuarios::mdlAgregarFacturacion("facturacion", $datos);
         }
+        $FacturacionUser=ModeloUsuarios::mdlMostrarDatosFacturacion('facturacion', $idUsuario);
     }
 }
 ?>
@@ -513,7 +514,7 @@ TABLA CARRITO DE COMPRAS
     <script>
         var direccionEnvio = JSON.parse(localStorage.getItem("direccionEnvio"));
 
-        console.log(direccionEnvio);
+        
 
         $('#email').on('click', function(event) {
             event.preventDefault();
@@ -618,7 +619,8 @@ TABLA CARRITO DE COMPRAS
                             detalles: details,
                             usuario: JSON.stringify(localStorage.getItem("usuario")),
                             productos: getItems(),
-                            direccion: getDireccionEnvio()
+                            direccion: getDireccionEnvio(),
+                            metodo: 'paypal'
                         },
                     }).done(function(res) {
                         console.log("success", res);
@@ -686,13 +688,32 @@ TABLA CARRITO DE COMPRAS
     </script>
 
     <script>
+
+        const baseUrl = 'https://ecommerce.netpay.com.mx/gateway-ecommerce';
+        const storeIdAcq = '483131';
+        const userName = "ecommerce@netpay.com.mx";
+        const password = "ec0m12";
+        const url2 = "https://ecommerce.netpay.com.mx";
+
+        console.log({
+            credenciales: {
+                baseUrl,
+                storeIdAcq,
+                userName,
+                password,
+                url2
+            }
+        });
+
         $(document).ready(function() {
+
+            
 
 
             // ===============
             // PAGO CON NETPAY
             // ===============
-            const baseUrl = 'http://certificaciones.netpay.com.mx:4030/gateway-ecommerce';
+            
             console.log(baseUrl);
 
             $.ajax({
@@ -700,173 +721,265 @@ TABLA CARRITO DE COMPRAS
                 contentType: 'Application/Json',
                 type: 'POST',
                 data: `
-        {
-            "security":
-                {
-                    "userName": "ecommerce@netpay.com.mx",
-                    "password": "ec0m12"
-                }
-        }
-        `,
-                success: function(data) {
-                    console.log(data.token)
-
-                    datosNetPay = 
-                            {
-                                "storeIdAcq":"483131",
-                                "transType":"Auth",
-                                "promotion":"000000",
-                                "checkout":{
-                                "merchantReferenceCode":"145000494",
-                                "bill":{
-                                "city":"Guadalupe",
-                                "country":"MX",
-                                "firstName":"Heriberto",
-                                "lastName":"Hernandez",
-                                "email":"accept@netpay.com.mx",
-                                "phoneNumber":"8119654348",
-                                "postalCode":"34987",
-                                "state":"Campeche",
-                                "street1":"una calle",
-                                "street2":"otra calle",
-                                "ipAddress":"127.0.0.1"
-                                },
-                                "ship":{
-                                    "city":"Guadalupe",
-                                    "country":"MX",
-                                    "firstName":"Heriberto",
-                                    "lastName":"Hernandez",
-                                    "phoneNumber":"8119654348",
-                                    "postalCode":"34987",
-                                    "state":"Nuevo Leon",
-                                    "street1":"una calle",
-                                    "street2":"otra calle",
-                                    "shippingMethod":"flatrate_flatrate"
-                                },
-                                "itemList":[
-                                    
-                                ],
-                                "purchaseTotals":{
-                                "grandTotalAmount":"3",
-                                "currency":"MXN"
-                                },
-                                "merchanDefinedDataList":[
-                                {"id":2,
-                                "value":"Web"},
-                                {"id":4,
-                                "value":"515"},
-                                {"id":5,
-                                "value":"0"},
-                                {"id":6,
-                                "value":"0"},
-                                {"id":7,
-                                "value":"0"},
-                                {"id":9,
-                                "value":"Retail"},
-                                {"id":10,
-                                "value":"3D"},
-                                {"id":11,
-                                "value":"flatrate_flatrate"},
-                                {"id":13,
-                                "value":"N"},
-                                {"id":14,
-                                "value":"Domicilio"},
-                                {"id":"16",
-                                "value":"50000"}
-                                ]
-                                }
-                            }
-                    
-                    productos = JSON.parse(
-                        localStorage.getItem('listaProductos')
-                    );
-
-                    productos.forEach( function(producto){
-                        datosNetPay.checkout.itemList.push({
-                            "id":producto.idProducto,
-                            "productSKU":"SKU1",
-                            "unitPrice":producto.precio,
-                            "productName":producto.titulo,
-                            "quantity":producto.cantidad,
-                            "productCode":"Tops & Blouses"
-                        })
-                        // console.log({
-                        //     PRODUCTO: producto.idProducto
-                        // })
-                    } );
-
-                    console.log(datosNetPay.checkout.itemList.push())
-                    console.log(datosNetPay)
-                    console.log($('#totalCompra').html())
-
-                    $.ajax({
-                        url: `${baseUrl}/v2/checkout`,
-                        headers: {
-                            'content-Type': "Application/Json",
-                            'Authorization': `Bearer ${data.token}`,
-                        },
-                        type: 'POST',
-                        data: JSON.stringify(datosNetPay),
-                        success: function(data2) {
-                            const MerchantResponseURL = btoa('http://localhost/ProyectoZAeropuerto/frontend/ajax/netpay.ajax.php');
-                            console.log(MerchantResponseURL)
-                            url = 'https://ecommerce.netpay.com.mx';
-
-                            // const ruta = `http://certificaciones.netpay.com.mx:7092/a-webapp/e-commerce/web-authorizer?checkoutTokenId=${response2.response.checkoutTokenId}`;
-                            // const ruta = `http://certificaciones.netpay.com.mx:7092/a-webapp/e-commerce/web-authorizer?checkoutTokenId=${response2.response.checkoutTokenId}&checkoutDetail=true&MerchantResponseURL=${MerchantResponseURL}`;
-                            const ruta = `${url}/a-webapp3/e-commerce/web-authorizer?checkoutTokenId=${data2.response.checkoutTokenId}&checkoutDetail=true&MerchantResponseURL=${MerchantResponseURL}`;
-
-                            console.log({
-                                ruta
-                            });
-
-                            $('#formu').attr('action', ruta);
-                            // $('#formu').submit();
-                        },
-                        error: function(err) {
-                            // console.log(err)
-                        }
-                    });
-
-                },
-                error: function(err) {
-                    // console.log(err)
-                }
-            });
-
-
-
-
-
-            $('.cantidadItem').each(function() {
-                $(this).attr('readonly', 'true');
-            });
-
-            // MOSTRAMOS LA DIRECCION SELECCIONADA POR EL USUARIO PREVIAMENTE
-            if (JSON.parse(localStorage.getItem('direccionEnvio')) != null) {
-                console.log('DIRECCION DE USUARIO', JSON.parse(localStorage.getItem('direccionEnvio')));
-                $('#direccionesResumen').html(`
-            <div class="panel panel-default">
-                <div class="panel panel-heading">
-                    DIRECCIÓN DE ENVÍO
-                </div>
-                <div class="panel-body" id="direccionEnvioBody">
-                    <div class="panel panel-default">
-                        ${JSON.parse(localStorage.getItem('direccionEnvio'))[0].colonia}
-                    </div>
-                </div>
-            </div>`);
+            {
+                "security":
+                    {
+                        "userName": "${userName}",
+                        "password": "${password}"
+                    }
             }
-        });
+            `,
+                    success: function(data) {
+                        console.log(data.token)
 
-        //enviar datos
+                        // ================================================
+                        // PROCESO CUANDO LA COMPRA SE REALIZO EXITOSAMENTE
+                        // ================================================
+
+                        $.ajax({
+                            url: `${baseUrl}/v1/transaction-report/transaction/${getUrlVars()['transactionToken']}/${storeIdAcq}`,
+                            contentType: 'Application/Json',
+                            headers: {
+                                    'content-Type': "Application/Json",
+                                    'Authorization': `Bearer ${data.token}`,
+                                },
+                            type: 'GET',
+                            success: function(detalles) {
+
+                                // ==================================
+                                // GUARDAR COMPRA EN LA BASE DE DATOS
+                                // ==================================
+
+                                console.log('Funciona');
+
+                                $.ajax({
+                                    url: rutaFrontEnd + 'ajax/checkout.ajax.php',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {
+                                        detalles: detalles,
+                                        usuario: JSON.stringify(localStorage.getItem("usuario")),
+                                        productos: getItems(),
+                                        direccion: getDireccionEnvio(),
+                                        metodo: 'netpay'
+                                    },
+                                }).done(function(res) {
+                                    console.log("success", res);
+                                    swal({
+                                        title: "¡Tu compra ha sido realizada con éxito!",
+                                        text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
+                                        type: "success",
+                                        confirmButtonText: "Aceptar",
+                                        closeOnConfirm: false
+                                    }, function(isConfirm) {
+                                        if (isConfirm) {
+                                            localStorage.removeItem("listaProductos");
+                                            localStorage.removeItem("sumaCesta");
+                                            localStorage.removeItem("cantidadCesta");
+                                            window.location = rutaFrontEnd;
+                                        }
+                                    });
+                                }).fail(function(err) {
+                                    console.log("error", err);
+                                });
+
+                                // =========================
+                                // 
+                                // ==========================
+
+                                console.log({
+                                    'MESSAGE': 'RESPUESTA DE COMPRA',
+                                    ruta: rutaFrontEnd + 'ajax/netpay.ajax.php',
+                                    data: data,
+                                    items: JSON.parse( getItems('listaProductos') ),
+                                    usuario: JSON.stringify(localStorage.getItem("usuario"))
+                                });
+
+                                
+                            }
+                        });
+
+                        // =========================
+
+                        datosNetPay = 
+                                {
+                                    "storeIdAcq": storeIdAcq,
+                                    "transType":"Auth",
+                                    "promotion":"000000",
+                                    "checkout":{
+                                        "merchantReferenceCode":"145000494",
+                                        "bill":{
+                                        "city":"Guadalupe",
+                                        "country":"MX",
+                                        "firstName":"<?php echo $user["nombre"] ?>",
+                                        "lastName":"<?php echo $user["nombre"] ?>",
+                                        "email":"<?php echo $user["email"]; ?>",
+                                        "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
+                                        "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
+                                        "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                        "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
+                                        "street2":"<?php echo $FacturacionUser[0]["calle"]; ?>",
+                                        "ipAddress":"127.0.0.1"
+                                    },
+                                    "ship":{
+                                        "city":"Guadalupe",
+                                        "country":"MX",
+                                        "firstName":"<?php echo $user["nombre"]; ?>",
+                                        "lastName":"<?php echo $user["nombre"]; ?>",
+                                        "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
+                                        "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
+                                        "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                        "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
+                                        "street2":"<?php echo $FacturacionUser[0]["calle"]; ?>",
+                                        "shippingMethod":"flatrate_flatrate"
+                                    },
+                                    "itemList":[
+                                        
+                                    ],
+                                    "purchaseTotals":{
+                                    "grandTotalAmount":localStorage.getItem("sumaCesta"),
+                                    "currency":"MXN"
+                                    },
+                                    "merchanDefinedDataList":[
+                                    {"id":2,
+                                    "value":"Web"},
+                                    {"id":4,
+                                    "value":"515"},
+                                    {"id":5,
+                                    "value":"0"},
+                                    {"id":6,
+                                    "value":"0"},
+                                    {"id":7,
+                                    "value":"0"},
+                                    {"id":9,
+                                    "value":"Retail"},
+                                    {"id":10,
+                                    "value":"3D"},
+                                    {"id":11,
+                                    "value":"flatrate_flatrate"},
+                                    {"id":13,
+                                    "value":"N"},
+                                    {"id":14,
+                                    "value":"Domicilio"},
+                                    {"id":"16",
+                                    "value":"50000"}
+                                    ]
+                                    }
+                                }
+                        
+                        productos = JSON.parse(
+                            localStorage.getItem('listaProductos')
+                        );
+                        
+                        console.log({
+                            datosNetPay:datosNetPay,
+                        });
+
+                        productos.forEach( function(producto){
+                            datosNetPay.checkout.itemList.push({
+                                "id":producto.idProducto,
+                                "productSKU":"SKU1",
+                                "unitPrice":producto.precio,
+                                "productName":producto.titulo,
+                                "quantity":producto.cantidad,
+                                "productCode":"Tops & Blouses"
+                            })
+                            // console.log({
+                            //     PRODUCTO: producto.idProducto
+                            // })
+                        } );
+
+                        console.log(datosNetPay.checkout.itemList.push())
+                        console.log(datosNetPay)
+                        console.log($('#totalCompra').html())
+
+                        $.ajax({
+                            url: `${baseUrl}/v2/checkout`,
+                            headers: {
+                                'content-Type': "Application/Json",
+                                'Authorization': `Bearer ${data.token}`,
+                            },
+                            type: 'POST',
+                            data: JSON.stringify(datosNetPay),
+                            success: function(data2) {
+                                const MerchantResponseURL = btoa(window.location.origin + window.location.pathname);
+                                console.log(MerchantResponseURL)
+                                
+
+                                // const ruta = `http://certificaciones.netpay.com.mx:7092/a-webapp/e-commerce/web-authorizer?checkoutTokenId=${response2.response.checkoutTokenId}`;
+                                // const ruta = `http://certificaciones.netpay.com.mx:7092/a-webapp/e-commerce/web-authorizer?checkoutTokenId=${response2.response.checkoutTokenId}&checkoutDetail=true&MerchantResponseURL=${MerchantResponseURL}`;
+                                const ruta = `${url2}/a-webapp3/e-commerce/web-authorizer?checkoutTokenId=${data2.response.checkoutTokenId}&checkoutDetail=true&MerchantResponseURL=${MerchantResponseURL}`;
+
+                                console.log({
+                                    ruta
+                                });
+
+                                $('#formu').attr('action', ruta);
+                                // $('#formu').submit();
+                            },
+                            error: function(err) {
+                                // console.log(err)
+                            }
+                        });
+
+                    },
+                    error: function(err) {
+                        // console.log(err)
+                    }
+                });
+
+
+
+
+
+                $('.cantidadItem').each(function() {
+                    $(this).attr('readonly', 'true');
+                });
+
+                // MOSTRAMOS LA DIRECCION SELECCIONADA POR EL USUARIO PREVIAMENTE
+                if (JSON.parse(localStorage.getItem('direccionEnvio')) != null) {
+                    console.log('DIRECCION DE USUARIO', JSON.parse(localStorage.getItem('direccionEnvio')));
+                    $('#direccionesResumen').html(`
+                <div class="panel panel-default">
+                    <div class="panel panel-heading">
+                        DIRECCIÓN DE ENVÍO
+                    </div>
+                    <div class="panel-body" id="direccionEnvioBody">
+                        <div class="panel panel-default">
+                            ${JSON.parse(localStorage.getItem('direccionEnvio'))[0].colonia}
+                        </div>
+                    </div>
+                </div>`);
+                }
+            });
+
+            // =====================
+            // VALIDAR COMPRA NETPAY
+            // =====================
+
+            console.log({
+            'VARIABLES URL': getUrlVars()['transactionToken']
+        })
+
+        
+        
 
         $(document).on('click', '#botonPagoNetPay', function() {
 
-            
+            // alert(localStorage.getItem("sumaCesta"));
 
+            // console.log(datosNetPay.checkout.purchaseTotals.grandTotalAmount);
+            datosNetPay.checkout.purchaseTotals.grandTotalAmount = localStorage.getItem("sumaCesta");
             $('#formu').submit();
         });
+
+        function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
 
         $(document).ready(function() {});
     </script>
