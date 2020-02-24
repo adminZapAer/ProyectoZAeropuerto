@@ -89,6 +89,20 @@ class ModeloCompras{
         $stmt = null;
     }
 
+    static public function mdlGetCompras(){
+        $stmt = Conexion::conectar()->prepare("SELECT id FROM compras ORDER BY idCompra LIMIT 1");
+
+        if($stmt->execute()){
+            return $stmt->fetch();
+        }else{
+            return "error";
+        }
+
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+
     static public function mdlGetCompra($id){
         $stmt = Conexion::conectar()->prepare("SELECT * FROM productos WHERE idProducto = :idProducto");
         $stmt->bindParam(":idProducto", $id, PDO::PARAM_STR);

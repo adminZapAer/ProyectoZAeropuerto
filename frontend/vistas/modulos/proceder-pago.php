@@ -1,9 +1,13 @@
 <?php
 
+require_once __DIR__ . '/../modelos/compras.modelo.php';
+
 $url = Ruta::ctrRuta();
 $servidor = Ruta::ctrRutaServidor();
 
 //disable-card=visa,mastercard
+
+echo ModeloCompras::mdlGetCompras();
 
 ?>
 <script>
@@ -746,13 +750,17 @@ TABLA CARRITO DE COMPRAS
                             type: 'GET',
                             success: function(detalles) {
 
-                                // ==================================
-                                // GUARDAR COMPRA EN LA BASE DE DATOS
-                                // ==================================
+                                console.log({
+                                    detalles,
+                                    status: detalles.transaction.status
+                                })
 
-                                console.log('Funciona');
+                                // ================================================
+                                // GUARDAR COMPRA EN LA BASE DE DATOS SI FUE EXITOSA
+                                // ================================================
 
-                                $.ajax({
+                                if(detalles.transaction.status == 'DONE'){
+                                    $.ajax({
                                     url: rutaFrontEnd + 'ajax/checkout.ajax.php',
                                     type: 'POST',
                                     dataType: 'json',
@@ -763,25 +771,38 @@ TABLA CARRITO DE COMPRAS
                                         direccion: getDireccionEnvio(),
                                         metodo: 'netpay'
                                     },
-                                }).done(function(res) {
-                                    console.log("success", res);
+                                    }).done(function(res) {
+                                        console.log("success", res);
+                                        swal({
+                                            title: "¡Tu compra ha sido realizada con éxito!",
+                                            text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
+                                            type: "success",
+                                            confirmButtonText: "Aceptar",
+                                            closeOnConfirm: false
+                                        }, function(isConfirm) {
+                                            if (isConfirm) {
+                                                localStorage.removeItem("listaProductos");
+                                                localStorage.removeItem("sumaCesta");
+                                                localStorage.removeItem("cantidadCesta");
+                                                window.location = rutaFrontEnd;
+                                            }
+                                        });
+                                    }).fail(function(err) {
+                                        console.log("error", err);
+                                    });
+                                }else{
                                     swal({
-                                        title: "¡Tu compra ha sido realizada con éxito!",
-                                        text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
-                                        type: "success",
+                                        title: "¡Tu compra ha sido rechazada!",
+                                        // text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
+                                        type: "warning",
                                         confirmButtonText: "Aceptar",
                                         closeOnConfirm: false
-                                    }, function(isConfirm) {
-                                        if (isConfirm) {
-                                            localStorage.removeItem("listaProductos");
-                                            localStorage.removeItem("sumaCesta");
-                                            localStorage.removeItem("cantidadCesta");
-                                            window.location = rutaFrontEnd;
-                                        }
                                     });
-                                }).fail(function(err) {
-                                    console.log("error", err);
-                                });
+                                }
+
+                                console.log('Funciona');
+
+                                
 
                                 // =========================
                                 // 
@@ -813,7 +834,8 @@ TABLA CARRITO DE COMPRAS
                                         "country":"MX",
                                         "firstName":"<?php echo $user["nombre"] ?>",
                                         "lastName":"<?php echo $user["nombre"] ?>",
-                                        "email":"<?php echo $user["email"]; ?>",
+                                        // "email":"<?php echo $user["email"]; ?>",
+                                        "email":"accept@netpay.com.mx",
                                         "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
                                         "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
                                         "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
@@ -902,6 +924,11 @@ TABLA CARRITO DE COMPRAS
                             type: 'POST',
                             data: JSON.stringify(datosNetPay),
                             success: function(data2) {
+
+                                console.log({
+                                    datosAlRealizarCompra: data2
+                                });
+
                                 const MerchantResponseURL = btoa(window.location.origin + window.location.pathname);
                                 console.log(MerchantResponseURL)
                                 
