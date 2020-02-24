@@ -25,7 +25,7 @@ function insertarProductoAListaHTML(item) {
 
         '<center>' +
 
-        '<button class="btn btn-default backColor quitarItem" idProducto="' + item.idProducto + '" tipo="' + item.tipo + '" peso="' + item.peso + '">' +
+        '<button class="btn btn-default backColor quitarItem" idProducto="' + item.idProducto + '" tipo="' + item.tipo + '" peso="' + item.peso + '" sku="'+item.sku+'" tipoA="'+item.tipoA+'">' +
 
         '<i class="fa fa-times"></i>' +
 
@@ -273,7 +273,9 @@ $(".agregarCarrito").click(function () {
         "precio":$(this).attr("precio"),
         "tipo":$(this).attr("tipo"),
         "peso":$(this).attr("peso"),
-        "cantidad":"1"
+        "cantidad":"1",
+        "sku":$(this).attr("sku"),
+        "tipoA":$(this).attr("tipoA")
     };
 
     var agregarAlCarrito = false;
@@ -393,6 +395,8 @@ $(document).on("click", ".quitarItem", function () {
             var pesoArray = $(idProducto[i]).attr("peso");
             var tipoArray = $(cantidad[i]).attr("tipo");
             var cantidadArray = $(cantidad[i]).val();
+            var sku = $(idProducto[i]).attr("sku");
+            var tipoA=$(idProducto[i]).attr("tipoA");
 
             listaCarrito.push({
                 "idProducto": idProductoArray,
@@ -401,7 +405,10 @@ $(document).on("click", ".quitarItem", function () {
                 "precio": precioArray,
                 "tipo": tipoArray,
                 "peso": pesoArray,
-                "cantidad": cantidadArray
+                "cantidad": cantidadArray,
+                "sku": sku,
+                "tipoA":tipoA
+                
             });
 
         }
@@ -459,6 +466,8 @@ $(document).on("change", ".cantidadItem", function () {
                 "tipo": $(cantidad[i]).attr("tipo"),
                 "peso": $(idProducto[i]).attr("peso"),
                 "cantidad": $(cantidad[i]).val(),
+                "sku": $(idProducto[i]).attr("sku"),
+                "tipoA": $(idProducto[i]).attr("tipoA"),
             }
         );
     }

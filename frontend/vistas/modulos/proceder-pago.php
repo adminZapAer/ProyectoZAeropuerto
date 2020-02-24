@@ -1,13 +1,38 @@
 <?php
 
-require_once __DIR__ . '/../modelos/compras.modelo.php';
+#require_once "../../vendor/paypal/paypal-checkout-sdk/samples/CaptureIntentExamples/CreateOrder.php";
+#require_once '../../vendor/autoload.php';
+#require_once __DIR__ . '/../modelos/compras.modelo.php';
 
 $url = Ruta::ctrRuta();
 $servidor = Ruta::ctrRutaServidor();
 
 //disable-card=visa,mastercard
 
-echo ModeloCompras::mdlGetCompras();
+#print_r( ModeloCompras::mdlGetCompras() );
+
+$externalContent = file_get_contents('http://checkip.dyndns.com/');
+preg_match('/Current IP Address: \[?([:.0-9a-fA-F]+)\]?/', $externalContent, $m);
+$externalIp = $m[1];
+
+function getRealIpAddr()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+    {
+      $ip=$_SERVER['HTTP_CLIENT_IP'];
+    }
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+    {
+      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else
+    {
+      $ip=$_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+
+#print_r(ModeloCompras::mdlGetCompras()['idCompra']);
 
 ?>
 <script>
@@ -349,7 +374,7 @@ TABLA CARRITO DE COMPRAS
                     <div class="formPago row">
 
                         <form id="formu" method="POST" target="_blank" style="display: none;">
-                            JWT: <input type="text" name="jwt"><br>
+                            JWT: <input type="text" name="jwt" id="jwt"><br>
                             <input type="submit" value="Submit">
                         </form>
                         <p>Click on the submit button, and the input will be sent to a page on
@@ -516,6 +541,7 @@ TABLA CARRITO DE COMPRAS
     script 
 ======================================-->
     <script>
+    
         var direccionEnvio = JSON.parse(localStorage.getItem("direccionEnvio"));
 
         
@@ -572,7 +598,7 @@ TABLA CARRITO DE COMPRAS
                         "tipo": item.tipo,
                         "cantidad": item.cantidad,
                         "costoEnvio": item.costoEnvio,
-                        "origen": item.origen,
+                        "origen": item.origen
                     });
                 });
 
@@ -711,7 +737,18 @@ TABLA CARRITO DE COMPRAS
 
         $(document).ready(function() {
 
+            // $.get("http://ipinfo.io", function(response) {
+            //     alert(response.ip);
+            // }, "jsonp");
             
+
+            // $.getJSON("http://jsonip.com/?callback=?", function (data) {
+            //     console.log({
+            //         mensaje:'aqui',
+            //         data
+            //     });
+            //     alert(data.ip);
+            // });    
 
 
             // ===============
@@ -734,7 +771,7 @@ TABLA CARRITO DE COMPRAS
             }
             `,
                     success: function(data) {
-                        console.log(data.token)
+                        console.log(data)
 
                         // ================================================
                         // PROCESO CUANDO LA COMPRA SE REALIZO EXITOSAMENTE
@@ -821,30 +858,30 @@ TABLA CARRITO DE COMPRAS
                         });
 
                         // =========================
-
+                        if(localStorage.getItem("dirreccionEnvios")=="null"){
                         datosNetPay = 
                                 {
                                     "storeIdAcq": storeIdAcq,
                                     "transType":"Auth",
                                     "promotion":"000000",
                                     "checkout":{
-                                        "merchantReferenceCode":"145000494",
+                                        "merchantReferenceCode":"<?php print_r(ModeloCompras::mdlGetCompras()['idCompra']+1); ?>",
                                         "bill":{
-                                        "city":"Guadalupe",
+                                        "city":"<?php echo $FacturacionUser[0]["estado"]; ?>",
                                         "country":"MX",
                                         "firstName":"<?php echo $user["nombre"] ?>",
                                         "lastName":"<?php echo $user["nombre"] ?>",
                                         // "email":"<?php echo $user["email"]; ?>",
-                                        "email":"accept@netpay.com.mx",
+                                        "email":"review@netpay.com.mx",
                                         "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
                                         "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
                                         "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
                                         "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
-                                        "street2":"<?php echo $FacturacionUser[0]["calle"]; ?>",
-                                        "ipAddress":"127.0.0.1"
+                                        "street2":"<?php echo $FacturacionUser[0]["colonia"]; ?>",
+                                        "ipAddress":"<?php echo getenv('DIR_IP') ? getenv('DIR_IP') :  getRealIpAddr(); ?>"
                                     },
                                     "ship":{
-                                        "city":"Guadalupe",
+                                        "city":"<?php echo $FacturacionUser[0]["estado"]; ?>",
                                         "country":"MX",
                                         "firstName":"<?php echo $user["nombre"]; ?>",
                                         "lastName":"<?php echo $user["nombre"]; ?>",
@@ -852,7 +889,7 @@ TABLA CARRITO DE COMPRAS
                                         "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
                                         "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
                                         "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
-                                        "street2":"<?php echo $FacturacionUser[0]["calle"]; ?>",
+                                        "street2":"<?php echo $FacturacionUser[0]["colonia"]; ?>",
                                         "shippingMethod":"flatrate_flatrate"
                                     },
                                     "itemList":[
@@ -863,31 +900,102 @@ TABLA CARRITO DE COMPRAS
                                     "currency":"MXN"
                                     },
                                     "merchanDefinedDataList":[
+                                    {"id": 93,
+                                     "value":"<?php echo $FacturacionUser[0]["telefono"]; ?>" },
                                     {"id":2,
                                     "value":"Web"},
-                                    {"id":4,
-                                    "value":"515"},
-                                    {"id":5,
-                                    "value":"0"},
-                                    {"id":6,
-                                    "value":"0"},
-                                    {"id":7,
-                                    "value":"0"},
-                                    {"id":9,
-                                    "value":"Retail"},
-                                    {"id":10,
-                                    "value":"3D"},
-                                    {"id":11,
-                                    "value":"flatrate_flatrate"},
+                                    {"id": 20,
+                                    "value": "Automotriz"},
                                     {"id":13,
-                                    "value":"N"},
-                                    {"id":14,
-                                    "value":"Domicilio"},
-                                    {"id":"16",
-                                    "value":"50000"}
+                                    "value":"No"},
+                                    {"id":21,
+                                    "value":"Si"},
+                                    {"id":22,
+                                    "value":"C"},
+                                    {"id":25,
+                                    "value":storeIdAcq},
+                                    {"id":26,
+                                    "value":storeIdAcq},
+                                    {"id":10,
+                                    "value":"3DS"},
+                                    {"id":50,
+                                    "value":"No"},
+                                    {"id":9,
+                                    "value":"Retail"}
                                     ]
                                     }
                                 }
+                                
+                                
+                        }else{
+                            datosNetPay = 
+                                {
+                                    "storeIdAcq": storeIdAcq,
+                                    "transType":"Auth",
+                                    "promotion":"000000",
+                                    "checkout":{
+                                        "merchantReferenceCode":"<?php print_r(ModeloCompras::mdlGetCompras()['idCompra'] + 1); ?>",
+                                        "bill":{
+                                        "city":"<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                        "country":"MX",
+                                        "firstName":"<?php echo $user["nombre"] ?>",
+                                        "lastName":"<?php echo $user["nombre"] ?>",
+                                        // "email":"<?php echo $user["email"]; ?>",
+                                        "email":"review@netpay.com.mx",
+                                        "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
+                                        "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
+                                        "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                        "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
+                                        "street2":"<?php echo $FacturacionUser[0]["colonia"]; ?>",
+                                        "ipAddress":"<?php echo getenv('DIR_IP') ? getenv('DIR_IP') :  getRealIpAddr(); ?>"
+                                    },
+                                    "ship":{
+                                        "city":"<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                        "country":"MX",
+                                        "firstName":"<?php echo $user["nombre"]; ?>",
+                                        "lastName":"<?php echo $user["nombre"]; ?>",
+                                        "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
+                                        "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
+                                        "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                        "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
+                                        "street2":"<?php echo $FacturacionUser[0]["colonia"]; ?>",
+                                        "shippingMethod":"flatrate_flatrate"
+                                    },
+                                    "itemList":[
+                                        
+                                    ],
+                                    "purchaseTotals":{
+                                    "grandTotalAmount":localStorage.getItem("sumaCesta"),
+                                    "currency":"MXN"
+                                    },
+                                    "merchanDefinedDataList":[
+                                    {"id": 93,
+                                     "value":"<?php echo $FacturacionUser[0]["telefono"]; ?>" },
+                                    {"id":2,
+                                    "value":"Web"},
+                                    {"id": 20,
+                                    "value": "Automotriz"},
+                                    {"id":13,
+                                    "value":"No"},
+                                    {"id":21,
+                                    "value":"No"},
+                                    {"id":22,
+                                    "value":"R"},
+                                    {"id":25,
+                                    "value":storeIdAcq},
+                                    {"id":26,
+                                    "value":storeIdAcq},
+                                    {"id":10,
+                                    "value":"3DS"},
+                                    {"id":50,
+                                    "value":"No"},
+                                    {"id":9,
+                                    "value":"Retail"}
+                                    ]
+                                    }
+                                }
+                        }
+                        
                         
                         productos = JSON.parse(
                             localStorage.getItem('listaProductos')
@@ -900,11 +1008,11 @@ TABLA CARRITO DE COMPRAS
                         productos.forEach( function(producto){
                             datosNetPay.checkout.itemList.push({
                                 "id":producto.idProducto,
-                                "productSKU":"SKU1",
+                                "productSKU": producto.sku ,
                                 "unitPrice":producto.precio,
                                 "productName":producto.titulo,
                                 "quantity":producto.cantidad,
-                                "productCode":"Tops & Blouses"
+                                "productCode":producto.tipoA.substring(0,25)
                             })
                             // console.log({
                             //     PRODUCTO: producto.idProducto
@@ -940,7 +1048,7 @@ TABLA CARRITO DE COMPRAS
                                 console.log({
                                     ruta
                                 });
-
+                                $('#jwt').val(data.token);
                                 $('#formu').attr('action', ruta);
                                 // $('#formu').submit();
                             },
@@ -1001,12 +1109,12 @@ TABLA CARRITO DE COMPRAS
         });
 
         function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
 
         $(document).ready(function() {});
     </script>

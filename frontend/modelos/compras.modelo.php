@@ -88,9 +88,9 @@ class ModeloCompras{
         $stmt -> close();
         $stmt = null;
     }
-
+    
     static public function mdlGetCompras(){
-        $stmt = Conexion::conectar()->prepare("SELECT id FROM compras ORDER BY idCompra LIMIT 1");
+        $stmt = Conexion::conectar()->prepare("SELECT idCompra FROM compras ORDER BY idCompra DESC");
 
         if($stmt->execute()){
             return $stmt->fetch();
@@ -101,7 +101,6 @@ class ModeloCompras{
         $stmt -> close();
         $stmt = null;
     }
-    
 
     static public function mdlGetCompra($id){
         $stmt = Conexion::conectar()->prepare("SELECT * FROM productos WHERE idProducto = :idProducto");
