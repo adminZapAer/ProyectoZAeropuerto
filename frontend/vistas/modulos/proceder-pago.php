@@ -19,15 +19,12 @@ function getRealIpAddr()
 {
     if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
     {
-      $ip=$_SERVER['HTTP_CLIENT_IP'];
-    }
-    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
     {
-      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
-    }
-    else
-    {
-      $ip=$_SERVER['REMOTE_ADDR'];
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        $ip = $_SERVER['REMOTE_ADDR'];
     }
     return $ip;
 }
@@ -106,7 +103,7 @@ if (isset($_SESSION["validarSesion"])) {
 
             $factTemp = ModeloUsuarios::mdlAgregarFacturacion("facturacion", $datos);
         }
-        $FacturacionUser=ModeloUsuarios::mdlMostrarDatosFacturacion('facturacion', $idUsuario);
+        $FacturacionUser = ModeloUsuarios::mdlMostrarDatosFacturacion('facturacion', $idUsuario);
     }
 }
 ?>
@@ -324,11 +321,19 @@ TABLA CARRITO DE COMPRAS
 
                             <!--<img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">-->
                             <center>
-                                <a href="#modalTransferencia" data-toggle="modal"><button type="button" class="btn btn-warning" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">TRANSFERENCIA ELECTRONICA</button></a>
+                                <a href="#modalTransferencia" data-toggle="modal">
+                                    <button type="button" class="btn btn-warning" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
+                                        TRANSFERENCIA ELECTRONICA
+                                    </button>
+                                </a>
                             </center>
                             <br>
                             <center>
-                                <a href="#modalNetPay" id="botonPagoNetPay"><button type="button" class="btn btn-info" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">PAGO CON NETPAY</button></a>
+                                <a href="#modalNetPay" id="botonPagoNetPay">
+                                    <button type="button" class="btn btn-info" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
+                                        PAGO CON NETPAY
+                                    </button>
+                                </a>
                             </center>
                         </figure>
 
@@ -362,27 +367,50 @@ TABLA CARRITO DE COMPRAS
 
             <div class="modal-body modalTitulo">
 
-                <h3 class="backColor">PAGO CON NETPAY</h3>
+                <h3 class="backColor">
+                    PAGO CON NETPAY
+                </h3>
 
                 <button type="button" data-dismiss="modal" class="close">&times;</button>
 
                 <div class="contenidoCheckout">
 
-                    <h4>Puede realizar su pago con transferencia a cualquiera de nuestras cuentas bancarias:</h4>
 
                     <!-- FORMAS DE PAGO -->
                     <div class="formPago row">
+
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <label for="">OPCION DE PAGO</label>
+                            <select name="" id="opcionPagoNetPay" class="form-control">
+                                <option value="000000">Pago en una sola exchibición</option>
+                                <!-- <option value="000303">3 meses sin intereses</option>
+                                <option value="000603">6 meses sin intereses</option>
+                                <option value="000903">9 meses sin intereses</option>
+                                <option value="001203">12 meses sin intereses</option>
+                                <option value="001803">18 meses sin intereses</option> -->
+                            </select>
+                        </div>
+                        <div class="col-lg-4"></div>
+
+                        <div class="col-lg-12">
+                            <a href="#" id="botonRealizarPagoNetPay" class="btn btn-info">
+                                <button type="button" class="btn btn-info" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
+                                    REALIZAR COMPRA
+                                </button>
+                            </a>
+                        </div>
 
                         <form id="formu" method="POST" target="_blank" style="display: none;">
                             JWT: <input type="text" name="jwt" id="jwt"><br>
                             <input type="submit" value="Submit">
                         </form>
-                        <p>Click on the submit button, and the input will be sent to a page on
-                            the server called "/action_page.php".</p>
+
+
 
                         <!-- <iframe name="my_iframe" src="not_submitted_yet.aspx" style="width: 100%; height: 1000px"> -->
 
-                        </iframe>
+                        <!-- </iframe> -->
 
                     </div>
 
@@ -541,10 +569,9 @@ TABLA CARRITO DE COMPRAS
     script 
 ======================================-->
     <script>
-    
         var direccionEnvio = JSON.parse(localStorage.getItem("direccionEnvio"));
 
-        
+
 
         $('#email').on('click', function(event) {
             event.preventDefault();
@@ -718,43 +745,26 @@ TABLA CARRITO DE COMPRAS
     </script>
 
     <script>
+        function realizarPagoNetPay(opcionPago) {
 
-        const baseUrl = 'https://ecommerce.netpay.com.mx/gateway-ecommerce';
-        const storeIdAcq = '483131';
-        const userName = "ecommerce@netpay.com.mx";
-        const password = "ec0m12";
-        const url2 = "https://ecommerce.netpay.com.mx";
+            const baseUrl = 'https://ecommerce.netpay.com.mx/gateway-ecommerce';
+            const storeIdAcq = '483131';
+            const userName = "ecommerce@netpay.com.mx";
+            const password = "ec0m12";
+            const url2 = "https://ecommerce.netpay.com.mx";
+            const promotion = opcionPago
 
-        console.log({
-            credenciales: {
-                baseUrl,
-                storeIdAcq,
-                userName,
-                password,
-                url2
-            }
-        });
+            console.log({
+                credenciales: {
+                    baseUrl,
+                    storeIdAcq,
+                    userName,
+                    password,
+                    url2
+                },
+                promotion
+            });
 
-        $(document).ready(function() {
-
-            // $.get("http://ipinfo.io", function(response) {
-            //     alert(response.ip);
-            // }, "jsonp");
-            
-
-            // $.getJSON("http://jsonip.com/?callback=?", function (data) {
-            //     console.log({
-            //         mensaje:'aqui',
-            //         data
-            //     });
-            //     alert(data.ip);
-            // });    
-
-
-            // ===============
-            // PAGO CON NETPAY
-            // ===============
-            
             console.log(baseUrl);
 
             $.ajax({
@@ -770,34 +780,34 @@ TABLA CARRITO DE COMPRAS
                     }
             }
             `,
-                    success: function(data) {
-                        console.log(data)
+                success: function(data) {
+                    console.log(data)
 
-                        // ================================================
-                        // PROCESO CUANDO LA COMPRA SE REALIZO EXITOSAMENTE
-                        // ================================================
+                    // ================================================
+                    // PROCESO CUANDO LA COMPRA SE REALIZO EXITOSAMENTE
+                    // ================================================
 
-                        $.ajax({
-                            url: `${baseUrl}/v1/transaction-report/transaction/${getUrlVars()['transactionToken']}/${storeIdAcq}`,
-                            contentType: 'Application/Json',
-                            headers: {
-                                    'content-Type': "Application/Json",
-                                    'Authorization': `Bearer ${data.token}`,
-                                },
-                            type: 'GET',
-                            success: function(detalles) {
+                    $.ajax({
+                        url: `${baseUrl}/v1/transaction-report/transaction/${getUrlVars()['transactionToken']}/${storeIdAcq}`,
+                        contentType: 'Application/Json',
+                        headers: {
+                            'content-Type': "Application/Json",
+                            'Authorization': `Bearer ${data.token}`,
+                        },
+                        type: 'GET',
+                        success: function(detalles) {
 
-                                console.log({
-                                    detalles,
-                                    status: detalles.transaction.status
-                                })
+                            console.log({
+                                detalles,
+                                status: detalles.transaction.status
+                            })
 
-                                // ================================================
-                                // GUARDAR COMPRA EN LA BASE DE DATOS SI FUE EXITOSA
-                                // ================================================
+                            // ================================================
+                            // GUARDAR COMPRA EN LA BASE DE DATOS SI FUE EXITOSA
+                            // ================================================
 
-                                if(detalles.transaction.status == 'DONE'){
-                                    $.ajax({
+                            if (detalles.transaction.status == 'DONE') {
+                                $.ajax({
                                     url: rutaFrontEnd + 'ajax/checkout.ajax.php',
                                     type: 'POST',
                                     dataType: 'json',
@@ -808,273 +818,239 @@ TABLA CARRITO DE COMPRAS
                                         direccion: getDireccionEnvio(),
                                         metodo: 'netpay'
                                     },
-                                    }).done(function(res) {
-                                        console.log("success", res);
-                                        swal({
-                                            title: "¡Tu compra ha sido realizada con éxito!",
-                                            text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
-                                            type: "success",
-                                            confirmButtonText: "Aceptar",
-                                            closeOnConfirm: false
-                                        }, function(isConfirm) {
-                                            if (isConfirm) {
-                                                localStorage.removeItem("listaProductos");
-                                                localStorage.removeItem("sumaCesta");
-                                                localStorage.removeItem("cantidadCesta");
-                                                window.location = rutaFrontEnd;
-                                            }
-                                        });
-                                    }).fail(function(err) {
-                                        console.log("error", err);
-                                    });
-                                }else{
+                                }).done(function(res) {
+                                    console.log("success", res);
                                     swal({
-                                        title: "¡Tu compra ha sido rechazada!",
-                                        // text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
-                                        type: "warning",
+                                        title: "¡Tu compra ha sido realizada con éxito!",
+                                        text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
+                                        type: "success",
                                         confirmButtonText: "Aceptar",
                                         closeOnConfirm: false
+                                    }, function(isConfirm) {
+                                        if (isConfirm) {
+                                            localStorage.removeItem("listaProductos");
+                                            localStorage.removeItem("sumaCesta");
+                                            localStorage.removeItem("cantidadCesta");
+                                            window.location = rutaFrontEnd;
+                                        }
                                     });
-                                }
-
-                                console.log('Funciona');
-
-                                
-
-                                // =========================
-                                // 
-                                // ==========================
-
-                                console.log({
-                                    'MESSAGE': 'RESPUESTA DE COMPRA',
-                                    ruta: rutaFrontEnd + 'ajax/netpay.ajax.php',
-                                    data: data,
-                                    items: JSON.parse( getItems('listaProductos') ),
-                                    usuario: JSON.stringify(localStorage.getItem("usuario"))
+                                }).fail(function(err) {
+                                    console.log("error", err);
                                 });
-
-                                
+                            } else {
+                                swal({
+                                    title: "¡Tu compra ha sido rechazada!",
+                                    // text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
+                                    type: "warning",
+                                    confirmButtonText: "Aceptar",
+                                    closeOnConfirm: false
+                                });
                             }
-                        });
 
-                        // =========================
-                        if(localStorage.getItem("dirreccionEnvios")=="null"){
-                        datosNetPay = 
-                                {
-                                    "storeIdAcq": storeIdAcq,
-                                    "transType":"Auth",
-                                    "promotion":"000000",
-                                    "checkout":{
-                                        "merchantReferenceCode":"<?php print_r(ModeloCompras::mdlGetCompras()['idCompra']+1); ?>",
-                                        "bill":{
-                                        "city":"<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                        "country":"MX",
-                                        "firstName":"<?php echo $user["nombre"] ?>",
-                                        "lastName":"<?php echo $user["nombre"] ?>",
-                                        // "email":"<?php echo $user["email"]; ?>",
-                                        "email":"review@netpay.com.mx",
-                                        "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
-                                        "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
-                                        "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                        "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
-                                        "street2":"<?php echo $FacturacionUser[0]["colonia"]; ?>",
-                                        "ipAddress":"<?php echo getenv('DIR_IP') ? getenv('DIR_IP') :  getRealIpAddr(); ?>"
-                                    },
-                                    "ship":{
-                                        "city":"<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                        "country":"MX",
-                                        "firstName":"<?php echo $user["nombre"]; ?>",
-                                        "lastName":"<?php echo $user["nombre"]; ?>",
-                                        "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
-                                        "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
-                                        "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                        "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
-                                        "street2":"<?php echo $FacturacionUser[0]["colonia"]; ?>",
-                                        "shippingMethod":"flatrate_flatrate"
-                                    },
-                                    "itemList":[
-                                        
-                                    ],
-                                    "purchaseTotals":{
-                                    "grandTotalAmount":localStorage.getItem("sumaCesta"),
-                                    "currency":"MXN"
-                                    },
-                                    "merchanDefinedDataList":[
-                                    {"id": 93,
-                                     "value":"<?php echo $FacturacionUser[0]["telefono"]; ?>" },
-                                    {"id":2,
-                                    "value":"Web"},
-                                    {"id": 20,
-                                    "value": "Automotriz"},
-                                    {"id":13,
-                                    "value":"No"},
-                                    {"id":21,
-                                    "value":"Si"},
-                                    {"id":22,
-                                    "value":"C"},
-                                    {"id":25,
-                                    "value":storeIdAcq},
-                                    {"id":26,
-                                    "value":storeIdAcq},
-                                    {"id":10,
-                                    "value":"3DS"},
-                                    {"id":50,
-                                    "value":"No"},
-                                    {"id":9,
-                                    "value":"Retail"}
-                                    ]
-                                    }
-                                }
-                                
-                                
-                        }else{
-                            datosNetPay = 
-                                {
-                                    "storeIdAcq": storeIdAcq,
-                                    "transType":"Auth",
-                                    "promotion":"000000",
-                                    "checkout":{
-                                        "merchantReferenceCode":"<?php print_r(ModeloCompras::mdlGetCompras()['idCompra'] + 1); ?>",
-                                        "bill":{
-                                        "city":"<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                        "country":"MX",
-                                        "firstName":"<?php echo $user["nombre"] ?>",
-                                        "lastName":"<?php echo $user["nombre"] ?>",
-                                        // "email":"<?php echo $user["email"]; ?>",
-                                        "email":"review@netpay.com.mx",
-                                        "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
-                                        "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
-                                        "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                        "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
-                                        "street2":"<?php echo $FacturacionUser[0]["colonia"]; ?>",
-                                        "ipAddress":"<?php echo getenv('DIR_IP') ? getenv('DIR_IP') :  getRealIpAddr(); ?>"
-                                    },
-                                    "ship":{
-                                        "city":"<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                        "country":"MX",
-                                        "firstName":"<?php echo $user["nombre"]; ?>",
-                                        "lastName":"<?php echo $user["nombre"]; ?>",
-                                        "phoneNumber":"<?php echo $FacturacionUser[0]["telefono"]; ?>",
-                                        "postalCode":"<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
-                                        "state":"<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                        "street1":"<?php echo $FacturacionUser[0]["calle"]; ?>",
-                                        "street2":"<?php echo $FacturacionUser[0]["colonia"]; ?>",
-                                        "shippingMethod":"flatrate_flatrate"
-                                    },
-                                    "itemList":[
-                                        
-                                    ],
-                                    "purchaseTotals":{
-                                    "grandTotalAmount":localStorage.getItem("sumaCesta"),
-                                    "currency":"MXN"
-                                    },
-                                    "merchanDefinedDataList":[
-                                    {"id": 93,
-                                     "value":"<?php echo $FacturacionUser[0]["telefono"]; ?>" },
-                                    {"id":2,
-                                    "value":"Web"},
-                                    {"id": 20,
-                                    "value": "Automotriz"},
-                                    {"id":13,
-                                    "value":"No"},
-                                    {"id":21,
-                                    "value":"No"},
-                                    {"id":22,
-                                    "value":"R"},
-                                    {"id":25,
-                                    "value":storeIdAcq},
-                                    {"id":26,
-                                    "value":storeIdAcq},
-                                    {"id":10,
-                                    "value":"3DS"},
-                                    {"id":50,
-                                    "value":"No"},
-                                    {"id":9,
-                                    "value":"Retail"}
-                                    ]
-                                    }
-                                }
+                            console.log('Funciona');
+
+
+
+                            // =========================
+                            // 
+                            // ==========================
+
+                            console.log({
+                                'MESSAGE': 'RESPUESTA DE COMPRA',
+                                ruta: rutaFrontEnd + 'ajax/netpay.ajax.php',
+                                data: data,
+                                items: JSON.parse(getItems('listaProductos')),
+                                usuario: JSON.stringify(localStorage.getItem("usuario"))
+                            });
+
+
                         }
-                        
-                        
-                        productos = JSON.parse(
-                            localStorage.getItem('listaProductos')
-                        );
-                        
-                        console.log({
-                            datosNetPay:datosNetPay,
-                        });
+                    });
 
-                        productos.forEach( function(producto){
-                            datosNetPay.checkout.itemList.push({
-                                "id":producto.idProducto,
-                                "productSKU": producto.sku ,
-                                "unitPrice":producto.precio,
-                                "productName":producto.titulo,
-                                "quantity":producto.cantidad,
-                                "productCode":producto.tipoA.substring(0,25)
-                            })
-                            // console.log({
-                            //     PRODUCTO: producto.idProducto
-                            // })
-                        } );
+                    // =========================
 
-                        console.log(datosNetPay.checkout.itemList.push())
-                        console.log(datosNetPay)
-                        console.log($('#totalCompra').html())
-
-                        $.ajax({
-                            url: `${baseUrl}/v2/checkout`,
-                            headers: {
-                                'content-Type': "Application/Json",
-                                'Authorization': `Bearer ${data.token}`,
-                            },
-                            type: 'POST',
-                            data: JSON.stringify(datosNetPay),
-                            success: function(data2) {
-
-                                console.log({
-                                    datosAlRealizarCompra: data2
-                                });
-
-                                const MerchantResponseURL = btoa(window.location.origin + window.location.pathname);
-                                console.log(MerchantResponseURL)
-                                
-
-                                // const ruta = `http://certificaciones.netpay.com.mx:7092/a-webapp/e-commerce/web-authorizer?checkoutTokenId=${response2.response.checkoutTokenId}`;
-                                // const ruta = `http://certificaciones.netpay.com.mx:7092/a-webapp/e-commerce/web-authorizer?checkoutTokenId=${response2.response.checkoutTokenId}&checkoutDetail=true&MerchantResponseURL=${MerchantResponseURL}`;
-                                const ruta = `${url2}/a-webapp3/e-commerce/web-authorizer?checkoutTokenId=${data2.response.checkoutTokenId}&checkoutDetail=true&MerchantResponseURL=${MerchantResponseURL}`;
-
-                                console.log({
-                                    ruta
-                                });
-                                $('#jwt').val(data.token);
-                                $('#formu').attr('action', ruta);
-                                // $('#formu').submit();
-                            },
-                            error: function(err) {
-                                // console.log(err)
-                            }
-                        });
-
-                    },
-                    error: function(err) {
-                        // console.log(err)
+                    if (localStorage.getItem("direccionEnvios") == "null") {
+                        esEnvio = false;
+                    } else {
+                        esEnvio = true;
                     }
-                });
+
+                    datosNetPay = {
+                        "storeIdAcq": storeIdAcq,
+                        "transType": "Auth",
+                        "promotion": promotion,
+                        "checkout": {
+                            "merchantReferenceCode": "<?php print_r(ModeloCompras::mdlGetCompras()['idCompra'] + 1); ?>",
+                            "bill": {
+                                "city": "<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                "country": "MX",
+                                "firstName": "<?php echo $user["nombre"] ?>",
+                                "lastName": "<?php echo $user["nombre"] ?>",
+                                // "email":"<?php echo $user["email"]; ?>",
+                                "email": "accept@netpay.com.mx",
+                                "phoneNumber": "<?php echo $FacturacionUser[0]["telefono"]; ?>",
+                                "postalCode": "<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
+                                "state": "<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                "street1": "<?php echo $FacturacionUser[0]["calle"]; ?>",
+                                "street2": "<?php echo $FacturacionUser[0]["colonia"]; ?>",
+                                "ipAddress": "<?php echo getenv('DIR_IP') ? getenv('DIR_IP') :  getRealIpAddr(); ?>"
+                            },
+                            "ship": {
+                                "city": "<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                "country": "MX",
+                                "firstName": "<?php echo $user["nombre"]; ?>",
+                                "lastName": "<?php echo $user["nombre"]; ?>",
+                                "phoneNumber": "<?php echo $FacturacionUser[0]["telefono"]; ?>",
+                                "postalCode": "<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
+                                "state": "<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                "street1": "<?php echo $FacturacionUser[0]["calle"]; ?>",
+                                "street2": "<?php echo $FacturacionUser[0]["colonia"]; ?>",
+                                "shippingMethod": "flatrate_flatrate"
+                            },
+                            "itemList": [
+
+                            ],
+                            "purchaseTotals": {
+                                "grandTotalAmount": localStorage.getItem("sumaCesta"),
+                                "currency": "MXN"
+                            },
+                            "merchanDefinedDataList": [{
+                                    "id": 93,
+                                    "value": "<?php echo $FacturacionUser[0]["telefono"]; ?>"
+                                },
+                                {
+                                    "id": 2,
+                                    "value": "Web"
+                                },
+                                {
+                                    "id": 20,
+                                    "value": "Automotriz"
+                                },
+                                {
+                                    "id": 13,
+                                    "value": "No"
+                                },
+                                {
+                                    "id": 21,
+                                    "value": esEnvio ? "No" : "Si",
+                                },
+                                {
+                                    "id": 22,
+                                    "value": esEnvio ? "R" : "C"
+                                },
+                                {
+                                    "id": 25,
+                                    "value": storeIdAcq
+                                },
+                                {
+                                    "id": 26,
+                                    "value": storeIdAcq
+                                },
+                                {
+                                    "id": 10,
+                                    "value": "3DS"
+                                },
+                                {
+                                    "id": 50,
+                                    "value": "No"
+                                },
+                                {
+                                    "id": 9,
+                                    "value": "Retail"
+                                }
+                            ]
+                        }
+                    }
+
+
+
+                    productos = JSON.parse(
+                        localStorage.getItem('listaProductos')
+                    );
+
+                    console.log({
+                        datosNetPay: datosNetPay,
+                    });
+
+                    productos.forEach(function(producto) {
+                        datosNetPay.checkout.itemList.push({
+                            "id": producto.idProducto,
+                            "productSKU": producto.sku,
+                            "unitPrice": producto.precio,
+                            "productName": producto.titulo,
+                            "quantity": producto.cantidad,
+                            "productCode": producto.tipoA.substring(0, 25)
+                        })
+                        // console.log({
+                        //     PRODUCTO: producto.idProducto
+                        // })
+                    });
+
+                    console.log(datosNetPay.checkout.itemList.push())
+                    console.log(datosNetPay)
+                    console.log($('#totalCompra').html())
+
+                    $.ajax({
+                        url: `${baseUrl}/v2/checkout`,
+                        headers: {
+                            'content-Type': "Application/Json",
+                            'Authorization': `Bearer ${data.token}`,
+                        },
+                        type: 'POST',
+                        data: JSON.stringify(datosNetPay),
+                        success: function(data2) {
+
+                            console.log({
+                                datosAlRealizarCompra: data2
+                            });
+
+                            const MerchantResponseURL = btoa(window.location.origin + window.location.pathname);
+                            console.log(MerchantResponseURL)
+
+
+                            // const ruta = `http://certificaciones.netpay.com.mx:7092/a-webapp/e-commerce/web-authorizer?checkoutTokenId=${response2.response.checkoutTokenId}`;
+                            // const ruta = `http://certificaciones.netpay.com.mx:7092/a-webapp/e-commerce/web-authorizer?checkoutTokenId=${response2.response.checkoutTokenId}&checkoutDetail=true&MerchantResponseURL=${MerchantResponseURL}`;
+                            const ruta = `${url2}/a-webapp3/e-commerce/web-authorizer?checkoutTokenId=${data2.response.checkoutTokenId}&checkoutDetail=true&MerchantResponseURL=${MerchantResponseURL}`;
+
+                            console.log({
+                                ruta
+                            });
+                            $('#jwt').val(data.token);
+                            $('#formu').attr('action', ruta);
+                            // $('#formu').submit();
+                        },
+                        error: function(err) {
+                            // console.log(err)
+                        }
+                    });
+
+                },
+                error: function(err) {
+                    // console.log(err)
+                }
+            });
+        }
+
+        $(document).ready(function() {
+
+            // ===============
+            // PAGO CON NETPAY
+            // ===============
+
+            realizarPagoNetPay("000000");
 
 
 
 
 
-                $('.cantidadItem').each(function() {
-                    $(this).attr('readonly', 'true');
-                });
+            $('.cantidadItem').each(function() {
+                $(this).attr('readonly', 'true');
+            });
 
-                // MOSTRAMOS LA DIRECCION SELECCIONADA POR EL USUARIO PREVIAMENTE
-                if (JSON.parse(localStorage.getItem('direccionEnvio')) != null) {
-                    console.log('DIRECCION DE USUARIO', JSON.parse(localStorage.getItem('direccionEnvio')));
-                    $('#direccionesResumen').html(`
+            // MOSTRAMOS LA DIRECCION SELECCIONADA POR EL USUARIO PREVIAMENTE
+            if (JSON.parse(localStorage.getItem('direccionEnvio')) != null) {
+                console.log('DIRECCION DE USUARIO', JSON.parse(localStorage.getItem('direccionEnvio')));
+                $('#direccionesResumen').html(`
                 <div class="panel panel-default">
                     <div class="panel panel-heading">
                         DIRECCIÓN DE ENVÍO
@@ -1085,32 +1061,89 @@ TABLA CARRITO DE COMPRAS
                         </div>
                     </div>
                 </div>`);
-                }
-            });
+            }
+        });
 
-            // =====================
-            // VALIDAR COMPRA NETPAY
-            // =====================
+        // =====================
+        // VALIDAR COMPRA NETPAY
+        // =====================
 
-            console.log({
+        console.log({
             'VARIABLES URL': getUrlVars()['transactionToken']
         })
 
-        
-        
+
+
 
         $(document).on('click', '#botonPagoNetPay', function() {
 
-            // alert(localStorage.getItem("sumaCesta"));
+            $('#modalNetPay').modal('show');
+            sumaCesta = parseFloat(localStorage.getItem("sumaCesta"))
 
-            // console.log(datosNetPay.checkout.purchaseTotals.grandTotalAmount);
+            opcionesPago = '<option value="000000">Pago en una sola exhibición</option>';
+
+            if (sumaCesta >= 300) {
+                opcionesPago += '<option value="000303">3 meses sin intereses</option>'
+            }
+
+            if (sumaCesta >= 600) {
+                opcionesPago += '<option value="000603">6 meses sin intereses</option>'
+            }
+
+            if (sumaCesta >= 900) {
+                opcionesPago += '<option value="000903">9 meses sin intereses</option>'
+            }
+
+            if (sumaCesta >= 1200) {
+                opcionesPago += '<option value="001203">12 meses sin intereses</option>'
+            }
+
+            if (sumaCesta >= 1800) {
+                opcionesPago += '<option value="001803">18 meses sin intereses</option>'
+            }
+
+            $('#opcionPagoNetPay').html(opcionesPago);
+
+            console.log({
+                message: 'definiendo opcionesPago',
+                sumaCesta,
+                opcionesPago
+            });
+
+            // datosNetPay.checkout.purchaseTotals.grandTotalAmount = localStorage.getItem("sumaCesta");
+            // $('#formu').submit();
+        });
+
+        $(document).on('change', '#opcionPagoNetPay', function() {
+
+            codigoOpcionPago = $(this).val()
+            datosNetPay.promotion = codigoOpcionPago
+
+            realizarPagoNetPay(codigoOpcionPago);
+
+            console.log({
+                message: 'opcion de pago actualizada',
+                value: $(this).val(),
+                netpay: datosNetPay
+            });
+        });
+
+        $(document).on('click', '#botonRealizarPagoNetPay', function() {
             datosNetPay.checkout.purchaseTotals.grandTotalAmount = localStorage.getItem("sumaCesta");
+
+            console.log({
+                message: 'Datos finales enviados a netpay',
+                datosNetPay
+            });
+
+
+
             $('#formu').submit();
         });
 
         function getUrlVars() {
             var vars = {};
-            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
                 vars[key] = value;
             });
             return vars;
