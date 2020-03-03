@@ -263,7 +263,7 @@ TABLA CARRITO DE COMPRAS
                                 <div class="form-check">
                                     <input type="checkbox" class="politicas form-check-input" id="input-terminos">
                                     <label class="form-check-label" for="input-terminos">
-                                        He leído y acepto los <a href="#">términos y condiciones.</a>
+                                        He leído y acepto los <a href="<?php echo $url;?>politicas-privacidad" target="_blank">términos y condiciones.</a>
                                     </label>
                                 </div>
                             </div>
@@ -331,7 +331,8 @@ TABLA CARRITO DE COMPRAS
                             <center>
                                 <a href="#modalNetPay" id="botonPagoNetPay">
                                     <button type="button" class="btn btn-info" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
-                                        PAGO CON NETPAY
+                                        PAGO CON TARJETA
+                                        <img src="https://www.consumemejor.com/img/cards-logos.png" alt="" width="100px">
                                     </button>
                                 </a>
                             </center>
@@ -368,7 +369,7 @@ TABLA CARRITO DE COMPRAS
             <div class="modal-body modalTitulo">
 
                 <h3 class="backColor">
-                    PAGO CON NETPAY
+                    PAGO CON TARJETA
                 </h3>
 
                 <button type="button" data-dismiss="modal" class="close">&times;</button>
@@ -379,27 +380,70 @@ TABLA CARRITO DE COMPRAS
                     <!-- FORMAS DE PAGO -->
                     <div class="formPago row">
 
-                        <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                            <label for="">TIPO DE TARJETA</label>
+                            <select name="" id="opcionTipoTarjeta" class="form-control" require>
+                                <option value="001">VISA</option>
+                                <option value="002">MASTERCARD</option>
+                                <option value="003">AMERICAN EXPRESS</option>
+                            </select>
+                        </div>
                         <div class="col-lg-4">
                             <label for="">OPCION DE PAGO</label>
                             <select name="" id="opcionPagoNetPay" class="form-control">
                                 <option value="000000">Pago en una sola exchibición</option>
-                                <!-- <option value="000303">3 meses sin intereses</option>
-                                <option value="000603">6 meses sin intereses</option>
-                                <option value="000903">9 meses sin intereses</option>
-                                <option value="001203">12 meses sin intereses</option>
-                                <option value="001803">18 meses sin intereses</option> -->
                             </select>
                         </div>
-                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <label for="">IVA DE COMPRA</label>
+                            <input type="text" class="form-control" readonly id="ivaInput">
+                        </div>
 
-                        <div class="col-lg-12">
-                            <a href="#" id="botonRealizarPagoNetPay" class="btn btn-info">
-                                <button type="button" class="btn btn-info" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <th>Tarjeta</th>
+                                        <th>Sobre tasa</th>
+                                        <th>Tasa de débito/crédito</th>
+                                        <th>Cargo por transferencia</th>
+                                        <th>Total a pagar</th>
+                                        <th>Total + Cargos</th>
+                                    </thead>
+                                    <tbody>
+                                        <td>
+                                            <span id="resumenTipoTarjeta"></span>
+                                        </td>
+                                        <td>
+                                            <span id="resumenSobreTasa"></span>%
+                                        </td>
+                                        <td>
+                                            <span id="resumenTasaDebitoCredito"></span>
+                                        </td>
+                                        <td>
+                                            $<span id="resumenCargoPorTransferencia">0</span>
+                                        </td>
+                                        <td>
+                                            $<span id="resumenTotalAPagar"></span>
+                                        </td>
+                                        <td style="background-color: #b8e994">
+                                            $<span id="resumenTotalAPagarMasCargos"></span>
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12 mt-3">
+                            <a href="#" id="botonRealizarPagoNetPay" class="btn btn-info mt-3">
+                                <button type="button" class="btn btn-info mt-3" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
                                     REALIZAR COMPRA
                                 </button>
                             </a>
                         </div>
+
+                        <hr>
 
                         <form id="formu" method="POST" target="_blank" style="display: none;">
                             JWT: <input type="text" name="jwt" id="jwt"><br>
@@ -585,10 +629,10 @@ TABLA CARRITO DE COMPRAS
                     },
                 })
                 .done(function(res) {
-                    console.log("success", res);
+                    // console.log("success", res);
                 })
                 .fail(function(err) {
-                    console.log("error", err);
+                    // console.log("error", err);
                 });
 
         });
@@ -629,7 +673,7 @@ TABLA CARRITO DE COMPRAS
                     });
                 });
 
-                console.log('data', JSON.stringify(data));
+                // console.log('data', JSON.stringify(data));
                 return JSON.stringify(data);
 
             } else {
@@ -667,7 +711,7 @@ TABLA CARRITO DE COMPRAS
                 // Capture the funds from the transaction
                 return actions.order.capture().then(function(details) {
                     // Show a success message to your buyer
-                    console.log('details', details);
+                    // console.log('details', details);
                     $.ajax({
                         url: rutaFrontEnd + 'ajax/checkout.ajax.php',
                         type: 'POST',
@@ -680,7 +724,7 @@ TABLA CARRITO DE COMPRAS
                             metodo: 'paypal'
                         },
                     }).done(function(res) {
-                        console.log("success", res);
+                        // console.log("success", res);
                         swal({
                             title: "¡Tu compra ha sido realizada con éxito!",
                             text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
@@ -696,7 +740,7 @@ TABLA CARRITO DE COMPRAS
                             }
                         });
                     }).fail(function(err) {
-                        console.log("error", err);
+                        // console.log("error", err);
                     });
 
                     //swal({
@@ -720,7 +764,7 @@ TABLA CARRITO DE COMPRAS
                 window.location = rutaFrontEnd + 'carrito-de-compras';
             },
             onError: function(err) {
-                console.log('err', err);
+                // console.log('err', err);
                 swal({
                     title: "Ocurrio un error",
                     text: "Favor de intentar de nuevo o más tarde, disculpe las molestias.",
@@ -745,7 +789,57 @@ TABLA CARRITO DE COMPRAS
     </script>
 
     <script>
-        function realizarPagoNetPay(opcionPago) {
+
+        function getPorcentajeComision( promotion, tipoTarjeta ){
+
+            // 001 - VISA
+            // 002 - MASTERCARD
+            // 003 - AMERICAN EXPRESS
+
+            porcentaje = 0.0
+
+            if( tipoTarjeta == '001' || tipoTarjeta == '002' ){
+
+                if( promotion == '000303' ){
+                    porcentaje = 4.66;
+                }else if(promotion == '000603' ){
+                    porcentaje = 7.51;
+                }else if(promotion == '000903' ){
+                    porcentaje = 10.86;
+                }else if(promotion == '001203' ){
+                    porcentaje = 13.63;
+                }else if(promotion == '001803' ){
+                    porcentaje = 19.99;
+                }
+
+            }
+
+            if( tipoTarjeta == '003' ){
+                if( promotion == '000303' ){
+                    porcentaje = 6.05;
+                }else if(promotion == '000603' ){
+                    porcentaje = 8.50;
+                }else if(promotion == '000903' ){
+                    porcentaje = 10.80;
+                }else if(promotion == '001203' ){
+                    porcentaje = 12.95;
+                }else if(promotion == '001803' ){
+                    porcentaje = 0.0;
+                }
+            }
+
+            return porcentaje
+
+        }
+
+        async function getPorcentajeCreditoDebito(tipoTarjeta){
+            if(tipoTarjeta == '003'){
+                return 3.5
+            }
+            return 2.9
+        }
+
+        async function realizarPagoNetPay(opcionPago) {
 
             const baseUrl = 'https://ecommerce.netpay.com.mx/gateway-ecommerce';
             const storeIdAcq = '483131';
@@ -753,6 +847,25 @@ TABLA CARRITO DE COMPRAS
             const password = "ec0m12";
             const url2 = "https://ecommerce.netpay.com.mx";
             const promotion = opcionPago
+            const tipoTarjeta = $(`#opcionTipoTarjeta`).val()
+
+
+            const porcentajeComision = getPorcentajeComision( promotion, tipoTarjeta )
+            const sumaCesta = parseFloat(localStorage.getItem("sumaCesta"))
+            const cargoPorTransferencia = 3.00
+            const iva = sumaCesta * 0.16
+
+            const porcentajeCreditoDebito = await getPorcentajeCreditoDebito(tipoTarjeta);
+
+            const totalAPagar =  sumaCesta + porcentajeComision/100*sumaCesta + cargoPorTransferencia + porcentajeCreditoDebito/100*sumaCesta + iva * 2
+
+            $("#ivaInput").val(iva.toFixed(2))
+            $('#resumenTipoTarjeta').html( $(`#opcionTipoTarjeta option:selected`).html() );
+            $('#resumenSobreTasa').html(porcentajeComision.toFixed(2));
+            $('#resumenTasaDebitoCredito').html(porcentajeCreditoDebito.toFixed(2) + "% + IVA");
+            $(`#resumenCargoPorTransferencia`).html( (cargoPorTransferencia).toFixed(2) + ' + IVA' );
+            $(`#resumenTotalAPagar`).html( sumaCesta.toFixed(2) );
+            $(`#resumenTotalAPagarMasCargos`).html( totalAPagar.toFixed(2) );
 
             console.log({
                 credenciales: {
@@ -762,12 +875,20 @@ TABLA CARRITO DE COMPRAS
                     password,
                     url2
                 },
-                promotion
+                promotion,
+                tarjeta: {
+                    tipoTarjeta,
+                    porcentajeComision,
+                    porcentajeCreditoDebito
+                },
+                venta: {
+                    sumaCesta,
+                    cargoPorTransferencia,
+                    totalAPagar
+                }
             });
 
-            console.log(baseUrl);
-
-            $.ajax({
+            total = await $.ajax({
                 url: `${baseUrl}/v1/auth/login`,
                 contentType: 'Application/Json',
                 type: 'POST',
@@ -880,6 +1001,7 @@ TABLA CARRITO DE COMPRAS
                         "transType": "Auth",
                         "promotion": promotion,
                         "checkout": {
+                            "cardType" : tipoTarjeta,
                             "merchantReferenceCode": "<?php print_r(ModeloCompras::mdlGetCompras()['idCompra'] + 1); ?>",
                             "bill": {
                                 "city": "<?php echo $FacturacionUser[0]["estado"]; ?>",
@@ -911,7 +1033,7 @@ TABLA CARRITO DE COMPRAS
 
                             ],
                             "purchaseTotals": {
-                                "grandTotalAmount": localStorage.getItem("sumaCesta"),
+                                "grandTotalAmount": totalAPagar.toFixed(2),
                                 "currency": "MXN"
                             },
                             "merchanDefinedDataList": [{
@@ -1074,11 +1196,14 @@ TABLA CARRITO DE COMPRAS
 
 
 
-
-        $(document).on('click', '#botonPagoNetPay', function() {
-
+        function mostrarMensualidadesDisponibles(){
             $('#modalNetPay').modal('show');
-            sumaCesta = parseFloat(localStorage.getItem("sumaCesta"))
+            sumaCesta = parseFloat(localStorage.getItem("sumaCesta"));
+            tipoTarjeta = $(`#opcionTipoTarjeta`).val()
+
+            console.log({
+                tipoTarjetaEnMens: tipoTarjeta
+            });
 
             opcionesPago = '<option value="000000">Pago en una sola exhibición</option>';
 
@@ -1098,21 +1223,45 @@ TABLA CARRITO DE COMPRAS
                 opcionesPago += '<option value="001203">12 meses sin intereses</option>'
             }
 
-            if (sumaCesta >= 1800) {
+            if (sumaCesta >= 1800 && tipoTarjeta != '003') {
                 opcionesPago += '<option value="001803">18 meses sin intereses</option>'
             }
 
             $('#opcionPagoNetPay').html(opcionesPago);
+        }
 
-            console.log({
-                message: 'definiendo opcionesPago',
-                sumaCesta,
-                opcionesPago
-            });
+        $(document).on('click', '#botonPagoNetPay', function() {
+
+            mostrarMensualidadesDisponibles();
+
+            // console.log({
+            //     message: 'definiendo opcionesPago',
+            //     sumaCesta,
+            //     opcionesPago
+            // });
 
             // datosNetPay.checkout.purchaseTotals.grandTotalAmount = localStorage.getItem("sumaCesta");
             // $('#formu').submit();
         });
+
+        $(document).on('change', '#opcionTipoTarjeta', function() {
+
+            // console.log({
+            //     tipoTarjeta: $(this).val()
+            // });
+
+            codigoOpcionPago = $('#opcionPagoNetPay').val()
+            datosNetPay.promotion = codigoOpcionPago
+
+            mostrarMensualidadesDisponibles();
+            realizarPagoNetPay(codigoOpcionPago);
+
+            // console.log({
+            //     message: 'opcion de pago actualizada',
+            //     value: $(this).val(),
+            //     netpay: datosNetPay
+            // });
+            });
 
         $(document).on('change', '#opcionPagoNetPay', function() {
 
@@ -1121,20 +1270,20 @@ TABLA CARRITO DE COMPRAS
 
             realizarPagoNetPay(codigoOpcionPago);
 
-            console.log({
-                message: 'opcion de pago actualizada',
-                value: $(this).val(),
-                netpay: datosNetPay
-            });
+            // console.log({
+            //     message: 'opcion de pago actualizada',
+            //     value: $(this).val(),
+            //     netpay: datosNetPay
+            // });
         });
 
         $(document).on('click', '#botonRealizarPagoNetPay', function() {
             datosNetPay.checkout.purchaseTotals.grandTotalAmount = localStorage.getItem("sumaCesta");
 
-            console.log({
-                message: 'Datos finales enviados a netpay',
-                datosNetPay
-            });
+            // console.log({
+            //     message: 'Datos finales enviados a netpay',
+            //     datosNetPay
+            // });
 
 
 
