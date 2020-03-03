@@ -1,47 +1,319 @@
+.dudasYSugerencias{
+    margin-top:20px;
+    background: linear-gradient(to top, black 10% ,white 70%);
+}
+/*==========================================================*/
+
+.dudasYSugerencias .container{
+    margin-top: 30px;
+}
+
+.dudasYSugerencias .container .datos-i{
+    display: block;
+}
+
+.dudasYSugerencias .container .datos-t{
+    display: block;
+    text-align: center;
+}
+
+/*==========================================================*/
+.dudasYSugerencias .telefonoContacto{
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.dudasYSugerencias .correoContacto{
+    
+    height: 100px;
+}
+
+.dudasYSugerencias .direccionContacto{
+    
+    height: 100px;
+}
+
+.dudasYSugerencias .telefonoContacto img{
+    width: 40px;
+    
+}
+
+.dudasYSugerencias .correoContacto img{
+    width: 40px;
+    
+}
+
+.dudasYSugerencias .direccionContacto img{
+    width: 40px;
+    
+}
+/*==========================================================*/
+.formularioCont{
+    
+    /*background: linear-gradient(to top, black, white);*/
+}
+
 /*=============================================
 FOOTER
 =============================================*/
 
 footer{
-	margin-top:20px;
-	border-top:8px solid #999;
-	background: #222;
-	padding:20px 0;
+    background: #000;
+}
+/*======================================================*/
+/*-------------------------------------------*/
+footer #zaeropuerto img{
+    /*display: flex;
+    
+    align-items: center;*/
+    display:flex;
+    margin:0 auto;
 }
 
+footer #freightliner img{
+    display:flex;
+    margin:0 auto;
+}
+
+footer #mercedes img{
+    display:flex;
+    margin:0 auto;
+}
+
+footer #greatdane img{
+    display:flex;
+    margin:0 auto;
+}
+/*-------------------------------------------*/
+/*======================================================*/
+
 .footerCategorias h4 a{
-	color:#666;
+    color:#666;
 }
 
 .footerCategorias li a{
-	color:#999;
+    color:#999;
 }
 
 .footerCategorias hr{
-	border:1px solid #333;
+    border:1px solid #333;
 }
 
 .infoContacto h5{
-	color:#999;
+    color:#999;
 }
 
 .formContacto h4{
-	color:#666;
+    color:#666;
 }
 
 .final{
-	padding:20px 0;
-	background: black;
+    padding:10px 0;
+    background: black;
 }
 
 .final ul li{
-	display:inline;
-	line-height:30px;
-	margin:0px 5px;
-	color:white;
+    display:inline;
+    line-height:30px;
+    margin:0px 5px;
+    color:white;
 }
 
 .final .social ul li a i{
-	font-size:18px;
-	margin:0 1px;
+    font-size:18px;
+    margin:0 1px;
+}
+
+/*--=================================
+    PUNTOS DE QUIEBRE PERSONALIZADOS
+===================================*/
+/*--======================================================================
+                ESCRITORIO GRANDE (LG revisamos en 1366 en adelante)
+========================================================================*/
+@media (min-width: 1200px)
+{
+    /*------------------------------------------------*/
+    
+    .dudasYSugerencias .container .datos-t{
+        font-size: 15px;
+    }
+    
+    footer #zaeropuerto img{
+        width:100%;
+        max-width:250px;
+        display:flex;
+        margin:0 auto;
+    }
+    
+    footer #freightliner img{
+        width:100%;
+        max-width:170px;
+        display:flex;
+        margin:0 auto;
+    }
+    
+    footer #mercedes img{
+        width:100%;
+        max-width:170px;
+        display:flex;
+        margin:0 auto;
+    }
+    
+    footer #greatdane img{
+        width:100%;
+        max-width:170px;
+        display:flex;
+        margin:0 auto;
+    }
+    /*------------------------------------------------*/
+    
+}
+/*--======================================================================
+        ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
+========================================================================*/
+@media (max-width: 1199px) and (min-width: 992px)
+{
+    /*------------------------------------------------*/
+    
+    .dudasYSugerencias .container .datos-t{
+        font-size: 12px;
+    }
+    
+    footer #zaeropuerto{}
+    
+    footer #freightliner{}
+
+    footer #mercedes{}
+
+    footer #greatdane{}
+    /*------------------------------------------------*/
+    
+    /*------------------------------------------------*/
+    footer #zaeropuerto img{
+        width:100%;
+        max-width:200px;
+        margin: auto;
+    }
+    
+    footer #freightliner img{
+        width:100%;
+        max-width:140px;
+        margin: auto;
+    }
+    
+    footer #mercedes img{
+        width:100%;
+        max-width:140px;
+        margin: auto;
+    }
+    
+    footer #greatdane img{
+        width:100%;
+        max-width:140px;
+        margin: auto;
+    }
+    /*------------------------------------------------*/
+}
+/*--======================================================================
+        ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
+========================================================================*/
+@media (max-width: 991px) and (min-width: 768px)
+{
+    /*------------------------------------------------*/
+    
+    .dudasYSugerencias .container .datos-t{
+        font-size: 10px;
+    }
+    
+    .dudasYSugerencias .direccionContacto img{
+        width: 25px;
+
+    }
+    
+    footer #zaeropuerto{
+
+    }
+    
+    footer #freightliner{
+        
+    }
+
+    footer #mercedes{
+        
+    }
+
+    footer #greatdane{
+        
+    }
+    /*------------------------------------------------*/
+    
+    /*------------------------------------------------*/
+    footer #zaeropuerto img{
+        width:100%;
+        max-width:200px;
+        margin: auto;
+    }
+    
+    footer #freightliner img{
+        width:100%;
+        max-width:120px;
+        margin: auto;
+    }
+    
+    footer #mercedes img{
+        width:100%;
+        max-width:120px;
+        margin: auto;
+    }
+    
+    footer #greatdane img{
+        width:100%;
+        max-width:120px;
+        margin: auto;
+    }
+    /*------------------------------------------------*/
+}
+/*--======================================================================
+                                MOVILES (XS revisamos en 320px)
+========================================================================*/
+@media (max-width: 767px)
+{   
+    /*------------------------------------------------*/
+    footer #zaeropuerto{
+        display: block;
+    }
+    
+    footer #freightliner{
+        display:none;
+    }
+
+    footer #mercedes{
+        display:none;
+    }
+
+    footer #greatdane{
+        display:none;
+    }
+    /*------------------------------------------------*/
+    
+    /*------------------------------------------------*/
+    footer #zaeropuerto img{
+        width:100%;
+        max-width:200px;
+        margin: auto;
+    }
+    
+    footer #freightliner img{
+        
+    }
+    
+    footer #mercedes img{
+        
+    }
+    
+    footer #greatdane img{
+        
+    }
+    /*------------------------------------------------*/
 }

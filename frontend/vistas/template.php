@@ -118,6 +118,10 @@
         
         <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
         
+        <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Oswald:300&display=swap" rel="stylesheet">
+        
         <!--==================================
             HOJAS DE ESTILO PERSONALIZADAS
         ===================================-->
@@ -139,6 +143,8 @@
         <link rel="stylesheet" href="<?php echo $url;?>vistas/css/ofertas.css">
         
         <link rel="stylesheet" href="<?php echo $url;?>vistas/css/footer.css">
+        
+        <link rel="stylesheet" href="<?php echo $url;?>vistas/css/banner.css">
         
         <!--==================================
                 PLUGGINS DE JAVASCRIPT
@@ -291,7 +297,7 @@
                 include "modulos/infoproductos.php";
             }
             
-            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas" || $rutas[0] === "proceder-pago" || $rutas[0] == "editarDireccion" || $rutas[0] == "pagoTransferencia" || $rutas[0] == "prueba"){
+            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas" || $rutas[0] === "proceder-pago" || $rutas[0] == "editarDireccion" || $rutas[0] == "pagoTransferencia" || $rutas[0] == "prueba" || $rutas[0] == "politicas-privacidad"){
                 include "modulos/".$rutas[0].".php";
             }
             
@@ -315,7 +321,10 @@
             else if($rutas[0] == "inicio"){
                 //include "modulos/slide.php";
                 //include "modulos/destacados.php";
-                include "modulos/familias.php";
+                include "modulos/banner.php";
+                include "modulos/aplicacion.php";
+                include "modulos/marca.php";
+                include "modulos/tipo-de-sistema.php";
             }
             else{
                 include "modulos/error404.php";
@@ -324,7 +333,10 @@
         else{
             //include "modulos/slide.php";
             //include "modulos/destacados.php";
-            include "modulos/familias.php";
+            include "modulos/banner.php";
+            include "modulos/aplicacion.php";
+            include "modulos/marca.php";
+            include "modulos/tipo-de-sistema.php";
         }
         include "modulos/footer.php";
         ?>
@@ -350,6 +362,8 @@
         <script src="<?php echo $url;?>vistas/js/CarritoComprasService.js"></script>
 
         <script src="<?php echo $url;?>vistas/js/carrito-de-compras.js"></script>
+        
+        <script src="<?php echo $url;?>vistas/js/banner.js"></script>
         
         <!--<script src="<?php echo $url;?>vistas/js/registroFacebook.js"></script>-->
         
