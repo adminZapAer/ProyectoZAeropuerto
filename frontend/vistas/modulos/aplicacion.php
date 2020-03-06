@@ -43,9 +43,9 @@ echo '
 
 <?php
 
-$titulosModulos = array("APLICACION","MARCA","TIPO DE SISTEMA");
+$titulosModulos = array("APLICACION");
 
-$rutaModulos = array("aplicacion","marca","tipo-de-sistema");
+$rutaModulos = array("aplicacion");
 
 $base = 0;
 
@@ -62,29 +62,7 @@ if($titulosModulos[0] == "APLICACION"){
     
 }
 
-if($titulosModulos[1] == "MARCA"){
-    
-    $ordenar = "marcas";//esta variable va a ser la que defina como va a ser ordenada la tabla
-    $item = null;
-    $valor = null;
-    $modo = "DESC";
-    
-    $marca = ControladorProductos::ctrMostrarMarcas($ordenar, $item, $valor, $base, $tope, $modo);
-    
-}
-
-if($titulosModulos[2] == "TIPO DE SISTEMA"){
-    
-    $ordenar = "sistemas";//esta variable va a ser la que defina como va a ser ordenada la tabla
-    $item = null;
-    $valor = null;
-    $modo = "DESC";
-    
-    $tipoSistema = ControladorProductos::ctrMostrarSistemas($ordenar, $item, $valor, $base, $tope, $modo);
-    
-}
-
-$modulos = array($aplicacion,$marca,$tipoSistema);
+$modulos = array($aplicacion);
 
 for ($i = 0; $i < count($titulosModulos); $i++){
     echo '
@@ -149,7 +127,7 @@ for ($i = 0; $i < count($titulosModulos); $i++){
                 
                 <!-- Producto -->
                 
-                <li class="col-md-3 col-sm-6 col-xs-12 familias">
+                <li class="col-md-3 col-sm-6 col-xs-6 familias">
                 
                     <!--===============================================-->
                     
@@ -164,7 +142,7 @@ for ($i = 0; $i < count($titulosModulos); $i++){
                     </figure>
                     
                     <!--===============================================-->
-                    
+                    <!--
                     <h4>
                     
                         <small>
@@ -177,7 +155,7 @@ for ($i = 0; $i < count($titulosModulos); $i++){
                             
                         </small>
                         
-                    </h4>
+                    </h4>-->
                     
                     <!--===============================================-->
                     

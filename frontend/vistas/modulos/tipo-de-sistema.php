@@ -43,37 +43,15 @@ echo '
 
 <?php
 
-$titulosModulos = array("APLICACION","MARCA","TIPO DE SISTEMA");
+$titulosModulos = array("TIPO DE SISTEMA");
 
-$rutaModulos = array("aplicacion","marca","tipo-de-sistema");
+$rutaModulos = array("tipo-de-sistema");
 
 $base = 0;
 
 $tope = 4;
 
-if($titulosModulos[0] == "APLICACION"){
-    
-    $ordenar = "aplicaciones";//esta variable va a ser la que defina como va a ser ordenada la tabla
-    $item = null;
-    $valor = null;
-    $modo = "DESC";
-    
-    $aplicacion = ControladorProductos::ctrMostrarAplicaciones($ordenar, $item, $valor, $base, $tope, $modo);
-    
-}
-
-if($titulosModulos[1] == "MARCA"){
-    
-    $ordenar = "marcas";//esta variable va a ser la que defina como va a ser ordenada la tabla
-    $item = null;
-    $valor = null;
-    $modo = "DESC";
-    
-    $marca = ControladorProductos::ctrMostrarMarcas($ordenar, $item, $valor, $base, $tope, $modo);
-    
-}
-
-if($titulosModulos[2] == "TIPO DE SISTEMA"){
+if($titulosModulos[0] == "TIPO DE SISTEMA"){
     
     $ordenar = "sistemas";//esta variable va a ser la que defina como va a ser ordenada la tabla
     $item = null;
@@ -84,7 +62,7 @@ if($titulosModulos[2] == "TIPO DE SISTEMA"){
     
 }
 
-$modulos = array($aplicacion,$marca,$tipoSistema);
+$modulos = array($tipoSistema);
 
 for ($i = 0; $i < count($titulosModulos); $i++){
     echo '
@@ -149,7 +127,7 @@ for ($i = 0; $i < count($titulosModulos); $i++){
                 
                 <!-- Producto -->
                 
-                <li class="col-md-3 col-sm-6 col-xs-12 familias">
+                <li class="col-md-3 col-sm-6 col-xs-6 familias">
                 
                     <!--===============================================-->
                     
@@ -164,7 +142,7 @@ for ($i = 0; $i < count($titulosModulos); $i++){
                     </figure>
                     
                     <!--===============================================-->
-                    
+                    <!--
                     <h4>
                     
                         <small>
@@ -177,7 +155,7 @@ for ($i = 0; $i < count($titulosModulos); $i++){
                             
                         </small>
                         
-                    </h4>
+                    </h4>-->
                     
                     <!--===============================================-->
                     

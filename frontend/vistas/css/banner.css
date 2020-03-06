@@ -1,0 +1,245 @@
+.container-banner{
+    background: rgb(204,21,25);
+    background: linear-gradient(90deg, rgba(204,21,25,1) 45%, rgba(31,32,34,1) 55%); 
+}
+#stage {
+    margin: 0 auto;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+#stage div{
+    position: absolute;
+}
+#stage .imagen1{
+    background-image: url(../img/banner/baner1.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#stage .imagen2{
+    background-image: url(../img/banner/baner2.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#stage .imagen3{
+    background-image: url(../img/banner/baner3.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#stage .imagen4{
+    background-image: url(../img/banner/baner4.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#stage .imagen5{
+    background-image: url(../img/banner/baner5.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#stage .imagen6{
+    background-image: url(../img/banner/baner6.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#stage div:nth-of-type(1) {
+    animation-name: fader;
+    animation-delay: 4s;
+    animation-duration: 1s;
+    z-index: 20;
+}
+#stage div:nth-of-type(2) {
+    z-index: 10;
+}
+#stage div:nth-of-type(n+3) {
+    display: none;
+}
+
+@keyframes fader {
+    from { opacity: 1.0; }
+    to   { opacity: 0.0; }
+}
+
+.imagenMarca{
+    display: flex;
+    justify-content: center;
+}
+
+.imagenMarca img{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.botonWhats{
+    display: flex;
+    justify-content: center;
+}
+
+.boton_personalizado{
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    max-width: 320px;
+    height: 38px;
+    padding: 5px 50px;
+    font-size:16px;
+    text-align: center;
+    font-family: 'PostScriptum','Oswald', sans-serif;
+    color: #ffffff;
+    background-color:#787878;
+    margin-bottom: 20px;
+    /*border-radius:6px;*/
+    /*border:2px solid #0016b0;*/
+}
+
+.boton_personalizado:hover{
+    background-color:#ED1C24;
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    color: #ffffff;
+    transition-duration: 0.3s;
+}
+
+.botonWhats .img-whatsapp{
+    width: 100%;
+    max-width: 47px;
+}
+
+/*--=================================
+    PUNTOS DE QUIEBRE PERSONALIZADOS
+===================================*/
+/*--======================================================================
+            ESCRITORIO GRANDE (LG revisamos en 1366 en adelante)
+========================================================================*/
+@media (min-width: 1200px)
+{
+    /*------------------------------BANNER------------------------------*/
+    #stage {
+        width: 922px;
+        height: 309px;
+    }
+    
+    #stage div{
+        width:100%;
+        max-width:922px;
+        height:100%;
+        max-height: 309px;
+    }
+    /*------------------------------------------------------------------*/
+    
+    /*------------------------------DEALER------------------------------*/
+    .botonWhats .img-whatsapp{
+        position:absolute;
+        right: 100px;
+        bottom: 25px;
+    }
+    /*------------------------------------------------------------------*/
+}
+/*--======================================================================
+        ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
+========================================================================*/
+@media (max-width: 1199px) and (min-width: 992px)
+{
+    /*------------------------------BANNER------------------------------*/
+    #stage {
+        width: 793.6px;
+        height: 247.2px;
+    }
+    
+    #stage div{
+        width:100%;
+        max-width:793.6px;
+        height:100%;
+        max-height: 247.2px;
+    }
+    /*------------------------------------------------------------------*/
+    
+    /*------------------------------DEALER------------------------------*/
+    .botonWhats .img-whatsapp{
+        position:absolute;
+        right: 50px;
+        bottom: 25px;
+    }
+    /*------------------------------------------------------------------*/
+}
+/*--======================================================================
+        ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
+========================================================================*/
+@media (max-width: 991px) and (min-width: 768px)
+{
+    /*------------------------------BANNER------------------------------*/
+    #stage {
+        width: 595.2px;
+        height: 185.4px;
+    }
+    
+    #stage div{
+        width:100%;
+        max-width:595.2px;
+        height:100%;
+        max-height: 185.4px;
+    }
+    /*------------------------------------------------------------------*/
+    
+    /*------------------------------DEALER------------------------------*/
+    .botonWhats .img-whatsapp{
+        position:absolute;
+        right: -5px;
+        bottom: 25px;
+    }
+    /*------------------------------------------------------------------*/
+}
+/*--======================================================================
+                                MOVILES (XS revisamos en 320px)
+========================================================================*/
+@media (max-width: 767px) and (min-width: 497px){
+    /*------------------------------BANNER------------------------------*/
+    #stage {
+        width: 496px;
+        height: 154.5px;
+    }
+    
+    #stage div{
+        width:100%;
+        max-width:496px;
+        height:100%;
+        max-height: 154.5px;
+    }
+    /*------------------------------------------------------------------*/
+    /*------------------------------DEALER------------------------------*/
+    .botonWhats .img-whatsapp{
+        position:relative;
+        left: 135px;
+        bottom: 45px;
+    }
+    /*------------------------------------------------------------------*/
+}
+
+@media (max-width: 496px)
+{
+    /*------------------------------BANNER------------------------------*/
+    #stage {
+        width: 297.6px;
+        height: 92.7px;
+    }
+    
+    #stage div{
+        width:100%;
+        max-width:297.6px;
+        height:100%;
+        max-height: 92.7px;
+    }
+    /*------------------------------------------------------------------*/
+    
+    /*------------------------------DEALER------------------------------*/
+    .boton_personalizado{
+        font-size: 17px;
+        padding: -5px 10px;
+    }
+    .botonWhats .img-whatsapp{
+        position:relative;
+        left: 145px;
+        bottom: 45px;
+    }
+    /*------------------------------------------------------------------*/
+}
