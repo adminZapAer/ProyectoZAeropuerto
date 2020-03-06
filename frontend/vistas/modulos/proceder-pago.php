@@ -263,7 +263,7 @@ TABLA CARRITO DE COMPRAS
                                 <div class="form-check">
                                     <input type="checkbox" class="politicas form-check-input" id="input-terminos">
                                     <label class="form-check-label" for="input-terminos">
-                                        He leído y acepto los <a href="<?php echo $url;?>politicas-privacidad" target="_blank">términos y condiciones.</a>
+                                        He leído y acepto los <a href="<?php echo $url; ?>politicas-privacidad" target="_blank">términos y condiciones.</a>
                                     </label>
                                 </div>
                             </div>
@@ -380,7 +380,7 @@ TABLA CARRITO DE COMPRAS
                     <!-- FORMAS DE PAGO -->
                     <div class="formPago row">
 
-                    <div class="col-lg-4">
+                        <div class="col-lg-4">
                             <label for="">TIPO DE TARJETA</label>
                             <select name="" id="opcionTipoTarjeta" class="form-control" require>
                                 <option value="001">VISA</option>
@@ -435,12 +435,18 @@ TABLA CARRITO DE COMPRAS
                         </div>
 
 
-                        <div class="col-lg-12 mt-3">
+                        <div class="col-lg-10 mt-3">
                             <a href="#" id="botonRealizarPagoNetPay" class="btn btn-info mt-3">
                                 <button type="button" class="btn btn-info mt-3" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
-                                    REALIZAR COMPRA
+                                    REALIZAR COMPRAsxd
                                 </button>
                             </a>
+                        </div>
+                        <div class="col-lg-2 mt-3">
+                            <button type="button" class="btn btn-primary float-right" data-dismiss="modal">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                regresar
+                            </button>
                         </div>
 
                         <hr>
@@ -789,8 +795,7 @@ TABLA CARRITO DE COMPRAS
     </script>
 
     <script>
-
-        function getPorcentajeComision( promotion, tipoTarjeta ){
+        function getPorcentajeComision(promotion, tipoTarjeta) {
 
             // 001 - VISA
             // 002 - MASTERCARD
@@ -798,32 +803,32 @@ TABLA CARRITO DE COMPRAS
 
             porcentaje = 0.0
 
-            if( tipoTarjeta == '001' || tipoTarjeta == '002' ){
+            if (tipoTarjeta == '001' || tipoTarjeta == '002') {
 
-                if( promotion == '000303' ){
+                if (promotion == '000303') {
                     porcentaje = 4.66;
-                }else if(promotion == '000603' ){
+                } else if (promotion == '000603') {
                     porcentaje = 7.51;
-                }else if(promotion == '000903' ){
+                } else if (promotion == '000903') {
                     porcentaje = 10.86;
-                }else if(promotion == '001203' ){
+                } else if (promotion == '001203') {
                     porcentaje = 13.63;
-                }else if(promotion == '001803' ){
+                } else if (promotion == '001803') {
                     porcentaje = 19.99;
                 }
 
             }
 
-            if( tipoTarjeta == '003' ){
-                if( promotion == '000303' ){
+            if (tipoTarjeta == '003') {
+                if (promotion == '000303') {
                     porcentaje = 6.05;
-                }else if(promotion == '000603' ){
+                } else if (promotion == '000603') {
                     porcentaje = 8.50;
-                }else if(promotion == '000903' ){
+                } else if (promotion == '000903') {
                     porcentaje = 10.80;
-                }else if(promotion == '001203' ){
+                } else if (promotion == '001203') {
                     porcentaje = 12.95;
-                }else if(promotion == '001803' ){
+                } else if (promotion == '001803') {
                     porcentaje = 0.0;
                 }
             }
@@ -832,8 +837,8 @@ TABLA CARRITO DE COMPRAS
 
         }
 
-        async function getPorcentajeCreditoDebito(tipoTarjeta){
-            if(tipoTarjeta == '003'){
+        async function getPorcentajeCreditoDebito(tipoTarjeta) {
+            if (tipoTarjeta == '003') {
                 return 3.5
             }
             return 2.9
@@ -850,22 +855,22 @@ TABLA CARRITO DE COMPRAS
             const tipoTarjeta = $(`#opcionTipoTarjeta`).val()
 
 
-            const porcentajeComision = getPorcentajeComision( promotion, tipoTarjeta )
+            const porcentajeComision = getPorcentajeComision(promotion, tipoTarjeta)
             const sumaCesta = parseFloat(localStorage.getItem("sumaCesta"))
             const cargoPorTransferencia = 3.00
             const iva = sumaCesta * 0.16
 
             const porcentajeCreditoDebito = await getPorcentajeCreditoDebito(tipoTarjeta);
 
-            const totalAPagar =  sumaCesta + porcentajeComision/100*sumaCesta + cargoPorTransferencia + porcentajeCreditoDebito/100*sumaCesta + iva * 2
+            const totalAPagar = sumaCesta + porcentajeComision / 100 * sumaCesta + cargoPorTransferencia + porcentajeCreditoDebito / 100 * sumaCesta
 
             $("#ivaInput").val(iva.toFixed(2))
-            $('#resumenTipoTarjeta').html( $(`#opcionTipoTarjeta option:selected`).html() );
+            $('#resumenTipoTarjeta').html($(`#opcionTipoTarjeta option:selected`).html());
             $('#resumenSobreTasa').html(porcentajeComision.toFixed(2));
-            $('#resumenTasaDebitoCredito').html(porcentajeCreditoDebito.toFixed(2) + "% + IVA");
-            $(`#resumenCargoPorTransferencia`).html( (cargoPorTransferencia).toFixed(2) + ' + IVA' );
-            $(`#resumenTotalAPagar`).html( sumaCesta.toFixed(2) );
-            $(`#resumenTotalAPagarMasCargos`).html( totalAPagar.toFixed(2) );
+            $('#resumenTasaDebitoCredito').html(porcentajeCreditoDebito.toFixed(2) + "%");
+            $(`#resumenCargoPorTransferencia`).html((cargoPorTransferencia).toFixed(2) + '');
+            $(`#resumenTotalAPagar`).html(sumaCesta.toFixed(2));
+            $(`#resumenTotalAPagarMasCargos`).html(totalAPagar.toFixed(2));
 
             console.log({
                 credenciales: {
@@ -1001,7 +1006,7 @@ TABLA CARRITO DE COMPRAS
                         "transType": "Auth",
                         "promotion": promotion,
                         "checkout": {
-                            "cardType" : tipoTarjeta,
+                            "cardType": tipoTarjeta,
                             "merchantReferenceCode": "<?php print_r(ModeloCompras::mdlGetCompras()['idCompra'] + 1); ?>",
                             "bill": {
                                 "city": "<?php echo $FacturacionUser[0]["estado"]; ?>",
@@ -1196,7 +1201,7 @@ TABLA CARRITO DE COMPRAS
 
 
 
-        function mostrarMensualidadesDisponibles(){
+        function mostrarMensualidadesDisponibles() {
             $('#modalNetPay').modal('show');
             sumaCesta = parseFloat(localStorage.getItem("sumaCesta"));
             tipoTarjeta = $(`#opcionTipoTarjeta`).val()
@@ -1261,7 +1266,7 @@ TABLA CARRITO DE COMPRAS
             //     value: $(this).val(),
             //     netpay: datosNetPay
             // });
-            });
+        });
 
         $(document).on('change', '#opcionPagoNetPay', function() {
 
