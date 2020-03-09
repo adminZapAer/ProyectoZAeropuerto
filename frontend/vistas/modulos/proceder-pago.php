@@ -438,7 +438,7 @@ TABLA CARRITO DE COMPRAS
                         <div class="col-lg-10 mt-3">
                             <a href="#" id="botonRealizarPagoNetPay" class="btn btn-info mt-3">
                                 <button type="button" class="btn btn-info mt-3" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
-                                    REALIZAR COMPRAsxd
+                                    REALIZAR COMPRA
                                 </button>
                             </a>
                         </div>
