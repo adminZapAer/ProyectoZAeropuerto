@@ -163,10 +163,10 @@ if(isset($_SESSION["validarSesion"])){
                 
             </div>
             <!--=================================
-                      CARRITO DE COMPRAS
+                      PROMOCIONES
             ==================================-->
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="camion">
-                <img src="<?php echo $servidor;?>vistas/img/camion.png" alt="">
+                <a href="#modalPromociones" data-toggle="modal" style="text-decoration: none;"><img src="<?php echo $servidor;?>vistas/img/ofertas.png" alt="logo Refaccionaria"></a>
             </div>
             
         </div>
@@ -537,4 +537,20 @@ if(isset($_SESSION["validarSesion"])){
         
     </div>
     
+</div>
+
+
+<!--==============================================-->
+<div class="modal fade modalOferta" id="modalPromociones" role="dialog">
+    
+    <div class="modal-dialog">
+        <div class="modal-body img-Promocion">
+            <a href="<?php echo $url;?>ofertas"><img src="<?php echo $servidor;?>vistas/img/promo.jpg"></a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div>¡Aprovecha nuestra oferta de lanzamiento!</div>
+        </div>
+    </div>
 </div>

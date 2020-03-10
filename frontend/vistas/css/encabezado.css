@@ -214,6 +214,14 @@ header #categorias hr
 .modalFormulario form .checkBox{
     margin-top:10px;
 }
+/*--------------------------------------------------------*/
+.modalOferta .modal-dialog{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/*--------------------------------------------------------*/
 /*--=================================
     PUNTOS DE QUIEBRE PERSONALIZADOS
 ===================================*/
@@ -232,10 +240,10 @@ header #categorias hr
         
     }
     header #camion img{
-        width: 100%;
-        max-width: 150px;
-        margin-top: 15px;
-        
+        position: absolute;
+        right: 18px;
+        width: 200px;
+        margin-top: 22px;
     }
     
     /*------------------------------------------------*/
@@ -314,7 +322,25 @@ header #categorias hr
         left: -100px;
     }
     /*------------------------------------------------*/
-    
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 900px;
+        margin-top: 30px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 700px;
+    }
+    .modalOferta .container div{
+        margin-right: 10%;
+        margin-left: 10%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
     /*------------------------------------------------*/
     
     /*------------------------------------------------*/
@@ -335,9 +361,11 @@ header #categorias hr
         
     }
     header #camion img{
-        width: 100%;
-        max-width: 130px;
-        margin-top: 20px;
+        
+        position: absolute;
+        right: 18px;
+        width: 200px;
+        margin-top: 18px;
         
     }
     /*------------------------------------------------*/
@@ -426,6 +454,25 @@ header #categorias hr
         font-size: 14px;
     }
     /*------------------------------------------------------------------*/
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 900px;
+        margin-top: 50px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 700px;
+    }
+    .modalOferta .container div{
+        margin-right: 7%;
+        margin-left: 7%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
 }
 /*--======================================================================
         ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
@@ -442,10 +489,11 @@ header #categorias hr
         
     }
     header #camion img{
-        width: 100%;
-        max-width: 130px;
-        margin-top: 20px;
         
+        position: absolute;
+        right: 0px;
+        width: 150px;
+        margin-top: 20px;
     }
     
     /*------------------------------------------------*/
@@ -535,6 +583,25 @@ header #categorias hr
         font-size: 12px;
     }
     /*------------------------------------------------------------------*/
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 700px;
+        margin-top: 60px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 700px;
+    }
+    .modalOferta .container div{
+        margin-right: 1%;
+        margin-left: 1%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
 }
 /*--======================================================================
                                 MOVILES (XS revisamos en 320px)
@@ -546,7 +613,10 @@ header #categorias hr
         margin-top: 15px;
     }
     header #camion img{
-        width: 70px;
+        
+        position: absolute;
+        right: -30px;
+        width: 130px;
         margin-top: 20px;
         
     }
@@ -629,6 +699,25 @@ header #categorias hr
     }
  
     /*------------------------------------------------------------------*/
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 900px;
+        margin-top: 55px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 600px;
+    }
+    .modalOferta .container div{
+        margin-right: 5%;
+        margin-left: 5%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
 }
 @media (max-width: 499px)
 {
@@ -648,10 +737,10 @@ header #categorias hr
         margin-top: 15px;
     }
     header #camion img{
+        
         position: absolute;
-        right: -9px;
-        width: 100%;
-        max-width: 55px;
+        right: -30px;
+        width: 100px;
         margin-top: 25px;
         
     }
@@ -768,7 +857,25 @@ header #categorias hr
         display: none;
     }
     /*------------------------------------------------------------------*/
-    
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 900px;
+        margin-top: 70px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 400px;
+    }
+    .modalOferta .container div{
+        margin-right: 1%;
+        margin-left: 1%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
     /*------------------------------------------------*/
     
     /*------------------------------------------------*/
