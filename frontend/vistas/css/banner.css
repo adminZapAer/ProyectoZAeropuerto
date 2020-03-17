@@ -41,6 +41,16 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+#stage .imagen7{
+    background-image: url(../img/banner/baner7.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#stage .imagen8{
+    background-image: url(../img/banner/baner8.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 #stage div:nth-of-type(1) {
     animation-name: fader;
     animation-delay: 4s;
@@ -81,10 +91,9 @@
     width: 100%;
     max-width: 320px;
     height: 38px;
-    padding: 5px 50px;
-    font-size:16px;
+    padding: 8px 50px;
     text-align: center;
-    font-family: 'PostScriptum','Oswald', sans-serif;
+    font-family: 'postscriptumlight','Oswald',sans-serif;
     color: #ffffff;
     background-color:#787878;
     margin-bottom: 20px;
@@ -133,6 +142,10 @@
         right: 100px;
         bottom: 25px;
     }
+    
+    .botonWhats .boton_personalizado{
+        font-size: 15px;
+    }
     /*------------------------------------------------------------------*/
 }
 /*--======================================================================
@@ -155,6 +168,9 @@
     /*------------------------------------------------------------------*/
     
     /*------------------------------DEALER------------------------------*/
+    .botonWhats .boton_personalizado{
+        font-size: 15px;
+    }
     .botonWhats .img-whatsapp{
         position:absolute;
         right: 50px;
@@ -186,6 +202,9 @@
         position:absolute;
         right: -5px;
         bottom: 25px;
+    }
+    .botonWhats .boton_personalizado{
+        font-size: 15px;
     }
     /*------------------------------------------------------------------*/
 }
@@ -233,7 +252,7 @@
     
     /*------------------------------DEALER------------------------------*/
     .boton_personalizado{
-        font-size: 17px;
+        font-size: 15px;
         padding: -5px 10px;
     }
     .botonWhats .img-whatsapp{

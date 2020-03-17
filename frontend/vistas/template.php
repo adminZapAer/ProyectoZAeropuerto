@@ -145,6 +145,8 @@
         <link rel="stylesheet" href="<?php echo $url;?>vistas/css/footer.css">
         
         <link rel="stylesheet" href="<?php echo $url;?>vistas/css/banner.css">
+
+        <link rel="stylesheet" href="<?php echo $url;?>vistas/css/fonts/post-scriptum/stylesheet.css">
         
         <!--==================================
                 PLUGGINS DE JAVASCRIPT

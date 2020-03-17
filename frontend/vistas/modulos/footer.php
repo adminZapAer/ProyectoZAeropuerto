@@ -105,11 +105,21 @@
             <!--==================================
                            CATEGORIAS
             ===================================-->
-            
+            <div class="somos">
+                
+                <div class="col-xs-12 text-center">
+                    
+                    <span class="somos-1"><a href="https://www.zapataaeropuerto.com/about.html" target="_blank">Conocenos... </a></span><span class="quien-soy"><a href="https://www.zapataaeropuerto.com/about.html" target="_blank">¿Quienes somos?</a></span>
+                    
+                </div>
+                
+            </div>
+            <br>
+            <br>
             <div class="marcas">
                 <div class="col-xs-12" id="zaeropuerto">
                     <figure>
-                        <a href="https://www.zapataaeropuerto.com">
+                        <a href="http://www.zapata.com.mx/freightliner/?utm_source=WebsiteZapata&amp;utm_medium=LinkZapataCamiones">
                             <img src="<?php echo $servidor;?>vistas/img/plantilla/logob.png">
                         </a>
                     </figure>

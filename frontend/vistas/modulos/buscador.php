@@ -6,35 +6,35 @@ BARRA PRODUCTOS
     
     <div class="container">
         
-	    <div class="row">
-	    
-	        <div class="col-sm-6 col-xs-12">
-	            
+        <div class="row">
+        
+            <div class="col-sm-6 col-xs-12">
+                
                 <div class="btn-group">
-	                
-	                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-	                    
-	                    Ordenar Productos <span class="caret"></span>
-	                    
-	                </button>
-	                
-	                <ul class="dropdown-menu" role="menu">
+                    
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        
+                        Ordenar Productos <span class="caret"></span>
+                        
+                    </button>
+                    
+                    <ul class="dropdown-menu" role="menu">
                         <?php
                         
                         echo '
                         <li><a href="'.$url.$rutas[0].'/1/recientes/'.$rutas[3].'">Más Reciente</a></li>
-	                    <li><a href="'.$url.$rutas[0].'/1/antiguos/'.$rutas[3].'">Más Antiguo</a></li>
+                        <li><a href="'.$url.$rutas[0].'/1/antiguos/'.$rutas[3].'">Más Antiguo</a></li>
                         ';
                         
                         
                         ?>
-	                    
+                        
                     </ul>
-	                
-	            </div>
-	            
-	        </div>
-		    <div class="col-sm-6 col-xs-12 organizarProductos">
+                    
+                </div>
+                
+            </div>
+            <div class="col-sm-6 col-xs-12 organizarProductos">
                 
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default btnGrid" id="btnGrid0">
@@ -53,14 +53,14 @@ BARRA PRODUCTOS
                         
                     </button>
                     
-				</div>
-				
-			</div>
-			
-		</div>
-		
-	</div>
-	
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
 </div>
 
 
@@ -146,7 +146,7 @@ BARRA PRODUCTOS
                 <div class = "col-xs-12 text-center error404">
                     
                     <h1><small>¡Oops!</small></h1>
-                    <h2>Aún no hay productos en esta sección</h2>
+                    <h2>No hay publicaciones que coincidan con tu busqueda</h2>
                     
                 </div>
                 
@@ -158,14 +158,14 @@ BARRA PRODUCTOS
                     <!--=====================================
                         VITRINA DE PRODUCTOS EN CUADRICULA
                     ======================================-->
-                    <ul class = "grid0">';
+                    <ul class = "grid0 busqueda">';
                         
                         foreach ($productos as $key => $value)
                         {
                             echo '
                             <!-- Producto -->
                             
-                            <li class="col-md-3 col-sm-6 col-xs-12" style =" width:292.5px; height:393.6px;">
+                            <li class="col-md-3 col-sm-6 col-xs-12" style ="">
                             
                                 <!--===============================================-->
                                 <figure>
@@ -173,9 +173,9 @@ BARRA PRODUCTOS
                                     <a href="'.$url.$value["ruta"].'" class="pixelProducto">';
                                         
                                         if($value["portada"] != ""){
-                                            echo '<img src="'.$servidor.$value["portada"].'" class="img-responsive" style="width: 287px; height: 215px;">';
+                                            echo '<img src="'.$servidor.$value["portada"].'" class="img-responsive" style="">';
                                         }else{
-                                            echo '<img src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg" class="img-responsive" style="width: 287px; height: 215px;">';
+                                            echo '<img src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg" class="img-responsive" style="">';
                                         }
                                     
                                     echo '    
@@ -183,7 +183,7 @@ BARRA PRODUCTOS
                                     
                                 </figure>
                                 
-                                '.$value["idProducto"].'
+                                <strong>SKU: </strong>'.$value["sku"].'
                                 
                                 <!--===============================================-->
                                 

@@ -98,11 +98,7 @@ $(function(){
     
 });
 
-$.scrollUp({
-    scrollText: "",
-    scrollSpeed: 2000,
-    easingType: "easeOutQuint"
-});
+
 
 /*=================================================
                 MIGAS DE PAN

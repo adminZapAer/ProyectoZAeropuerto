@@ -53,6 +53,7 @@ BARRA PRODUCTOS
 
 .barraProductos .organizarProductos span{
 	margin-left:5px;
+    
 }
 
 /*=============================================
@@ -61,6 +62,7 @@ VITRINA PRODUCTOS CUADRÍCULA
 
 .tituloDestacado h1{
 	margin-top:-5px;
+    /*font-family: 'postscriptumlight','Oswald',sans-serif;*/
 }
 
 .tituloDestacado button span{
@@ -169,6 +171,15 @@ VITRINA PRODUCTOS LISTA
 	    width:50%;
 	    height:50%;
 	}
+    .productos ul.busqueda li{
+        width: 100%;
+        max-width: 292.5px;
+        height: 393.6px;
+    }
+    .productos ul.busqueda img{
+        width: 287px;
+        height: 215px;
+    }
 
 }
 
@@ -181,6 +192,15 @@ ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
 	.banner{
 		height:260px;
 	}
+    .productos ul.busqueda li{
+        width: 100%;
+        max-width: 242.5px;
+        height: 342.38px;
+    }
+    .productos ul.busqueda img{
+        width: 212.5px;
+        height: 159.38px;
+    }
 
 }
 
@@ -212,8 +232,17 @@ ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
 	.banner .textoDer, .banner .textoIzq, .banner .textoCentro{
 		top:35px; 
 	}
-
-
+    
+    .productos ul.busqueda li{
+        width: 100%;
+        max-width: 375px;
+        height: 422.75px;
+    }
+    .productos ul.busqueda img{
+        width: 345px;
+        height: 258.75px;
+    }
+    
 }
 
 /*=============================================
@@ -265,6 +294,5 @@ MOVIL (XS revisamos en 320px)
 	.productos ul li h1 small{
 		font-size:16px;
 	}
-
 	
 }

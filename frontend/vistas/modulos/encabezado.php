@@ -44,7 +44,7 @@ if(isset($_SESSION["validarSesion"])){
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="logotipo">
                 
                 <a href="<?php echo $url; ?>">
-                    <img src="<?php echo $servidor;?>vistas/img/logo-online-blaco.png" alt="logo Refaccionaria">
+                    <img src="<?php echo $servidor;?>vistas/img/logo-online.png" alt="logo Refaccionaria">
                 </a>
                 
             </div>
@@ -72,12 +72,14 @@ if(isset($_SESSION["validarSesion"])){
                         <a href="<?php echo $url;?>carrito-de-compras" class="icon-compras">
                             
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <div class="cantidadCesta text-center"></div>
                             
                         </a>
                         <p class="tituloSeccion">
-                            COMPRAS <span class="cantidadCesta"></span>
+                            Mi carrito
+                            <!--COMPRAS <span class="cantidadCesta"></span>
                             <br>
-                            MX $ <span class="sumaCesta"></span>
+                            MX $ <span class="sumaCesta"></span>-->
                         </p>
                         
                     </div>
@@ -142,13 +144,14 @@ if(isset($_SESSION["validarSesion"])){
                             else{
                                 echo '
                                 <li>
-                                    <span class="icon-usuario">
-                                        <a href="#modalIngreso" data-toggle="modal"><i class="fa fa-user" aria-hidden="true"></i></a>
-                                    </span>
+                                    <a href="#modalIngreso" data-toggle="modal">
+                                        <span class="icon-usuario"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    </a>
+                                    
                                 </li>
                                 <span class="tituloSeccion">
                                     <li><a href="#modalIngreso" data-toggle="modal">Iniciar Sesión</a></li>
-                                    <li><a href="#modalRegistro" data-toggle="modal">Crear Cuenta</a></li>
+                                    <!--<li><a href="#modalRegistro" data-toggle="modal">Crear Cuenta</a></li>-->
                                 </span>
                                 ';
                             }
@@ -221,37 +224,30 @@ if(isset($_SESSION["validarSesion"])){
             ?>
         </div>
         
-        <div class="container tipo-aplicaciones">
-            
-            <div class="row">
-                
-                <div class="col-lg-2 col-md-2"></div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 center-block">
-                    
-                    <div class="col-lg-3 col-md-3 temporal"></div>
-                    
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 aplicaciones">
-                        <a href="<?php echo $url;?>aplicacion">APLICACION</a>
-                    </div>
-                    
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 aplicaciones">
-                        <a href="<?php echo $url;?>marca">MARCA</a>
-                    </div>
-                    
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 aplicaciones">
-                        <a href="<?php echo $url;?>tipo-de-sistema">TIPO DE SISTEMA</a>
-                    </div>
-                    
-                </div>
-                <div class="col-lg-2 col-md-2"></div>
-                
-            </div>
-            
-        </div>
         
         
     </div>
 </header>
+
+<div class="container-fluid">
+<div class="container">
+            
+    <div class="row">
+        
+        <div class="col-lg-6 col-md-6 col-sm-4 col-xs-2"></div>
+        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-8 aplicaciones">
+            <ul class="horizontal">
+                <li><a href="<?php echo $url;?>aplicacion">Aplicaciones</a></li>
+                <li><a href="<?php echo $url;?>marca">Marca</a></li>
+                <li><a href="<?php echo $url;?>tipo-de-sistema">Tipo de Sistema</a></li>
+                <li><a href="<?php echo $url;?>ofertas">Kits</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-1 col-xs-2"></div>
+    </div>
+    
+</div>
+</div>
 
 <div class="container-fluid">
     
@@ -260,18 +256,29 @@ if(isset($_SESSION["validarSesion"])){
         <div class="row">
             
             <!------------------------BUSCADOR------------------------>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
-            <div class="input-group col-lg-8 col-md-8 col-sm-8 col-xs-12" id="buscador">
-                <input type="search" name="buscar" class="form-control" id="busca" placeholder="Buscar..." value="">
-                <span class="input-group-btn">
-                    <a href="<?php echo $url; ?>buscador/1/recientes">
-                        <button class="btn btn-default backColor" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </a>
-                </span>
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+                
+                <div class="input-group col-lg-9 col-md-9 col-sm-8 col-xs-12" id="buscador">
+                    <input type="search" name="buscar" class="form-control" id="busca" placeholder="Buscar..." value="">
+                    <span class="input-group-btn">
+                        <a href="<?php echo $url; ?>buscador/1/recientes">
+                            <button class="btn btn-default backColor" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </a>
+                    </span>
+                </div>
+                
+                <div class="col-lg-1 col-md-2 col-sm-1 col-xs-12"></div>
+                
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+            
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 estafeta">
+                <a href="https://www.estafeta.com/Herramientas/Rastreo" style="">Rastrear mi envío</a>
+                <a href="https://www.estafeta.com/Herramientas/Rastreo"><img src="<?php echo $servidor;?>vistas/img/estafeta.jpg" alt=""></a>
+            </div>
             
         </div>
         
