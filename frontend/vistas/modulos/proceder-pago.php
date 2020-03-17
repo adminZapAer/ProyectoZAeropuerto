@@ -301,33 +301,8 @@ TABLA CARRITO DE COMPRAS
 
                         <figure class="col-xs-6 col-xs-offset-3">
 
-                            <center>
+                            
 
-                                <input type="radio" id="checkPaypal" name="pago" value="paypal" checked>
-
-                            </center>
-
-                            <div id="paypal-button-container"></div>
-
-                        </figure>
-                        <br>
-                        <figure class="col-xs-6 col-xs-offset-3">
-
-                            <center>
-
-                                <input type="radio" id="checkBBVA" name="pago" value="BBVA">
-
-                            </center>
-
-                            <!--<img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">-->
-                            <center>
-                                <a href="#modalTransferencia" data-toggle="modal">
-                                    <button type="button" class="btn btn-warning" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
-                                        TRANSFERENCIA ELECTRONICA
-                                    </button>
-                                </a>
-                            </center>
-                            <br>
                             <center>
                                 <a href="#modalNetPay" id="botonPagoNetPay">
                                     <button type="button" class="btn btn-info" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
@@ -336,6 +311,23 @@ TABLA CARRITO DE COMPRAS
                                     </button>
                                 </a>
                             </center>
+                            <br>
+                            <center>
+                                <a href="#modalTransferencia" data-toggle="modal">
+                                    <button type="button" class="btn btn-warning" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
+                                        TRANSFERENCIA ELECTRONICA
+                                    </button>
+                                </a>
+                            </center>
+
+                        </figure>
+                        <br>
+
+                        <figure class="col-xs-6 col-xs-offset-3">
+                            <br>    
+                            <!--<img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">-->
+                            <div id="paypal-button-container"></div>
+                            
                         </figure>
 
                     </div>
