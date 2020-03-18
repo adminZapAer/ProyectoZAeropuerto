@@ -14,6 +14,8 @@ $url = Ruta::ctrRuta();
         <div class="imagen4"></div>
         <div class="imagen5"></div>
         <div class="imagen6"></div>
+        <div class="imagen7"></div>
+        <div class="imagen8"></div>
         
     </div>
     

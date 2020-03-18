@@ -867,6 +867,10 @@ $.ajax({
                     <div class="radio">
                         <label><input type="radio" class="recoleccionPersonal" name="inputDireccion" value="-1">
                             <span>Recoger en Zapata Camiones Aeropuerto</span>
+                            <br>
+                            <span>Carretera Los Reyes - Lechería Km. 23. Colonia La Magdalena Panoaya.</span>
+                            <br>
+                            <span>Municipio de Textcoco. Estado de México</span>
                         </label>
                     </div>
                 </div>

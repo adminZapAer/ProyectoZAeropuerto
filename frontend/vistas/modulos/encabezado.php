@@ -10,197 +10,166 @@ INICIO DE SESIÓN USUARIO
 
 if(isset($_SESSION["validarSesion"])){
 
-	if($_SESSION["validarSesion"] == "ok"){
+    if($_SESSION["validarSesion"] == "ok"){
 
-		echo '<script>
-		
-			localStorage.setItem("usuario","'.$_SESSION["idUsuario"].'");
+        echo '<script>
+        
+            localStorage.setItem("usuario","'.$_SESSION["idUsuario"].'");
 
-		</script>';
+        </script>';
 
-	}
+    }
 
 }
 
-
 ?>
-<!--=================================
-                TOP
-==================================-->
-<div class="container-fluid barraSuperior" id="top">
-    <div class="container">
-        <div class="row">
-            <!--==============================
-            REDES SOCIALES
-            ==============================-->
-            <!--En escritorio grande ocupara 9 columnas, en escritorio mediano 9 columnas, en escritorio pequeño ocupara 8 columnas y en dispositivos moviles ocupara 12 columnas -->
-            <div class="col-lg-7 col-md-7 col-sm-8 col-xs-12 social">
-                <ul>
-                    <!--==========CAMBIAR LOS ESTILOS DE LA SECCION SOCIAL Y LAS URL-->
-                    <?php
-                    /*Se realizara una solicitud al controlador para que cambie las caracteristicas de redes sociales*/
-                    $social = ControladorPlantilla::ctrEstiloPlantilla();
-                    
-                    $jsonRedesSociales = json_decode($social["redesSociales"],true);
-                    
-                    foreach ($jsonRedesSociales as $key => $value){ 
-                        echo '
-                        <li>
-                           <a href="'.$value["url"].'" target="_blank">
-                               <i class="fa '.$value["red"].' redSocial '.$value["estilo"].'" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        ';
-                    }?>
-                </ul>
-            </div>
-            <!--==============================
-            REGISTRO DE USUARIOS
-            ==============================-->
-            <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12 registro">
-                <ul>
-                    
-                    <?php
-                    //Preguntamos si esta creada la variable sesion
-                    if(isset($_SESSION["validarSesion"])){
-                        //Si esta validada la sesion
-                        if($_SESSION["validarSesion"] == "ok"){
-                            //de que modo fue que se inicio sesion
-                            if($_SESSION["modo"] == "directo"){
-                                if($_SESSION["foto"] != ""){
-                                    echo'
-                                    <li>
-                                        <img class="img-circle" src="'.$url.$_SESSION["foto"].'" width="8%">
-                                    </li>
-                                    ';
-                                }
-                                else{
-                                    echo'
-                                    <li>
-                                        <img class="img-circle" src="'.$servidor.'vistas/img/usuarios/default/anonymous.png" width="10%">
-                                    </li>
-                                    ';
-                                }
-                                echo'
-                                <li>Bienvenido '.strtok($_SESSION["nombre"]," ").' |</li>
-                                <li>
-                                    <a href="'.$url.'perfil">Ver perfil</a>
-                                </li>
-                                <li> | </li>
-                                <li>
-                                    <a href="'.$url.'salir">Cerrar Sesión</a>
-                                </li>
-                                ';
-                            }
-                            
-                        }
-                    }
-                    else{
-                        echo '
-                        
-                        <li><a href="#modalIngreso" data-toggle="modal">Iniciar Sesión</a></li>
-                        <li>|</li>
-                        <li><a href="#modalRegistro" data-toggle="modal">Crear Cuenta</a></li>
-                        
-                        ';
-                    }
-                    
-                    ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 <!--=================================
                 HEADER
 ==================================-->
 <header class="container-fluid"> <!-- Contenedor Fluido -->
+    
     <div class="container"> <!--Contenedor estatico-->
+        
         <div class="row" id="encabezado"> <!-- Sistema de filas y columnas de bootstrap-->
+            
+            <?php
+            
+            $social = ControladorPlantilla::ctrEstiloPlantilla();
+            
+            ?>
+            
             <!--=================================
                             LOGOTIPO
             ==================================-->
-            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="logotipo">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="logotipo">
+                
                 <a href="<?php echo $url; ?>">
-                    <img src="<?php echo $servidor.$social["logo"];?>" class="img-responsive" alt="logo">
+                    <img src="<?php echo $servidor;?>vistas/img/logo-online.png" alt="logo Refaccionaria">
                 </a>
+                
             </div>
+            
             <!--=================================
                  BLOQUE CATEGORIAS Y BUSCADOR
             ==================================-->
-            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 <!--=================================
                             BOTON CATEGORIAS
                 ==================================-->
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 backColor" id="btnCategorias">
-                    <p>CATÁLOGO
-                        <span class="pull-right">
-                            <i class="fa fa-bars" aria-hidden="true"></i>
-                        </span>
-                    </p>
-                </div>
-                <!--=================================
-                                BUSCADOR
-                ==================================-->
-                <div class="input-group col-lg-8 col-md-8 col-sm-8 col-xs-12" id="buscador">
-                    <input type="search" name="buscar" class="form-control" id="busca" placeholder="Buscar..." value="">
-                    <span class="input-group-btn">
-                        <a href="<?php echo $url; ?>buscador/1/recientes">
-                           
-                            <button class="btn btn-default backColor" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </a>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="btnCategorias">
+                    <p>Catálogo</p>
+                    <span class="pull-right icon-categ">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
                     </span>
                 </div>
-                
-                <br>
-                <div class="col-md-3 col-sm-3" id="freightliner">
-                    <figure>
-                        <a href="<?php echo $url."buscador/1/recientes/freightliner"; ?>">
-                            <img src="<?php echo $servidor; ?>vistas/img/freightliner-logo.png" style="display:flex;  align-items: center; ">
+                <!--=================================
+                           COMPRAS Y SESION
+                ==================================-->
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="compras-y-sesion">
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="carrito">
+                        
+                        <a href="<?php echo $url;?>carrito-de-compras" class="icon-compras">
+                            
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <div class="cantidadCesta text-center"></div>
+                            
                         </a>
-                    </figure>
-                </div>
-                <div class="col-md-3 col-sm-3" id="mercedes">
-                    <figure>
-                        <a href="<?php echo $url."buscador/1/recientes/mercedes-benz"; ?>">
-                            <img src="<?php echo $servidor; ?>vistas/img/logo-mercedes.png" style="display:flex;  align-items: center;">
-                        </a>
-                    </figure>
-                </div>
-                
-                <div class="col-md-3 col-sm-3" id="greatdane">
-                    <figure>
-                        <a href="<?php echo $url."buscador/1/recientes/great-dane"; ?>">
-                            <img src="<?php echo $servidor; ?>vistas/img/logo-great-dane.png" style="display:flex;  align-items: center;">
-                        </a>
-                    </figure>
+                        <p class="tituloSeccion">
+                            Mi carrito
+                            <!--COMPRAS <span class="cantidadCesta"></span>
+                            <br>
+                            MX $ <span class="sumaCesta"></span>-->
+                        </p>
+                        
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="registro">
+                        
+                        <ul>
+                            
+                            <?php 
+                            
+                            //Preguntamos si esta creada la variable sesion
+                            if(isset($_SESSION["validarSesion"])){
+                                //Si esta validada la sesion
+                                if($_SESSION["validarSesion"] == "ok"){
+                                    //de que modo fue que se inicio sesion
+                                    if($_SESSION["modo"] == "directo"){
+                                        if($_SESSION["foto"] != ""){
+                                            echo'
+                                            <li>
+                                                <img class="img-usuario" src="'.$url.$_SESSION["foto"].'">
+                                            </li>
+                                            ';
+                                        }
+                                        else{
+                                            echo'
+                                            <li>
+                                                <img class="img-usuario" src="'.$servidor.'vistas/img/usuarios/default/anonymous.png">
+                                            </li>
+                                            ';
+                                        }
+                                        echo'
+                                        <!--<li>'.strtok($_SESSION["nombre"]," ").' |</li>-->
+                                        <span class="dropdown">
+                                            
+                                            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" style="color: #fff" onclick="this.blur();">
+                                                
+                                                <span class="tituloSeccionDrop">'.strtok($_SESSION["nombre"]," ").'</span>
+                                                <span class="arrow-down" style=""><i class="caret"></i></span> 
+                                                
+                                            </button>
+                                            
+                                            <ul class="dropdown-menu">
+                                                <li><a href="'.$url.'perfil">Perfil</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="'.$url.'salir">Salir</a></li>
+                                            </ul>
+                                            
+                                        </span>
+                                        <!--<span class="tituloSeccion">
+                                            <li>
+                                                <a href="'.$url.'perfil">Ver perfil</a>
+                                            </li>
+                                            <li>
+                                                <a href="'.$url.'salir">Cerrar Sesión</a>
+                                            </li>
+                                        </span>-->
+                                        ';
+                                    }
+
+                                }
+                            }
+                            else{
+                                echo '
+                                <li>
+                                    <a href="#modalIngreso" data-toggle="modal">
+                                        <span class="icon-usuario"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    </a>
+                                    
+                                </li>
+                                <span class="tituloSeccion">
+                                    <li><a href="#modalIngreso" data-toggle="modal">Iniciar Sesión</a></li>
+                                    <!--<li><a href="#modalRegistro" data-toggle="modal">Crear Cuenta</a></li>-->
+                                </span>
+                                ';
+                            }
+                            
+                            ?>
+                            
+                        </ul>
+                        
+                    </div>
+                    
                 </div>
                 
             </div>
             <!--=================================
-                      CARRITO DE COMPRAS
+                      PROMOCIONES
             ==================================-->
-            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="carrito">
-                <a href="<?php echo $url;?>carrito-de-compras">
-                    <button class="btn btn-default pull-left backColor">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    </button>
-                </a>
-                <p>MI CARRITO 
-                    <span class="cantidadCesta"></span>
-                    <br>
-                    MXN $ <span class="sumaCesta"></span>
-                </p>
-            </div>
-            
-            <br>
-                
-            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12">
-                
-                <a href="https://bit.ly/2EX1eXS" class="pull-right" target="_blank"><img src="<?php echo $servidor?>vistas/img/contacto.png" style="width: 100%; max-width: 240px;"></a>
-                
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="camion">
+                <a href="#modalPromociones" data-toggle="modal" style="text-decoration: none;"><img src="<?php echo $servidor;?>vistas/img/ofertas.png" alt="logo Refaccionaria"></a>
             </div>
             
         </div>
@@ -254,8 +223,68 @@ if(isset($_SESSION["validarSesion"])){
             //var_dump($categorias);
             ?>
         </div>
+        
+        
+        
     </div>
 </header>
+
+<div class="container-fluid">
+<div class="container">
+            
+    <div class="row">
+        
+        <div class="col-lg-6 col-md-6 col-sm-4 col-xs-2"></div>
+        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-8 aplicaciones">
+            <ul class="horizontal">
+                <li><a href="<?php echo $url;?>aplicacion">Aplicaciones</a></li>
+                <li><a href="<?php echo $url;?>marca">Marca</a></li>
+                <li><a href="<?php echo $url;?>tipo-de-sistema">Tipo de Sistema</a></li>
+                <li><a href="<?php echo $url;?>ofertas">Kits</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-1 col-xs-2"></div>
+    </div>
+    
+</div>
+</div>
+
+<div class="container-fluid">
+    
+    <div class="container">
+        
+        <div class="row">
+            
+            <!------------------------BUSCADOR------------------------>
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+                
+                <div class="input-group col-lg-9 col-md-9 col-sm-8 col-xs-12" id="buscador">
+                    <input type="search" name="buscar" class="form-control" id="busca" placeholder="Buscar..." value="">
+                    <span class="input-group-btn">
+                        <a href="<?php echo $url; ?>buscador/1/recientes">
+                            <button class="btn btn-default backColor" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </a>
+                    </span>
+                </div>
+                
+                <div class="col-lg-1 col-md-2 col-sm-1 col-xs-12"></div>
+                
+            </div>
+            
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 estafeta">
+                <a href="https://www.estafeta.com/Herramientas/Rastreo" style="">Rastrear mi envío</a>
+                <a href="https://www.estafeta.com/Herramientas/Rastreo"><img src="<?php echo $servidor;?>vistas/img/estafeta.jpg" alt=""></a>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
 
 
 <!--==================================
@@ -275,36 +304,10 @@ if(isset($_SESSION["validarSesion"])){
             <!--==================================
             *==   VENTANA MODAL PARA REGISTRO  ==*
             ===================================-->
-            <!--
-            <div class="col-sm-6 col-xs-12 facebook" >
-                
-                <p>
-                    
-                    <i class="fa fa-facebook"></i>
-                    Registro con Facebook
-                    
-                </p>
-                
-            </div>
-                
-            <!--==================================
-            *==   VENTANA MODAL PARA REGISTRO  ==*
-            ===================================--
             
-            <div class="col-sm-6 col-xs-12 google" >
-                
-                <p>
-                    
-                    <i class="fa fa-google"></i>
-                    Registro con Google
-                    
-                </p>
-                
-            </div>
-            -->
             <!--=====================================
-			REGISTRO DIRECTO
-			======================================-->
+            REGISTRO DIRECTO
+            ======================================-->
             <form method="post"  onsubmit="return registroUsuario()">
                
                 <hr>
@@ -409,38 +412,9 @@ if(isset($_SESSION["validarSesion"])){
             
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             
-            <!--==================================
-            *==   INICIAR SESION FACEBOOK  ==*
-            ===================================
-            
-            <div class="col-sm-6 col-xs-12 facebook">
-                
-                <p>
-                    
-                    <i class="fa fa-facebook"></i>
-                    Ingresa con Facebook
-                    
-                </p>
-                
-            </div>
-                
-            <!--==================================
-            *==   INICIAR SESION GOOGLE  ==*
-            ===================================
-            
-            <div class="col-sm-6 col-xs-12 google">
-                
-                <p>
-                    
-                    <i class="fa fa-google"></i>
-                    Ingresa con Google
-                    
-                </p>
-                
-            </div>
             <!--=====================================
-			INGRESO DIRECTO
-			======================================-->
+            INGRESO DIRECTO
+            ======================================-->
             <form method="post">
                
                 <hr>
@@ -570,4 +544,20 @@ if(isset($_SESSION["validarSesion"])){
         
     </div>
     
+</div>
+
+
+<!--==============================================-->
+<div class="modal fade modalOferta" id="modalPromociones" role="dialog">
+    
+    <div class="modal-dialog">
+        <div class="modal-body img-Promocion">
+            <a href="<?php echo $url;?>ofertas"><img src="<?php echo $servidor;?>vistas/img/promo.jpg"></a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div>¡Aprovecha nuestra oferta de lanzamiento!</div>
+        </div>
+    </div>
 </div>

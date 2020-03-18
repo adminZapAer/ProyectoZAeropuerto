@@ -141,7 +141,7 @@ class ModeloProductos{
             
             if($x == ($tamano - 1)){
                 
-                $query = "ruta LIKE '%$busqueda[0]%' OR titulo LIKE '%$busqueda[0]%' OR titular LIKE '%$busqueda[0]%' OR descripcion LIKE '%$busqueda[0]%' OR detalles LIKE '%$busqueda[0]%' OR marca LIKE '%$busqueda[0]%' OR tipoSistema LIKE '%$busqueda[0]%' OR aplicacion LIKE '%$busqueda[0]%' OR sku LIKE '%$busqueda[0]%' OR tipoAplicacion LIKE '%$busqueda[0]%'";
+                $query = "ruta LIKE '%$busqueda[0]%' OR titulo LIKE '%$busqueda[0]%' OR titular LIKE '%$busqueda[0]%' OR descripcion LIKE '%$busqueda[0]%' OR detalles LIKE '%$busqueda[0]%' OR marca LIKE '%$busqueda[0]%' OR tipoSistema LIKE '%$busqueda[0]%' OR aplicacion = '%$busqueda[0]%' OR sku LIKE '%$busqueda[0]%' OR tipoAplicacion LIKE '%$busqueda[0]%'";
                 
             }
             
@@ -166,7 +166,7 @@ class ModeloProductos{
                     
                     if($x == ($tamano - 1)){
                         
-                        $query .= " OR ruta LIKE '%$busqueda[$i]%' OR titulo LIKE '%$busqueda[$i]%' OR titular LIKE '%$busqueda[$i]%' OR descripcion LIKE '%$busqueda[$i]%' OR detalles LIKE '%$busqueda[$i]%' OR marca LIKE '%$busqueda[$i]%' OR tipoSistema LIKE '%$busqueda[$i]%' OR aplicacion LIKE '%$busqueda[$i]%' OR sku LIKE '%$busqueda[$i]%' OR tipoAplicacion LIKE '%$busqueda[$i]%'";
+                        $query .= " OR ruta LIKE '%$busqueda[$i]%' OR titulo LIKE '%$busqueda[$i]%' OR titular LIKE '%$busqueda[$i]%' OR descripcion LIKE '%$busqueda[$i]%' OR detalles LIKE '%$busqueda[$i]%' OR marca LIKE '%$busqueda[$i]%' OR tipoSistema LIKE '%$busqueda[$i]%' OR aplicacion = '%$busqueda[$i]%' OR sku LIKE '%$busqueda[$i]%' OR tipoAplicacion LIKE '%$busqueda[$i]%'";
                         
                     }
                     

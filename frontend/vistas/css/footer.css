@@ -125,6 +125,21 @@ footer #greatdane img{
     margin:0 1px;
 }
 
+.somos{
+    padding: 20px 0;
+}
+.somos span.somos-1 a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 25px;
+}
+
+.somos span.quien-soy a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+}
+
 /*--=================================
     PUNTOS DE QUIEBRE PERSONALIZADOS
 ===================================*/

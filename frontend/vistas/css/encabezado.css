@@ -1,10 +1,6 @@
 /*--=================================
                 TOP
 ===================================*/
-#top ul
-{
-    padding-top: 8px;
-}
 
 #top ul li
 {
@@ -13,87 +9,148 @@
     margin: 0px 5px; /*Margen 0 vertical 5 horizontal*/
     color: white;
 }
-
-/*--=================================
-                SOCIAL
-===================================*/
-.social ul li a i
-{
-    font-size: 18px;
-    margin: 0 1px;
-}
-
 /*--=================================
                 REGISTRO
 ===================================*/
-.registro ul
+header #registro ul
 {
-    text-align: right;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
+    /*text-align: center;
+    font-size: 11px;
+    font-weight: 600;*/
+    
 }
 /*--=================================
                 HEADER
 ===================================*/
+header{
+    background: -moz-linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 80%), url(../img/plantilla/fondo-cabez.jpg);
+    background: -webkit-linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 80%), url(../img/plantilla/fondo-cabez.jpg);
+    background: linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 80%), url(../img/plantilla/fondo-cabez.jpg);
+    
+    
+}
+/*------------------------CATÁLOGO------------------------*/
 header #btnCategorias
 {
     margin: 20px 0;
+    
 }
 header #btnCategorias p
 {
-    line-height: 40px;
-    margin-bottom: 0px;
-}
-header #btnCategorias p span
-{
+    color: #ffffff;
+    font-family: 'postscriptumlight','Oswald',sans-serif;
     cursor: pointer;
 }
-header #buscador
+header #btnCategorias span.icon-categ
 {
-    margin: 20px 0;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+    color: #ffffff;
 }
-header #buscador input
+header #btnCategorias span.icon-categ:hover{
+    color: #bf0411;
+}
+
+/*--------------------MI CARRITO--------------------------*/
+header #carrito{
+    margin: 20px 0;
+    color: #ffffff;
+}
+header #carrito a.icon-compras{
+    border-radius: 0;
+    text-decoration: none;
+    color: #ffffff;
+}
+header #carrito a.icon-compras:hover{
+    color: #bf0411;
+}
+header #carrito p{
+    margin: auto;
+    font-family: 'Arial', sans-serif;
+}
+/*------------------------USUARIOS------------------------*/
+header #registro{
+    margin: 20px 0;
+    color: #ffffff;
+}
+header #registro span.icon-usuario{
+    border-radius: 0;
+    text-decoration: none;
+    color: #ffffff;
+    border: 1px solid #ed1c24;
+}
+header #registro img.img-usuario{
+    border-radius: 0;
+    text-decoration: none;
+    color: #ffffff;
+    border: 1px solid #ed1c24;
+}
+header #registro span.icon-usuario:hover{
+    color: #bf0411;
+}
+header #registro span.tituloSeccion{
+    margin: auto;
+    align-content: center;
+}
+header #registro span.tituloSeccionDrop{
+    margin: auto;
+    align-content: center;
+    font-family: 'Arial', sans-serif;
+}
+header #registro span.tituloSeccionDrop a{
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+}
+header #registro span.tituloSeccion a{
+    text-decoration: none;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+}
+header #registro span.arrow-down{
+    align-content: center;
+    text-decoration: none;
+}
+header #registro .dropdown-menu a{
+    font-family: 'Arial', sans-serif;
+}
+header #registro .dropdown-menu a:hover{
+    background: red;
+    color: #ffffff;
+}
+header #registro .dropdown-toggle:focus{
+    outline:none !important;
+}
+/*----------------------APLICACIONES----------------------*/
+
+/*--------------------------------------------------------*/
+/*----------------------BUSCADOR-------------------*/
+div #buscador
 {
+    
+}
+div #buscador input
+{
+    margin:10px 0;
     padding: 19px;
     border-radius: 0px;
+    border-color: #ED1C24;
 }
-header #buscador button
+
+div #buscador ::placeholder{
+    color: #ED1C24;
+}
+
+div #buscador button
 {
     padding: 9px;
     border: 1px solid silver;
     border-radius: 0;
 }
 /*------------------------------------------------*/
-header #freightliner{
-    
-}
 
-header #mercedes{
-    margin-left: 60px;
-}
-
-header #greatdane{
-    margin-left: 60px;
-}
 /*------------------------------------------------*/
-header #carrito
-{
-    margin: 20px 0;
-}
-header #carrito button
-{
-    padding: 9px 15px;
-    border: 1px solid silver;
-    border-radius: 0;
-}
-header #carrito p
-{
-    padding: 2px;
-    padding-left: 60px;
-    border: 1px solid #aaa;
-    font-size: 12px;
-}
+
 header #categorias
 {
     display: none;
@@ -131,28 +188,6 @@ header #categorias hr
     color: white;
 }
 
-.modalFormulario .facebook, .modalFormulario .google{
-    cursor: pointer;
-}
-
-.modalFormulario .facebook p{
-    background: #46639f;
-}
-
-.modalFormulario .google p{
-    background: #d6512e;
-}
-
-.modalFormulario .facebook p, .modalFormulario .google p{
-    color: white;
-    text-align: center;
-    line-height: 40px;
-    padding: 8px;
-    font-size: 18px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
 .modalFormulario p i{
     margin-left: -25px;
     margin-right: 25px;
@@ -160,11 +195,11 @@ header #categorias hr
 }
 
 .modalFormulario form{
-	padding: 20px;
+    padding: 20px;
 }
 
 .modalFormulario form hr{
-	border:1px solid #eee;
+    border:1px solid #eee;
 }
 
 .modalFormulario form input[type="text"],
@@ -176,8 +211,25 @@ header #categorias hr
     padding: 15px;
 }
 .modalFormulario form .checkBox{
-	margin-top:10px;
+    margin-top:10px;
 }
+/*--------------------------------------------------------*/
+.modalOferta .modal-dialog{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/*--------------------------------------------------------*/
+header #carrito .cantidadCesta{
+    text-decoration: none;
+    color: #ffffff;
+    background-color: rgba(193,39,45,1);
+}
+header a.icon-compras .cantidadCesta:hover{
+    color: #ffffff;
+}
+/*--------------------------------------------------------*/
 /*--=================================
     PUNTOS DE QUIEBRE PERSONALIZADOS
 ===================================*/
@@ -189,38 +241,173 @@ header #categorias hr
     /*--=================================
                     HEADER
     ===================================*/
-    header #logotipo img
-    {
-        padding: 20px 110px;
-        padding-left:0px;
+    header{
+        height: 90px;
     }
-    header #carrito
-    {
-        padding-left: 100px;
+    header #logotipo img{
+        position: absolute;
+        top: 6px;
+        right: 27px;
+        width: 100%;
+        max-width: 200px;
+        z-index: 1;
     }
-    
-    .modalFormulario .facebook p{
-        margin-right:-15px;
+    header #camion img{
+        position: absolute;
+        top: 0px;
+        left: 90px;
+        width: 100px;
+        z-index: 1;
     }
     
     /*------------------------------------------------*/
-    header #freightliner img{
-        width:150px;
-        margin-top:5px;
-        margin-left: 5px;
+    header #btnCategorias p{
+        position: absolute;
+        top: 0px;
+        font-size: 40px;
+        padding: 0px 30px 0px 0px;
     }
+    header #btnCategorias span.icon-categ{
+        position: absolute;
+        top: 0px;
+        right: 15px;
+        padding: 12px 15px;
+        font-size: 25px;
+    }
+    header #categorias{
+        margin-top: 60px;
+    }
+    /*------------------------------------------------------------------*/
+    header #carrito a.icon-compras{
+        position: relative;
+        top: 10px;
+        padding: 12px 15px;
+        font-size: 28px;
+    }
+    header #carrito p{
+        position: relative;
+        width: 100px;
+        top: -20px;
+        left: 15px;
+        font-size: 17px;
+    }
+    /*------------------------------------------------------------------*/
     
-    header #mercedes img{
-        width:150px;
-        margin-top:0px;
-    }
-    
-    header #greatdane img{
-        width:120px;
-        margin-top:-30px;
-    }
     /*------------------------------------------------*/
     
+    /*------------------------------------------------*/
+    header #registro span.icon-usuario{
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        padding: 7px 14px;
+        font-size: 19px;
+    }
+    header #registro img.img-usuario{
+        position: absolute;
+        top: 3px;
+        left: 2px;
+        width: 100%;
+        max-width: 45px;
+        margin: 7px 14px;
+    }
+    header #registro span.tituloSeccion{
+        position: absolute;
+        text-decoration: none;
+        top: 14px;
+        left: 61px;
+        padding: 5.7px 0px 5.7px 10px;
+    }
+    header #registro span.tituloSeccion a{
+        font-size: 17px;
+    }
+    header #registro span.tituloSeccionDrop{
+        position: absolute;
+        text-decoration: none;
+        top: 5px;
+        left: 60px;
+        padding: 12px 0px 12px 10px;
+        font-size: 17px;
+    }
+    header #registro span.arrow-down{
+        position: absolute;
+        text-decoration: none;
+        top: 5px;
+        left: 120px;
+        padding: 12px 13px;
+        text-decoration: none;
+    }
+    header #registro .dropdown-menu{
+        position: absolute;
+        top: 50px;
+        left: 0px;
+    }
+    /*------------------------------------------------*/
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 900px;
+        margin-top: 30px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 700px;
+    }
+    .modalOferta .container div{
+        margin-right: 10%;
+        margin-left: 10%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    /*------------------------------------------------*/
+    .aplicaciones{
+        height: 15px;
+        margin-top: -10px;
+    }
+    .aplicaciones ul.horizontal{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-size: 15px;
+    }
+    .aplicaciones ul.horizontal li{
+        display: block;
+        float: left;
+        padding: 0 10px;
+    }
+    .aplicaciones ul.horizontal a{
+        text-decoration: none;
+        color: dimgrey;
+    }
+    /*------------------------------------------------*/
+    .estafeta{
+        position: relative;
+        top: 15px;
+        right: 70px;
+    }
+    .estafeta a{
+        text-decoration: none;
+        font-size: 18px;
+        color: #000000;
+    }
+    .estafeta img{
+        width: 90px;
+    }
+    /*-------------------------------------------------*/
+    header #carrito .cantidadCesta{
+        position: absolute;
+        top: 10px;
+        left: 35px;
+        width: 17px;
+        height: 17px;
+        font-size: 11px;
+        padding-top: 1px;
+        border-radius: 50%;
+    }
+    /*-------------------------------------------------*/
 }
 /*--======================================================================
         ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
@@ -230,51 +417,168 @@ header #categorias hr
     /*--=================================
                     HEADER
     ===================================*/
-    header #logotipo img
-    {
-        padding: 25px 60px;
-        padding-left: 0px;
-        
+    header{
+        height: 90px;
     }
-    header #carrito
-    {
-        padding-left: 70px;
+    header #logotipo img{
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        width: 100%;
+        max-width: 170px;
+        z-index: 1;
     }
-    .modalFormulario .facebook p{
-        margin-right:-15px;
-    }
-    
-    /*------------------------------------------------*/
-    header #freightliner{
-
-    }
-
-    header #mercedes{
-        margin-left: 55px;
-    }
-
-    header #greatdane{
-        margin-left: 40px;
+    header #camion img{
+        position: absolute;
+        right: 18px;
+        width: 100px;
+        z-index: 1;
     }
     /*------------------------------------------------*/
-    
+    header #btnCategorias p{
+        position: absolute;
+        top: 0px;
+        font-size: 35px;
+        padding: 0px 20px 0px 0px;
+    }
+    header #btnCategorias span.icon-categ{
+        position: absolute;
+        top: 0px;
+        right: 15px;
+        padding: 12px 15px;
+        font-size: 23px;
+    }
+    header #categorias{
+        margin-top: 50px;
+    }
     /*------------------------------------------------*/
-    header #freightliner img{
-        width:140px;
-        margin-top:0px;
-        margin-left: 5px;
+    header #carrito a.icon-compras{
+        position: relative;
+        top: 11px;
+        padding: 10px 13px;
+        font-size: 23px;
     }
-    
-    header #mercedes img{
-        width:140px;
-        margin-top:0px;
+    header #carrito p{
+        position: relative;
+        top: -18px;
+        left: 15px;
+        width: 100px;
+        padding: 3px 0px 3px 0px;
+        font-size: 15px;
     }
-    
-    header #greatdane img{
-        width:100px;
-        margin-top:-35px;
+    /*------------------------------------------------------------------*/
+    header #registro span.icon-usuario{
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        padding: 7px 14px;
+        font-size: 17px;
     }
-    /*------------------------------------------------*/
+    header #registro img.img-usuario{
+        position: absolute;
+        top: 0px;
+        left:0px;
+        width: 100%;
+        max-width: 44px;
+        margin: 9px 12px;
+        font-size: 19px;
+    }
+    header #registro span.tituloSeccion{
+        position: absolute;
+        text-decoration: none;
+        top: 14px;
+        left: 61px;
+        padding: 4.2px 0px 4.2px 10px;
+    }
+    header #registro span.tituloSeccion a{
+        font-size: 15px;
+    }
+    header #registro span.tituloSeccionDrop{
+        position: absolute;
+        text-decoration: none;
+        top: 5px;
+        left: 50px;
+        padding: 12px 0px 12px 10px;
+    }
+    header #registro span.arrow-down{
+        position: absolute;
+        text-decoration: none;
+        top: 5px;
+        left: 100px;
+        padding: 12px 13px;
+        text-decoration: none;
+    }
+    header #registro .dropdown-menu{
+        position: absolute;
+        top: 50px;
+        left: -20px;
+    }
+    /*------------------------------------------------------------------*/
+    .aplicaciones{
+        height: 15px;
+        margin-top: -5px;
+    }
+    .aplicaciones ul.horizontal{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-size: 15px;
+    }
+    .aplicaciones ul.horizontal li{
+        display: block;
+        float: left;
+        padding: 0 10px;
+    }
+    .aplicaciones ul.horizontal a{
+        text-decoration: none;
+        color: dimgrey;
+    }
+    /*------------------------------------------------------------------*/
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 900px;
+        margin-top: 50px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 700px;
+    }
+    .modalOferta .container div{
+        margin-right: 7%;
+        margin-left: 7%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    /*------------------------------------------------------------------*/
+    .estafeta{
+        position: relative;
+        top: 18px;
+        right: 70px;
+    }
+    .estafeta a{
+        text-decoration: none;
+        font-size: 16px;
+        color: #000000;
+    }
+    .estafeta img{
+        width: 80px;
+    }
+    /*--------------------------------------------------------------*/
+    header #carrito .cantidadCesta{
+        position: absolute;
+        top: 7px;
+        left: 28px;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        padding-top: 1px;
+        border-radius: 50%;
+    }
+    /*--------------------------------------------------------------*/
 }
 /*--======================================================================
         ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
@@ -284,58 +588,349 @@ header #categorias hr
     /*--=================================
                     HEADER
     ===================================*/
-    header #logotipo img
-    {
-        padding: 30px 0px;
+    header{
+        height: 70px;
     }
-    header #carrito
-    {
-        padding-left: 55px;
+    header #logotipo img{
+        position: absolute;
+        top: 14px;
+        right: 22px;
+        width: 100%;
+        max-width: 170px;
     }
-    header #carrito p
-    {
-        display: none;
-    }
-    .modalFormulario .facebook p{
-        margin-right:-15px;
-    }
-    
-    /*------------------------------------------------*/
-    header #freightliner{
-
-    }
-
-    header #mercedes{
-        margin-left: 45px;
-    }
-
-    header #greatdane{
-        margin-left: 45px;
+    header #camion img{
+        
+        position: absolute;
+        top: 0px;
+        width: 90px;
     }
     /*------------------------------------------------*/
-    
+    header #btnCategorias p{
+        position: absolute;
+        top: 0px;
+        right: 50px;
+        font-size: 30px;
+        padding: 0px 20px 0px 0px;
+    }
+    header #btnCategorias span.icon-categ{
+        position: absolute;
+        top: -5px;
+        right: 20px;
+        padding: 10px 15px;
+        font-size: 23px;
+    }
+    header #categorias{
+        margin-top: 35px;
+    }
     /*------------------------------------------------*/
-    header #freightliner img{
-        width:120px;
-        margin-top:0px;
-        margin-left: 5px;
+    header #carrito a.icon-compras{
+        position: relative;
+        top: 5px;
+        right: 40px;
+        padding: 10px 13px;
+        font-size: 23px;
+    }
+    header #carrito p{
+        position: relative;
+        bottom: 20px;
+        left: 0px;
+        width: 80px;
+        font-size: 14px;
+    }
+    /*------------------------------------------------------------------*/
+    header #registro span.icon-usuario{
+        position: absolute;
+        top: 3px;
+        left: -10px;
+        padding: 7px 14px;
+        font-size: 15px;
+    }
+    header #registro img.img-usuario{
+        position: absolute;
+        top: -5px;
+        left: -25px;
+        width: 100%;
+        max-width: 38px;
+        margin: 7px 14px;
+    }
+    header #registro span.tituloSeccion{
+        position: absolute;
+        text-decoration: none;
+        top: 9px;
+        left: 30px;
+        padding: 3.5px 0px 3.5px 10px;
+    }
+    header #registro span.tituloSeccion a{
+        font-size: 14px;
+    }
+    header #registro span.tituloSeccionDrop{
+        position: absolute;
+        text-decoration: none;
+        top: -1px;
+        left: 20px;
+        padding: 12px 0px 12px 10px;
+    }
+    header #registro span.arrow-down{
+        position: absolute;
+        text-decoration: none;
+        top: -3px;
+        left: 68px;
+        padding: 12px 13px;
+        text-decoration: none;
+    }
+    header #registro .dropdown-menu{
+        position: absolute;
+        top: 42px;
+        left: -48px;
     }
     
-    header #mercedes img{
-        width:120px;
-        margin-top:0px;
+    /*------------------------------------------------------------------*/
+    .aplicaciones{
+        height: 15px;
+        margin-top: -17px;
     }
-    
-    header #greatdane img{
-        width:80px;
-        margin-top:-25px;
+    .aplicaciones ul.horizontal{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-size: 14px;
     }
-    /*------------------------------------------------*/
+    .aplicaciones ul.horizontal li{
+        display: block;
+        float: left;
+        padding: 0 10px;
+    }
+    .aplicaciones ul.horizontal a{
+        text-decoration: none;
+        color: dimgrey;
+    }
+    /*------------------------------------------------------------------*/
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 700px;
+        margin-top: 60px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 700px;
+    }
+    .modalOferta .container div{
+        margin-right: 1%;
+        margin-left: 1%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    /*---------------------------------------------------------*/
+    .estafeta{
+        position: relative;
+        top: 20px;
+        right: 90px;
+    }
+    .estafeta a{
+        text-decoration: none;
+        font-size: 15px;
+        color: #000000;
+    }
+    .estafeta img{
+        width: 70px;
+    }
+    /*--------------------------------------------------------------*/
+    header #carrito .cantidadCesta{
+        position: absolute;
+        top: 5px;
+        left: 25px;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        padding-top: 1px;
+        border-radius: 50%;
+    }
+    /*--------------------------------------------------------------*/
 }
 /*--======================================================================
                                 MOVILES (XS revisamos en 320px)
 ========================================================================*/
-@media (max-width: 767px)
+@media (max-width: 767px) and (min-width: 500px){
+    /*------------------------------------------------------------------*/
+    header{
+        height: 70px;
+        margin-bottom: 7px;
+    }
+    header #logotipo img{
+        position: absolute;
+        top:20px;
+        right: -11px;
+        width: 110px;
+        z-index: 1;
+    }
+    header #camion img{
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        width: 70px;
+        z-index: 1;
+    }
+    /*------------------------------------------------------------------*/
+    /*------------------------------------------------*/
+    header #btnCategorias p{
+        position: absolute;
+        top: 7px;
+        right: 3px;
+        font-size: 20px;
+        padding: 0px 40px 0px 0px;
+    }
+    header #btnCategorias span.icon-categ{
+        position: absolute;
+        top: -2px;
+        right: 7px;
+        padding: 9px 10px;
+        font-size: 18px;
+    }
+    header #categorias{
+        margin-top: 55px;
+    }
+    /*------------------------------------------------*/
+    header #carrito a.icon-compras{
+        position: absolute;
+        top: -2px;
+        right: 70px;
+        padding: 9px 10px;
+        font-size: 18px;
+    }
+    header #carrito p{
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        width: 60px;
+        font-size: 12px;
+    }
+    /*------------------------------------------------------------------*/
+    header #registro span.icon-usuario{
+        position: absolute;
+        top: 3px;
+        right: 57px;
+        padding: 7px 10px;
+        font-size: 13px;
+    }
+    header #registro span.tituloSeccion{
+        position: absolute;
+        text-decoration: none;
+        top: 7px;
+        right: -23px;
+        padding: 3px 0px 3px 0px;
+    }
+    header #registro span.tituloSeccion a{
+        font-size: 11.5px;
+    }
+    header #registro img.img-usuario{
+        position: absolute;
+        top: -5px;
+        left: -25px;
+        width: 100%;
+        max-width: 38px;
+        margin: 7px 14px;
+    }
+    header #registro span.tituloSeccionDrop{
+        position: absolute;
+        text-decoration: none;
+        top: -1px;
+        left: 20px;
+        padding: 12px 0px 12px 10px;
+    }
+    header #registro span.arrow-down{
+        position: absolute;
+        text-decoration: none;
+        top: -3px;
+        left: 68px;
+        padding: 12px 13px;
+        text-decoration: none;
+    }
+    header #registro .dropdown-menu{
+        position: absolute;
+        top: 42px;
+        left: -48px;
+    }
+    div #buscador
+    {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    /*------------------------------------------------------------------*/
+    .aplicaciones{
+        height: 15px;
+        margin-top: 0px;
+    }
+    .aplicaciones ul.horizontal{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-size: 13px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .aplicaciones ul.horizontal li{
+        float: left;
+        padding: 0 5px;
+    }
+    .aplicaciones ul.horizontal a{
+        text-decoration: none;
+        color: dimgrey;
+    }
+    /*------------------------------------------------------------------*/
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 900px;
+        margin-top: 55px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 600px;
+    }
+    .modalOferta .container div{
+        margin-right: 5%;
+        margin-left: 5%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    /*------------------------------------------------------------------*/
+    .estafeta{
+        position: relative;
+        margin-top: -9px;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: center;
+    }
+    .estafeta a{
+        text-decoration: none;
+        font-size: 18px;
+        color: #000000;
+    }
+    .estafeta img{
+        width: 90px;
+        margin-top: -3px;
+    }
+    /*--------------------------------------------------------------*/
+    header #carrito .cantidadCesta{
+        position: absolute;
+        top: 7px;
+        left: 18px;
+        width: 14px;
+        height: 14px;
+        font-size: 8px;
+        padding-top: 1px;
+        border-radius: 50%;
+    }
+    /*--------------------------------------------------------------*/
+}
+@media (max-width: 499px)
 {
     /*--=================================
                      TOP
@@ -344,63 +939,162 @@ header #categorias hr
     {
         text-align: center;
     }
-    #top .registro
-    {
-        border-top: 1px solid #222;
-    }
     /*--=================================
                     HEADER
     ===================================*/
-    header #logotipo img
-    {
-       /*/ padding: 30px;/*/
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 60px;
-        padding-right: 60px;
-        padding-bottom: 10px;
+   /*------------------------------------------------------------------*/
+    header{
+        height: 70px;
     }
+    header #logotipo img{
+        position: absolute;
+        right: -30px;
+        top: 20px;
+        width: 110px;
+    }
+    header #camion img{
+        
+        position: absolute;
+        right: -10px;
+        width: 70px;
+        
+    }
+    /*------------------------------------------------*/
+    
+    header #btnCategorias p{
+        position: absolute;
+        font-size: 15px;
+        padding: 5px 40px 5px 0px;
+    }
+    header #btnCategorias span.icon-categ{
+        position: absolute;
+        top: 0px;
+        left: 70px;
+        padding: 9px 10px;
+        font-size: 12px;
+        border: 1px solid #aaa;
+    }
+    /*------------------------------------------------*/
+    header #carrito a.icon-compras{
+        position: absolute;
+        left: 32px;
+        border: 1px solid #aaa;
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+    header #carrito p{
+        display: none;
+    }
+    /*------------------------------------------------*/
     header #categorias
     {
-        margin-bottom: 10px;
+        margin-top: 55px;
     }
-    header #buscador
+    div #buscador
     {
-        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-bottom: 5px;
     }
-    header #carrito
-    {
-        margin: 0px;
+    .aplicaciones{
+        height: 15px;
+        margin-top: 5px;
     }
-    .modalFormulario .google p{
-        margin-top: -15px;
+    .aplicaciones ul.horizontal{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-size: 13px;
+        display: flex;
+        justify-content: space-around;
     }
-    
-    /*------------------------------------------------*/
-    header #freightliner{
+    .aplicaciones ul.horizontal li{
+        float: left;
+        padding: 0 5px;
+    }
+    .aplicaciones ul.horizontal a{
+        text-decoration: none;
+        color: dimgrey;
+    }
+    /*------------------------------------------------------------------*/
+    header #registro span.icon-usuario{
+        position: absolute;
+        left: 28px;
+        padding: 8.5px 10px;
+        font-size: 13px;
+    }
+    header #registro span.tituloSeccion{
         display: none;
     }
-
-    header #mercedes{
+    header #registro span.tituloSeccion a{
+        font-size: 11px;
+    }
+    header #registro img.img-usuario{
+        position: absolute;
+        bottom: -15px;
+        left: 13px;
+        width: 100%;
+        max-width: 37px;
+        margin: 8.5px 10px;
+    }
+    header #registro span.tituloSeccionDrop{
         display: none;
     }
-
-    header #greatdane{
+    header #registro span.arrow-down{
+        position: absolute;
+        text-decoration: none;
+        top: -1px;
+        left: 45px;
+        padding: 7.5px 7px;
+        text-decoration: none;
+    }
+    header #registro .dropdown-menu{
+        position: absolute;
+        top: 42px;
+        left: -103px;
+        width: 100%;
+        max-width: 500px;
+    }
+    /*------------------------------------------------------------------*/
+    /*------------------------------------------------------------------*/
+    .modalOferta .modal-dialog{
+        width: 100%;
+        max-width: 900px;
+        margin-top: 70px;
+    }
+    .modalOferta .img-Promocion img{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 400px;
+    }
+    .modalOferta .container div{
+        margin-right: 1%;
+        margin-left: 1%;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    /*------------------------------------------------------------------*/
+    .estafeta{
+        position: relative;
+        margin-top: -9px;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: center;
+    }
+    .estafeta a{
+        text-decoration: none;
+        font-size: 18px;
+        color: #000000;
+    }
+    .estafeta img{
+        width: 90px;
+        margin-top: -3px;
+    }
+    /*--------------------------------------------------------------*/
+    header #carrito .cantidadCesta{
         display: none;
     }
-    /*------------------------------------------------*/
-    
-    /*------------------------------------------------*/
-    header #freightliner img{
-        
-    }
-    
-    header #mercedes img{
-        
-    }
-    
-    header #greatdane img{
-        
-    }
-    /*------------------------------------------------*/
+    /*--------------------------------------------------------------*/
 }
