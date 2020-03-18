@@ -387,8 +387,8 @@ TABLA CARRITO DE COMPRAS
                             </select>
                         </div>
                         <div class="col-lg-4">
-                            <label for="">OPCION DE PAGO</label>
-                            <input class="form-control" value="123" readonly id="resumenTotalAPagarMasCargos">
+                            <label for="">TOTAL A PAGAR + CARGOS</label>
+                            <input class="form-control" value="" readonly id="resumenTotalAPagarMasCargos">
                         </div>
                         <!--<div class="col-lg-4">-->
                         <!--    <label for="">IVA DE COMPRA</label>-->
