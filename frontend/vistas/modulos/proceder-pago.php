@@ -301,33 +301,8 @@ TABLA CARRITO DE COMPRAS
 
                         <figure class="col-xs-6 col-xs-offset-3">
 
-                            <center>
+                            
 
-                                <input type="radio" id="checkPaypal" name="pago" value="paypal" checked>
-
-                            </center>
-
-                            <div id="paypal-button-container"></div>
-
-                        </figure>
-                        <br>
-                        <figure class="col-xs-6 col-xs-offset-3">
-
-                            <center>
-
-                                <input type="radio" id="checkBBVA" name="pago" value="BBVA">
-
-                            </center>
-
-                            <!--<img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">-->
-                            <center>
-                                <a href="#modalTransferencia" data-toggle="modal">
-                                    <button type="button" class="btn btn-warning" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
-                                        TRANSFERENCIA ELECTRONICA
-                                    </button>
-                                </a>
-                            </center>
-                            <br>
                             <center>
                                 <a href="#modalNetPay" id="botonPagoNetPay">
                                     <button type="button" class="btn btn-info" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
@@ -336,6 +311,23 @@ TABLA CARRITO DE COMPRAS
                                     </button>
                                 </a>
                             </center>
+                            <br>
+                            <center>
+                                <a href="#modalTransferencia" data-toggle="modal">
+                                    <button type="button" class="btn btn-warning" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
+                                        TRANSFERENCIA ELECTRONICA
+                                    </button>
+                                </a>
+                            </center>
+
+                        </figure>
+                        <br>
+
+                        <figure class="col-xs-6 col-xs-offset-3">
+                            <br>    
+                            <!--<img src="<?php echo $url; ?>vistas/img/plantilla/bbva.jpg" alt="" class="img-thumbnail">-->
+                            <div id="paypal-button-container"></div>
+                            
                         </figure>
 
                     </div>
@@ -395,50 +387,54 @@ TABLA CARRITO DE COMPRAS
                             </select>
                         </div>
                         <div class="col-lg-4">
-                            <label for="">IVA DE COMPRA</label>
-                            <input type="text" class="form-control" readonly id="ivaInput">
+                            <label for="">OPCION DE PAGO</label>
+                            <input class="form-control" value="123" readonly id="resumenTotalAPagarMasCargos">
                         </div>
+                        <!--<div class="col-lg-4">-->
+                        <!--    <label for="">IVA DE COMPRA</label>-->
+                        <!--    <input type="text" class="form-control" readonly id="ivaInput">-->
+                        <!--</div>-->
 
-                        <div class="col-sm-12">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                        <th>Tarjeta</th>
-                                        <th>Sobre tasa</th>
-                                        <th>Tasa de débito/crédito</th>
-                                        <th>Cargo por transferencia</th>
-                                        <th>Total a pagar</th>
-                                        <th>Total + Cargos</th>
-                                    </thead>
-                                    <tbody>
-                                        <td>
-                                            <span id="resumenTipoTarjeta"></span>
-                                        </td>
-                                        <td>
-                                            <span id="resumenSobreTasa"></span>%
-                                        </td>
-                                        <td>
-                                            <span id="resumenTasaDebitoCredito"></span>
-                                        </td>
-                                        <td>
-                                            $<span id="resumenCargoPorTransferencia">0</span>
-                                        </td>
-                                        <td>
-                                            $<span id="resumenTotalAPagar"></span>
-                                        </td>
-                                        <td style="background-color: #b8e994">
-                                            $<span id="resumenTotalAPagarMasCargos"></span>
-                                        </td>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <!--<div class="col-sm-4">-->
+                        <!--    <div class="table-responsive">-->
+                        <!--        <table class="table">-->
+                        <!--            <thead class="thead-dark">-->
+                                        <!--<th>Tarjeta</th>-->
+                                        <!--<th>Sobre tasa</th>-->
+                                        <!--<th>Tasa de débito/crédito</th>-->
+                                        <!--<th>Cargo por transferencia</th>-->
+                                        <!--<th>Total a pagar</th>-->
+                        <!--                <th>Total + Cargos</th>-->
+                        <!--            </thead>-->
+                        <!--            <tbody>-->
+                                        <!--<td>-->
+                                        <!--    <span id="resumenTipoTarjeta"></span>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                        <!--    <span id="resumenSobreTasa"></span>%-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                        <!--    <span id="resumenTasaDebitoCredito"></span>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                        <!--    $<span id="resumenCargoPorTransferencia">0</span>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                        <!--    $<span id="resumenTotalAPagar"></span>-->
+                                        <!--</td>-->
+                        <!--                <td style="background-color: #b8e994">-->
+                        <!--                    $<span id="resumenTotalAPagarMasCargos"></span>-->
+                        <!--                </td>-->
+                        <!--            </tbody>-->
+                        <!--        </table>-->
+                        <!--    </div>-->
+                        <!--</div>-->
 
-
+                        <br><br><hr>
                         <div class="col-lg-10 mt-3">
                             <a href="#" id="botonRealizarPagoNetPay" class="btn btn-info mt-3">
                                 <button type="button" class="btn btn-info mt-3" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
-                                    REALIZAR COMPRAsxd
+                                    REALIZAR COMPRA
                                 </button>
                             </a>
                         </div>
@@ -870,7 +866,7 @@ TABLA CARRITO DE COMPRAS
             $('#resumenTasaDebitoCredito').html(porcentajeCreditoDebito.toFixed(2) + "%");
             $(`#resumenCargoPorTransferencia`).html((cargoPorTransferencia).toFixed(2) + '');
             $(`#resumenTotalAPagar`).html(sumaCesta.toFixed(2));
-            $(`#resumenTotalAPagarMasCargos`).html(totalAPagar.toFixed(2));
+            $(`#resumenTotalAPagarMasCargos`).val(totalAPagar.toFixed(2));
 
             console.log({
                 credenciales: {
