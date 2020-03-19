@@ -82,7 +82,8 @@ class AjaxCheckout
 			'direccion' => $direccionEnvio ? json_encode($direccionEnvio[0]) : null,
 			'pais' => 'México',
 			'fecha' => date('Y-m-d'),
-			'statusCompraId' => 1 // en espera
+			'statusCompraId' => 1, // en espera
+			'validarCompra' => 1,
 		];
 		$compra = ModeloCompras::mdlAgregarCompra('compras', $datosCompra);
 
