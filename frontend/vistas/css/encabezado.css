@@ -363,6 +363,17 @@ header a.icon-compras .cantidadCesta:hover{
         font-size: 15px;
     }
     /*------------------------------------------------*/
+    .envio{
+        margin-top: -15px;
+        padding-left: 225px;
+        float: left;
+    }
+    .envio span{
+        font-family: 'arialbold', sans-serif;
+        font-size: 15px;
+        color: #c1272d;
+    }
+    /*------------------------------------------------*/
     .aplicaciones{
         height: 15px;
         margin-top: -10px;
@@ -514,6 +525,18 @@ header a.icon-compras .cantidadCesta:hover{
         left: -20px;
     }
     /*------------------------------------------------------------------*/
+    /*------------------------------------------------*/
+    .envio{
+        margin-top: -15px;
+        padding-left: 190px;
+        float: left;
+    }
+    .envio span{
+        font-family: 'arialbold', sans-serif;
+        font-size: 15px;
+        color: #c1272d;
+    }
+    /*------------------------------------------------*/
     .aplicaciones{
         height: 15px;
         margin-top: -5px;
@@ -683,7 +706,18 @@ header a.icon-compras .cantidadCesta:hover{
         top: 42px;
         left: -48px;
     }
-    
+    /*------------------------------------------------*/
+    .envio{
+        margin-top: -17px;
+        padding-left: 110px;
+        float: left;
+    }
+    .envio span{
+        font-family: 'arialbold', sans-serif;
+        font-size: 14px;
+        color: #c1272d;
+    }
+    /*------------------------------------------------*/
     /*------------------------------------------------------------------*/
     .aplicaciones{
         height: 15px;
@@ -859,6 +893,18 @@ header a.icon-compras .cantidadCesta:hover{
         margin-top: 5px;
         margin-bottom: 5px;
     }
+    /*------------------------------------------------*/
+    .envio{
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: -10px;
+    }
+    .envio span{
+        font-family: 'arialbold', sans-serif;
+        font-size: 14px;
+        color: #c1272d;
+    }
+    /*------------------------------------------------*/
     /*------------------------------------------------------------------*/
     .aplicaciones{
         height: 15px;
@@ -995,6 +1041,18 @@ header a.icon-compras .cantidadCesta:hover{
         margin-top: 10px;
         margin-bottom: 5px;
     }
+    /*------------------------------------------------*/
+    .envio{
+        text-align: center;
+        margin-top: 17px;
+        margin-bottom: -13px;
+    }
+    .envio span{
+        font-family: 'arialbold', sans-serif;
+        font-size: 14px;
+        color: #c1272d;
+    }
+    /*------------------------------------------------*/
     .aplicaciones{
         height: 15px;
         margin-top: 5px;

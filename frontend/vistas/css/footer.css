@@ -1,6 +1,8 @@
 .dudasYSugerencias{
     margin-top:20px;
     background: linear-gradient(to top, black 10% ,white 70%);
+    justify-content: center; 
+    align-items: center;
 }
 /*==========================================================*/
 
@@ -181,6 +183,37 @@ footer #greatdane img{
         display:flex;
         margin:0 auto;
     }
+    
+    /*------------------------------------------------*/
+    
+    .metodosPago{
+        float: right;
+        position: relative;
+        top: 80px;
+        left: 180px;
+    }
+    
+    .metodosPago ul.horizontal{
+        margin:0;
+        padding: 0;
+        list-style-type: none;
+    }
+    
+    .metodosPago ul.horizontal li{
+        display: block;
+        float: left;
+        padding: 0 8px;
+    }
+    
+    .metodosPago ul.horizontal li img{
+        width: 80px;
+    }
+    .dudasYSugerencias img.dudas-sugerencias{
+        align-items: center;
+        width: 100%;
+        max-width: 3000px;
+        height:90px;
+    }
     /*------------------------------------------------*/
     
 }
@@ -227,6 +260,37 @@ footer #greatdane img{
         width:100%;
         max-width:140px;
         margin: auto;
+    }
+    /*------------------------------------------------*/
+    
+    .metodosPago{
+        float: right;
+        position: relative;
+        top: 70px;
+        left: 80px;
+    }
+    
+    .metodosPago ul.horizontal{
+        margin:0;
+        padding: 0;
+        list-style-type: none;
+    }
+    
+    .metodosPago ul.horizontal li{
+        display: block;
+        float: left;
+        padding: 0 8px;
+    }
+    
+    .metodosPago ul.horizontal li img{
+        width: 80px;
+    }
+    
+    .dudasYSugerencias img.dudas-sugerencias{
+        align-items: center;
+        width: 100%;
+        max-width: 1500px;
+        height:80px;
     }
     /*------------------------------------------------*/
 }
@@ -288,11 +352,42 @@ footer #greatdane img{
         margin: auto;
     }
     /*------------------------------------------------*/
+    /*------------------------------------------------*/
+    
+    .metodosPago{
+        float: right;
+        position: relative;
+        top: 80px;
+        left: 70px;
+    }
+    
+    .metodosPago ul.horizontal{
+        margin:0;
+        padding: 0;
+        list-style-type: none;
+    }
+    
+    .metodosPago ul.horizontal li{
+        display: block;
+        float: left;
+        padding: 0 8px;
+    }
+    
+    .metodosPago ul.horizontal li img{
+        width: 60px;
+    }
+    .dudasYSugerencias img.dudas-sugerencias{
+        align-items: center;
+        width: 100%;
+        max-width: 1500px;
+        height:90px;
+    }
+    /*------------------------------------------------*/
 }
 /*--======================================================================
                                 MOVILES (XS revisamos en 320px)
 ========================================================================*/
-@media (max-width: 767px)
+@media (max-width: 767px) and (min-width: 500px)
 {   
     /*------------------------------------------------*/
     footer #zaeropuerto{
@@ -329,6 +424,107 @@ footer #greatdane img{
     
     footer #greatdane img{
         
+    }
+    /*------------------------------------------------*/
+    
+    .metodosPago{
+        float: right;
+        position: relative;
+        top: 40px;
+        left: 100px;
+    }
+    
+    .metodosPago ul.horizontal{
+        margin:0;
+        padding: 0;
+        list-style-type: none;
+    }
+    
+    .metodosPago ul.horizontal li{
+        display: block;
+        float: left;
+        padding: 0 4px;
+    }
+    
+    .metodosPago ul.horizontal li img{
+        width: 40px;
+    }
+    .dudasYSugerencias img.dudas-sugerencias{
+        align-items: center;
+        width: 100%;
+        max-width: 1500px;
+        height:60px;
+    }
+    /*------------------------------------------------*/
+}
+@media (max-width: 499px)
+{   
+    /*------------------------------------------------*/
+    footer #zaeropuerto{
+        display: block;
+    }
+    
+    footer #freightliner{
+        display:none;
+    }
+
+    footer #mercedes{
+        display:none;
+    }
+
+    footer #greatdane{
+        display:none;
+    }
+    /*------------------------------------------------*/
+    
+    /*------------------------------------------------*/
+    footer #zaeropuerto img{
+        width:100%;
+        max-width:200px;
+        margin: auto;
+    }
+    
+    footer #freightliner img{
+        
+    }
+    
+    footer #mercedes img{
+        
+    }
+    
+    footer #greatdane img{
+        
+    }
+    /*------------------------------------------------*/
+    
+    .metodosPago{
+        float: right;
+        position: relative;
+        top: 30px;
+        left:70px;
+    }
+    
+    .metodosPago ul.horizontal{
+        margin:0;
+        padding: 0;
+        list-style-type: none;
+    }
+    
+    .metodosPago ul.horizontal li{
+        display: block;
+        float: left;
+        padding: 0 0px;
+    }
+    
+    .metodosPago ul.horizontal li img{
+        width: 100%;
+        max-width: 35px;
+    }
+    .dudasYSugerencias img.dudas-sugerencias{
+        align-items: center;
+        width: 100%;
+        max-width: 1500px;
+        height:40px;
     }
     /*------------------------------------------------*/
 }

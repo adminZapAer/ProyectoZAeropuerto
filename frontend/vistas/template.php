@@ -147,6 +147,8 @@
         <link rel="stylesheet" href="<?php echo $url;?>vistas/css/banner.css">
 
         <link rel="stylesheet" href="<?php echo $url;?>vistas/css/fonts/post-scriptum/stylesheet.css">
+
+        <link rel="stylesheet" href="<?php echo $url;?>vistas/css/fonts/arial-bold/stylesheet.css">
         
         <!--==================================
                 PLUGGINS DE JAVASCRIPT
@@ -299,7 +301,7 @@
                 include "modulos/infoproductos.php";
             }
             
-            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas" || $rutas[0] === "proceder-pago" || $rutas[0] == "editarDireccion" || $rutas[0] == "pagoTransferencia" || $rutas[0] == "prueba" || $rutas[0] == "politicas-privacidad"){
+            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas" || $rutas[0] === "proceder-pago" || $rutas[0] == "editarDireccion" || $rutas[0] == "pagoTransferencia" || $rutas[0] == "terminos-y-condiciones" || $rutas[0] == "politicas-privacidad"){
                 include "modulos/".$rutas[0].".php";
             }
             

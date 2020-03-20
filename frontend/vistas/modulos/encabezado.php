@@ -255,6 +255,18 @@ if(isset($_SESSION["validarSesion"])){
         
         <div class="row">
             
+            <div class="envio">
+                <span>Envíos a todo México</span>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div class="container">
+        
+        <div class="row">
+            
             <!------------------------BUSCADOR------------------------>
             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
                 

@@ -1,6 +1,17 @@
-<div class="container-fluid dudasYSugerencias" style="justify-content: center; align-items: center;">
+<div class="container-fluid dudasYSugerencias">
     
-    <img src="<?php echo $servidor;?>vistas/img/dudas.png" style="display:flex; align-items: center; width: 100%; ">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 metodosPago">
+            
+        <ul class="horizontal">
+            <li><img src="<?php echo $url;?>vistas/img/plantilla/logo-visa.png" alt=""></li>
+            <li><img src="<?php echo $url;?>vistas/img/plantilla/logo-mastercard.png" alt=""></li>
+            <li><img src="<?php echo $url;?>vistas/img/plantilla/logo-amex.png" alt=""></li>
+            <li><img src="<?php echo $url;?>vistas/img/plantilla/logo-paypal.png" alt=""></li>
+        </ul>
+        
+    </div>
+
+    <img class="dudas-sugerencias" src="<?php echo $servidor;?>vistas/img/dudas.png">
     
     <div class="container">
         
@@ -53,7 +64,7 @@
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 text-center formContacto">
                 
-                <h1 style="font-size:30px; color: red; text-align: center; text-transform: uppercase; font-family: 'Anton', sans-serif;">¿Cómo le podemos ayudar?</h1>
+                <h1 style="font-size:30px; color: red; text-align: center; text-transform: uppercase; font-family: 'Anton', sans-serif;">¿Cómo podemos ayudarte?</h1>
                 <form role="form" method="post" onsubmit="return validarContactenos()">
                     
                     <input type="text" id="nombreContactenos" name="nombreContactenos" class="form-control" placeholder="Escriba su nombre" required>
@@ -109,7 +120,7 @@
                 
                 <div class="col-xs-12 text-center">
                     
-                    <span class="somos-1"><a href="https://www.zapataaeropuerto.com/about.html" target="_blank">Conocenos... </a></span><span class="quien-soy"><a href="https://www.zapataaeropuerto.com/about.html" target="_blank">¿Quienes somos?</a></span>
+                    <span class="somos-1"><a href="https://www.zapataaeropuerto.com/about.html" target="_blank">Conócenos... </a></span><span class="quien-soy"><a href="https://www.zapataaeropuerto.com/about.html" target="_blank">¿Quienes somos?</a></span>
                     
                 </div>
                 
@@ -119,7 +130,7 @@
             <div class="marcas">
                 <div class="col-xs-12" id="zaeropuerto">
                     <figure>
-                        <a href="http://www.zapata.com.mx/freightliner/?utm_source=WebsiteZapata&amp;utm_medium=LinkZapataCamiones">
+                        <a href="https://www.zapataaeropuerto.com">
                             <img src="<?php echo $servidor;?>vistas/img/plantilla/logob.png">
                         </a>
                     </figure>
@@ -159,6 +170,8 @@
                 $fecha = date('Y');
                 
                 echo'<h5>&copy; '.$fecha.'. Todos los derechos reservados.</h5>';
+                echo '<h5><a href="'.$url.'terminos-y-condiciones" target="_blank">Términos y Condiciones</a></h5>';
+                echo '<br>';
                 
                 ?>
                 
