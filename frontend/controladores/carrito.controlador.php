@@ -130,12 +130,12 @@ class ControladorCarrito{
 	=============================================*/
 	static public function ctrCargarComprobante($listaProductos, $direccion){
 
-		if(isset($_POST["usuarioComprobante"])){
+        if(isset($_POST["usuarioComprobante"])){
 
-			/*=============================================
-			VALIDAR IMAGEN
-			=============================================*/
-			$ruta = "";
+            /*=============================================
+            VALIDAR IMAGEN
+            =============================================*/
+            $ruta = "";
             $fechaPago = $_POST["fechaPago"];
             $idUsuario = $_SESSION["idUsuario"];
             $banco = $_POST["banco"];
@@ -143,54 +143,54 @@ class ControladorCarrito{
             $referencia = $_POST["referencia"];
             
             //Preguntamos si viene un archivo
-			if(isset($_FILES["datosRecibo"]["tmp_name"]) && !empty($_FILES["datosRecibo"]["tmp_name"])){
+            if(isset($_FILES["datosRecibo"]["tmp_name"]) && !empty($_FILES["datosRecibo"]["tmp_name"])){
                 
-				/*=============================================
-				PRIMERO PREGUNTAMOS SI EXISTE EL DIRECTORIO, SINO EXISTE SE CREA
-				=============================================*/
+                /*=============================================
+                PRIMERO PREGUNTAMOS SI EXISTE EL DIRECTORIO, SINO EXISTE SE CREA
+                =============================================*/
                 //Creamos la direccion donde se van a guardar las imagenes
-				$directorio = "../backend/vistas/img/rtfc/us".$idUsuario;
+                $directorio = "../backend/vistas/img/rtfc/us".$idUsuario;
                     //Si no hay imagen en la base de datos creamos un nuevo directorio, en donde se va a guardar la imagen
-				
+                
                 if(!file_exists($directorio)){
                     mkdir($directorio, 0777, true);
                 }
                 
-				/*=============================================
-				GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-				=============================================*/
+                /*=============================================
+                GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                =============================================*/
                 
-				$aleatorio = mt_rand(100, 999);
+                $aleatorio = mt_rand(100, 999);
                 
-				if($_FILES["datosRecibo"]["type"] == "image/jpeg"){
+                if($_FILES["datosRecibo"]["type"] == "image/jpeg"){
                     //Mandamos a llamar el nuevo directoro de la imagen y le asignaremos un nombre a la imagen
-					$ruta = "../backend/vistas/img/rtfc/us".$idUsuario."/cmp".$idUsuario."_".$aleatorio.".jpg";
+                    $ruta = "../backend/vistas/img/rtfc/us".$idUsuario."/cmp".$idUsuario."_".$aleatorio.".jpg";
                     
-					/*=============================================
-					MOFICAMOS TAMAÑO DE LA FOTO
-					=============================================*/
+                    /*=============================================
+                    MOFICAMOS TAMAÑO DE LA FOTO
+                    =============================================*/
                     //creamos una nueva imagen jpg
-					$origen = imagecreatefromjpeg($_FILES["datosRecibo"]["tmp_name"]);
+                    $origen = imagecreatefromjpeg($_FILES["datosRecibo"]["tmp_name"]);
                     //enviamos la imagen nueva a la ruta destino
-					imagejpeg($origen, $ruta);
+                    imagejpeg($origen, $ruta);
                     
-				}
+                }
 
-				if($_FILES["datosRecibo"]["type"] == "image/png"){
+                if($_FILES["datosRecibo"]["type"] == "image/png"){
                     
                     $ruta = "../backend/vistas/img/rtfc/us".$_POST["idUsuario"]."/cmp".$idUsuario."_".$aleatorio.".png";
                     
-					/*=============================================
-					MOFICAMOS TAMAÑO DE LA FOTO
-					=============================================*/
+                    /*=============================================
+                    MOFICAMOS TAMAÑO DE LA FOTO
+                    =============================================*/
                     
-					$origen = imagecreatefrompng($_FILES["datosRecibo"]["tmp_name"]);
+                    $origen = imagecreatefrompng($_FILES["datosRecibo"]["tmp_name"]);
                     
-					imagepng($origen, $ruta);
+                    imagepng($origen, $ruta);
                     
-				}
+                }
                 
-			}
+            }
             
             /*---------------------------------------------------------------------------------*/
             $envio = 0;
@@ -210,7 +210,7 @@ class ControladorCarrito{
             }
             
             $datosCompra = [
-                'idUsuario' => $user['idUsuario'],
+                'idUsuario' => $idUsuario,
                 'metodo' => 'Transferencia',
                 'envio' => $envio,
                 'costo_envio' => $costoEnvio,
@@ -267,15 +267,15 @@ class ControladorCarrito{
             }
             
             /*---------------------------------------------------------------------------------*/
-			$datosT = array("usuario" => $_SESSION["idUsuario"],
+            $datosT = array("usuario" => $_SESSION["idUsuario"],
                            "idCompra" => 0,
-						   "fechaPago" => $fechaPago,
-						   "banco" => $banco,
+                           "fechaPago" => $fechaPago,
+                           "banco" => $banco,
                            "monto" => $monto,
                            "referencia" => $referencia,
-						   "foto" => $ruta);
+                           "foto" => $ruta);
             
-			$tabla = "pagostransferencia";
+            $tabla = "pagostransferencia";
             
             $nombreUsuario = $_SESSION["nombre"];
             
@@ -284,7 +284,7 @@ class ControladorCarrito{
             $transferenciaHTML = "";
             
             $transferenciaHTML = "
-				<p><b>Datos de Pago de Transferencia</b><br></p>
+                <p><b>Datos de Pago de Transferencia</b><br></p>
                 <p><b>Fecha Registro: </b>" . $fechaRegistro . "</p>
                 <br>
                 <p><b>Fecha de Pago: </b>" . $fechaPago . "</p>
@@ -294,9 +294,9 @@ class ControladorCarrito{
                 <p><b>Banco: </b>" . $banco . " | <b>Monto de pago: $</b>" . $monto . " |  <b>Referencia: </b>" . $referencia . "</p>
             ";
             
-			$respuesta = ModeloCarrito::mdlCargarComprobante($tabla, $datosT);
+            $respuesta = ModeloCarrito::mdlCargarComprobante($tabla, $datosT);
             
-			if($respuesta == "ok"){
+            if($respuesta == "ok"){
                 
                 //$registro = $this::ctrEnviarCorreoComprobante();
                 /*=============================================
@@ -305,7 +305,7 @@ class ControladorCarrito{
 
                 date_default_timezone_set("America/Mexico_City");
 
-                $url = Ruta::ctrRuta();	
+                $url = Ruta::ctrRuta(); 
 
                 $mail = new PHPMailer;
 
@@ -315,7 +315,7 @@ class ControladorCarrito{
 
                 $mail->setFrom('noreply@refaccioneszapatacamiones.com', 'Refacciones Zapata Camiones');
 
-                $mail->addReplyTo('noreply@refaccioneszapatacamiones.com', 'Refacciones Zapata Camiones');
+                $mail->addReplyTo('no-reply@refaccioneszapatacamiones.com', 'Refacciones Zapata Camiones');
 
                 $mail->Subject = "Ha recibido una Transferencia";
 
@@ -415,7 +415,7 @@ class ControladorCarrito{
                                 closeOnConfirm: false
                             },
                             function(isConfirm){
-                                if (isConfirm) {	  
+                                if (isConfirm) {      
                                     window.location = rutaFrontEnd ;
                                 }
                             }
@@ -427,11 +427,11 @@ class ControladorCarrito{
 
                 }
                 
-			}
+            }
 
-		}
+        }
 
-	}
+    }
     
     
     

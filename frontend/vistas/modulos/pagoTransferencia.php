@@ -6,13 +6,13 @@ $servidor = Ruta::ctrRutaServidor();
 
 if(!isset($_SESSION["validarSesion"])){
     
-	echo '<script>
+    echo '<script>
         
-		window.location = "'.$url.'";
+        window.location = "'.$url.'";
         
-	</script>';
+    </script>';
     
-	exit();
+    exit();
     
 }
 
@@ -69,11 +69,8 @@ BREADCRUMB TRANSFERENCIA
                             //var_dump($direccion[0]);
                             
                             $listaProductos = json_decode($_REQUEST["lsprt"],true);
-                            var_dump($listaProductos[0]["cantidad"]);
-                    
-                    $producto = ModeloProductos::mdlGetProducto($listaProductos[0]["idProducto"]);
-                    var_dump("<br><br><br>");
-                    var_dump($producto["stock"]);
+                            
+                            $producto = ModeloProductos::mdlGetProducto($listaProductos[0]["idProducto"]);
                             
                             $direccion = json_decode($_REQUEST["dir"],true);
                             

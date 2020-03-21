@@ -43,7 +43,7 @@ if(isset($_SESSION["validarSesion"])){
             ==================================-->
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="logotipo">
                 
-                <a href="<?php echo $url; ?>">
+                <a href="https://www.refaccionariazapata.com/">
                     <img src="<?php echo $servidor;?>vistas/img/logo-online.png" alt="logo Refaccionaria">
                 </a>
                 
@@ -240,7 +240,7 @@ if(isset($_SESSION["validarSesion"])){
                 <li><a href="<?php echo $url;?>aplicacion">Aplicaciones</a></li>
                 <li><a href="<?php echo $url;?>marca">Marca</a></li>
                 <li><a href="<?php echo $url;?>tipo-de-sistema">Tipo de Sistema</a></li>
-                <li><a href="<?php echo $url;?>ofertas">Kits</a></li>
+                <li><a href="<?php echo $url;?>buscador/1/recientes/Kit">Kits</a></li>
             </ul>
         </div>
         <div class="col-sm-1 col-xs-2"></div>
