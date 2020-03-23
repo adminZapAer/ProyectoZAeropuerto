@@ -170,7 +170,15 @@ class ControladorProductos{
         return $respuesta;
         
     }
-    
+    static public function ctrMostrarSistema($item, $valor){
+        
+        $tabla = "sistemas";
+        
+        $respuesta = ModeloProductos::mdlMostrarSistema($tabla, $item, $valor);
+        
+        return $respuesta;
+        
+    }
     /*=======================================================
                         LISTAR SISTEMAS
     =======================================================*/

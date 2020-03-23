@@ -182,41 +182,18 @@ if(isset($_SESSION["validarSesion"])){
             $item = null;
             $valor = null;
             
-            $categorias = ControladorProductos::ctrMostrarCategorias($item, $valor);
+            $sistema = ControladorProductos::ctrMostrarSistema($item, $valor);
             
             //Crearemos un foreach para recorrer el contenido del arreglo almacenado en la variable categoria
-            foreach ($categorias as $key => $value){
+            foreach ($sistema as $key => $value){
                 //var_dump($value["categoria"]);
                 echo '
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             
-                    <h4>
-                        <a href="'.$url.$value["ruta"].'" class="pixelCategorias">'.$value["categoria"].'</a>
-                    </h4>
-                    
-                    <hr>
-                    <ul>';
-                
-                    $item = "idCategoria";
-                    
-                    $valor = $value["idCategoria"];
-                
-                    $limite = true;
-                
-                    $base=0;
-                
-                    $tope=4;
-                    
-                    $subcategorias = ControladorProductos::ctrMostrarSubcategorias($item, $valor, $limite, $base, $tope);
-                
-                    foreach ($subcategorias as $key => $value){
-                        
-                        echo '<li><a href="'.$url.$value["ruta"].'" class="pixelSubCategorias">'.$value["subcategoria"].'</a></li>';
-                        
-                    }
-                    //var_dump($subcategorias);
-                    echo '
-                    </ul>
+                    <h5>
+                        <a href="'.$url."buscador/1/recientes/".$value["ruta"].'" class="">'.$value["titulo"].'</a>
+                    </h5>
+
                 </div>
                 ';
             }
@@ -428,8 +405,6 @@ if(isset($_SESSION["validarSesion"])){
             INGRESO DIRECTO
             ======================================-->
             <form method="post">
-               
-                <hr>
                 
                 <div class="form-group">
                    

@@ -8,7 +8,9 @@ echo '
 
 <script>
     localStorage.removeItem("usuario");
-    localStorage.clear();
+    localStorage.removeItem("direccionEnvio");
+    localStorage.removeItem("paginaEnvio");
+    /*window.location.href = "https://www.refaccionariazapata.com/";*/
     window.location = "'.$url.'";
 </script>
 

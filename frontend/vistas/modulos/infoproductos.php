@@ -591,15 +591,10 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                 
                     <?php
                     
-                    $item = "idSubcategoria";
-                    $valor = $infoProducto["idSubcategoria"];
-                    $limite = true;
-                    $base1=null;
-                    $tope1=null;
-                    $rutaArticulosDestacados = ControladorProductos::ctrMostrarSubcategorias($item,$valor,$limite,$base1,$tope1);
+                    $valor = $infoProducto["tipoSistema"];
                     
                     echo '
-                    <a href="'.$url.$rutaArticulosDestacados[0]["ruta"].'">
+                    <a href="'.$url."buscador/1/recientes/".$valor.'">
                     
                         <button class="btn btn-default backColor pull-right">
                         
@@ -630,12 +625,15 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
         ======================================-->
         <?php
         
-        $ordenar = "";
-        $item="idSubcategoria";
-        $valor= $infoProducto["idSubcategoria"];
-        $base= 0;
-        $tope= 4;
-        $modo= "Rand()";
+        
+        $ordenar = "";//esta variable va a ser la que defina como va a ser ordenada la tabla
+        $item = "tipoSistema";
+        $valor = $infoProducto["tipoSistema"];
+        $base = 0;
+        $tope = 3;
+        $modo = "Rand()";
+        
+        
         
         $productosRelacionados = ControladorProductos::ctrMostrarProductos($ordenar,$item,$valor,$base,$tope,$modo);
         
@@ -643,7 +641,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
         if(!$productosRelacionados){
             
             echo'
-            <div class="col-xs-12 error404">
+            <div class="col-xs-12 text-center error404">
                 <center>
                     <h1><small>¡Oops!</small></h1>
                     <h2>No hay productos relacionados.</h2>
@@ -656,7 +654,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
         else{
             
             echo'
-            <ul class="grid0">';
+            <ul class="grid0 busqueda">';
 
             foreach ($productosRelacionados as $key => $value)
             {
@@ -664,19 +662,25 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
 
                 <!-- Producto -->
 
-                <li class="col-md-3 col-sm-6 col-xs-12" style =" width:292.5px; height:393.6px;">
+                <li class="col-md-4 col-sm-6 col-xs-12" style ="">
 
                     <!--===============================================-->
 
                     <figure>
 
-                        <a href="'.$url.$value["ruta"].'" class="pixelProducto">
+                        <a href="'.$url.$value["ruta"].'" class="pixelProducto">';
 
-                            <img src="'.$servidor.$value["portada"].'" class="img-responsive" style="width: 287px; height: 215px;">
-
+                            if($value["portada"] != ""){
+                                echo '<img src="'.$servidor.$value["portada"].'" class="img-responsive" style="">';
+                            }else{
+                                echo '<img src="'.$servidor.'/vistas/img/plantilla/imagenProducto.jpg" class="img-responsive" style="">';
+                            }
+                        echo '
                         </a>
 
                     </figure>
+
+                    <strong>SKU: </strong>'.$value["sku"].'
 
                     <!--===============================================-->
 
@@ -695,7 +699,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 }
                                 if ($value["oferta"] != 0)
                                 {
-                                    echo'<span class = "label label-warning fontSize">'.$value["descuentoOferta"].'% OFF</span>';
+                                    echo'<span class = "label label-warning fontSize">'.$value["descuentoOferta"].'% DESC</span>';
                                 }
 
                             echo'

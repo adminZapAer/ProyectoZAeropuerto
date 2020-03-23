@@ -94,7 +94,7 @@ for ($i = 0; $i < count($titulosModulos); $i++){
                     
                     <div class="col-sm-6 col-xs-12">
                     
-                        <a href="'.$rutaModulos[$i].'">
+                        <a href="'.$url.$rutaModulos[$i].'">
                         
                             <button class="btn btn-default backColor pull-right">
                             
