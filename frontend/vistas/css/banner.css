@@ -70,13 +70,13 @@
 }
 
 .imagenMarca{
-    display: flex;
     justify-content: center;
 }
 
 .imagenMarca img{
     display: block;
     width: 100%;
+    max-width: 190px;
     margin-bottom: 20px;
 }
 
