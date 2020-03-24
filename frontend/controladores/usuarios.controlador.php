@@ -353,9 +353,9 @@ class ControladorUsuarios{
                         
 						$mail->isMail();
                         
-						$mail->setFrom('zapata.camiones.redes@gmail.com', 'Refaccionaria Zapata Aeropuerto');
+						$mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Zapata Aeropuerto');
                         
-						$mail->addReplyTo('zapata.camiones.redes@gmail.com', 'Refaccionaria Zapata Aeropuerto');
+						$mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Zapata Aeropuerto');
                         
 						$mail->Subject = "Solicitud de nueva contraseña";
                         
