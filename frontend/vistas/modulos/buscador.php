@@ -204,7 +204,7 @@ BARRA PRODUCTOS
                                             
                                             if ($value["oferta"] != 0)
                                             {
-                                                echo'<span class = "label label-warning fontSize">'.$value["descuentoOferta"].'% OFF</span>';
+                                                echo'<span class = "label label-warning fontSize">'.$value["descuentoOferta"].'% DESC</span>';
                                             }
                                             
                                         echo'
@@ -365,7 +365,7 @@ BARRA PRODUCTOS
                                             }
                                             if ($value["oferta"] != 0)
                                             {
-                                                echo'<span class = "label label-warning">'.$value["descuentoOferta"].'% OFF</span>';
+                                                echo'<span class = "label label-warning">'.$value["descuentoOferta"].'% DESC</span>';
                                             }
                                             
                                         echo'
