@@ -188,7 +188,7 @@ if(isset($_SESSION["validarSesion"])){
             foreach ($sistema as $key => $value){
                 //var_dump($value["categoria"]);
                 echo '
-                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
             
                     <h5>
                         <a href="'.$url."buscador/1/recientes/".$value["ruta"].'" class="">'.$value["titulo"].'</a>
