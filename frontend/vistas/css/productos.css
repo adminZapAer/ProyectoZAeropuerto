@@ -313,5 +313,12 @@ MOVIL (XS revisamos en 320px)
 	.productos ul li h1 small{
 		font-size:16px;
 	}
+
+	.productos img.oferta-e{
+		width: 100%;
+		max-width: 200px;
+		display: block;
+		margin: 0 auto;
+	}
 	
 }

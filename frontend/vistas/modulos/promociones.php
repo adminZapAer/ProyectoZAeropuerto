@@ -67,7 +67,7 @@ echo '
                     
                     <figure>
                         
-                        <img src="'.$servidor.'vistas/img/ofertas-esp.jpg" class="img-responsive">
+                        <img src="'.$servidor.'vistas/img/ofertas-esp.jpg" class="img-responsive oferta-e">
                         
                     </figure>
                     
