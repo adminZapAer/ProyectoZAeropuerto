@@ -254,9 +254,9 @@ header a.icon-compras .cantidadCesta:hover{
     }
     header #camion img{
         position: absolute;
-        top: 0px;
-        left: 90px;
-        width: 100px;
+        top: 20px;
+        left: 60px;
+        width: 150px;
         z-index: 1;
     }
     
@@ -441,8 +441,9 @@ header a.icon-compras .cantidadCesta:hover{
     }
     header #camion img{
         position: absolute;
+        top: 30px;
         right: 18px;
-        width: 100px;
+        width: 115px;
         z-index: 1;
     }
     /*------------------------------------------------*/
@@ -622,9 +623,8 @@ header a.icon-compras .cantidadCesta:hover{
         max-width: 170px;
     }
     header #camion img{
-        
         position: absolute;
-        top: 0px;
+        top: 25px;
         width: 90px;
     }
     /*------------------------------------------------*/
@@ -803,7 +803,7 @@ header a.icon-compras .cantidadCesta:hover{
     }
     header #camion img{
         position: absolute;
-        top: 0px;
+        top: 25px;
         right: 5px;
         width: 70px;
         z-index: 1;
@@ -999,11 +999,10 @@ header a.icon-compras .cantidadCesta:hover{
         width: 110px;
     }
     header #camion img{
-        
         position: absolute;
+        top: 25px;
         right: -10px;
         width: 70px;
-        
     }
     /*------------------------------------------------*/
     

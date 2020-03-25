@@ -144,7 +144,26 @@ VITRINA PRODUCTOS LISTA
 .fontSize{
 	font-size:11px;
 }
+/*-----------------------------------------------*/
+.error{
+    
+}
 
+.error img{
+    width: 300px;
+    margin: 0 auto;
+}
+
+.error .error-txt{
+    margin-top: 20px;
+}
+
+.error h1{
+    color: #000000;
+    font-size: 35px;
+    font-family: 'Arial','Oswald',sans-serif;
+}
+/*-----------------------------------------------*/
 /*--=================================
     PUNTOS DE QUIEBRE PERSONALIZADOS
 ===================================*/

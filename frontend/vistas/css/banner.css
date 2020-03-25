@@ -1,6 +1,8 @@
 .container-banner{
-    background: rgb(204,21,25);
-    background: linear-gradient(90deg, rgba(204,21,25,1) 45%, rgba(31,32,34,1) 55%); 
+    background: rgb(1,24,58);
+    background: -webkit-linear-gradient(left, rgba(1,24,58,1) 40%, rgba(31,32,34,1) 60%);
+    background: -o-linear-gradient(left, rgba(1,24,58,1) 40%, rgba(31,32,34,1) 60%);
+    background: linear-gradient(to right, rgba(1,24,58,1) 40%, rgba(31,32,34,1) 60%);
 }
 #stage {
     margin: 0 auto;

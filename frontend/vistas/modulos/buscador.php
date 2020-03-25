@@ -142,14 +142,24 @@ BARRA PRODUCTOS
             if (!$productos)
             {
                 echo '
-                
-                <div class = "col-xs-12 text-center error404">
+                <br>
+                <br>
+                <div class = "col-xs-12 text-center error">
                     
-                    <h1><small>¡Oops!</small></h1>
-                    <h2>No hay publicaciones que coincidan con tu busqueda</h2>
+                    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12">
+                        
+                        <img src="'.$url.'vistas/img/plantilla/busqueda-RZ.png" alt="error404" class="img-responsive">
+                        
+                    </div>
+                    
+                    <div class="col-lg-7 col-md-7 col-sm-8 col-xs-12 error-txt">
+                        
+                        <h1>No hay publicaciones que coincidan con tu busqueda</h1>
+                        <h4>¿Necesitas ayuda? Comunícate con nosotros sin ningún costo</h4>
+                        
+                    </div>
                     
                 </div>
-                
                 ';
             }
             else{
