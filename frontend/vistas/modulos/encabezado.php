@@ -169,7 +169,7 @@ if(isset($_SESSION["validarSesion"])){
                       PROMOCIONES
             ==================================-->
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="camion">
-                <a href="#modalPromociones" data-toggle="modal" style="text-decoration: none;"><img src="<?php echo $servidor;?>vistas/img/camion.png" alt="logo Refaccionaria"></a>
+                <img src="<?php echo $servidor;?>vistas/img/camion.png" alt="logo Refaccionaria">
             </div>
             
         </div>

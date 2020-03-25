@@ -146,16 +146,18 @@ BARRA PRODUCTOS
                 <br>
                 <div class = "col-xs-12 text-center error">
                     
-                    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         
                         <img src="'.$url.'vistas/img/plantilla/busqueda-RZ.png" alt="error404" class="img-responsive">
                         
                     </div>
                     
-                    <div class="col-lg-7 col-md-7 col-sm-8 col-xs-12 error-txt">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 error-txt">
                         
-                        <h1>No hay publicaciones que coincidan con tu busqueda</h1>
-                        <h4>¿Necesitas ayuda? Comunícate con nosotros sin ningún costo</h4>
+                        <h1>Si no encuentras el producto que buscas en nuestra página,</h1>
+                        <h4>comunícate con nosotros sin ningún costo.</h4>
+                        <h3>+52 595 106 9120</h3>
+                        <h4>Estamos para ayudarte a encontrar la pieza que necesitas.</h4>
                         
                     </div>
                     
