@@ -317,6 +317,8 @@ MOVIL (XS revisamos en 320px)
 	.productos img.oferta-e{
 		width: 100%;
 		max-width: 200px;
+		object-fit: cover;
+		height: 85px;
 		display: block;
 		margin: 0 auto;
 	}

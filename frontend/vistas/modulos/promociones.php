@@ -76,7 +76,7 @@ echo '
                 </li>
                 <!-- Producto -->
                 
-                <li class="col-md-2 col-sm-2 col-xs-6">
+                <li class="col-md-2 col-sm-2 col-xs-4">
                     
                     <!--===============================================-->
                     
@@ -95,7 +95,7 @@ echo '
                 </li>
                 <!-- Producto -->
                 
-                <li class="col-md-2 col-sm-2 col-xs-6">
+                <li class="col-md-2 col-sm-2 col-xs-4">
                     
                     <!--===============================================-->
                     
@@ -114,7 +114,7 @@ echo '
                 </li>
                 <!-- Producto -->
                 
-                <li class="col-md-2 col-sm-2 col-xs-6">
+                <li class="col-md-2 col-sm-2 col-xs-4">
                     
                     <!--===============================================-->
                     
@@ -133,7 +133,7 @@ echo '
                 </li>
                 <!-- Producto -->
                 
-                <li class="col-md-2 col-sm-2 col-xs-6">
+                <li class="col-md-2 col-sm-2 col-xs-4">
                     
                     <!--===============================================-->
                     
@@ -152,7 +152,7 @@ echo '
                 </li>
                 <!-- Producto -->
                 
-                <li class="col-md-2 col-sm-2 col-xs-6">
+                <li class="col-md-2 col-sm-2 col-xs-4">
                     
                     <!--===============================================-->
                     
