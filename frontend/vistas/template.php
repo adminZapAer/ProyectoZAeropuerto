@@ -326,6 +326,7 @@
                 //include "modulos/slide.php";
                 //include "modulos/destacados.php";
                 include "modulos/banner.php";
+                include "modulos/promociones.php";
                 include "modulos/aplicacion.php";
                 include "modulos/marca.php";
                 include "modulos/tipo-de-sistema.php";
@@ -338,6 +339,7 @@
             //include "modulos/slide.php";
             //include "modulos/destacados.php";
             include "modulos/banner.php";
+            include "modulos/promociones.php";
             include "modulos/aplicacion.php";
             include "modulos/marca.php";
             include "modulos/tipo-de-sistema.php";

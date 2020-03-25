@@ -189,8 +189,9 @@ footer #greatdane img{
     .metodosPago{
         float: right;
         position: relative;
+        width: 420px;
         top: 80px;
-        left: 180px;
+        right: -10px;
     }
     
     .metodosPago ul.horizontal{
