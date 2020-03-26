@@ -216,7 +216,7 @@ class AjaxCheckout
 			$mail->Port       = $_SERVER['MAIL_PORT'];                              // TCP port to connect to
 
 			//Recipients
-			$mail->setFrom($_SERVER['MAIL_FROM'], 'Refacciones Zapata Camiones');
+			$mail->setFrom($_SERVER['MAIL_FROM'], 'Refaccionaria Online Zapata');
 			$mail->addAddress($user['email'], $user['nombre']);     // Add a recipient, Name is optional
 
 			// // Attachments
@@ -225,7 +225,7 @@ class AjaxCheckout
 
 			// Content
 			$mail->isHTML(true);                                  // Set email format to HTML
-			$mail->Subject = 'Gracias por comprar en refaccioneszapatacamiones.com';
+			$mail->Subject = 'Gracias por comprar en refaccionariazapata.com';
 
 			$listaProductos = "";
 			$productosEnviadosDesdePlanta = '';
@@ -262,7 +262,7 @@ class AjaxCheckout
 		                <center>
 		                    <img src="https://www.zapataaeropuerto.com/img/mail/icon-email.png" alt="icono-mail" style="padding: 20px; width: 15%;">
 		                    
-		                    <h3 style="font-weight: 100; color: #000;">Gracias por comprar en refaccioneszapatacamiones.com</h3>
+		                    <h3 style="font-weight: 100; color: #000;">Gracias por comprar en refaccionariazapata.com</h3>
 		                    
 		                    <hr style="border:1px solid #ccc; width:80%;">
 		                    
@@ -286,7 +286,7 @@ class AjaxCheckout
 							' . $direccionHTML . '
 							<hr style="border:1px solid #ccc; width:80%;">
 
-		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">¡Gracias por elegir Refacciones Zapata Camiones!.</h4>
+		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">¡Gracias por elegir Refaccionaria Online Zapata!.</h4>
 		                    
 		                </center>
 		                
@@ -319,7 +319,7 @@ class AjaxCheckout
 
 			$mail->Port       = $_SERVER['MAIL_PORT'];
 
-			$mail->setFrom($_SERVER['MAIL_FROM'], 'Refacciones Zapata Camiones');
+			$mail->setFrom($_SERVER['MAIL_FROM'], 'Refaccionaria Online Zapata');
 			$mail->addAddress($_SERVER['MAIL_VENDEDOR']); //'jmolina@zapata.com.mx'
 
 			$mail->Subject = 'Notificación de compra por un cliente';

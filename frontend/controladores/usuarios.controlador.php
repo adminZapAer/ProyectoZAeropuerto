@@ -40,9 +40,9 @@ class ControladorUsuarios{
                     
                     $mail->isMail();
                     //El correo es enviado por
-                    $mail->setFrom('zapata.camiones.redes@gmail.com', 'Refaccionaria Zapata Aeropuerto');
+                    $mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
                     //Para que responda al Correo
-                    $mail->addReplyTo('zapata.camiones.redes@gmail.com', 'Refaccionaria Zapata Aeropuerto');
+                    $mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
                     //El siguiente correo no es para que responda, es solo informativo
                     $mail->Subject = "Por favor verifique su dirección de correo electrónico.";
                     //Agregamos el correo electronico al cual haremos llegar el mensaje
@@ -62,7 +62,7 @@ class ControladorUsuarios{
                                 
                                 <hr style="border:1px solid #ccc; width:80%;">
                                 
-                                <h4 style="font-weight: 100; color: #999; padding: 0 20px;">Para comenzar a usar su cuenta de <strong>Refaccionaria ZAPATA AEROPUERTO</strong>, debe confirmar su dirección de correo electrónico.</h4>
+                                <h4 style="font-weight: 100; color: #999; padding: 0 20px;">Para comenzar a usar su cuenta de <strong>Refaccionaria Online Zapata</strong>, debe confirmar su dirección de correo electrónico.</h4>
                                 
                                 <a href="'.$url.'verificar/'.$encriptarEmail.'" target="_blank" style="text-decoration: none">
                                     <div style="line-height: 60px; background: #0aa; width: 60%; color: white;">Verifíque su dirección de correo electrónico</div>
@@ -353,9 +353,9 @@ class ControladorUsuarios{
                         
 						$mail->isMail();
                         
-						$mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Zapata Aeropuerto');
+						$mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
                         
-						$mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Zapata Aeropuerto');
+						$mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
                         
 						$mail->Subject = "Solicitud de nueva contraseña";
                         
@@ -1075,9 +1075,9 @@ class ControladorUsuarios{
 
 					$mail->isMail();
 
-					$mail->setFrom('noreply@refaccioneszapatacamiones.com', 'Refacciones Zapata Camiones');
+					$mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
 
-					$mail->addReplyTo('cursos@tutorialesatualcance.com', 'Refacciones Zapata Camiones');
+					$mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
 
 					$mail->Subject = "Ha recibido una consulta";
 
