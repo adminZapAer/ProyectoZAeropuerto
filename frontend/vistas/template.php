@@ -86,6 +86,8 @@
         <meta itemprop="description" content="<?php echo $cabeceras['descripcion'];?>">
         <meta itemprop="image" content="<?php echo $cabeceras['portada'];?>">
 
+        <meta name="google-site-verification" content="GHe1O_0c_e91stCPyBNpydKiW5y3toTLz5gQfAVR4Rg" />
+
         <!--=====================================
                     MARCADO TWITTER
         ======================================-->
