@@ -98,7 +98,18 @@
         <meta name="twitter:image" content="<?php echo $cabeceras['portada'];?>">
         <meta name="twitter:site" content="@ZAeropuerto">
         
-        
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162197239-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-162197239-1');
+        </script>
+
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++-->
         
         <!--==================================
                     PLUGGINS DE CSS
