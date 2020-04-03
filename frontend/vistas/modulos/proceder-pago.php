@@ -946,7 +946,8 @@ TABLA CARRITO DE COMPRAS
                             // GUARDAR COMPRA EN LA BASE DE DATOS SI FUE EXITOSA
                             // ================================================
 
-                            if (detalles.transaction.status == 'DONE' && getUrlVars()['transactionToken'] != undefined) {
+                            if (detalles.transaction.status == 'DONE' && window.location == window.top.location) {
+                                alert('ENTRA AQUI');
                                 // alert('FUE DONE');
                                 $.ajax({
                                     url: rutaFrontEnd + 'ajax/checkout.ajax.php',
@@ -978,7 +979,9 @@ TABLA CARRITO DE COMPRAS
                                 }).fail(function(err) {
                                     console.log("error", err);
                                 });
-                            } else {
+                            } 
+                            
+                            if (detalles.transaction.status != 'DONE' && window.location == window.top.location) {
                                 swal({
                                     title: "¡Tu compra ha sido rechazada!",
                                     // text: "Gracias por preferir a zapata camiones. Se ha enviado un correo a tu cuenta con los detalles de la compra.",
