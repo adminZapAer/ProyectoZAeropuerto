@@ -925,7 +925,6 @@ TABLA CARRITO DE COMPRAS
 
                     if (getUrlVars()['transactionToken'] != undefined && window.location != window.top.location) {
                         window.top.location.href = rutaFrontEnd + `proceder-pago/?transactionToken=${getUrlVars()['transactionToken']}`;
-                        break;
                     }
 
                     $.ajax({
