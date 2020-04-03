@@ -185,6 +185,10 @@ class ControladorUsuarios
             return;
         }
 
+        if($_POST['opcionInicio'] == 'COMPRA AL MOMENTO' && !isset($_POST["ingEmailAlMomento"])){
+
+        }
+
         if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["ingEmail"]) || !preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])) {
             echo '
             <script>

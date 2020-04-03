@@ -478,7 +478,7 @@ if (isset($_SESSION["validarSesion"])) {
 
                                 </span>
 
-                                <input type="email" class="form-control" id="ingEmailAlMomento" name="ingEmailAlMomento" placeholder="Correo Electrónico" required>
+                                <input type="email" class="form-control" id="ingEmailAlMomento" name="ingEmailAlMomento" placeholder="Correo Electrónico">
 
                             </div>
 
