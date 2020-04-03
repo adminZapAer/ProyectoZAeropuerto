@@ -457,7 +457,7 @@ if (isset($_SESSION["validarSesion"])) {
 
                                     </span>
 
-                                    <input type="password" class="form-control" id="ingPassword" name="ingPassword" placeholder="Contraseña" required>
+                                    <input type="password" class="form-control" id="ingPassword" name="ingPassword" placeholder="Contraseña">
 
                                 </div>
 
