@@ -947,7 +947,7 @@ TABLA CARRITO DE COMPRAS
                             // ================================================
 
                             if (detalles.transaction.status == 'DONE' && window.location == window.top.location) {
-                                alert('ENTRA AQUI');
+                                // alert('ENTRA AQUI');
                                 // alert('FUE DONE');
                                 $.ajax({
                                     url: rutaFrontEnd + 'ajax/checkout.ajax.php',
