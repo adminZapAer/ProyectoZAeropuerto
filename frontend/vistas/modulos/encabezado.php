@@ -446,10 +446,19 @@ if(isset($_SESSION["validarSesion"])){
                 
                 ?>
                 
-                <input type="submit" class="btn btn-default backColor btn-block btnIngreso" value="ENVIAR">
+                <input type="submit" name="opcionInicio" class="btn btn-default backColor btn-block btnIngreso" value="ENVIAR">
+
                 
                 <br>
                 
+                <input type="submit" name="opcionInicio" class="btn btn-default btn-block btnIngreso" value="COMPRA AL MOMENTO" style="background-color:#686de0; color: white">
+               
+               <p class="text-muted">
+                    Al elegir esta opción la entrega del producto será realizada únicamente en Zapata Camiones.
+               </p>
+
+                <br>
+
                 <center>
                     <a href="#modalPassword" data-dismiss="modal" data-toggle="modal">¿Ovidaste tu contraseña?</a>
                 </center>
