@@ -193,7 +193,13 @@ class ControladorUsuarios
 
         }
 
-        if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["ingEmail"]) || !preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])) {
+        if($_POST['opcionInicio'] == 'COMPRA AL MOMENTO'){
+            $correo = $_POST["ingEmailAlMomento"];
+        }else{
+            $correo = $_POST["ingEmail"];
+        }
+
+        if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $correo) || ($_POST['opcionInicio'] == 'ENVIAR' && !preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"]))) {
             echo '
             <script>
                 
