@@ -181,7 +181,7 @@ class ControladorUsuarios
             return;
         }
 
-        if($_POST['opcionInicio'] == 'ENVIAR' && !isset($_POST["ingEmail"])){
+        if ($_POST['opcionInicio'] == 'ENVIAR' && !isset($_POST["ingEmail"])) {
             return;
         }
 
@@ -214,14 +214,14 @@ class ControladorUsuarios
         // print_r($_POST['opcionInicio']);
         // return;
 
-        if($_POST['opcionInicio'] == 'COMPRA AL MOMENTO'){
-            
-            
+        if ($_POST['opcionInicio'] == 'COMPRA AL MOMENTO') {
+
+
 
             $datos = array(
                 "nombre" => 'INVITADO',
                 "password" => crypt('', '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$'),
-                "email" => md5(rand()),
+                "email" => $_POST['ingEmailAlMomento'],
                 "modo" => "directo",
                 "foto" => "",
                 "verificacion" => 0,
@@ -237,23 +237,23 @@ class ControladorUsuarios
             $password = '';
         }
 
-        
-        if($_POST['opcionInicio'] == 'ENVIAR' && isset($_POST["ingEmail"])){
+
+        if ($_POST['opcionInicio'] == 'ENVIAR' && isset($_POST["ingEmail"])) {
             $email = $_POST["ingEmail"];
             $password = $_POST["ingPassword"];
         }
 
-            $tabla = "usuarios";
+        $tabla = "usuarios";
 
-            $item = "email";
+        $item = "email";
 
-            $valor = $email;
+        $valor = $email;
 
-            $respuesta = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
+        $respuesta = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
 
-            //Si el usuario no há verificado la cuenta
-            if ($respuesta["verificacion"] == 1) {
-                echo '
+        //Si el usuario no há verificado la cuenta
+        if ($respuesta["verificacion"] == 1) {
+            echo '
                 <script>
                     
                     swal({
@@ -271,20 +271,20 @@ class ControladorUsuarios
                     
                 </script>
                 ';
-                return;
-            }
+            return;
+        }
 
-            $encriptar = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+        $encriptar = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-            // print_r(' 1: '.$respuesta["email"]);
-            // print_r(' 2: '.$email);
-            // print_r(' 3: '.$respuesta["password"]);
-            // print_r(' 4: '.$encriptar);
-            // return;
+        // print_r(' 1: '.$respuesta["email"]);
+        // print_r(' 2: '.$email);
+        // print_r(' 3: '.$respuesta["password"]);
+        // print_r(' 4: '.$encriptar);
+        // return;
 
-            //Si correo y contraseña no coinciden vamos a acceder al sistema
-            if ($respuesta["email"] != $email || $respuesta["password"] != $encriptar) {
-                echo '
+        //Si correo y contraseña no coinciden vamos a acceder al sistema
+        if ($respuesta["email"] != $email || $respuesta["password"] != $encriptar) {
+            echo '
                 <script>
 
                     swal({
@@ -300,30 +300,30 @@ class ControladorUsuarios
                         } 
                     });
                 </script>';
-                return;
-            }
+            return;
+        }
 
 
 
-            //Se crean variables de sesion para validar la sesion
-            $_SESSION["validarSesion"] = "ok";
+        //Se crean variables de sesion para validar la sesion
+        $_SESSION["validarSesion"] = "ok";
 
-            $_SESSION["idUsuario"] = $respuesta["idUsuario"];
+        $_SESSION["idUsuario"] = $respuesta["idUsuario"];
 
-            $_SESSION["nombre"] = $respuesta["nombre"];
+        $_SESSION["nombre"] = $respuesta["nombre"];
 
-            $_SESSION["foto"] = $respuesta["foto"];
+        $_SESSION["foto"] = $respuesta["foto"];
 
-            $_SESSION["email"] = $respuesta["email"];
+        $_SESSION["email"] = $respuesta["email"];
 
-            $_SESSION["password"] = $respuesta["password"];
+        $_SESSION["password"] = $respuesta["password"];
 
-            $_SESSION["modo"] = $respuesta["modo"];
+        $_SESSION["modo"] = $respuesta["modo"];
 
-            //Despues de iniciar sesion lo redireccionará a la página en donde esta la persona y no a la pagina de inicio
+        //Despues de iniciar sesion lo redireccionará a la página en donde esta la persona y no a la pagina de inicio
 
-            //se crea un local sotorage para que almacene la direccion en donde estamos
-            echo '
+        //se crea un local sotorage para que almacene la direccion en donde estamos
+        echo '
                 <script>
                     
                     window.location = localStorage.getItem("rutaActual");
