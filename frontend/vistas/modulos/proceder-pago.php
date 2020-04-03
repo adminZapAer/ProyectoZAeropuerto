@@ -904,7 +904,7 @@ TABLA CARRITO DE COMPRAS
                     }
             }
             `,
-                success: function(data) {
+                success: async function(data) {
                     console.log(data)
 
                     // ================================================
@@ -927,7 +927,7 @@ TABLA CARRITO DE COMPRAS
                         window.top.location.href = rutaFrontEnd + `proceder-pago/?transactionToken=${getUrlVars()['transactionToken']}`;
                     }
 
-                    $.ajax({
+                    await $.ajax({
                         url: `${baseUrl}/v1/transaction-report/transaction/${getUrlVars()['transactionToken']}/${storeIdAcq}`,
                         contentType: 'Application/Json',
                         headers: {
@@ -935,7 +935,7 @@ TABLA CARRITO DE COMPRAS
                             'Authorization': `Bearer ${data.token}`,
                         },
                         type: 'GET',
-                        success: function(detalles) {
+                        success: async function(detalles) {
 
                             console.log({
                                 detalles,
@@ -948,7 +948,7 @@ TABLA CARRITO DE COMPRAS
 
                             if (detalles.transaction.status == 'DONE') {
                                 // alert('FUE DONE');
-                                $.ajax({
+                                await $.ajax({
                                     url: rutaFrontEnd + 'ajax/checkout.ajax.php',
                                     type: 'POST',
                                     dataType: 'json',
