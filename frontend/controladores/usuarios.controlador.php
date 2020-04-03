@@ -337,13 +337,23 @@ class ControladorUsuarios
         //Despues de iniciar sesion lo redireccionará a la página en donde esta la persona y no a la pagina de inicio
 
         //se crea un local sotorage para que almacene la direccion en donde estamos
+
+        
+        if( $_POST['opcionInicio'] == 'COMPRA AL MOMENTO' ){
+            $redireccion = '"proceder-pago"';
+        }else{
+            $redireccion = 'localStorage.getItem("rutaActual")';
+        }
+
         echo '
                 <script>
                     
-                    window.location = localStorage.getItem("rutaActual");
-                    
+                    window.location = '. $redireccion .';
+
                 </script>
                 ';
+
+        
     }
     /*=============================================
 	               OLVIDA CONTRASEÑA

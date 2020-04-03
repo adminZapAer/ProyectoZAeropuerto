@@ -412,7 +412,7 @@ if (isset($_SESSION["validarSesion"])) {
 
         <div class="modal-body modalTitulo">
 
-            <h3 class="backColor">Iniciar Sesión</h3>
+            <h3 class="backColor">REALIZAR COMPRA</h3>
 
             <button type="button" class="close" data-dismiss="modal">&times;</button>
 
@@ -432,6 +432,14 @@ if (isset($_SESSION["validarSesion"])) {
                             -->
 
                         <div class="col-md-6" style="border-right: 1px solid gray;">
+
+                            <h3 class="text-center">INICIAR SESIÓN</h3>
+
+                            <div style="height: 5em">
+                                    <p class="text-muted">
+                                        Al iniciar sesión, tu compra será guardada en tu historial de usuario, ¡podrás configurar tus direcciones de envío y podrás facturar!.
+                                    </p>
+                            </div>
 
                             <div class="input-group">
 
@@ -470,6 +478,15 @@ if (isset($_SESSION["validarSesion"])) {
 
                         <div class="col-md-6">
 
+                            <h3 class="text-center">COMPRA AL MOMENTO</h3>
+
+                            <div style="height: 5em">
+                                <p class="text-muted">
+                                    Si no deseas registrarte con nosotros, sólo coloca tu correo electrónico y clickea el botón morado,
+                                    ¡serás redigirido directamente a tu compra! <br>
+                                </p>
+                            </div>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon">
@@ -485,9 +502,8 @@ if (isset($_SESSION["validarSesion"])) {
                             <br>
 
                             <input type="submit" name="opcionInicio" class="btn btn-default btn-block btnIngreso" value="COMPRA AL MOMENTO" style="background-color:#686de0; color: white">
-
                             <p class="text-muted">
-                                Al elegir esta opción la entrega del producto será realizada únicamente en Zapata Camiones.
+                                <small>Al elegir esta opción la entrega del producto será realizada únicamente en Zapata Camiones.</small>
                             </p>
 
                         </div>
