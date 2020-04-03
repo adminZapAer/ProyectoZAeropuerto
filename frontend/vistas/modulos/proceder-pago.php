@@ -904,7 +904,7 @@ TABLA CARRITO DE COMPRAS
                     }
             }
             `,
-                success: async function(data) {
+                success: function(data) {
                     console.log(data)
 
                     // ================================================
@@ -927,7 +927,7 @@ TABLA CARRITO DE COMPRAS
                         window.top.location.href = rutaFrontEnd + `proceder-pago/?transactionToken=${getUrlVars()['transactionToken']}`;
                     }
 
-                    await $.ajax({
+                    $.ajax({
                         url: `${baseUrl}/v1/transaction-report/transaction/${getUrlVars()['transactionToken']}/${storeIdAcq}`,
                         contentType: 'Application/Json',
                         headers: {
