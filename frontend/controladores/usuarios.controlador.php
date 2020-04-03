@@ -185,6 +185,10 @@ class ControladorUsuarios
             return;
         }
 
+        if ($_POST['opcionInicio'] == 'ENVIAR' && !isset($_POST["ingPassword"])) {
+            return;
+        }
+
         if($_POST['opcionInicio'] == 'COMPRA AL MOMENTO' && !isset($_POST["ingEmailAlMomento"])){
 
         }
