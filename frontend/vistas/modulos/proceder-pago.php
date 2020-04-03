@@ -935,7 +935,7 @@ TABLA CARRITO DE COMPRAS
                             'Authorization': `Bearer ${data.token}`,
                         },
                         type: 'GET',
-                        success: async function(detalles) {
+                        success: function(detalles) {
 
                             console.log({
                                 detalles,
@@ -948,7 +948,7 @@ TABLA CARRITO DE COMPRAS
 
                             if (detalles.transaction.status == 'DONE') {
                                 // alert('FUE DONE');
-                                await $.ajax({
+                                $.ajax({
                                     url: rutaFrontEnd + 'ajax/checkout.ajax.php',
                                     type: 'POST',
                                     dataType: 'json',
