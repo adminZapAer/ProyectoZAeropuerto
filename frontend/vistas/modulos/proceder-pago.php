@@ -946,7 +946,7 @@ TABLA CARRITO DE COMPRAS
                             // GUARDAR COMPRA EN LA BASE DE DATOS SI FUE EXITOSA
                             // ================================================
 
-                            if (detalles.transaction.status == 'DONE') {
+                            if (detalles.transaction.status == 'DONE' && getUrlVars()['transactionToken'] != undefined) {
                                 // alert('FUE DONE');
                                 $.ajax({
                                     url: rutaFrontEnd + 'ajax/checkout.ajax.php',
