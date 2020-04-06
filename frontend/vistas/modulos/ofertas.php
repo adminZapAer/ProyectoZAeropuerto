@@ -80,9 +80,11 @@ $ruta = $rutas[0];
                                     
                                     if($value["imgOferta"] != ""){
                                         echo '<img class="img-responsive" src="'.$servidor.$value["imgOferta"].'"width="100%">';
+                                        echo 'imagen oferta';
                                     }
                                     else{
                                         echo '<img class="img-responsive" src="'.$servidor.$value["portada"].'"width="100%">';
+                                        echo 'imagen portada';
                                     }
                                     
                                     echo '
