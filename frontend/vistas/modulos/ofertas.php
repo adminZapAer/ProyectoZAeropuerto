@@ -78,7 +78,7 @@ $ruta = $rutas[0];
                                 
                                 <figure>';
                                     
-                                    if($value["imgOferta"] == "" || $value["imgOferta"] == null){
+                                    if($value["imgOferta"] != "" || $value["imgOferta"] != null){
                                         echo '<img class="img-responsive" src="'.$servidor.$value["portada"].'"width="100%">';
                                     }
                                     else{
