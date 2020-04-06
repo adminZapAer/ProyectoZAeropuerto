@@ -76,18 +76,10 @@ $ruta = $rutas[0];
                                     
                                 </h3>
                                 
-                                <figure>';
+                                <figure>
                                     
-                                    if($value["imgOferta"] != "" || $value["imgOferta"] != null){
-                                        echo '<img class="img-responsive" src="'.$servidor.$value["imgOferta"].'"width="100%">';
-                                        echo 'imagen oferta';
-                                    }
-                                    else{
-                                        echo '<img class="img-responsive" src="'.$servidor.$value["portada"].'"width="100%">';
-                                        echo 'imagen portada';
-                                    }
+                                    <img class="img-responsive" src="'.$servidor.$value["imgOferta"].'"width="100%">
                                     
-                                    echo '
                                     <div class="sombraSuperior">
                                     
                                     </div>';
@@ -274,9 +266,17 @@ $ruta = $rutas[0];
                                     
                                 </h3>
                                 
-                                <figure>
-                                
-                                    <img class="img-responsive" src="'.$servidor.$value["imgOferta"].'"width="100%">
+                                <figure>';
+                                    
+                                    if($value["imgOferta"] != "" || $value["imgOferta"] != Null || $value["imgOferta"] != " "){
+                                        echo'<img class="img-responsive" src="'.$servidor.$value["imgOferta"].'" width="100%">';
+                                        echo "imagen oferta";
+                                    }
+                                    else{
+                                        echo'<img class="img-responsive" src="'.$servidor.$value["portada"].'" width="100%">';
+                                        echo "imagen portada";
+                                    }
+                                    echo'
                                     
                                     <div class="sombraSuperior">
                                     
