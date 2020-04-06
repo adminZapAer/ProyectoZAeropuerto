@@ -268,7 +268,7 @@ $ruta = $rutas[0];
                                 
                                 <figure>';
                                     
-                                    if($value["imgOferta"] != "" || $value["imgOferta"] != Null || $value["imgOferta"] != " "){
+                                    if($value["imgOferta"] != "" || $value["imgOferta"] != null || $value["imgOferta"] != " "){
                                         echo'<img class="img-responsive" src="'.$servidor.$value["imgOferta"].'" width="100%">';
                                     }
                                     else{
