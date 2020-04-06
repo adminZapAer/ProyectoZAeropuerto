@@ -76,10 +76,16 @@ $ruta = $rutas[0];
                                     
                                 </h3>
                                 
-                                <figure>
-                                
-                                    <img class="img-responsive" src="'.$servidor.$value["imgOferta"].'"width="100%">
+                                <figure>';
                                     
+                                    if($value["imgOferta"] == "" || $value["imgOferta"] == null){
+                                        echo '<img class="img-responsive" src="'.$servidor.$value["portada"].'"width="100%">';
+                                    }
+                                    else{
+                                        echo '<img class="img-responsive" src="'.$servidor.$value["imgOferta"].'"width="100%">';
+                                    }
+                                    
+                                    echo '
                                     <div class="sombraSuperior">
                                     
                                     </div>';
