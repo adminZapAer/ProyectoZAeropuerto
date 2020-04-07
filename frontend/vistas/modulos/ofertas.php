@@ -270,11 +270,9 @@ $ruta = $rutas[0];
                                     
                                     if($value["imgOferta"] != ""){
                                         echo'<img class="img-responsive" src="'.$servidor.$value["imgOferta"].'" width="100%">';
-                                        echo "img oferta";
                                     }
                                     else{
                                         echo'<img class="img-responsive" src="'.$servidor.$value["portada"].'" width="100%">';
-                                        echo "img portada";
                                     }
                                     echo'
                                     
