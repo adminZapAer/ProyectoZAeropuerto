@@ -1212,12 +1212,12 @@ class ControladorUsuarios
                 $mail->msgHTML('
 
                 <header style="background: linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 30%), url(https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/fondo-cabez.jpg); width: 100%; height: 70px;">
-            
-                    <img src="https://www.refaccionariazapata.com/frontend/vistas/img/logo-online.png" alt="" style="width: 135px; float: left; position: absolute; top: 19px; left: 30px;">
+
+                    <img src="https://www.refaccionariazapata.com/frontend/vistas/img/logo-online.png" alt="" style="width: 135px; float: left; margin-top:11px; margin-left:25px;">
                     
                 </header>
                 
-                <div class="correo" style="font-family: Arial; margin-top: 25px;">
+                <div class="correo" style="align-content: center; justify-content: center; text-align: center; font-family: Arial; margin-top: 40px;">
                     
                     <br>
                     
