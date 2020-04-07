@@ -1193,6 +1193,8 @@ class ControladorUsuarios
 
                 date_default_timezone_set("America/Mexico_City");
 
+                $fecha = date('Y');
+
                 $url = Ruta::ctrRuta();
 
                 $mail = new PHPMailer;
