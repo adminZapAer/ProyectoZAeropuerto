@@ -72,7 +72,7 @@
         <meta property="og:title"   content="<?php echo $cabeceras['titulo'];?>">
         <meta property="og:url" content="<?php echo $url.$cabeceras['ruta'];?>">
         <meta property="og:description" content="<?php echo $cabeceras['descripcion'];?>">
-        <meta property="og:image"  content="<?php echo $cabeceras['portada'];?>">
+        <meta property="og:image"  content="<?php echo $url.$cabeceras['portada'];?>">
         <meta property="og:type"  content="website">	
         <meta property="og:site_name" content="Refaccionaria On line Zapata">
         <meta property="og:locale" content="es_MX">
@@ -84,7 +84,7 @@
         <meta itemprop="name" content="<?php echo $cabeceras['titulo'];?>">
         <meta itemprop="url" content="<?php echo $url.$cabeceras['ruta'];?>">
         <meta itemprop="description" content="<?php echo $cabeceras['descripcion'];?>">
-        <meta itemprop="image" content="<?php echo $cabeceras['portada'];?>">
+        <meta itemprop="image" content="<?php echo $url.$cabeceras['portada'];?>">
 
         <meta name="google-site-verification" content="GHe1O_0c_e91stCPyBNpydKiW5y3toTLz5gQfAVR4Rg" />
 
@@ -95,18 +95,18 @@
         <meta name="twitter:title" content="<?php echo $cabeceras['titulo'];?>">
         <meta name="twitter:url" content="<?php echo $url.$cabeceras['ruta'];?>">
         <meta name="twitter:description" content="<?php echo $cabeceras['descripcion'];?>">
-        <meta name="twitter:image" content="<?php echo $cabeceras['portada'];?>">
+        <meta name="twitter:image" content="<?php echo $url.$cabeceras['portada'];?>">
         <meta name="twitter:site" content="@ZAeropuerto">
         
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162197239-1"></script>
+        
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-162197239-1');
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-162197239-1');
         </script>
 
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++-->

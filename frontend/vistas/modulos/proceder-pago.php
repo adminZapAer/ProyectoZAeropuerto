@@ -247,7 +247,7 @@ TABLA CARRITO DE COMPRAS
 
         <!-- .......................... -->
 
-        <p class="text-primary">Para activar el botón de pago, es necesario aceptar las politicas de términos y condiciones</p>
+        <p style="font-weight: bold; font-size: 15px; text-decoration: underline;">Para activar el botón de pago, es necesario aceptar las politicas de términos y condiciones</p>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <small>

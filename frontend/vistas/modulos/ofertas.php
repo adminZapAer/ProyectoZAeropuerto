@@ -77,9 +77,9 @@ $ruta = $rutas[0];
                                 </h3>
                                 
                                 <figure>
-                                
-                                    <img class="img-responsive" src="'.$servidor.$value["imgOferta"].'"width="100%">
                                     
+                                    <img class="img-responsive" src="'.$servidor.$value["imgOferta"].'"width="100%">
+
                                     <div class="sombraSuperior">
                                     
                                     </div>';
@@ -266,9 +266,15 @@ $ruta = $rutas[0];
                                     
                                 </h3>
                                 
-                                <figure>
-                                
-                                    <img class="img-responsive" src="'.$servidor.$value["imgOferta"].'"width="100%">
+                                <figure>';
+                                    
+                                    if($value["imgOferta"] != ""){
+                                        echo'<img class="img-responsive" src="'.$servidor.$value["imgOferta"].'" width="100%">';
+                                    }
+                                    else{
+                                        echo'<img class="img-responsive" src="'.$servidor.$value["portada"].'" width="100%">';
+                                    }
+                                    echo'
                                     
                                     <div class="sombraSuperior">
                                     
