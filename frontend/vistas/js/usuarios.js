@@ -135,11 +135,11 @@ function registroUsuario(){
 
 	if(password != ""){
 
-		var expresion = /^[a-zA-Z0-9]*$/;
+		var expresion = /^[a-zA-Z0-9*+-]*$/;
 
 		if(!expresion.test(password)){
 
-			$("#regPassword").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> No se permiten caracteres especiales</div>')
+			$("#regPassword").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> No se permiten caracteres especiales. <strong>Solo se permiten los siguientes caracteres especiales: "+ - *"</strong></div>')
 
 			return false;
 
