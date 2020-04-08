@@ -340,7 +340,7 @@ class ControladorUsuarios
 
         
         if( $_POST['opcionInicio'] == 'COMPRA AL MOMENTO' ){
-            $redireccion = '"proceder-pago"';
+            $redireccion = 'https://www.refaccionariazapata.com/frontend/proceder-pago';
         }else{
             $redireccion = 'localStorage.getItem("rutaActual")';
         }
