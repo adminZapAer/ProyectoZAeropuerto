@@ -36,8 +36,6 @@ class ControladorUsuarios
 					=============================================*/
                     date_default_timezone_set("America/Mexico_City");
 
-                    $fecha = date('Y');
-
                     $url = Ruta::ctrRuta();
 
                     $mail = new PHPMailer;
@@ -50,80 +48,41 @@ class ControladorUsuarios
                     //Para que responda al Correo
                     $mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
                     //El siguiente correo no es para que responda, es solo informativo
-                    $mail->Subject = "Por favor verifique su correo electrónico.";
+                    $mail->Subject = "Por favor verifique su dirección de correo electrónico.";
                     //Agregamos el correo electronico al cual haremos llegar el mensaje
                     $mail->addAddress($_POST["regEmail"]);
                     //Enviaremos el contenido del Correo
                     $mail->msgHTML('
-
-                    <header style="background: linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 30%), url(https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/fondo-cabez.jpg); width: 100%; height: 70px;">
-
-                        <img src="https://www.refaccionariazapata.com/frontend/vistas/img/logo-online.png" alt="" style="width: 135px; float: left; margin-top:11px; margin-left:25px;">
-
-                    </header>
-                    
-                    <div class="correo" style="align-content: center; justify-content: center; text-align: center; font-family: Arial; margin-top: 40px;">
-                        
+                    <div style="width:100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px;">
                         <center>
-                            
-                            <br>
-                            
-                            <img src="https://www.refaccionariazapata.com/frontend/vistas/img/sobre-gris57x39.png" alt="">
-                            
-                            <h3 style="font-size: 18px;">Verifique su Correo Electrónico</h3>
-                            
-                            <hr style="border:1px solid #ccc; width:92%;">
-                            
+                            <img src="https://www.zapataaeropuerto.com/img/logo/logoZapataNegro.png" alt="logo-zapata" style="width: 20%; padding: 20px;">
                         </center>
+                        <div style="position:relative; margin: auto; width: 600px; background: white; padding: 20px;">
                         
-                    </div>
-                    
-                    <body style="align-content: center; justify-content: center; text-align: center; font-family: Arial;">
-                    
-                        <p>Saludos '.$_POST["regUsuario"].'</p>
-                        
-                        <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Para comenzar a usar su cuenta de <strong>Refaccionaria Online ZAPATA</strong>, debe confirmar su dirección de correo electrónico.</h4>
-                        
-                        <center>
-                            
-                            <a href="'.$url.'verificar/'.$encriptarEmail.'" target="_blank" style="text-decoration: none">
-                                <div style="line-height: 35px; background: rgba(193,39,45,1); width: 60%; color: white;">Verifíque su dirección de correo electrónico</div>
-                            </a>
-                            
-                        </center>
-                        
-                        <br>
-                        
-                    </body>
-                    
-                    <footer style="background: linear-gradient(to top, black 30% ,white 80%);">
-                        
-                        <hr style="border:1px solid #ccc; width:80%;">
-                        
-                        <h5 style="font-weight: 100; color: 5d5d5d;">Si usted no se registró en esta pagina, puede ignorar este correo electrónico y la cuenta será eliminada.</h5>
-                        
-                        <br><br><br>
-                        
-                        <div style="text-align: center; align-content: center; align-items: center; justify-content: center;">
-                        
-                            <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 25px;">Conócenos... </a>
-                            
-                            <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 18px;">¿Quienes somos?</a>
-                            
-                            <br><br>
-                            
-                            <img src="https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/logob.png" alt="" style="display: flex; margin: 0 auto; width: 100%; max-width: 160px;">
-                            
-                            <p style="color: #ffffff; font-size: 12px;">&copy; '.$fecha.'. Todos los derechos reservados.</p>
-                            
-                            <a href="https://www.refaccionariazapata.com/frontend/terminos-y-condiciones" target="_blank" style="color: #ffffff; font-size: 12px;">Términos y Condiciones</a>
-                            
-                            <br><br>
+                            <center>
+                                <img src="https://www.zapataaeropuerto.com/img/mail/icon-email.png" alt="icono-mail" style="padding: 20px; width: 15%;">
+                                
+                                <h3 style="font-weight: 100; color: #999;">VERIFIQUE SU DIRECCIÓN DE CORREO ELECTRÓNICO</h3>
+                                
+                                <hr style="border:1px solid #ccc; width:80%;">
+                                
+                                <h4 style="font-weight: 100; color: #999; padding: 0 20px;">Para comenzar a usar su cuenta de <strong>Refaccionaria Online Zapata</strong>, debe confirmar su dirección de correo electrónico.</h4>
+                                
+                                <a href="' . $url . 'verificar/' . $encriptarEmail . '" target="_blank" style="text-decoration: none">
+                                    <div style="line-height: 60px; background: #0aa; width: 60%; color: white;">Verifíque su dirección de correo electrónico</div>
+                                </a>
+                                
+                                <br>
+                                
+                                <hr style="border:1px solid #ccc; width:80%;">
+                                
+                                <h5 style="font-weight: 100; color: #999;">Si no se inscribió en esta cuenta, puede ignorar este correo electrónico y la cuenta se eliminará.</h5>
+                                
+                            </center>
                             
                         </div>
                         
-                    </footer>
-
+                    </div>
                     ');
 
                     $envio = $mail->Send();
@@ -240,7 +199,7 @@ class ControladorUsuarios
             $correo = $_POST["ingEmail"];
         }
 
-        if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $correo) || ($_POST['opcionInicio'] == 'ENVIAR' && !preg_match('/^[a-zA-Z0-9*-+]+$/', $_POST["ingPassword"]))) {
+        if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $correo) || ($_POST['opcionInicio'] == 'ENVIAR' && !preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"]))) {
             echo '
             <script>
                 
@@ -381,7 +340,7 @@ class ControladorUsuarios
 
         
         if( $_POST['opcionInicio'] == 'COMPRA AL MOMENTO' ){
-            $redireccion = 'https://www.refaccionariazapata.com/frontend/proceder-pago';
+            $redireccion = '"/frontend/proceder-pago"';
         }else{
             $redireccion = 'localStorage.getItem("rutaActual")';
         }
@@ -401,6 +360,7 @@ class ControladorUsuarios
 	=============================================*/
     public function ctrOlvidoPassword()
     {
+
         //preguntamos si viene un correo electronico
         if (isset($_POST["passEmail"])) {
 
@@ -444,7 +404,6 @@ class ControladorUsuarios
                     //Actuualiza la informacion del usuario, usuario y la contraseña temporal
                     $id = $respuesta1["idUsuario"];
                     $item2 = "password";
-                    $nombre = strtok($respuesta1["nombre"]," ");
                     $valor2 = $encriptar;
                     $respuesta2 = ModeloUsuarios::mdlActualizarUsuario($tabla, $id, $item2, $valor2);
 
@@ -455,9 +414,6 @@ class ControladorUsuarios
 						=============================================*/
 
                         date_default_timezone_set("America/Mexico_City");
-
-                        $fecha = date('Y');
-
                         $url = Ruta::ctrRuta();
 
                         $mail = new PHPMailer;
@@ -474,87 +430,44 @@ class ControladorUsuarios
 
                         $mail->addAddress($_POST["passEmail"]);
 
-                        $mail->msgHTML('
-
-                        <header style="background: linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 30%), url(https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/fondo-cabez.jpg); width: 100%; height: 70px;">
-
-                            <img src="https://www.refaccionariazapata.com/frontend/vistas/img/logo-online.png" alt="" style="width: 135px; float: left; margin-top:11px; margin-left:25px;">
-
-                        </header>
-                        
-                        <div class="correo" style="align-content: center; justify-content: center; text-align: center; font-family: Arial; margin-top: 40px;">
-                            
+                        $mail->msgHTML(
+                            '
+                        <div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">    
+				            
                             <center>
+							
+                                <img style="padding:20px; width:10%" src="https://www.zapataaeropuerto.com/img/logo/logoZapataNegro.png">
                                 
-                                <br>
-                                
-                                <img src="https://www.refaccionariazapata.com/frontend/vistas/img/padlock.png" alt="" style="width: 100%; max-width: 80px;">
-                                
-                                <h3 style="font-size: 18px;">Solicitud de nueva contraseña</h3>
-                                
-                                <hr style="border:1px solid #ccc; width:92%;">
-                                
-                            </center>
-                            
-                        </div>
-                        
-                        <body style="align-content: center; justify-content: center; text-align: center; font-family: Arial;">
-                            
-                            <p>Saludos '.$nombre.'</p>
-                            
-                            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Hemos recibido una solicitud de cambio de contraseña.</h4>
-                            
-                            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Su nueva contraseña es:</h4>
-                            
-                            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>'.$nuevaPassword.'</strong></h4>
-                            
-                            <center>
-                                
-                                <a href="'.$url.'" target="_blank" style="text-decoration:none">
-                                
-                                    <div style="line-height:35px; background: rgba(193,39,45,1); width:60%; color:white">Ingrese nuevamente al sitio</div>
-                                
-                                </a>
-                                
-                            </center>
-                            
-                            <br>
-                            
-                        </body>
-                        
-                        <footer style="background: linear-gradient(to top, black 30% ,white 80%);">
-                            
-                            <hr style="border:1px solid #ccc; width:80%;">
-                            
-                            <h4 style="font-weight: 100; color: 5d5d5d;">Favor de cambiar esta contraseña por una clave <strong>segura</strong> que pueda recordar.
-                            <br><br>
-                            Para cambiar la contraseña, presione la pestaña donde dice su nombre y seleccione la sección <strong>Perfil</strong>, despues dirijase a la sección <strong>Editar perfil</strong>, en ese apartado cambie la contraseña. 
-                            <br><br>
-                            Solo se aceptan <strong>Letras, Numeros</strong> y los siguientes <strong>caracteres especiales: "+ * /"</strong> para cambiar la contraseña.</h4>
-                            
-                            <br><br><br>
-                            
-                            <div style="text-align: center; align-content: center; align-items: center; justify-content: center;">
-                                
-                                <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 25px;">Conócenos... </a>
-                                
-                                <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 18px;">¿Quienes somos?</a>
-                                
-                                <br><br>
-                                
-                                <img src="https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/logob.png" alt="" style="display: flex; margin: 0 auto; width: 100%; max-width: 160px;">
-                                
-                                <p style="color: #ffffff; font-size: 12px;">&copy; '.$fecha.'. Todos los derechos reservados.</p>
-                                
-                                <a href="https://www.refaccionariazapata.com/frontend/terminos-y-condiciones" target="_blank" style="color: #ffffff; font-size: 12px;">Términos y Condiciones</a>
-                                
-                                <br><br>
+				            </center>
+                            <div style="position:relative; margin:auto; width:600px; background:white; padding:20px">
+								<center>
+									<img style="padding:20px; width:15%" src="https://www.zapataaeropuerto.com/img/logo/logoZapataNegro.pngicon-pass.png">
+                                    
+                                    <h3 style="font-weight:100; color:#999">SOLICITUD DE NUEVA CONTRASEÑA</h3>
+                                    
+                                    <hr style="border:1px solid #ccc; width:80%">
+                                    
+                                    <h4 style="font-weight:100; color:#999; padding:0 20px">
+                                        <strong>Su nueva contraseña: </strong>' . $nuevaPassword . '
+                                    </h4>
+                                    
+                                    <a href="' . $url . '" target="_blank" style="text-decoration:none">
+                                        
+                                        <div style="line-height:60px; background:#0aa; width:60%; color:white">Ingrese nuevamente al sitio</div>
+                                    </a>
+                                    
+                                    <br>
+                                    
+                                    <hr style="border:1px solid #ccc; width:80%">
+                                    
+                                    <h5 style="font-weight:100; color:#999">Si no se inscribió en esta cuenta, puede ignorar este correo electrónico y la cuenta se eliminará.</h5>
+                                    
+                                </center>
                                 
                             </div>
                             
-                        </footer>
-                        
-                        ');
+                        </div>'
+                        );
 
                         $envio = $mail->Send();
 
@@ -1201,8 +1114,6 @@ class ControladorUsuarios
 
                 date_default_timezone_set("America/Mexico_City");
 
-                $fecha = date('Y');
-
                 $url = Ruta::ctrRuta();
 
                 $mail = new PHPMailer;
@@ -1221,69 +1132,34 @@ class ControladorUsuarios
 
                 $mail->msgHTML('
 
-                <header style="background: linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 30%), url(https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/fondo-cabez.jpg); width: 100%; height: 70px;">
+						<div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">
 
-                    <img src="https://www.refaccionariazapata.com/frontend/vistas/img/logo-online.png" alt="" style="width: 135px; float: left; margin-top:11px; margin-left:25px;">
-                    
-                </header>
-                
-                <div class="correo" style="align-content: center; justify-content: center; text-align: center; font-family: Arial; margin-top: 40px;">
-                    
-                    <br>
-                    
-                    <img src="https://www.refaccionariazapata.com/frontend/vistas/img/discuss-issue.png" alt="" style="width: 100%; max-width: 80px;">
-                    
-                    <h3 style="font-size: 18px;">Ha recibido una nueva consulta</h3>
-                    
-                    <hr style="border:1px solid #ccc; width:92%;">
-                    
-                </div>
-                
-                <body style="align-content: center; justify-content: center; text-align: center; font-family: Arial;">
-                    
-                    <p>Saludos Jose Antonio</p>
-                    
-                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Te hicieron una pregunta en <a href="https://www.refaccionariazapata.com">Refaccionaria Online Zapata</a>.</h4>
-                    
-                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">'.$_POST["mensajeContactenos"].'</h4>
-                    
-                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Estos son los datos del interesado:</strong></h4>
-                    
-                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Nombre: </strong>'.$_POST["nombreContactenos"].'</h4>
-                    
-                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>E-mail: </strong>'.$_POST["emailContactenos"].'</h4>
-                    
-                    <br>
-                    
-                </body>
-                
-                <footer style="background: linear-gradient(to top, black 50% ,white 100%);">
-                    
-                    <hr style="border:1px solid #ccc; width:80%;">
-                    
-                    <br><br><br><br><br><br>
-                    
-                    <div style="text-align: center; align-content: center; align-items: center; justify-content: center;">
-                        
-                        <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 25px;">Conócenos... </a>
-                        
-                        <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 18px;">¿Quienes somos?</a>
-                        
-                        <br><br>
-                        
-                        <img src="https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/logob.png" alt="" style="display: flex; margin: 0 auto; width: 100%; max-width: 160px;">
-                        
-                        <p style="color: #ffffff; font-size: 12px;">&copy; '.$fecha.'. Todos los derechos reservados.</p>
-                        
-                        <a href="https://www.refaccionariazapata.com/frontend/terminos-y-condiciones" target="_blank" style="color: #ffffff; font-size: 12px;">Términos y Condiciones</a>
-                        
-                        <br><br>
-                        
-                    </div>
-                    
-                </footer>
-						
-                ');
+						<img src="https://www.zapataaeropuerto.com/img/logo/logoZapataNegro.png" alt="logo-zapata" style="width: 20%; padding: 20px;">
+
+						<div style="position:relative; margin:auto; width:600px; background:white; padding-bottom:20px">
+
+							<center>
+
+							<img src="https://www.zapataaeropuerto.com/img/mail/icon-email.png" alt="icono-mail" style="padding: 20px; width: 10%;">
+
+
+							<h3 style="font-weight:100; color:#999;">HA RECIBIDO UNA CONSULTA</h3>
+
+							<hr style="width:80%; border:1px solid #ccc">
+
+							<h4 style="font-weight:100; color:#999; padding:0px 20px; text-transform:uppercase">' . $_POST["nombreContactenos"] . '</h4>
+
+							<h4 style="font-weight:100; color:#999; padding:0px 20px;">De: ' . $_POST["emailContactenos"] . '</h4>
+
+							<h4 style="font-weight:100; color:#999; padding:0px 20px">' . $_POST["mensajeContactenos"] . '</h4>
+
+							<hr style="width:80%; border:1px solid #ccc">
+
+							</center>
+
+						</div>
+
+					</div>');
 
                 $envio = $mail->Send();
 
