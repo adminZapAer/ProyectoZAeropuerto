@@ -201,6 +201,8 @@ class AjaxCheckout
 	{
 		date_default_timezone_set("America/Mexico_City");
 
+		$fecha = date('Y');
+
 		$mail = new PHPMailer;
 
 		try {
@@ -231,7 +233,7 @@ class AjaxCheckout
 			$productosEnviadosDesdePlanta = '';
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
-				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
+				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", Producto: " . $producto->titulo . ", Cantidad:" . $producto->cantidad . ", Precio: ".$producto->precio."</p>";
 				if ($producto->origen == 'planta') {
 					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
 					// print_r($productosEnviadosDesdePlanta);
@@ -244,55 +246,89 @@ class AjaxCheckout
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
 				$direccionHTML = "
-					<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
-                    <p><b>Nombre: </b>" . $direccionDestinoCliente['nombre'] . "</p>
-                    <p><b>Dirección: </b>" . $direccionDestinoCliente['calle'] . " | <b>Numero Exterior: </b>" . $direccionDestinoCliente['numext'] . " | <b>Numero Interior: </b>" . $direccionDestinoCliente['numint'] . "</p>
-                    <p><b>Colonia: </b>" . $direccionDestinoCliente['colonia'] . " | <b>Municipio: </b>" . $direccionDestinoCliente['municipio'] . " | <b>Estado: </b>" . $direccionDestinoCliente['estado'] . " | <b>Código Postal: </b>" . $direccionDestinoCliente['cp'] . "</p>
-                    <p><b>Teléfono: </b>" . $direccionDestinoCliente['celular'] . "</p>
+					<p><b>Calle: </b>".$direccionDestinoCliente['calle']."</p>
+		            <p><b>No. Exterior: </b>".$direccionDestinoCliente['numext']." | <b>No. Interior: </b>" .$direccionDestinoCliente['numint']."</p>
+		            <p><b>Colonia: </b>".$direccionDestinoCliente['colonia']."</p>
+		            <p><b>Municipio: </b>".$direccionDestinoCliente['municipio']." | <b>Estado: </b>" .$direccionDestinoCliente['estado']."</p>
+		            <p><b>Código Postal: </b>".$direccionDestinoCliente['cp']."</p>
+		            <p><b>Teléfono: </b>".$direccionDestinoCliente['celular']."</p>
+		            <br>
+		            <p><b>Lo recibirá:</b>".$direccionDestinoCliente['nombre']."</p>
                     ";
 			}
 
 			$mail->msgHTML('
-		        <div style="width:100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px;">
-		            <center>
-		                <img src="https://www.zapataaeropuerto.com/img/logo/logoZapataNegro.png" alt="logo-zapata" style="width: 20%; padding: 20px;">
-		            </center>
-		            <div style="position:relative; margin: auto; width: 600px; background: white; padding: 20px;">
-		            
-		                <center>
-		                    <img src="https://www.zapataaeropuerto.com/img/mail/icon-email.png" alt="icono-mail" style="padding: 20px; width: 15%;">
-		                    
-		                    <h3 style="font-weight: 100; color: #000;">Gracias por comprar en refaccionariazapata.com</h3>
-		                    
-		                    <hr style="border:1px solid #ccc; width:80%;">
-		                    
-		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">Nos complace informarle que su pedido ha sido procesado.</h4>
-		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">Los siguientes artículos enlistado han sido adquiridos.</h4>
-		                    ' . $listaProductos . '
-		                    <br>
-							
-							<hr style="border:1px solid #ccc; width:80%;">
-		                    
-		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">
-		                    	<p>
-		                    		Los siguientes productos serán enviados desde planta:
-								</p>
-								' . $productosEnviadosDesdePlanta . '
-		                    </h4>
-		                    
-							<br>
-		                    
-		                    <hr style="border:1px solid #ccc; width:80%;">
-							' . $direccionHTML . '
-							<hr style="border:1px solid #ccc; width:80%;">
+		    <header style="background: linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 30%), url(https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/fondo-cabez.jpg); width: 100%; height: 70px;">
 
-		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">¡Gracias por elegir Refaccionaria Online Zapata!.</h4>
-		                    
-		                </center>
-		                
-		            </div>
-		            
-		        </div>
+	            <img src="https://www.refaccionariazapata.com/frontend/vistas/img/logo-online.png" alt="" style="width: 135px; float: left; margin-top:11px; margin-left:25px;">
+
+	        </header>
+	        
+	        <div class="correo" style="align-content: center; justify-content: center; text-align: center; font-family: Arial; margin-top: 40px;">
+	            
+	            <br>
+	            
+	            <img src="https://www.refaccionariazapata.com/frontend/vistas/img/verification.png" alt="" style="width: 100%; max-width: 80px;">
+	            
+	            <h3 style="font-size: 18px;">Gracias por comprar en <a href="https://www.refaccionariazapata.com" style="text-decoration: none;">Refaccionaria Online Zapata</a></h3>
+	            
+	            <hr style="border:1px solid #ccc; width:92%;">
+	            
+	        </div>
+	        
+	        <body style="align-content: center; justify-content: center; text-align: center; font-family: Arial;">
+	            
+	            <p>Saludos '.strtok($_SESSION["nombre"], " ").'</p>
+	            
+	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Nos complace informarle que su pedido ha sido procesado</h4>
+	            
+	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Usted adquirio los siguientes artículos:</strong></h4>
+	            
+	            '.$listaProductos.'
+	            
+	            <br>
+	            
+	            <hr style="border:1px solid #ccc; width:80%;">
+	            
+	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Los siguientes productos serán enviados desde planta:</h4>
+	            
+	            <h5 style="font-weight: 100; color: #000000; padding: 0 20px;">'.$productosEnviadosDesdePlanta.'</h5>
+	            
+	            <hr style="border:1px solid #ccc; width:80%;">
+	            
+	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Se enviarán a la siguiente dirección:</h4>
+	            
+	            '.$direccionHTML.'
+	            
+	        </body>
+	        
+	        <footer style="background: linear-gradient(to top, black 30% ,white 80%);">
+	            
+	            <hr style="border:1px solid #ccc; width:80%;">
+	            
+	            <h5 style="font-weight: 100; color: 5d5d5d;">¡Gracias por elegir Refaccionaria Online Zapata!</h5>
+	            
+	            <br><br><br>
+	            
+	            <div style="text-align: center; align-content: center; align-items: center; justify-content: center;">
+	            
+	                <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 25px;">Conócenos... </a>
+	                
+	                <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 18px;">¿Quienes somos?</a>
+	                
+	                <br><br>
+	                
+	                <img src="https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/logob.png" alt="" style="display: flex; margin: 0 auto; width: 100%; max-width: 160px;">
+	                
+	                <p style="color: #ffffff; font-size: 12px;">&copy; '.$fecha.'. Todos los derechos reservados.</p>
+	                
+	                <a href="https://www.refaccionariazapata.com/frontend/terminos-y-condiciones" target="_blank" style="color: #ffffff; font-size: 12px;">Términos y Condiciones</a>
+	                
+	                <br><br>
+	                
+	            </div>
+	            
+	        </footer>
 		    ');
 			$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
@@ -305,6 +341,8 @@ class AjaxCheckout
 	public function sendEmailEmpleado($user, $productos, $compra)
 	{
 		date_default_timezone_set("America/Mexico_City");
+
+		$fecha = date('Y');
 
 		$mail = new PHPMailer;
 
@@ -345,7 +383,7 @@ class AjaxCheckout
 			$productosEnviadosDesdePlanta = '';
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
-				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . "</p>";
+				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . ", Precio: ".$producto->precio."</p>";
 
 				if ($producto->origen == 'planta') {
 					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
@@ -359,65 +397,95 @@ class AjaxCheckout
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
 				$direccionHTML = "
-					<p><b>DIRECCIÓN DE ENVÍO</b><br></p>
-                    <p><b>Nombre: </b>" . $direccionDestino['nombre'] . "</p>
-                    <p><b>Dirección: </b>" . $direccionDestino['calle'] . " | <b>Numero Exterior: </b>" . $direccionDestino['numext'] . " | <b>Numero Interior: </b>" . $direccionDestino['numint'] . "</p>
-                    <p><b>Colonia: </b>" . $direccionDestino['colonia'] . " | <b>Municipio: </b>" . $direccionDestino['municipio'] . " | <b>Estado: </b>" . $direccionDestino['estado'] . " | <b>Código Postal: </b>" . $direccionDestino['cp'] . "</p>
-                    <p><b>Teléfono: </b>" . $direccionDestino['celular'] . "</p>
-                    ";
+                	<p><b>Calle: </b>".$direccionDestinoCliente['calle']."</p>
+		            <p><b>No. Exterior: </b>".$direccionDestinoCliente['numext']." | <b>No. Interior: </b>" .$direccionDestinoCliente['numint']."</p>
+		            <p><b>Colonia: </b>".$direccionDestinoCliente['colonia']."</p>
+		            <p><b>Municipio: </b>".$direccionDestinoCliente['municipio']." | <b>Estado: </b>" .$direccionDestinoCliente['estado']."</p>
+		            <p><b>Código Postal: </b>".$direccionDestinoCliente['cp']."</p>
+		            <p><b>Teléfono: </b>".$direccionDestinoCliente['celular']."</p>
+		            <br>
+		            <p><b>Lo recibirá:</b>".$direccionDestinoCliente['nombre']."</p>    
+                ";
 			}
 
 			$mail->msgHTML('
-		        <div style="width:100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px;">
-		            <center>
-		                <img src="https://www.zapataaeropuerto.com/img/logo/logoZapataNegro.png" alt="logo-zapata" style="width: 20%; padding: 20px;">
-		            </center>
-		            <div style="position:relative; margin: auto; width: 600px; background: white; padding: 20px;">
-		            
-		                <center>
-		                    <img src="https://www.zapataaeropuerto.com/img/mail/icon-email.png" alt="icono-mail" style="padding: 20px; width: 10%;">
-		                    
-							<h3 style="font-weight: 100; color: #000;">
-								Se ha realizado una compra por el cliente:' . $user['nombre'] .
-				'<br> Con el correo: ' . $user['email'] .
-				'</h3>
-		                    
-		                    <hr style="border:1px solid #ccc; width:80%;">
-		                    
-		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">
-		                    	<p>
-		                    		La compra se realizo en la fecha ' . date('Y-m-d h:i') . '
-		                    		Los productos que el cliente adquirió son los siguientes:
-								</p>
-								' . $listaProductos . '
-		                    </h4>
-		                    
-							<br>
-							
-							<hr style="border:1px solid #ccc; width:80%;">
-		                    
-		                    <h4 style="font-weight: 100; color: #000; padding: 0 20px;">
-		                    	<p>
-		                    		Los siguientes productos serán enviados desde planta:
-								</p>
-								' . $productosEnviadosDesdePlanta . '
-		                    </h4>
-		                    
-							<br>
-		                    
-		                    <hr style="border:1px solid #ccc; width:80%;">
-                            
-                            <h4 style="font-weight: 100; color: #000; padding: 0 20px;">
-		                    	<p><b>DATOS DE FACTURACION</b></p>
-                                ' . $facturacionHTML . '
-		                    </h4>
-                            
-                            
-		                </center>
-		                
-		            </div>
-		            
-		        </div>
+			<header style="background: linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 30%), url(https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/fondo-cabez.jpg); width: 100%; height: 70px;">
+				
+	            <img src="https://www.refaccionariazapata.com/frontend/vistas/img/logo-online.png" alt="" style="width: 135px; float: left; margin-top:11px; margin-left:25px;">
+	            
+	        </header>
+	        
+	        <div class="correo" style="align-content: center; justify-content: center; text-align: center; font-family: Arial; margin-top: 40px;">
+	            
+	            <br>
+	            
+	            <img src="https://www.refaccionariazapata.com/frontend/vistas/img/verification.png" alt="" style="width: 100%; max-width: 80px;">
+	            
+	            <h3 style="font-size: 18px;">
+	                
+	                El usuario: '.$user['nombre'].' realizó una compra
+	                <br>
+	                con el correo: '.$user['email'].'
+	                
+	            </h3>
+	            
+	            <hr style="border:1px solid #ccc; width:92%;">
+	            
+	        </div>
+	        
+	        <body style="align-content: center; justify-content: center; text-align: center; font-family: Arial;">
+	            
+	            <p>Saludos Jose Antonio</p>
+	            
+	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Se realizó una compra el dia '.date('Y-m-d h:i').'</h4>
+	            
+	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Los productos que el cliente adquirió son los siguientes:</strong></h4>
+	            
+	            '.$listaProductos.'
+	            
+	            <br>
+	            
+	            <hr style="border:1px solid #ccc; width:80%;">
+	            
+	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Los siguientes productos serán enviados desde planta:</h4>
+	            
+	            <h5 style="font-weight: 100; color: #000000; padding: 0 20px;">'.$productosEnviadosDesdePlanta.'</h5>
+	            
+	            <hr style="border:1px solid #ccc; width:80%;">
+	            
+	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Los datos de Facturación son los siguientes:</h4>
+	            
+	            '.$facturacionHTML.'
+	            
+	        </body>
+	        
+	        <footer style="background: linear-gradient(to top, black 30% ,white 80%);">
+	            
+	            <hr style="border:1px solid #ccc; width:80%;">
+	            
+	            <h5 style="font-weight: 100; color: 5d5d5d;">¡Gracias por elegir Refaccionaria Online Zapata!</h5>
+	            
+	            <br><br><br>
+	            
+	            <div style="text-align: center; align-content: center; align-items: center; justify-content: center;">
+	            
+	                <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 25px;">Conócenos... </a>
+	                
+	                <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 18px;">¿Quienes somos?</a>
+	                
+	                <br><br>
+	                
+	                <img src="https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/logob.png" alt="" style="display: flex; margin: 0 auto; width: 100%; max-width: 160px;">
+	                
+	                <p style="color: #ffffff; font-size: 12px;">&copy; '.$fecha.'. Todos los derechos reservados.</p>
+	                
+	                <a href="https://www.refaccionariazapata.com/frontend/terminos-y-condiciones" target="_blank" style="color: #ffffff; font-size: 12px;">Términos y Condiciones</a>
+	                
+	                <br><br>
+	                
+	            </div>
+	            
+	        </footer>
 		    ');
 			$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
