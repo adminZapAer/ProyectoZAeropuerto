@@ -233,7 +233,7 @@ class AjaxCheckout
 			$productosEnviadosDesdePlanta = '';
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
-				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", Producto: " . $producto->titulo . ", Cantidad:" . $producto->cantidad . ", Precio: ".$producto->precio."</p>";
+				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", Producto: " . $producto->titulo . ", Cantidad:" . $producto->cantidad . ", Precio: <strong>$ ".$producto->precio."</strong></p>";
 				if ($producto->origen == 'planta') {
 					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
 					// print_r($productosEnviadosDesdePlanta);
@@ -306,7 +306,7 @@ class AjaxCheckout
 	            
 	            <hr style="border:1px solid #ccc; width:80%;">
 	            
-	            <h5 style="font-weight: 100; color: 5d5d5d;">¡Gracias por elegir Refaccionaria Online Zapata!</h5>
+	            <h5 style="font-weight: 100; color: 5d5d5d; text-align:center;">¡Gracias por elegir Refaccionaria Online Zapata!</h5>
 	            
 	            <br><br><br>
 	            
@@ -383,7 +383,7 @@ class AjaxCheckout
 			$productosEnviadosDesdePlanta = '';
 			foreach ($productos as $producto) {
 				$sku = ModeloProductos::mdlGetProducto($producto->idProducto)["sku"];
-				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . ", Precio: ".$producto->precio."</p>";
+				$listaProductos = $listaProductos . "<p>" . "SKU: " . $sku . ", producto: " . $producto->titulo . ", cantidad:" . $producto->cantidad . ", Precio: <strong>$ ".$producto->precio."</strong></p>";
 
 				if ($producto->origen == 'planta') {
 					$productosEnviadosDesdePlanta = $productosEnviadosDesdePlanta . "-" . $producto->titulo . " <br>";
@@ -463,7 +463,7 @@ class AjaxCheckout
 	            
 	            <hr style="border:1px solid #ccc; width:80%;">
 	            
-	            <h5 style="font-weight: 100; color: 5d5d5d;">¡Gracias por elegir Refaccionaria Online Zapata!</h5>
+	            <h5 style="font-weight: 100; color: 5d5d5d; text-align:center;">¡Gracias por elegir Refaccionaria Online Zapata!</h5>
 	            
 	            <br><br><br>
 	            

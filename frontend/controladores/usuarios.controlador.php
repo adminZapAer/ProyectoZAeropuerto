@@ -99,7 +99,7 @@ class ControladorUsuarios
                         
                         <hr style="border:1px solid #ccc; width:80%;">
                         
-                        <h5 style="font-weight: 100; color: 5d5d5d;">Si usted no se registró en esta pagina, puede ignorar este correo electrónico y la cuenta será eliminada.</h5>
+                        <h5 style="font-weight: 100; color: 5d5d5d;text-align:center; ">Si usted no se registró en esta pagina, puede ignorar este correo electrónico y la cuenta será eliminada.</h5>
                         
                         <br><br><br>
                         
@@ -527,13 +527,13 @@ class ControladorUsuarios
                             
                             <hr style="border:1px solid #ccc; width:80%;">
                             
-                            <h4 style="font-weight: 100; color: 5d5d5d;">Favor de cambiar esta contraseña por una clave <strong>segura</strong> que pueda recordar.
+                            <h4 style="font-weight: 100; color: 5d5d5d; text-align:center;">Favor de cambiar esta contraseña por una clave <strong>segura</strong> que pueda recordar.
                             <br><br>
                             Para cambiar la contraseña, presione la pestaña donde dice su nombre y seleccione la sección <strong>Perfil</strong>, despues dirijase a la sección <strong>Editar perfil</strong>, en ese apartado cambie la contraseña. 
                             <br><br>
                             Solo se aceptan <strong>Letras, Numeros</strong> y los siguientes <strong>caracteres especiales: "+ * /"</strong> para cambiar la contraseña.</h4>
                             
-                            <br><br><br>
+                            <br><br><br><br><br>
                             
                             <div style="text-align: center; align-content: center; align-items: center; justify-content: center;">
                                 
@@ -1218,8 +1218,8 @@ class ControladorUsuarios
 
                 $mail->Subject = "Recibió una nueva consulta";
 
-                $mail->addAddress("zapata.camiones.redes@gmail.com");
-                //$mail->addAddress("jmolina@zapata.com.mx");
+                //$mail->addAddress("zapata.camiones.redes@gmail.com");
+                $mail->addAddress("jmolina@zapata.com.mx");
 
                 $mail->msgHTML('
                 
@@ -1257,7 +1257,7 @@ class ControladorUsuarios
                     
                     <br>
 
-                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Favor de comunicarte con '.$_POST["nombreContactenos"].' lo mas pronto posible.</h4>
+                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px; text-align:center;">Favor de comunicarte con '.$_POST["nombreContactenos"].' lo mas pronto posible.</h4>
                     
                 </body>
                 
