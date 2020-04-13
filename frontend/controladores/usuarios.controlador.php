@@ -336,6 +336,8 @@ class ControladorUsuarios
         // return;
 
         //Si correo y contraseña no coinciden vamos a acceder al sistema
+
+
         if ($respuesta["email"] != $email || $respuesta["password"] != $encriptar) {
             echo '
                 <script>

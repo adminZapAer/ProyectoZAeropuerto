@@ -844,11 +844,11 @@ TABLA CARRITO DE COMPRAS
 
         async function realizarPagoNetPay(opcionPago) {
 
-            const baseUrl = 'https://ecommerce.netpay.com.mx/gateway-ecommerce';
-            const storeIdAcq = '483131';
-            const userName = "ecommerce@netpay.com.mx";
-            const password = "ec0m12";
-            const url2 = "https://ecommerce.netpay.com.mx";
+            const baseUrl = '<?php echo getenv('BASE_URL') ?>';
+            const storeIdAcq = '<?php echo getenv('STORE_ID_ACT') ?>';
+            const userName = "<?php echo getenv('USER_NAME') ?>";
+            const password = "<?php echo getenv('PASSWORD') ?>";
+            const url2 = "<?php echo getenv('URL_2') ?>";
             const promotion = opcionPago
             const tipoTarjeta = $(`#opcionTipoTarjeta`).val()
 
@@ -1225,7 +1225,7 @@ TABLA CARRITO DE COMPRAS
             tipoTarjeta = $(`#opcionTipoTarjeta`).val()
 
             console.log({
-                tipoTarjetaEnMens: tipoTarjeta
+                tipoTarjetaEnMens: tipoTarjeta,
             });
 
             opcionesPago = '<option value="000000">Pago en una sola exhibición</option>';
