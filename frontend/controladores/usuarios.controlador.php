@@ -1406,7 +1406,7 @@ class ControladorUsuarios
                     
                     <img src="https://www.refaccionariazapata.com/frontend/vistas/img/discuss-issue.png" alt="" style="width: 100%; max-width: 80px;">
                     
-                    <h3 style="font-size: 18px;">Hemos recibido una nueva consulta</h3>
+                    <h3 style="font-size: 18px;">Realizaste una consulta</h3>
                     
                     <hr style="border:1px solid #ccc; width:92%;">
                     
@@ -1432,7 +1432,7 @@ class ControladorUsuarios
 
                     <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Nombre: </strong>Jose Antonio Molina. <strong>Teléfono: </strong><a href="tel:+525951069120">59-5106-9120</a><br><strong>Correo: </strong><a href="mailto:jmolina@zapata.com.mx">jmolina@zapata.com.mx</a></h4>
                     
-                    <h5>Gracias por visitar refaccionariazapata.com</h5>
+                    <h5 style="text-align:center;">Gracias por visitar refaccionariazapata.com</h5>
 
                 </body>
                 
