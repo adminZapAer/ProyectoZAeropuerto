@@ -1216,7 +1216,8 @@ class ControladorUsuarios
 
                 $mail->Subject = "Ha recibido una consulta";
 
-                $mail->addAddress("jmolina@zapata.com.mx");
+                $mail->addAddress("zapata.camiones.redes@gmail.com");
+                //$mail->addAddress("jmolina@zapata.com.mx");
 
                 $mail->msgHTML('
                 
@@ -1288,6 +1289,9 @@ class ControladorUsuarios
 
                 if (!$envio) {
 
+                    $respAuto = new ControladorUsuarios();
+                    $respAuto -> ctrFormularioRespuestaAuto();
+
                     echo '<script> 
 
 							swal({
@@ -1349,6 +1353,113 @@ class ControladorUsuarios
         }
     }
 
+    public function ctrFormularioRespuestaAuto()
+    {
+
+        if (isset($_POST['mensajeContactenos'])) {
+
+            if (
+                preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombreContactenos"]) &&
+                preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["mensajeContactenos"]) &&
+                preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["emailContactenos"])
+            ) {
+
+                /*=============================================
+                ENVÍO CORREO ELECTRÓNICO
+                =============================================*/
+
+                date_default_timezone_set("America/Mexico_City");
+
+                $fecha = date('Y');
+
+                $url = Ruta::ctrRuta();
+
+                $mail = new PHPMailer;
+
+                $mail->CharSet = 'UTF-8';
+
+                $mail->isMail();
+
+                $mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+
+                $mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+
+                $mail->Subject = "Hemos recibido una consulta";
+
+                $mail->addAddress($_POST["emailContactenos"]);
+
+                $mail->msgHTML('
+                
+                <header style="background: linear-gradient(0deg, rgba(193,39,45,1) 10%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8015581232492998) 15%, rgba(67,71,74,0) 30%), url(https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/fondo-cabez.jpg); width: 100%; height: 70px;">
+
+                    <img src="https://www.refaccionariazapata.com/frontend/vistas/img/logo-online.png" alt="" style="width: 135px; float: left; margin-top:11px; margin-left:25px;">
+
+                </header>
+                
+                <div class="correo" style="align-content: center; justify-content: center; text-align: center; font-family: Arial; margin-top: 40px;">
+                    
+                    <br>
+                    
+                    <img src="https://www.refaccionariazapata.com/frontend/vistas/img/discuss-issue.png" alt="" style="width: 100%; max-width: 80px;">
+                    
+                    <h3 style="font-size: 18px;">Hemos recibido una nueva consulta</h3>
+                    
+                    <hr style="border:1px solid #ccc; width:92%;">
+                    
+                </div>
+                
+                <body style="align-content: center; justify-content: center; text-align: center; font-family: Arial;">
+                    
+                    <p>Saludos '.$_POST["nombreContactenos"].'</p>
+                    
+                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Hemos recibido una pregunta en <a href="https://www.refaccionariazapata.com">Refaccionaria Online Zapata</a>.</h4>
+                    
+                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">'.$_POST["mensajeContactenos"].'</h4>
+                    
+                    <h5 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Estos son los datos del interesado:</strong></h5>
+                    
+                    <h5 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Nombre: </strong>'.$_POST["nombreContactenos"].'</h5>
+                    
+                    <h5 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>E-mail: </strong>'.$_POST["emailContactenos"].'</h5>
+                    
+                    <br>
+
+                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Nuestro personal se contactará con usted lo mas pronto posible. Gracias por visitar <a href="https://www.refaccionariazapata.com"> Refaccionaria Online Zapata</a></h4>
+                    
+                </body>
+                
+                <footer style="background: linear-gradient(to top, black 50% ,white 100%);">
+                    
+                    <hr style="border:1px solid #ccc; width:80%;">
+                    
+                    <br><br><br><br><br><br>
+                    
+                    <div style="text-align: center; align-content: center; align-items: center; justify-content: center;">
+                        
+                        <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 25px;">Conócenos... </a>
+                        
+                        <a href="https://www.zapataaeropuerto.com/about.html" target="_blank" style="text-decoration: none; color: #ffffff; font-size: 18px;">¿Quienes somos?</a>
+                        
+                        <br><br>
+                        
+                        <img src="https://www.refaccionariazapata.com/frontend/vistas/img/plantilla/logob.png" alt="" style="display: flex; margin: 0 auto; width: 100%; max-width: 160px;">
+                        
+                        <p style="color: #ffffff; font-size: 12px;">&copy; '.$fecha.'. Todos los derechos reservados.</p>
+                        
+                        <a href="https://www.refaccionariazapata.com/frontend/terminos-y-condiciones" target="_blank" style="color: #ffffff; font-size: 12px;">Términos y Condiciones</a>
+                        
+                        <br><br>
+                        
+                    </div>
+                    
+                </footer>
+
+                ');
+
+                $envio = $mail->Send();
+            }
+        }
+    }
     /*---------------------------------------------------------------*/
 
     /*=============================================
