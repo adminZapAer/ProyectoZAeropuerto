@@ -1289,9 +1289,6 @@ class ControladorUsuarios
 
                 if (!$envio) {
 
-                    $respAuto = new ControladorUsuarios();
-                    $respAuto -> ctrFormularioRespuestaAuto();
-
                     echo '<script> 
 
 							swal({
@@ -1311,6 +1308,9 @@ class ControladorUsuarios
 
 						</script>';
                 } else {
+
+                    $respAuto = new ControladorUsuarios();
+                    $respAuto -> ctrFormularioRespuestaAuto();
 
                     echo '<script> 
 
