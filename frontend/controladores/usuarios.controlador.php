@@ -46,9 +46,9 @@ class ControladorUsuarios
 
                     $mail->isMail();
                     //El correo es enviado por
-                    $mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+                    $mail->setFrom('no-reply@refaccionariazapata.com', 'Refaccionaria Online Zapata');
                     //Para que responda al Correo
-                    $mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+                    $mail->addReplyTo('no-reply@refaccionariazapata.com', 'Refaccionaria Online Zapata');
                     //El siguiente correo no es para que responda, es solo informativo
                     $mail->Subject = "Por favor verifique su correo electrónico.";
                     //Agregamos el correo electronico al cual haremos llegar el mensaje
@@ -99,7 +99,7 @@ class ControladorUsuarios
                         
                         <hr style="border:1px solid #ccc; width:80%;">
                         
-                        <h5 style="font-weight: 100; color: 5d5d5d;">Si usted no se registró en esta pagina, puede ignorar este correo electrónico y la cuenta será eliminada.</h5>
+                        <h5 style="font-weight: 100; color: 5d5d5d;text-align:center; ">Si usted no se registró en esta pagina, puede ignorar este correo electrónico y la cuenta será eliminada.</h5>
                         
                         <br><br><br>
                         
@@ -467,9 +467,9 @@ class ControladorUsuarios
 
                         $mail->isMail();
 
-                        $mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+                        $mail->setFrom('no-reply@refaccionariazapata.com', 'Refaccionaria Online Zapata');
 
-                        $mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+                        $mail->addReplyTo('no-reply@refaccionariazapata.com', 'Refaccionaria Online Zapata');
 
                         $mail->Subject = "Solicitud de nueva contraseña";
 
@@ -527,13 +527,13 @@ class ControladorUsuarios
                             
                             <hr style="border:1px solid #ccc; width:80%;">
                             
-                            <h4 style="font-weight: 100; color: 5d5d5d;">Favor de cambiar esta contraseña por una clave <strong>segura</strong> que pueda recordar.
+                            <h4 style="font-weight: 100; color: 5d5d5d; text-align:center;">Favor de cambiar esta contraseña por una clave <strong>segura</strong> que pueda recordar.
                             <br><br>
                             Para cambiar la contraseña, presione la pestaña donde dice su nombre y seleccione la sección <strong>Perfil</strong>, despues dirijase a la sección <strong>Editar perfil</strong>, en ese apartado cambie la contraseña. 
                             <br><br>
                             Solo se aceptan <strong>Letras, Numeros</strong> y los siguientes <strong>caracteres especiales: "+ * /"</strong> para cambiar la contraseña.</h4>
                             
-                            <br><br><br>
+                            <br><br><br><br><br>
                             
                             <div style="text-align: center; align-content: center; align-items: center; justify-content: center;">
                                 
@@ -1212,14 +1212,14 @@ class ControladorUsuarios
 
                 $mail->isMail();
 
-                $mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+                $mail->setFrom('no-reply@refaccionariazapata.com', 'Refaccionaria Online Zapata');
 
-                $mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+                $mail->addReplyTo('no-reply@refaccionariazapata.com', 'Refaccionaria Online Zapata');
 
-                $mail->Subject = "Ha recibido una consulta";
+                $mail->Subject = "Recibió una nueva consulta";
 
-                $mail->addAddress("zapata.camiones.redes@gmail.com");
-                //$mail->addAddress("jmolina@zapata.com.mx");
+                //$mail->addAddress("zapata.camiones.redes@gmail.com");
+                $mail->addAddress("jmolina@zapata.com.mx");
 
                 $mail->msgHTML('
                 
@@ -1235,7 +1235,7 @@ class ControladorUsuarios
                     
                     <img src="https://www.refaccionariazapata.com/frontend/vistas/img/discuss-issue.png" alt="" style="width: 100%; max-width: 80px;">
                     
-                    <h3 style="font-size: 18px;">Ha recibido una nueva consulta</h3>
+                    <h3 style="font-size: 18px;">Recibió una nueva consulta</h3>
                     
                     <hr style="border:1px solid #ccc; width:92%;">
                     
@@ -1245,7 +1245,7 @@ class ControladorUsuarios
                     
                     <p>Saludos Jose Antonio</p>
                     
-                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Te hicieron una pregunta en <a href="https://www.refaccionariazapata.com">Refaccionaria Online Zapata</a>.</h4>
+                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Recibiste una pregunta en <a href="https://www.refaccionariazapata.com">Refaccionaria Online Zapata</a>.</h4>
                     
                     <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">'.$_POST["mensajeContactenos"].'</h4>
                     
@@ -1253,9 +1253,11 @@ class ControladorUsuarios
                     
                     <h5 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Nombre: </strong>'.$_POST["nombreContactenos"].'</h5>
                     
-                    <h5 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>E-mail: </strong>'.$_POST["emailContactenos"].'</h5>
+                    <h5 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>E-mail: </strong> <a href="mailto:'.$_POST["emailContactenos"].'">'.$_POST["emailContactenos"].'</a></h5>
                     
                     <br>
+
+                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px; text-align:center;">Favor de comunicarte con '.$_POST["nombreContactenos"].' lo mas pronto posible.</h4>
                     
                 </body>
                 
@@ -1382,11 +1384,11 @@ class ControladorUsuarios
 
                 $mail->isMail();
 
-                $mail->setFrom('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+                $mail->setFrom('no-reply@refaccionariazapata.com', 'Refaccionaria Online Zapata');
 
-                $mail->addReplyTo('no-replay@refaccionariazapata.com', 'Refaccionaria Online Zapata');
+                $mail->addReplyTo('no-reply@refaccionariazapata.com', 'Refaccionaria Online Zapata');
 
-                $mail->Subject = "Hemos recibido una consulta";
+                $mail->Subject = "Realizaste una consulta en Refaccionaria Zapata";
 
                 $mail->addAddress($_POST["emailContactenos"]);
 
@@ -1404,7 +1406,7 @@ class ControladorUsuarios
                     
                     <img src="https://www.refaccionariazapata.com/frontend/vistas/img/discuss-issue.png" alt="" style="width: 100%; max-width: 80px;">
                     
-                    <h3 style="font-size: 18px;">Hemos recibido una nueva consulta</h3>
+                    <h3 style="font-size: 18px;">Realizaste una consulta</h3>
                     
                     <hr style="border:1px solid #ccc; width:92%;">
                     
@@ -1418,7 +1420,7 @@ class ControladorUsuarios
                     
                     <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">'.$_POST["mensajeContactenos"].'</h4>
                     
-                    <h5 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Estos son los datos del interesado:</strong></h5>
+                    <h5 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Datos proporcionados:</strong></h5>
                     
                     <h5 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Nombre: </strong>'.$_POST["nombreContactenos"].'</h5>
                     
@@ -1426,8 +1428,12 @@ class ControladorUsuarios
                     
                     <br>
 
-                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Nuestro personal se contactará con usted lo mas pronto posible. Gracias por visitar <a href="https://www.refaccionariazapata.com"> Refaccionaria Online Zapata</a></h4>
+                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Nuestro ejecutivo se comunicará con usted lo mas pronto posible.</h4>
+
+                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Nombre: </strong>Jose Antonio Molina. <strong>Teléfono: </strong><a href="tel:+525951069120">59-5106-9120</a><br><strong>Correo: </strong><a href="mailto:jmolina@zapata.com.mx">jmolina@zapata.com.mx</a></h4>
                     
+                    <h5 style="text-align:center;">Gracias por visitar refaccionariazapata.com</h5>
+
                 </body>
                 
                 <footer style="background: linear-gradient(to top, black 50% ,white 100%);">
