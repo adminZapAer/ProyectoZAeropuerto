@@ -390,48 +390,37 @@ TABLA CARRITO DE COMPRAS
                             <label for="">TOTAL A PAGAR + CARGOS</label>
                             <input class="form-control" value="" readonly id="resumenTotalAPagarMasCargos">
                         </div>
-                        <!--<div class="col-lg-4">-->
-                        <!--    <label for="">IVA DE COMPRA</label>-->
-                        <!--    <input type="text" class="form-control" readonly id="ivaInput">-->
-                        <!--</div>-->
 
-                        <!--<div class="col-sm-4">-->
-                        <!--    <div class="table-responsive">-->
-                        <!--        <table class="table">-->
-                        <!--            <thead class="thead-dark">-->
-                        <!--<th>Tarjeta</th>-->
-                        <!--<th>Sobre tasa</th>-->
-                        <!--<th>Tasa de débito/crédito</th>-->
-                        <!--<th>Cargo por transferencia</th>-->
-                        <!--<th>Total a pagar</th>-->
-                        <!--                <th>Total + Cargos</th>-->
-                        <!--            </thead>-->
-                        <!--            <tbody>-->
-                        <!--<td>-->
-                        <!--    <span id="resumenTipoTarjeta"></span>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                        <!--    <span id="resumenSobreTasa"></span>%-->
-                        <!--</td>-->
-                        <!--<td>-->
-                        <!--    <span id="resumenTasaDebitoCredito"></span>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                        <!--    $<span id="resumenCargoPorTransferencia">0</span>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                        <!--    $<span id="resumenTotalAPagar"></span>-->
-                        <!--</td>-->
-                        <!--                <td style="background-color: #b8e994">-->
-                        <!--                    $<span id="resumenTotalAPagarMasCargos"></span>-->
-                        <!--                </td>-->
-                        <!--            </tbody>-->
-                        <!--        </table>-->
-                        <!--    </div>-->
-                        <!--</div>-->
+                        <div class="col-lg-4">
+                            <label for="">CIUDAD</label>
+                            <input type="text" class="form-control" id="inputCiudadNetPay" value="">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">CALLE</label>
+                            <input type="text" class="form-control" id="inputCalleNetPay" value="">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">COLONIA</label>
+                            <input type="text" class="form-control" id="inputColoniaNetPay" value="">
+                        </div>
+                        <div class="col-lg-4 mb-2">
+                            <label for="">CÓDIGO POSTAL</label>
+                            <input type="email" class="form-control" id="inputCodigoPostalNetPay" value="" required>
+                        </div>
+                        <div class="col-lg-4 mb-2">
+                            <label for="">EMAIL</label>
+                            <input type="email" class="form-control" id="inputEmailNetPay" value="<?php echo $user["email"]; ?>" required>
+                        </div>
+                        <div class="col-lg-4 mb-2">
+                            <label for="">TELÉFONO</label>
+                            <input type="email" class="form-control" id="inputTelefonoNetPay" value="" required>
+                        </div>
 
-                        <br><br>
-                        <hr>
+
+                        <p style="color: white;">
+                            &nbsp;
+                        </p>
+
                         <div class="col-lg-10 mt-3">
                             <a href="#" id="botonRealizarPagoNetPay" class="btn btn-info mt-3">
                                 <button type="button" class="btn btn-info mt-3" style="height: 100%; max-height: 45px; width: 100%; max-width: 498.75px; border-radius:15px 15px 15px 15px;">
@@ -454,7 +443,7 @@ TABLA CARRITO DE COMPRAS
                         </form>
 
                         <hr>
-                        <hr>  
+                        <hr>
 
                         <iframe id="iFrameNetPay" name="my_iframe" src="not_submitted_yet.aspx" style="width: 100%; height: 500px; display:none" frameBorder="0">
 
@@ -617,6 +606,17 @@ TABLA CARRITO DE COMPRAS
     script 
 ======================================-->
     <script>
+        class Direccion {
+            constructor(ciudad, calle, colonia, codigoPostal, telefono, email) {
+                this.ciudad = ciudad;
+                this.calle = calle;
+                this.colonia = colonia;
+                this.codigoPostal = codigoPostal;
+                this.telefono = telefono;
+                this.email = email
+            }
+        }
+
         var direccionEnvio = JSON.parse(localStorage.getItem("direccionEnvio"));
 
 
@@ -768,7 +768,6 @@ TABLA CARRITO DE COMPRAS
                 window.location = rutaFrontEnd + 'carrito-de-compras';
             },
             onError: function(err) {
-                // console.log('err', err);
                 swal({
                     title: "Ocurrio un error",
                     text: "Favor de intentar de nuevo o más tarde, disculpe las molestias.",
@@ -842,7 +841,7 @@ TABLA CARRITO DE COMPRAS
             return 2.9
         }
 
-        async function realizarPagoNetPay(opcionPago) {
+        async function realizarPagoNetPay(opcionPago, direccion) {
 
             const baseUrl = '<?php echo getenv('BASE_URL') ?>';
             const storeIdAcq = '<?php echo getenv('STORE_ID_ACT') ?>';
@@ -888,7 +887,8 @@ TABLA CARRITO DE COMPRAS
                     sumaCesta,
                     cargoPorTransferencia,
                     totalAPagar
-                }
+                },
+                direccion
             });
 
             total = await $.ajax({
@@ -979,8 +979,8 @@ TABLA CARRITO DE COMPRAS
                                 }).fail(function(err) {
                                     console.log("error", err);
                                 });
-                            } 
-                            
+                            }
+
                             if (detalles.transaction.status != 'DONE' && window.location == window.top.location) {
                                 swal({
                                     title: "¡Tu compra ha sido rechazada!",
@@ -1027,29 +1027,30 @@ TABLA CARRITO DE COMPRAS
                             "cardType": tipoTarjeta,
                             "merchantReferenceCode": "<?php print_r(ModeloCompras::mdlGetCompras()['idCompra'] + 1); ?>",
                             "bill": {
-                                "city": "<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                // "city": "<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                "city": direccion.ciudad,
                                 "country": "MX",
                                 "firstName": "<?php echo $user["nombre"] ?>",
                                 "lastName": "<?php echo $user["nombre"] ?>",
-                                // "email":"<?php echo $user["email"]; ?>",
-                                "email": "accept@netpay.com.mx",
-                                "phoneNumber": "<?php echo $FacturacionUser[0]["telefono"]; ?>",
-                                "postalCode": "<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
-                                "state": "<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                "street1": "<?php echo $FacturacionUser[0]["calle"]; ?>",
-                                "street2": "<?php echo $FacturacionUser[0]["colonia"]; ?>",
+                                "email": direccion.email,
+                                // "email": "accept@netpay.com.mx",
+                                "phoneNumber": direccion.telefono,
+                                "postalCode": direccion.codigoPostal,
+                                "state": direccion.ciudad,
+                                "street1": direccion.calle,
+                                "street2": direccion.colonia,
                                 "ipAddress": "<?php echo getenv('DIR_IP') ? getenv('DIR_IP') :  getRealIpAddr(); ?>"
                             },
                             "ship": {
-                                "city": "<?php echo $FacturacionUser[0]["estado"]; ?>",
+                                "city": direccion.ciudad,
                                 "country": "MX",
                                 "firstName": "<?php echo $user["nombre"]; ?>",
                                 "lastName": "<?php echo $user["nombre"]; ?>",
-                                "phoneNumber": "<?php echo $FacturacionUser[0]["telefono"]; ?>",
-                                "postalCode": "<?php echo $FacturacionUser[0]["codigoPostal"]; ?>",
-                                "state": "<?php echo $FacturacionUser[0]["estado"]; ?>",
-                                "street1": "<?php echo $FacturacionUser[0]["calle"]; ?>",
-                                "street2": "<?php echo $FacturacionUser[0]["colonia"]; ?>",
+                                "phoneNumber": direccion.telefono,
+                                "postalCode": direccion.codigoPostal,
+                                "state": direccion.ciudad,
+                                "street1": direccion.calle,
+                                "street2": direccion.colonia,
                                 "shippingMethod": "flatrate_flatrate"
                             },
                             "itemList": [
@@ -1182,7 +1183,21 @@ TABLA CARRITO DE COMPRAS
             // PAGO CON NETPAY
             // ===============
 
-            realizarPagoNetPay("000000");
+            ciudad = $('#inputCiudadNetPay').val();
+            calle = $('#inputCalleNetPay').val();
+            colonia = $('#inputColoniaNetPay').val();
+            email = $('#inputEmailNetPay').val();
+            telefono = $('#inputTelefonoNetPay').val();
+            codigoPostal = $('#inputCodigoPostalNetPay').val();
+            // ciudad = '';
+            // calle = '';
+            // colonia = '';
+            // email = '';
+            // telefono = '';
+            // codigoPostal = '';
+            direccion = new Direccion(ciudad, calle, colonia, codigoPostal, telefono, email);
+
+            realizarPagoNetPay("000000", direccion);
 
 
 
@@ -1267,6 +1282,23 @@ TABLA CARRITO DE COMPRAS
             // $('#formu').submit();
         });
 
+        $(document).on('keyup', '#inputEmailNetPay, #inputCiudadNetPay, #inputCalleNetPay, #inputColoniaNetPay, #inputTelefonoNetPay, #inputCodigoPostalNetPay', function() {
+            codigoOpcionPago = $('#opcionPagoNetPay').val()
+            datosNetPay.promotion = codigoOpcionPago
+
+            // mostrarMensualidadesDisponibles();
+
+            ciudad = $('#inputCiudadNetPay').val();
+            calle = $('#inputCalleNetPay').val();
+            colonia = $('#inputColoniaNetPay').val();
+            telefono = $('#inputTelefonoNetPay').val();
+            codigoPostal = $('#inputCodigoPostalNetPay').val();
+            email = $('#inputEmailNetPay').val();
+            direccion = new Direccion(ciudad, calle, colonia, codigoPostal, telefono, email);
+
+            realizarPagoNetPay(codigoOpcionPago, direccion);
+        });
+
         $(document).on('change', '#opcionTipoTarjeta', function() {
 
             // console.log({
@@ -1277,7 +1309,16 @@ TABLA CARRITO DE COMPRAS
             datosNetPay.promotion = codigoOpcionPago
 
             mostrarMensualidadesDisponibles();
-            realizarPagoNetPay(codigoOpcionPago);
+
+            ciudad = $('#inputCiudadNetPay').val();
+            calle = $('#inputCalleNetPay').val();
+            colonia = $('#inputColoniaNetPay').val();
+            telefono = $('#inputTelefonoNetPay').val();
+            codigoPostal = $('#inputCodigoPostalNetPay').val();
+            email = $('#inputEmailNetPay').val();
+            direccion = new Direccion(ciudad, calle, colonia, codigoPostal, telefono, email);
+
+            realizarPagoNetPay(codigoOpcionPago, direccion);
 
             // console.log({
             //     message: 'opcion de pago actualizada',
@@ -1291,7 +1332,15 @@ TABLA CARRITO DE COMPRAS
             codigoOpcionPago = $(this).val()
             datosNetPay.promotion = codigoOpcionPago
 
-            realizarPagoNetPay(codigoOpcionPago);
+            ciudad = $('#inputCiudadNetPay').val();
+            calle = $('#inputCalleNetPay').val();
+            colonia = $('#inputColoniaNetPay').val();
+            telefono = $('#inputTelefonoNetPay').val();
+            codigoPostal = $('#inputCodigoPostalNetPay').val();
+            email = $('#inputEmailNetPay').val();
+            direccion = new Direccion(ciudad, calle, colonia, codigoPostal, telefono, email);
+
+            realizarPagoNetPay(codigoOpcionPago, direccion);
 
             // console.log({
             //     message: 'opcion de pago actualizada',
@@ -1301,14 +1350,31 @@ TABLA CARRITO DE COMPRAS
         });
 
         $(document).on('click', '#botonRealizarPagoNetPay', function() {
-            datosNetPay.checkout.purchaseTotals.grandTotalAmount = localStorage.getItem("sumaCesta");
+
+            setTimeout(() => {}, 2000);
+
+            if (!$('#inputCiudadNetPay').val() ||
+                !$('#inputCalleNetPay').val() ||
+                !$('#inputColoniaNetPay').val() ||
+                !$('#inputEmailNetPay').val() ||
+                !$('#inputTelefonoNetPay').val() ||
+                !$('#inputCodigoPostalNetPay').val()) {
+                swal({
+                    title: "Campos incompletos",
+                    text: "Para realizar una compra es necesario que llene todos los campos solicitados.",
+                    type: "warning",
+                    confirmButtonText: "De acuerdo",
+                    closeOnConfirm: true
+                });
+                return;
+            }
 
             // console.log({
             //     message: 'Datos finales enviados a netpay',
             //     datosNetPay
             // });
 
-
+            // setTimeout(() => {}, 2000);
 
             $('#formu').submit();
 
@@ -1316,7 +1382,7 @@ TABLA CARRITO DE COMPRAS
                 $('#iFrameNetPay').show('slow');
             }, 1000);
 
-            
+
         });
 
         function getUrlVars() {

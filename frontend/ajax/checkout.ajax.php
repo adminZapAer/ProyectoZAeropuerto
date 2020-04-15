@@ -392,7 +392,7 @@ class AjaxCheckout
 				}
 			}
 
-			$direccionDestino = json_decode($compra['direccion'], true);
+			$direccionDestinoCliente = json_decode($compra['direccion'], true);
 
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
