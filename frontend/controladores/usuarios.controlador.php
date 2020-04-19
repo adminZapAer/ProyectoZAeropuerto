@@ -1042,7 +1042,7 @@ class ControladorUsuarios
 
                         function(isConfirm){
                                  if (isConfirm) {      
-                                   window.location = "' . $url . 'perfil";
+                                   window.location = "' . $url . 'direcciones";
                                   } 
                         });
 
@@ -1095,7 +1095,7 @@ class ControladorUsuarios
 
                         function(isConfirm){
                                  if (isConfirm) {      
-                                   window.location = "' . $url . 'perfil";
+                                   window.location = "' . $url . 'direcciones";
                                   } 
                         });
 
@@ -1171,7 +1171,7 @@ class ControladorUsuarios
 
                         function(isConfirm){
                                  if (isConfirm) {      
-                                   window.location = "' . $url . 'perfil";
+                                   window.location = "' . $url . 'direcciones";
                                   } 
                         });
 
@@ -1520,7 +1520,7 @@ class ControladorUsuarios
 
                         function(isConfirm){
                                  if (isConfirm) {      
-                                   window.location = "' . $url . 'perfil";
+                                   window.location = "' . $url . 'facturacion";
                                   } 
                         });
 
@@ -1574,7 +1574,7 @@ class ControladorUsuarios
                     },
                     function(isConfirm){
                         if (isConfirm) {      
-                            window.location = "' . $url . 'perfil";
+                            window.location = "' . $url . 'facturacion";
                         } 
                     });
                       

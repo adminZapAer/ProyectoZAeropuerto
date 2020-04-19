@@ -544,7 +544,7 @@ $(".delete-direccion").click(function(event){
     },
 	function(isConfirm){
         if (isConfirm) {	   
-		    window.location = "index.php?ruta=perfil&deletedir="+idDireccion;
+		    window.location = "index.php?ruta=direcciones&deletedir="+idDireccion;
 		} 
     });
 
@@ -629,7 +629,7 @@ $(".delete-facturacion").click(function(event){
     },
 	function(isConfirm){
         if (isConfirm) {	   
-		    window.location = "index.php?ruta=perfil&deletefact="+idFactura;
+		    window.location = "index.php?ruta=facturacion&deletefact="+idFactura;
 		} 
     });
 

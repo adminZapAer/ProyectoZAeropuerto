@@ -326,7 +326,7 @@
                 include "modulos/infoproductos.php";
             }
             
-            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "ofertas" || $rutas[0] === "proceder-pago" || $rutas[0] == "editarDireccion" || $rutas[0] == "pagoTransferencia" || $rutas[0] == "terminos-y-condiciones" || $rutas[0] == "politicas-privacidad"){
+            else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "compras" || $rutas[0] == "favoritos" || $rutas[0] == "perfil" || $rutas[0] == "direcciones" || $rutas[0] == "facturacion" || $rutas[0] == "ofertas" || $rutas[0] == "carrito-de-compras" || $rutas[0] === "proceder-pago" || $rutas[0] == "editarDireccion" || $rutas[0] == "pagoTransferencia" || $rutas[0] == "terminos-y-condiciones" || $rutas[0] == "politicas-privacidad"){
                 include "modulos/".$rutas[0].".php";
             }
             
