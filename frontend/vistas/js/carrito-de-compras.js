@@ -11,9 +11,9 @@ class LocalStorageJSON {
 function insertarProductoAListaHTML(item) {
 
     if (localStorage.getItem('paginaEnvio') != 1) {
-        input = '<input type="number" class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '" precio ="' + item.precio + '" idProducto="' + item.idProducto + '" costoEnvio="' + item.costoEnvio + '">';
+        input = '<input type="number" class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '" precio ="' + item.precio + '" idProducto="' + item.idProducto + '" costoEnvio="' + item.costoEnvio + '" porcentajeDescuentoEnvio="' + item.porcentajeDescuentoEnvio + '" fechaFinDescuentoEnvio="' + item.fechaFinDescuentoEnvio + '">';
     } else {
-        input = '<input type="number" readonly class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '" precio ="' + item.precio + '" idProducto="' + item.idProducto + '" costoEnvio="' + item.costoEnvio + '">';
+        input = '<input type="number" readonly class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '" precio ="' + item.precio + '" idProducto="' + item.idProducto + '" costoEnvio="' + item.costoEnvio + '" porcentajeDescuentoEnvio="' + item.porcentajeDescuentoEnvio + '" fechaFinDescuentoEnvio="' + item.fechaFinDescuentoEnvio + '">';
     }
 
     $(".cuerpoCarrito").append(
@@ -25,7 +25,7 @@ function insertarProductoAListaHTML(item) {
 
         '<center>' +
 
-        '<button class="btn btn-default backColor quitarItem" idProducto="' + item.idProducto + '" tipo="' + item.tipo + '" peso="' + item.peso + '" sku="'+item.sku+'" tipoA="'+item.tipoA+'">' +
+        '<button class="btn btn-default backColor quitarItem" idProducto="' + item.idProducto + '" tipo="' + item.tipo + '" peso="' + item.peso + '" sku="'+item.sku+'" tipoA="'+item.tipoA+'" porcentajeDescuentoEnvio="' + item.porcentajeDescuentoEnvio + '" fechaFinDescuentoEnvio="' + item.fechaFinDescuentoEnvio + '">' +
 
         '<i class="fa fa-times"></i>' +
 
@@ -267,7 +267,9 @@ $(".agregarCarrito").click(function () {
         "peso":$(this).attr("peso"),
         "cantidad":"1",
         "sku":$(this).attr("sku"),
-        "tipoA":$(this).attr("tipoA")
+        "tipoA":$(this).attr("tipoA"),
+        "porcentajeDescuentoEnvio":$(this).attr("porcentajeDescuentoEnvio"),
+        "fechaFinDescuentoEnvio":$(this).attr("fechaFinDescuentoEnvio"),
     };
 
     var agregarAlCarrito = false;
@@ -279,9 +281,6 @@ $(".agregarCarrito").click(function () {
     if (nuevoProducto.tipo == "fisico") {
 
         agregarAlCarrito = true;
-
-    }
-    else {
 
     }
 
@@ -460,6 +459,9 @@ $(document).on("change", ".cantidadItem", function () {
                 "cantidad": $(cantidad[i]).val(),
                 "sku": $(idProducto[i]).attr("sku"),
                 "tipoA": $(idProducto[i]).attr("tipoA"),
+                "tipoA": $(idProducto[i]).attr("tipoA"),
+                "porcentajeDescuentoEnvio": $(idProducto[i]).attr("porcentajeDescuentoEnvio"),
+                "fechaFinDescuentoEnvio": $(idProducto[i]).attr("fechaFinDescuentoEnvio"),
             }
         );
     }
@@ -771,7 +773,9 @@ $.ajax({
 })
     .done(function (respuesta) {
 
-        data = respuesta;
+        data = JSON.parse(respuesta);
+
+        console.log('DIRECCIONES', data);
 
         if (data.error) {
             $(".direcciones").append(`
