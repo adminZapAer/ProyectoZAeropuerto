@@ -392,6 +392,8 @@
         
         <script src="<?php echo $url;?>vistas/js/CarritoComprasService.js"></script>
 
+        <script src="<?php echo $url;?>vistas/js/services/CotizadorEstafetaService.js"></script>
+
         <script src="<?php echo $url;?>vistas/js/carrito-de-compras.js"></script>
         
         <script src="<?php echo $url;?>vistas/js/banner.js"></script>

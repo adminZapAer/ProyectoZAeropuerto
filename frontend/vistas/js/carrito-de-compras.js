@@ -151,61 +151,53 @@ else {
 VISUALIZAR LOS PRODUCTOS EN LA PÁGINA CARRITO DE COMPRAS
 ====================================================*/
 
-function getCostoEnvio(item, direccionId) {
+async function getCostoEnvio(item, direccionId) {
 
     // SOLICITAR COSTO DE ENVIO DE PRODUCTO
 
-    $.ajax({
-        method: "GET",
-        url: rutaFrontEnd + 'ajax/costoEnvio.php',
-        data: { id: item.idProducto, direccionId: direccionId, cantidad: item.cantidad }
-    })
-        .done(function (response) {
+    respuesta = await CotizadorEstafetaService.cotizar( item, direccionId )
+    console.log( respuesta )
 
-            respuesta = JSON.parse(response);
+    if( respuesta.error != null ){
+        swal({
+            title: "Error al cotizar",
+            text: respuesta.error,
+            type: "warning",
+            showCancelButton: false,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "¡Volver!",
+            closeOnConfirm: true
+        })
 
-            if( respuesta.error != null ){
-                swal({
-                    title: "Error al cotizar",
-                    text: respuesta.error,
-                    type: "warning",
-                    showCancelButton: false,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "¡Volver!",
-                    closeOnConfirm: true
-                })
+        $('.cabeceraCheckout #btnCheckout').hide();
 
-                $('.cabeceraCheckout #btnCheckout').hide();
+    }else{
+        $('.cabeceraCheckout #btnCheckout').show();
+    }
 
-            }else{
-                $('.cabeceraCheckout #btnCheckout').show();
-            }
 
-            console.log('RESPUESTA',JSON.parse(response));
+    const origen = respuesta.origen;
 
-            const origen = JSON.parse(response).origen;
+    if (origen == 'planta') {
+        $('.aviso').append(`
+            - El producto ${item.titulo} será enviado desde planta<hr>
+        `);
+    }
 
-            if (origen == 'planta') {
-                $('.aviso').append(`
-                    - El producto ${item.titulo} será enviado desde planta<hr>
-                `);
-            }
 
-            // console.log('RESPONSE ENVIO',JSON.parse(response).origen);
+    // ACTUALIZAMOS EL PRODUCTO CON EL NUEVO COSTO DE ENVIO
+    if (localStorage.getItem('paginaEnvio') != 1) {
+        item.costoEnvio = respuesta.costoEnvio;
+        item.origen = respuesta.origen;
+        actualizarProducto(item);
+    }
 
-            // ACTUALIZAMOS EL PRODUCTO CON EL NUEVO COSTO DE ENVIO
-            if (localStorage.getItem('paginaEnvio') != 1) {
-                item.costoEnvio = JSON.parse(response).costoEnvio;
-                item.origen = JSON.parse(response).origen;
-                actualizarProducto(item);
-            }
+    insertarProductoAListaHTML(item);
 
-            insertarProductoAListaHTML(item);
+    $(".cantidadItem[tipo='virtual']").attr("readonly", "true");
+    sumaSubtotales();
 
-            $(".cantidadItem[tipo='virtual']").attr("readonly", "true");
-            sumaSubtotales();
 
-        });
 }
 
 async function showProducts(direccion = null) {
@@ -777,9 +769,9 @@ $.ajax({
     method: "GET",
     url: rutaFrontEnd + 'ajax/direcciones.php',
 })
-    .done(function (response) {
+    .done(function (respuesta) {
 
-        data = JSON.parse(response);
+        data = respuesta;
 
         if (data.error) {
             $(".direcciones").append(`
@@ -987,6 +979,8 @@ $(".datosFacturacion").click(function () {
     );
     return;*/
 })
+
+
 
 $(document).ready(function(){
     
