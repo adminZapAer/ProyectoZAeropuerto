@@ -271,8 +271,6 @@ SECCIÓN PERFIL
                                                 $comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
 
                                                 echo '
-                                                <br><br>
-
                                                 <div class="pull-right">';
  
                                                     
