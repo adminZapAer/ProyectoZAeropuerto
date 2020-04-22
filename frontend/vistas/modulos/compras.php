@@ -284,11 +284,11 @@ SECCIÓN PERFIL
                                                         
                                                         //echo file_exists('/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.pdf');
                                                         
-                                                        //$file_pointer = '/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.pdf'; 
-                                                        //$file_pointer2 = '/home/u319109462/domains/refaccioneszapatacamiones.com/public_html/backend/cfdi/compra-'.$idCompra.'.xml';
+                                                        $file_pointer = '/home/u319109462/domains/refaccionariazapata.com/public_html/backend/cfdi/compra-'.$idCompra.'.pdf'; 
+                                                        $file_pointer2 = '/home/u319109462/domains/refaccionariazapata.com/public_html/backend/cfdi/compra-'.$idCompra.'.xml';
                                                         
-                                                        $file_pointer = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf'; 
-                                                        $file_pointer2 = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.xml';
+                                                        //$file_pointer = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.pdf'; 
+                                                        //$file_pointer2 = 'D:/xampp/htdocs/ProyectoZAeropuerto1/backend/compra-'.$idCompra.'.xml';
                                                         
                                                         if(is_file($file_pointer) && is_file($file_pointer2)){
                                                             //echo 'El archivo '.$archivoPDF.' y '.$archivoXML.'si existe.';
