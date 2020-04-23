@@ -952,9 +952,9 @@ $(".datosFacturacion").click(function () {
         },
         function(isConfirm){
             if(isConfirm){
-                swal("Muy bien", "Dirijase a Perfil > Facturación para llenar los datos correspondientes.","success");
+                swal("Muy bien", "Dirijase a Facturación para llenar los datos correspondientes.","success");
                 setTimeout(function(){
-                    window.location = rutaFrontEnd + "perfil";
+                    window.location = rutaFrontEnd + "facturacion";
                 },2000);
             }
             else{

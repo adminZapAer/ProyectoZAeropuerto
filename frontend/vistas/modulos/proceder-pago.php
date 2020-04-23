@@ -369,9 +369,9 @@ TABLA CARRITO DE COMPRAS
 
                 <div class="contenidoCheckout">
 
-
                     <!-- FORMAS DE PAGO -->
-                    <div class="formPago row">
+                    <div class="formPago row" style="font-family: 'Arial', Serif">
+
 
                         <div class="col-lg-4">
                             <label for="">TIPO DE TARJETA</label>
@@ -417,7 +417,6 @@ TABLA CARRITO DE COMPRAS
                             <input type="email" class="form-control" id="inputTelefonoNetPay" value="" required>
                         </div>
 
-
                         <p style="color: white;">
                             &nbsp;
                         </p>
@@ -435,6 +434,12 @@ TABLA CARRITO DE COMPRAS
                                 regresar
                             </button>
                         </div>
+
+                        <br>
+                        <br>
+                        <br>
+
+                        <p style="font-family: 'Arial', Serif">En caso de tener una falla relaccionada con <strong>X-Frame Options</strong> (<strong>Firefox Developer</strong>) sigue estas <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Headers/X-Frame-Options" target="_blank">instrucciones</a></p>
 
                         <hr>
 

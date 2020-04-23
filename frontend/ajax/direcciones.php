@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
 
     if(is_null($direcciones) || !count($direcciones)){
         print_r(json_encode([
-            'error' => 'No cuentas con ningúna dirección para cotizar el envío. Ve a la sección <a href="'.$url.'perfil">Mi perfil</a> y registra una dirección'
+            'error' => 'No cuentas con ningúna dirección para cotizar el envío. Ve a la sección <a href="'.$url.'direcciones"><i class="fa fa-map-marker"></i> Dirección de Envío</a> y registra una dirección'
         ]));
         return false;
     }
