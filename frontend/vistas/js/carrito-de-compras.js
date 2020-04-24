@@ -11,9 +11,9 @@ class LocalStorageJSON {
 function insertarProductoAListaHTML(item) {
 
     if (localStorage.getItem('paginaEnvio') != 1) {
-        input = '<input type="number" class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '" precio ="' + item.precio + '" idProducto="' + item.idProducto + '" costoEnvio="' + item.costoEnvio + '">';
+        input = '<input type="number" class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '" precio ="' + item.precio + '" idProducto="' + item.idProducto + '" costoEnvio="' + item.costoEnvio + '" porcentajeDescuentoEnvio="' + item.porcentajeDescuentoEnvio + '" fechaFinDescuentoEnvio="' + item.fechaFinDescuentoEnvio + '">';
     } else {
-        input = '<input type="number" readonly class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '" precio ="' + item.precio + '" idProducto="' + item.idProducto + '" costoEnvio="' + item.costoEnvio + '">';
+        input = '<input type="number" readonly class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '" precio ="' + item.precio + '" idProducto="' + item.idProducto + '" costoEnvio="' + item.costoEnvio + '" porcentajeDescuentoEnvio="' + item.porcentajeDescuentoEnvio + '" fechaFinDescuentoEnvio="' + item.fechaFinDescuentoEnvio + '">';
     }
 
     $(".cuerpoCarrito").append(
@@ -25,7 +25,7 @@ function insertarProductoAListaHTML(item) {
 
         '<center>' +
 
-        '<button class="btn btn-default backColor quitarItem" idProducto="' + item.idProducto + '" tipo="' + item.tipo + '" peso="' + item.peso + '" sku="'+item.sku+'" tipoA="'+item.tipoA+'">' +
+        '<button class="btn btn-default backColor quitarItem" idProducto="' + item.idProducto + '" tipo="' + item.tipo + '" peso="' + item.peso + '" sku="'+item.sku+'" tipoA="'+item.tipoA+'" porcentajeDescuentoEnvio="' + item.porcentajeDescuentoEnvio + '" fechaFinDescuentoEnvio="' + item.fechaFinDescuentoEnvio + '">' +
 
         '<i class="fa fa-times"></i>' +
 
@@ -151,61 +151,53 @@ else {
 VISUALIZAR LOS PRODUCTOS EN LA PÁGINA CARRITO DE COMPRAS
 ====================================================*/
 
-function getCostoEnvio(item, direccionId) {
+async function getCostoEnvio(item, direccionId) {
 
     // SOLICITAR COSTO DE ENVIO DE PRODUCTO
 
-    $.ajax({
-        method: "GET",
-        url: rutaFrontEnd + 'ajax/costoEnvio.php',
-        data: { id: item.idProducto, direccionId: direccionId, cantidad: item.cantidad }
-    })
-        .done(function (response) {
+    respuesta = await CotizadorEstafetaService.cotizar( item, direccionId )
+    console.log( respuesta )
 
-            respuesta = JSON.parse(response);
+    if( respuesta.error != null ){
+        swal({
+            title: "Error al cotizar",
+            text: respuesta.error,
+            type: "warning",
+            showCancelButton: false,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "¡Volver!",
+            closeOnConfirm: true
+        })
 
-            if( respuesta.error != null ){
-                swal({
-                    title: "Error al cotizar",
-                    text: respuesta.error,
-                    type: "warning",
-                    showCancelButton: false,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "¡Volver!",
-                    closeOnConfirm: true
-                })
+        $('.cabeceraCheckout #btnCheckout').hide();
 
-                $('.cabeceraCheckout #btnCheckout').hide();
+    }else{
+        $('.cabeceraCheckout #btnCheckout').show();
+    }
 
-            }else{
-                $('.cabeceraCheckout #btnCheckout').show();
-            }
 
-            console.log('RESPUESTA',JSON.parse(response));
+    const origen = respuesta.origen;
 
-            const origen = JSON.parse(response).origen;
+    if (origen == 'planta') {
+        $('.aviso').append(`
+            - El producto ${item.titulo} será enviado desde planta<hr>
+        `);
+    }
 
-            if (origen == 'planta') {
-                $('.aviso').append(`
-                    - El producto ${item.titulo} será enviado desde planta<hr>
-                `);
-            }
 
-            // console.log('RESPONSE ENVIO',JSON.parse(response).origen);
+    // ACTUALIZAMOS EL PRODUCTO CON EL NUEVO COSTO DE ENVIO
+    if (localStorage.getItem('paginaEnvio') != 1) {
+        item.costoEnvio = respuesta.costoEnvio;
+        item.origen = respuesta.origen;
+        actualizarProducto(item);
+    }
 
-            // ACTUALIZAMOS EL PRODUCTO CON EL NUEVO COSTO DE ENVIO
-            if (localStorage.getItem('paginaEnvio') != 1) {
-                item.costoEnvio = JSON.parse(response).costoEnvio;
-                item.origen = JSON.parse(response).origen;
-                actualizarProducto(item);
-            }
+    insertarProductoAListaHTML(item);
 
-            insertarProductoAListaHTML(item);
+    $(".cantidadItem[tipo='virtual']").attr("readonly", "true");
+    sumaSubtotales();
 
-            $(".cantidadItem[tipo='virtual']").attr("readonly", "true");
-            sumaSubtotales();
 
-        });
 }
 
 async function showProducts(direccion = null) {
@@ -275,7 +267,9 @@ $(".agregarCarrito").click(function () {
         "peso":$(this).attr("peso"),
         "cantidad":"1",
         "sku":$(this).attr("sku"),
-        "tipoA":$(this).attr("tipoA")
+        "tipoA":$(this).attr("tipoA"),
+        "porcentajeDescuentoEnvio":$(this).attr("porcentajeDescuentoEnvio"),
+        "fechaFinDescuentoEnvio":$(this).attr("fechaFinDescuentoEnvio"),
     };
 
     var agregarAlCarrito = false;
@@ -287,9 +281,6 @@ $(".agregarCarrito").click(function () {
     if (nuevoProducto.tipo == "fisico") {
 
         agregarAlCarrito = true;
-
-    }
-    else {
 
     }
 
@@ -468,6 +459,9 @@ $(document).on("change", ".cantidadItem", function () {
                 "cantidad": $(cantidad[i]).val(),
                 "sku": $(idProducto[i]).attr("sku"),
                 "tipoA": $(idProducto[i]).attr("tipoA"),
+                "tipoA": $(idProducto[i]).attr("tipoA"),
+                "porcentajeDescuentoEnvio": $(idProducto[i]).attr("porcentajeDescuentoEnvio"),
+                "fechaFinDescuentoEnvio": $(idProducto[i]).attr("fechaFinDescuentoEnvio"),
             }
         );
     }
@@ -777,9 +771,11 @@ $.ajax({
     method: "GET",
     url: rutaFrontEnd + 'ajax/direcciones.php',
 })
-    .done(function (response) {
+    .done(function (respuesta) {
 
-        data = JSON.parse(response);
+        data = JSON.parse(respuesta);
+
+        console.log('DIRECCIONES', data);
 
         if (data.error) {
             $(".direcciones").append(`
@@ -987,6 +983,8 @@ $(".datosFacturacion").click(function () {
     );
     return;*/
 })
+
+
 
 $(document).ready(function(){
     

@@ -351,3 +351,4 @@ Precio de arnes-de-motor-cummins
 7052.58
  */
 ?>
+<!-- <script src="vistas/js/services/ProductoServices.js"></script> -->

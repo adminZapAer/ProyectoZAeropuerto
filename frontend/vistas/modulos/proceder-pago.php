@@ -102,6 +102,7 @@ if (isset($_SESSION["validarSesion"])) {
             ];
 
             $factTemp = ModeloUsuarios::mdlAgregarFacturacion("facturacion", $datos);
+            
         }
         $FacturacionUser = ModeloUsuarios::mdlMostrarDatosFacturacion('facturacion', $idUsuario);
     }
