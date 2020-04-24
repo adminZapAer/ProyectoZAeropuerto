@@ -76,7 +76,7 @@ class AjaxCheckout
 		// ALMACENAMOS LA COMPRA REALIZADA
 		$datosCompra = [
 			'idUsuario' => $user['idUsuario'],
-			'metodo' => 'paypal',
+			'metodo' => $_POST['metodo'],
 			'envio' => $envio,
 			'costo_envio' => $costoEnvio,
 			'direccion' => $direccionEnvio ? json_encode($direccionEnvio[0]) : null,
