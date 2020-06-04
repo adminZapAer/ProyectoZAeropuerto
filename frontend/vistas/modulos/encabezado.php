@@ -149,7 +149,7 @@ if (isset($_SESSION["validarSesion"])) {
                                 </li>
                                 <span class="tituloSeccion">
                                     <li><a href="#modalIngreso" data-toggle="modal">Iniciar Sesión</a></li>
-                                    <!--<li><a href="#modalRegistro" data-toggle="modal">Crear Cuenta</a></li>-->
+                                    <li><a href="#modalRegistro" data-toggle="modal">Registrate</a></li>
                                 </span>
                                 ';
                             }
