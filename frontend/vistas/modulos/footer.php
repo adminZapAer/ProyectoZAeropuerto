@@ -65,7 +65,7 @@
                     <img src="<?php echo $servidor;?>vistas/img/telefono-gris49x51.png" alt="">
                 </div>
                 <div class="col-xs-10 datos-t">
-                    (595) 954-99-33
+                    <a href="tel:5959549933">(595) 954-99-33</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 correoContacto" style="justify-content: center; align-items: center;">
@@ -73,7 +73,7 @@
                     <img src="<?php echo $servidor;?>vistas/img/sobre-gris57x39.png" alt="">
                 </div>
                 <div class="col-xs-10 datos-t">
-                    contacto@zapata.com.mx
+                    <a href="mailto:contacto@zapata.com.mx" style="text-decoration: none;" target="_blank">contacto@zapata.com.mx</a>
                 </div>
                 
             </div>
@@ -83,11 +83,14 @@
                 </div>
                 
                 <div class="col-xs-10 datos-t">
-                    Carretera Los Reyes - Lechería Km. 23. 
-                    <br>
-                    Colonia La Magdalena Panoaya
-                    <br>
-                    Municipio Texcoco | Estado de México
+                    <a href="https://www.google.com/maps/place/ZAPATA+CAMIONES+AEROPUERTO/@19.525422,-98.897874,15z/data=!4m5!3m4!1s0x0:0x6f30d8d92669587!8m2!3d19.525422!4d-98.897874" style="text-decoration: none;" target="_blank">
+                        Carretera Los Reyes - Lechería Km. 23. 
+                        <br>
+                        Colonia La Magdalena Panoaya
+                        <br>
+                        Municipio Texcoco | Estado de México
+                    </a>
+                    
                 </div>
                 
             </div>
