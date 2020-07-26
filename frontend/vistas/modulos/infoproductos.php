@@ -308,18 +308,29 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                             </li>
                             ';
                         }
-                        if($infoProducto["stock"] != "0"){
+                        if($infoProducto["stock"] > "0"){
                             echo'
+                            <li>
+                                <i style="margin-right:10px" class="fa fa-check"></i>Stock Disponible
+                            </li>
+                            ';
+
+                            /*echo'
                             <li>
                                 <i style="margin-right:10px" class="fa fa-check"></i>Stock: '.$infoProducto["stock"].'
                             </li>
-                            ';
+                            ';*/
                         }else{
                             echo'
                             <li>
-                                <i style="margin-right:10px" class="fa fa-check"></i>Stock: 1
+                                <i style="margin-right:10px" class="fa fa-check"></i>Pregunte por disponibilidad.
                             </li>
                             ';
+                            /*echo'
+                            <li>
+                                <i style="margin-right:10px" class="fa fa-check"></i>Stock: 1
+                            </li>
+                            ';*/
                         }
                         echo'
                         </div>
