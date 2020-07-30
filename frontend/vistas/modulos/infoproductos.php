@@ -247,7 +247,8 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                             <small>IVA INCLUIDO</small>
                             </span>
                             
-                        </h2>';   
+                        </h2>
+                        <span>Precio sujeto a cambio sin previo aviso</span> <br><br>';   
                     }
                 }
                 
