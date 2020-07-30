@@ -231,7 +231,8 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                 else{
                     //si no tiene oferta
                     if($infoProducto["oferta"] == 0){
-                        echo'<h2 class="text-muted">MXN $'.number_format($infoProducto["precio"],2).' <small>IVA INCLUIDO</small></h2>';   
+                        echo'<h2 class="text-muted">MXN $'.number_format($infoProducto["precio"],2).' <small>IVA INCLUIDO</small></h2>
+                        <span>Precio sujeto a cambio sin previo aviso</span> <br><br>';   
                     }
                     //si tiene oferta el producto
                     else{
