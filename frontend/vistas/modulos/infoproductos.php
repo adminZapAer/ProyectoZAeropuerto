@@ -603,8 +603,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                 }
 
             }
-
-            var_dump($cantidad);
+            
             ?>
 
             <ul class="nav nav-tabs">
