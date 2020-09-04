@@ -159,6 +159,7 @@ class ModeloUsuarios
 			$stmt->execute();
 
 			return $stmt->fetch();
+			
 		} else {
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE idProducto = :idProducto ORDER BY Rand()");
@@ -178,6 +179,26 @@ class ModeloUsuarios
 	/*=============================================
 	ACTUALIZAR COMENTARIO
 	=============================================*/
+
+	static public function mdlCrearComentario($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (idUsuario, idProducto, calificacion, comentario) VALUES (:idUsuario, :idProducto, :calificacion, :comentario)");
+		$stmt->bindParam(":idUsuario", $datos["idUsuario"], PDO::PARAM_INT);
+		$stmt->bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);
+		$stmt->bindParam(":calificacion", $datos["calificacion"], PDO::PARAM_STR);
+		$stmt->bindParam(":comentario", $datos["comentario"], PDO::PARAM_STR);
+
+		if ($stmt->execute()) {
+			return "ok";
+		} else {
+			return "error";
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+
+	}
 
 	static public function mdlActualizarComentario($tabla, $datos)
 	{

@@ -63,10 +63,6 @@
     background: #1da1f2;
 }
 
-.alturaComentarios{
-	height:300px;
-}
-
 /*--=================================
     PUNTOS DE QUIEBRE PERSONALIZADOS
 ===================================*/
@@ -78,6 +74,26 @@
     .videoPresentacion{
         height: 415px;
     }
+    /*===================================
+    =            COMENTARIOS            =
+    ===================================*/
+    
+    .alturaComentarios{
+
+        /*height: 300px;*/
+
+        height: 100%;
+        min-height: 250px;
+        max-height: 300px;
+    }
+    .alturaComentarios .pbComentario{
+        height: 100%;
+        min-height:30px;
+        max-height: 300px;
+    }
+    
+    /*=====  End of COMENTARIOS  ======*/
+
 }
 /*--======================================================================
         ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
@@ -87,6 +103,26 @@
     .videoPresentacion{
         height: 350px;
     }
+
+    /*===================================
+    =            COMENTARIOS            =
+    ===================================*/
+    
+    .alturaComentarios{
+
+        /*height: 300px;*/
+
+        height: 100%;
+        min-height: 250px;
+        max-height: 350px;
+    }
+    .alturaComentarios .pbComentario{
+        height: 100%;
+        min-height:30px;
+        max-height: 300px;
+    }
+    
+    /*=====  End of COMENTARIOS  ======*/
 }
 /*--======================================================================
         ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
@@ -96,6 +132,25 @@
     .videoPresentacion{
         height: 300px;
     }
+
+    /*===================================
+    =            COMENTARIOS            =
+    ===================================*/
+    
+    .alturaComentarios{
+
+        /*height: 300px;*/
+
+        height: 100%;
+        
+    }
+    .alturaComentarios .pbComentario{
+        height: 100%;
+        min-height:30px;
+        max-height: 300px;
+    }
+    
+    /*=====  End of COMENTARIOS  ======*/
 }
 /*--======================================================================
                                 MOVILES (XS revisamos en 320px)
@@ -111,4 +166,21 @@
     .botonesCompra button{
         margin: 5px 0;
     }
+
+    /*===================================
+    =            COMENTARIOS            =
+    ===================================*/
+    
+    .alturaComentarios{
+
+        /*height: 300px;*/
+        
+    }
+    .alturaComentarios .pbComentario{
+        height: 100%;
+        
+    }
+    
+    /*=====  End of COMENTARIOS  ======*/
+
 }

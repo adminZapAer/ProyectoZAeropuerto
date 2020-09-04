@@ -146,7 +146,7 @@ $("#verMas").click(function(e){
 	if($("#verMas").html() == "Ver más"){
         //Visualizamos los demas comentarios en la seccion y cambiamos de nombre al boton, nombrandolo como verMenos
 		$(".comentarios").css({"overflow":"inherit"});
-        
+
 		$("#verMas").html("Ver menos"); 
 	   
 	}else{

@@ -244,8 +244,20 @@ COMENTARIOS ID
 
 $(".calificarProducto").click(function(){
 
+	
+	var idProducto = $(this).attr("idProducto");
+
+	
+	$("#idProducto").val(idProducto);
+
+})
+
+$(".actualizaCalificacion").click(function(){
+
+	
 	var idComentario = $(this).attr("idComentario");
 
+	
 	$("#idComentario").val(idComentario);
 
 })
@@ -376,6 +388,33 @@ function validarComentario(){
 
 }
 
+function validarComentarioActualizado(){
+
+	var comentario = $("#nComentario").val();
+
+	if(comentario != ""){
+
+		var expresion = /^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]*$/;
+
+		if(!expresion.test(comentario)){
+
+			$("#nComentario").parent().before('<div class="alert alert-danger"><strong>ERROR:</strong> No se permiten caracteres especiales como por ejemplo !$%&/?¡¿[]*</div>');
+
+			return false;
+
+		}
+
+	}else{
+
+		$("#nComentario").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> Campo obligatorio</div>');
+
+		return false;
+
+	}
+
+	return true;
+
+}
 /*=============================================
 LISTA DE DESEOS
 =============================================*/

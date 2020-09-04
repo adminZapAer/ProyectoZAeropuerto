@@ -463,9 +463,17 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 $imagenProducto = "/vistas/img/plantilla/imagenProducto.jpg";
                             }
                             
-                            echo'
+                            /*echo'
                             <div class="col-lg-6 col-md-8 col-xs-12">
                                 <button class="btn btn-default btn-block btn-lg backColor agregarCarrito" idProducto ="'.$infoProducto["idProducto"].'" imagen="'.$servidor.$imagenProducto.'" titulo="'.$infoProducto["titulo"].'" precio="'.$precioProducto.'" tipo="'.$infoProducto["tipo"].'" peso="'.$infoProducto["peso"].'" sku="'.$infoProducto["sku"].'" tipoA="'.$infoProducto["tipoSistema"].'" porcentajeDescuentoEnvio="'.$infoProducto["porcentaje_descuento_envio"].'" fechaFinDescuentoEnvio="'.$infoProducto["fecha_fin_descuento_envio"].'">
+                                    <i class="fa fa-shopping-cart col-xs-0"></i>
+                                    &#160;&#160;AGREGAR AL CARRITO
+                                </button>
+                            </div>
+                            ';*/
+                            echo'
+                            <div class="col-lg-6 col-md-8 col-xs-12">
+                                <button class="btn btn-default btn-block btn-lg backColor agregarCarrito" idProducto ="'.$infoProducto["idProducto"].'" imagen="'.$servidor.$imagenProducto.'" titulo="'.$infoProducto["titulo"].'" precio="'.$precioProducto.'" tipo="'.$infoProducto["tipo"].'" peso="'.$infoProducto["peso"].'" sku="'.$infoProducto["sku"].'" tipoA="'.$infoProducto["tipoSistema"].'">
                                     <i class="fa fa-shopping-cart col-xs-0"></i>
                                     &#160;&#160;AGREGAR AL CARRITO
                                 </button>
@@ -570,8 +578,323 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
             
         </div>
         <br><br>
-    
         
+        <!--=================================
+        =            COMENTARIOS            =
+        ==================================-->
+        
+        <div class="row">
+            
+            <?php 
+
+            $datos = array("idUsuario"=>"", "idProducto"=>$infoProducto["idProducto"]);
+
+            $comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
+
+            $cantidad = 0;
+
+            foreach ($comentarios as $key => $value) {
+                
+                if($value["comentario"] != ""){
+
+                    //$cantidad = count($value["idComentario"]);
+                    $cantidad += 1;
+
+                }
+
+            }
+
+            ?>
+
+            <ul class="nav nav-tabs">
+
+                <?php 
+
+                if($cantidad == 0){
+
+                    echo '
+                    <li class="active"><a>Sin Comentarios</a></li>
+                    <li></li>
+                    ';
+
+                }
+                else{
+
+                    echo '
+                    <li class="active">
+                        <a>Comentarios '.$cantidad.'</a>
+                    </li>
+                    <li><a id="verMas">Ver más</a></li>
+                    ';
+
+                    $sumaCalificacion = 0;
+
+                    for ($i=0; $i <$cantidad ; $i++) { 
+                        
+                        $sumaCalificacion +=$comentarios[$i]["calificacion"];
+
+                    }
+
+                    $promedio = round($sumaCalificacion/$cantidad,1);
+                    
+                    echo '
+
+                    <li class="pull-right">
+                        <a class="text-muted">
+                            Promedio de Calificación: '.$promedio.' | '; 
+
+                            if($promedio >= 0 && $promedio <= 0.9){
+
+                                echo'
+                                <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+
+                            }
+                            else if($promedio == 1){
+                                echo'
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                            }
+                            else if($promedio > 1 && $promedio <= 1.9){
+                                echo'
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                            }
+                            else if($promedio == 2){
+                                echo'
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                            }
+                            else if($promedio > 2 && $promedio <= 2.9){
+                                echo'
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                            }
+                            else if($promedio == 3){
+                                echo'
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                            }
+                            else if($promedio > 3 && $promedio <= 3.9){
+                                echo'
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                            }
+                            else if($promedio == 4){
+                                echo'
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                            }
+                            else if($promedio > 4 && $promedio <= 4.9){
+                                echo'
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>';
+                            }
+                            else if($promedio >= 5){
+                                echo'
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>';
+                            }
+
+                            echo'
+                        </a>
+                    </li>
+
+                    ';
+
+                }
+
+                ?>
+
+            </ul>
+
+            <br>
+
+        </div>
+
+        <div class="row comentarios">
+
+            <?php 
+
+            foreach ($comentarios as $key => $value) {
+                
+                if($value["comentario"] != ""){
+
+                    $item = "idUsuario";
+                    $valor = $value["idUsuario"];
+                    $usuario = ControladorUsuarios::ctrMostrarUsuario($item, $valor);
+
+                    $nCompleto = explode(" ", $usuario["nombre"]);
+                    $nNombre="";
+                    
+                    if(count($nCompleto) < 2){
+                        $nNombre = $nCompleto[0];
+                    }
+                    else{
+                        $nNombre = $nCompleto[0]." ".$nCompleto[1];
+                    }
+
+                    echo'
+                    <div class="panel-group col-md-3 col-sm-6 col-xs-12 alturaComentarios">
+                
+                        <div class="panel panel-default">
+                            
+                            <div class="panel-heading text-uppercase">
+                                
+                                '.$nNombre.' 
+                                <span class="text-right">';
+                                    if($usuario["foto"] != ""){
+                                        echo '<img class="img-circle pull-right" src="'.$url.$usuario["foto"].'" width="20%">';
+                                    }
+                                    else{
+                                        echo '<img class="img-circle pull-right" src="'.$url.'vistas/img/usuarios/default/default.png" width="20%">';
+                                    }
+
+                                echo '
+                                </span>
+
+                            </div>
+
+                            <div class="panel-body pbComentario">
+                                
+                                <small>'.$value["comentario"].'</small>
+
+                            </div>
+
+                            <div class="panel-footer">
+                                Calificación: '; 
+
+                                if($value["calificacion"] >= 0 && $value["calificacion"] <= 0.9){
+
+                                    echo'
+                                    <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+
+                                }
+                                else if($value["calificacion"] == 1){
+                                    echo'
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                                }
+                                else if($value["calificacion"] > 1 && $value["calificacion"] <= 1.9){
+                                    echo'
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                                }
+                                else if($value["calificacion"] == 2){
+                                    echo'
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                                }
+                                else if($value["calificacion"] > 2 && $value["calificacion"] <= 2.9){
+                                    echo'
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                                }
+                                else if($value["calificacion"] == 3){
+                                    echo'
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                                }
+                                else if($value["calificacion"] > 3 && $value["calificacion"] <= 3.9){
+                                    echo'
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                                }
+                                else if($value["calificacion"] == 4){
+                                    echo'
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
+                                }
+                                else if($value["calificacion"] > 4 && $value["calificacion"] <= 4.9){
+                                    echo'
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>';
+                                }
+                                else if($value["calificacion"] >= 5){
+                                    echo'
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>
+                                    <i class="fa fa-star" style="color: rgb(191, 4, 17);"></i>';
+                                }
+
+                            echo'   
+                            </div>
+
+                        </div>
+
+                    </div>
+                    ';
+                }
+
+            }
+
+            ?>
+
+        </div>
+        
+        <!--====  End of COMENTARIOS  ====-->
+        
+
     </div>
     
 </div>

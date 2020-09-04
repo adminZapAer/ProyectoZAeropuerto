@@ -818,22 +818,107 @@ class ControladorUsuarios
     /*=============================================
 	ACTUALIZAR COMENTARIOS
 	=============================================*/
+    public function ctrCrearComentario(){
 
+        if (isset($_POST["idProducto"])) {
+            
+            if (preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["comentario"])) {
+                
+                if ($_POST["comentario"] != ""){
+
+                    $tabla = "comentarios";
+
+                    $datos = array(
+                        "idUsuario" => $_POST["irs"],
+                        "idProducto" => $_POST["idProducto"],
+                        "calificacion" => $_POST["puntaje"],
+                        "comentario" => $_POST["comentario"]
+                    );
+
+                    $respuesta = ModeloUsuarios::mdlCrearComentario($tabla, $datos);
+                    print_r($respuesta);
+
+                    
+                    if($respuesta == "ok"){
+
+                        echo '
+                        <script>
+
+                            swal({
+                                title: "¡GRACIAS POR COMPARTIR SU OPINIÓN!",
+                                text: "¡Su calificación y comentario ha sido guardado!",
+                                type: "success",
+                                confirmButtonText: "Cerrar",
+                                closeOnConfirm: false
+                            },
+                            function(isConfirm){
+                                if (isConfirm) {       
+                                    history.back();
+                                } 
+                            });
+                            
+                        </script>';
+
+                    }
+
+                }
+                else{
+                    echo '
+                    <script>
+                        swal({
+                            title: "¡ERROR AL ENVIAR SU CALIFICACIÓN!",
+                            text: "¡El comentario no puede estar vacío!",
+                            type: "error",
+                            confirmButtonText: "Cerrar",
+                            closeOnConfirm: false
+                        },
+
+                        function(isConfirm){
+                            if (isConfirm) {       
+                                history.back();
+                            } 
+                        });
+                    </script>';
+                }
+
+            }
+            else{
+                echo '
+                <script>
+                    swal({
+                        title: "¡ERROR AL ENVIAR SU CALIFICACIÓN!",
+                        text: "¡El comentario no puede llevar caracteres especiales!",
+                        type: "error",
+                        confirmButtonText: "Cerrar",
+                        closeOnConfirm: false
+                    },
+                    function(isConfirm){
+                        if (isConfirm) {       
+                            history.back();
+                        } 
+                    });
+                </script>';
+            }
+            
+        }
+        else{
+
+        }
+    }
     public function ctrActualizarComentario()
     {
-
         if (isset($_POST["idComentario"])) {
 
-            if (preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["comentario"])) {
+            if (preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nComentario"])) {
 
-                if ($_POST["comentario"] != "") {
+                if ($_POST["nComentario"] != "") {
 
                     $tabla = "comentarios";
 
                     $datos = array(
                         "idComentario" => $_POST["idComentario"],
                         "calificacion" => $_POST["puntaje"],
-                        "comentario" => $_POST["comentario"]
+                        "comentario" => $_POST["nComentario"]
                     );
 
                     $respuesta = ModeloUsuarios::mdlActualizarComentario($tabla, $datos);
@@ -844,7 +929,7 @@ class ControladorUsuarios
                         <script>
 				            swal({
                                 title: "¡GRACIAS POR COMPARTIR SU OPINIÓN!",
-                                text: "¡Su calificación y comentario ha sido guardado!",
+                                text: "¡Su calificación y comentario ha sido actualizada!",
                                 type: "success",
                                 confirmButtonText: "Cerrar",
                                 closeOnConfirm: false

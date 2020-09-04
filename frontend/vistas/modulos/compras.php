@@ -176,20 +176,20 @@ SECCIÓN PERFIL
 
                                                 if($value2["tipo"] == "virtual"){
 
-                                                    echo'
+                                                echo'
 
-                                                    <a href="'.$url.'curso">
+                                                <a href="'.$url.'curso">
 
-                                                        <button class="btn btn-default pull-left">Ir al curso</button>
+                                                    <button class="btn btn-default pull-left">Ir al curso</button>
 
-                                                    </a>
+                                                </a>
 
-                                                    ';
+                                                ';
 
                                                 }
                                                 else{
 
-                                                    echo '<h6>Proceso de entrega: '.$value2["diasEntrega"].' días hábiles</h6>';
+                                                echo '<h6>Proceso de entrega: '.$value2["diasEntrega"].' días hábiles</h6>';
 
                                                     if($compras[$i]["envio"] == 0){
 
@@ -251,25 +251,25 @@ SECCIÓN PERFIL
                                                             </div>
                                                             ';
 
-                                                        }
-
                                                     }
 
+                                                }
+
                                                 echo'
-                                                    <h4 class="pull-right">
-                                                        <small>
-                                                            Comprado el '.substr($compras[$i]["fecha"],0,-8).'
-                                                        </small>
-                                                    </h4>
+                                                <h4 class="pull-right">
+                                                    <small>
+                                                        Comprado el '.substr($compras[$i]["fecha"],0,-8).'
+                                                    </small>
+                                                </h4>
 
-                                                </div>
+                                            </div>
 
-                                                <div class="col-md-4 col-xs-12">';
+                                            <div class="col-md-4 col-xs-12">';
 
                                                 $datos = array("idUsuario"=>$_SESSION["idUsuario"], "idProducto"=>$value2["idProducto"] );
 
                                                 $comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
-
+                                                
                                                 echo '
                                                 <div class="pull-right">';
  
@@ -292,7 +292,7 @@ SECCIÓN PERFIL
                                                         
                                                         if(is_file($file_pointer) && is_file($file_pointer2)){
                                                             //echo 'El archivo '.$archivoPDF.' y '.$archivoXML.'si existe.';
-                                                            echo'<a href="'.$archivoPDF.'" class="btn btn-primary btn-lg activate pull-" role="button" aria-pressed="true" download>Factura PDF</a>
+                                                            echo'<a href="'.$archivoPDF.'" class="btn btn-primary btn-lg activate pull-right" role="button" aria-pressed="true" download>Factura PDF</a>
                                                                 
                                                                 <a href="'.$archivoXML.'" class="btn btn-primary btn-lg activate pull-right" role="button" aria-pressed="true" download>Factura XML</a>';
                                                             
@@ -313,8 +313,213 @@ SECCIÓN PERFIL
                                                     echo'
 
                                                 </div>
+                                                <br>
+                                                <br>
+                                                <br>
+                                                ';
+                                                    
+                                                        if($comentarios){
+                                                            echo'
+                                                <div class="pull-right">
+
+                                                    <a class="actualizaCalificacion" href="#modalActualizaComentarios" data-toggle="modal" idComentario="'.$comentarios["idComentario"].'">
+                                                        <button class="btn btn-default btn-lg backColor">Actualizar Calificación</button>
+                                                    </a>
+
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <br>
+                                                <div class="pull-right">
+
+                                                    <h4 class="text-right">
+
+                                                            Calificación:';
+                                                            if($comentarios["calificacion"] == 0.0 && $comentarios["comentario"] == ""){
+
+                                                                echo'
+
+                                                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                            </h4>
+
+                                                            <p class="panel panell-default" style="padding:5px;">
+                                                                '.$comentarios["comentario"].'
+                                                            </p>
+                                                                ';
+
+                                                            }
+                                                            else{
+
+                                                                switch ($comentarios["calificacion"]) {
+                                                                    case 0.5:
+                                                                        echo '
+                                                                        <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+
+                                                                    case 1.0:
+                                                                        echo '
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+                                                                    case 1.5:
+                                                                        echo '
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+                                                                    case 2.0:
+                                                                        echo '
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+                                                                    case 2.5:
+                                                                        echo '
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+                                                                    case 3.0:
+                                                                        echo '
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+                                                                    case 3.5:
+                                                                        echo '
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+                                                                    case 4.0:
+                                                                        echo '
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+                                                                    case 4.5:
+                                                                        echo '
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+                                                                    case 5.0:
+                                                                        echo '
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                        <i class="fa fa-star" style="color: rgb(191, 4, 17);" aria-hidden="true"></i>
+                                                                    </h4>
+
+                                                                    <p class="panel panell-default" style="padding:5px;">
+                                                                        '.$comentarios["comentario"].'
+                                                                    </p>
+                                                                        ';
+                                                                        break;
+                                                                    default:
+                                                                        # code...
+                                                                        break;
+                                                                }
+
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo '
+                                                <div class="pull-right">
+
+                                                    <a class="calificarProducto" href="#modalComentarios" data-toggle="modal" idProducto="'.$value2["idProducto"].'">
+                                                        <button class="btn btn-default btn-lg backColor">Calificar Producto</button>
+                                                    </a>
+                                                                                                   
+                                                            ';
+                                                        }
+                                                        echo'
+
+                                                </div>
 
                                             </div>
+
+
 
                                         </div>
 
@@ -358,8 +563,9 @@ VENTANA MODAL PARA COMENTARIOS
             <button type="button" class="close" data-dismiss="modal">&times;</button>
 
 			<form method="post" onsubmit="return validarComentario()">
-			    
-                <input type="hidden" value="" id="idComentario" name="idComentario">
+
+                <input type="hidden" value="" id="idProducto" name="idProducto">
+                <input type="hidden" value="<?php echo $_SESSION["idUsuario"]; ?>" id="irs" name="irs">
 				    
                 <h1 class="text-center" id="estrellas">
                     
@@ -400,8 +606,8 @@ VENTANA MODAL PARA COMENTARIOS
                 
 				<?php
                 
-                    $actualizarComentario = new ControladorUsuarios();
-                    $actualizarComentario -> ctrActualizarComentario();
+                    $crearComentario = new ControladorUsuarios();
+                    $crearComentario -> ctrCrearComentario();
                 
 				?>
 				
@@ -414,6 +620,80 @@ VENTANA MODAL PARA COMENTARIOS
       	</div>
 
 	</div>
+
+</div>
+
+<!--=====================================
+VENTANA MODAL PARA COMENTARIOS
+======================================-->
+
+<div  class="modal fade modalFormulario" id="modalActualizaComentarios" role="dialog">
+    
+    <div class="modal-content modal-dialog">
+    
+        <div class="modal-body modalTitulo">
+            
+            <h3 class="backColor">ACTUALIZA CALIFICACION DE PRODUCTO</h3>
+            
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            <form method="post" onsubmit="return validarComentarioActualizado()">
+
+                <input type="hidden" value="" id="idComentario" name="idComentario">
+                    
+                <h1 class="text-center" id="estrellas">
+                    
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+
+                </h1>
+                
+                <div class="form-group text-center">
+                
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="0.5">0.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="1.0">1.0</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="1.5">1.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="2.0">2.0</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="2.5">2.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="3.0">3.0</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="3.5">3.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="4.0">4.0</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="4.5">4.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="5.0" checked>5.0</label>
+                    
+                </div>
+                
+                <div class="form-group">
+                  
+                    <label for="comment" class="text-muted">Tu opinión acerca de este producto: <span><small>(máximo 300 caracteres)</small></span></label>
+                    
+                    <textarea class="form-control" rows="5" id="nComentario" name="nComentario" maxlength="300" required></textarea>
+                    
+                    <br>
+                    
+                    <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR">
+                    
+                </div>
+                
+                <?php
+                
+                    $actualizarComentario = new ControladorUsuarios();
+                    $actualizarComentario -> ctrActualizarComentario();
+                
+                ?>
+                
+            </form>
+
+        </div>
+
+        <div class="modal-footer">
+        
+        </div>
+
+    </div>
 
 </div>
 
