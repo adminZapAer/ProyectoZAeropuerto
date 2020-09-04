@@ -604,6 +604,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
 
             }
 
+            var_dump($cantidad);
             ?>
 
             <ul class="nav nav-tabs">
@@ -619,13 +620,17 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
 
                 }
                 else{
-
                     echo '
                     <li class="active">
                         <a>Comentarios '.$cantidad.'</a>
-                    </li>
-                    <li><a id="verMas">Ver más</a></li>
-                    ';
+                    </li>';
+
+                    if($cantidad > 4){
+                        echo '
+                        <li><a id="verMas">Ver más</a></li>
+                        ';
+                    }
+                    
 
                     $sumaCalificacion = 0;
 
@@ -644,14 +649,12 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                             Promedio de Calificación: '.$promedio.' | '; 
 
                             if($promedio >= 0 && $promedio <= 0.9){
-
                                 echo'
                                 <i class="fa fa-star-half-o" style="color: rgb(191, 4, 17);"></i>
                                 <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
                                 <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
                                 <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>
                                 <i class="fa fa-star-o" style="color: rgb(191, 4, 17);"></i>';
-
                             }
                             else if($promedio == 1){
                                 echo'
