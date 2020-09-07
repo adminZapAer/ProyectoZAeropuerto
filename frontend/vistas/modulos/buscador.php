@@ -154,7 +154,7 @@ BARRA PRODUCTOS
                     
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 error-txt">
                         
-                        <h1>Si no encuentras el producto que buscas en nuestra página,</h1>
+                        <h1>Si no encuentras el producto en nuestra página,</h1>
                         <h4>comunícate con nosotros sin ningún costo.</h4>
                         <h3>+52 595 106 9120</h3>
                         <h4>Estamos para ayudarte a encontrar la pieza que necesitas.</h4>
