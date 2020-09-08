@@ -120,7 +120,12 @@ var url = window.location.href; //Es para saber en que pagina me encuentro
 
 var indice = url.split("/");
 
-var pagActual = indice[5];
+if(indice[2] =="localhost"){
+    var pagActual = indice[6];
+}
+else{
+    var pagActual = indice[5];
+}
 
 if(isNaN(pagActual)){
     $("#item1").addClass("active");
