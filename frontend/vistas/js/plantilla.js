@@ -120,7 +120,7 @@ var url = window.location.href; //Es para saber en que pagina me encuentro
 
 var indice = url.split("/");
 
-if(indice[2] =="localhost"){
+if(indice[6].length==1){
     var pagActual = indice[6];
 }
 else{
