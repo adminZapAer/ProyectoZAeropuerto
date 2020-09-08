@@ -120,11 +120,11 @@ var url = window.location.href; //Es para saber en que pagina me encuentro
 
 var indice = url.split("/");
 
-if(indice[6].length==1){
-    var pagActual = indice[6];
+if(indice[5] !="buscador"){
+    var pagActual = indice[5];
 }
 else{
-    var pagActual = indice[5];
+    var pagActual = indice[6];
 }
 
 if(isNaN(pagActual)){
