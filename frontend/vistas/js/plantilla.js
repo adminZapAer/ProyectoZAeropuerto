@@ -125,8 +125,8 @@ if(indice[5] !="buscador"){
 }
 else{
     var pagActual = indice[6];
-}
 
+}
 if(isNaN(pagActual)){
     $("#item1").addClass("active");
 }
