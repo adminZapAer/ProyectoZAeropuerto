@@ -451,7 +451,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                             $op = 0;
 
                             if($infoProducto["oferta"] == 0){
-                                $precioProducto = $infoProducto["precio"];
+                                $precioProducto = round($infoProducto["precio"],2);
                             }
                             else{
                                 $porcPromo = $infoProducto["descuentoOferta"]/100;
