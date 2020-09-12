@@ -454,8 +454,9 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 $precioProducto = number_format($infoProducto["precio"],2);
                             }
                             else{
+                                
                                 $porcPromo = $infoProducto["descuentoOferta"]/100;
-                                $op = round($precioProducto-($precioProducto*$porcPromo),2);
+                                $op = round($infoProducto["precio"]-($infoProducto["precio"]*$porcPromo),2);
                                 if($op == $infoProducto["precioOferta"]){
                                     $precioProducto = $infoProducto["precioOferta"];
                                 }
@@ -464,6 +465,7 @@ $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item,$valor);
                                 }
                                 $precioProducto = $infoProducto["precioOferta"];
                             }
+                            
                             
                             $imagenProducto = "";
                             
