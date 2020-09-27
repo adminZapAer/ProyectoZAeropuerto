@@ -394,6 +394,8 @@ class AjaxCheckout
 
 			$direccionDestinoCliente = json_decode($compra['direccion'], true);
 
+			$metodoPago = $compra['metodo'];
+
 			$direccionHTML = "";
 			if (isset($compra['direccion']) && !is_null($compra['direccion'])) {
 				$direccionHTML = "
@@ -456,6 +458,9 @@ class AjaxCheckout
 	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Los datos de Facturación son los siguientes:</h4>
 	            
 	            '.$facturacionHTML.'
+	            <br>
+
+	            <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Metodo de pago usado: '.$metodoPago.'</h4>
 	            
 	        </body>
 	        
