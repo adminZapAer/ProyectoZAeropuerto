@@ -12,8 +12,17 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
 
     if(!isset($_SESSION['idUsuario'])){
         print_r(json_encode([
-            'error' => 'Para que la compra sea enviada a su domicilio es necesario <a href="#modalIngreso" data-toggle="modal">Iniciar Sesión</a> o <a href="#modalRegistro" data-toggle="modal">Registrarse</a>'
+            'error' => '
+            <div class="col-xs-12">
+                <div class="alert alert-danger">
+                    Para que la compra sea enviada a su domicilio es necesario <a href="#modalIngreso" data-toggle="modal">Iniciar Sesión</a> o <a href="#modalRegistro" data-toggle="modal">Registrarse</a>
+                </div>
+            </div>
+            '
         ]));
+        /*print_r(json_encode([
+            'error' => 'Para que la compra sea enviada a su domicilio es necesario <a href="#modalIngreso" data-toggle="modal">Iniciar Sesión</a> o <a href="#modalRegistro" data-toggle="modal">Registrarse</a>'
+        ]));*/
         return false;
     }
 

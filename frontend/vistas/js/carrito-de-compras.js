@@ -778,13 +778,18 @@ $.ajax({
         console.log('DIRECCIONES', data);
 
         if (data.error) {
+            $(".direcciones").append(
+                ${data.error}
+            );
+        }
+        /*if (data.error) {
             $(".direcciones").append(`
             <div class="col-xs-12">
                 <div class="alert alert-danger">
                     ${data.error}
                 </div>
             </div>`);
-        }
+        }*/
 
         if (typeof data.direcciones != 'undefined') {
             data.direcciones.forEach(function (item) {
