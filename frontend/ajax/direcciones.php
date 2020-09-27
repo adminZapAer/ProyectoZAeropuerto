@@ -31,8 +31,35 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
 
     if(is_null($direcciones) || !count($direcciones)){
         print_r(json_encode([
-            'error' => 'No cuentas con ningúna dirección para cotizar el envío. Ve a la sección <a href="'.$url.'direcciones"><i class="fa fa-map-marker"></i> Dirección de Envío</a> y registra una dirección'
+            'error' => '
+            <script>
+                swal({
+                  title: "¿Deseas envío a domicilio?",
+                  text: "Si no desea el envío a domicilio su pedido tendra que recogerlo en Zapata Aeropuerto",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-danger",
+                  confirmButtonText: "Si. Deseo enviarlo a mi domicilio.",
+                  cancelButtonText: "No. Recoger en Zapata Aeropuerto",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+                },
+                function(isConfirm) {
+                  if (isConfirm) {
+                    swal("Excelente", "Registre la dirección de envío de su pedido y despues regrese al carrito de compras", "success");
+                    setTimeout(function(){
+                      window.location = rutaFrontEnd + "direcciones";
+                    },3000);
+                  } else {
+                    swal("Muy Bien", "Su pedido lo recogerá en Zapata Aeropuerto","success");
+                  }
+                });
+            </script>
+            '
         ]));
+        /*print_r(json_encode([
+            'error' => 'No cuentas con ningúna dirección para cotizar el envío. Ve a la sección <a href="'.$url.'direcciones"><i class="fa fa-map-marker"></i> Dirección de Envío</a> y registra una dirección'
+        ]));*/
         return false;
     }
 
