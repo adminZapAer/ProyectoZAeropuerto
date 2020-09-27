@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
             'error' => '
             <script>
                 swal({
-                  title: "¿Deseas envío a domicilio?",
+                  title: "¿Desea envío a domicilio?",
                   text: "Si no desea el envío a domicilio su pedido tendra que recogerlo en Zapata Aeropuerto",
                   type: "warning",
                   showCancelButton: true,
