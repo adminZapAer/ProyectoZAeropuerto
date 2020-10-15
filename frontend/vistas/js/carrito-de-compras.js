@@ -775,7 +775,7 @@ $.ajax({
 
         data = JSON.parse(respuesta);
 
-        console.log('DIRECCIONES', data);
+        //console.log('DIRECCIONES', data);
 
         if (data.error) {
             $(".direcciones").append(
@@ -871,7 +871,7 @@ $.ajax({
                             <br>
                             <span>Carretera Los Reyes - Lechería Km. 23. Colonia La Magdalena Panoaya.</span>
                             <br>
-                            <span>Municipio de Textcoco. Estado de México</span>
+                            <span>Municipio de Texcoco. Estado de México</span>
                         </label>
                     </div>
                 </div>

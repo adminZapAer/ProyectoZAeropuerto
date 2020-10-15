@@ -442,25 +442,6 @@
         
         <script src="<?php echo $url;?>vistas/js/banner.js"></script>
         
-        <!--<script src="<?php echo $url;?>vistas/js/registroFacebook.js"></script>-->
-        
-        <script>
-            /*============================================
-                        COMPARTIR EN FACEBOOK
-            ============================================*/
-            
-            $(".btnFacebook").click(function(){
-                FB.ui(
-                {
-                    method: 'share',
-                    display: 'popup',
-                    href: '<?php echo $url.$cabeceras["ruta"]; ?>',
-                }, function(response){});
-                
-            });
-            
-        </script>
-        
     </body>
     
     
