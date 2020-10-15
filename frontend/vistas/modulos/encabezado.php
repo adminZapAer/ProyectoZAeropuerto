@@ -278,6 +278,7 @@ if (isset($_SESSION["validarSesion"])) {
 *==   VENTANA MODAL PARA REGISTRO  ==*
 ===================================-->
 
+
 <div class="modal fade modalFormulario" id="modalRegistro" role="dialog">
 
     <div class="modal-content modal-dialog">
@@ -433,7 +434,7 @@ if (isset($_SESSION["validarSesion"])) {
 
                         <div class="col-md-6" style="border-right: 1px solid gray;">
 
-                            <h3 class="text-center">INICIAR SESIÓN</h3>
+                            <h4 class="text-center">INICIAR SESIÓN</h4>
 
                             <div style="height: 5em">
                                     <p class="text-muted">
@@ -477,13 +478,20 @@ if (isset($_SESSION["validarSesion"])) {
                         </div>
 
                         <div class="col-md-6">
+                            
+                            <h4 class="text-center">REGISTRO</h4>
 
-                            <h3 class="text-center">COMPRA AL MOMENTO</h3>
+                            <p class="text-muted text-center">¿No tienes una cuenta?</p>
+
+                            <a href="#modalRegistro" data-dismiss="modal" data-toggle="modal" class="btn btn-default backColor btn-block btnIngreso" style="padding-top: 15px; padding-bottom: 15px;">REGISTRATE</a>
+
+                            <hr>
+
+                            <!--<h4 class="text-center">COMPRA AL MOMENTO</h4>-->
 
                             <div style="height: 5em">
                                 <p class="text-muted">
-                                    Si no deseas registrarte con nosotros, sólo coloca tu correo electrónico y clickea el botón morado,
-                                    ¡serás redigirido directamente a tu compra! <br>
+                                    Si no deseas registrarte, sólo coloca tu correo electrónico y realiza tu compra.
                                 </p>
                             </div>
 
@@ -539,13 +547,15 @@ if (isset($_SESSION["validarSesion"])) {
 
         <div class="modal-footer">
 
-            ¿No tienes una cuenta? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Regístrate</a></strong>
+            <!--¿No tienes una cuenta? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Regístrate</a></strong>-->
 
         </div>
 
     </div>
 
 </div>
+
+
 
 
 
