@@ -487,7 +487,7 @@ if (isset($_SESSION["validarSesion"])) {
 
                             <hr>
 
-                            <!--<h4 class="text-center">COMPRA AL MOMENTO</h4>-->
+                            <h4 class="text-center">COMPRA AL MOMENTO</h4>
 
                             <div style="height: 5em">
                                 <p class="text-muted">
@@ -495,21 +495,10 @@ if (isset($_SESSION["validarSesion"])) {
                                 </p>
                             </div>
 
-                            <div class="input-group">
+                            <a href="#modalCompraMom" data-dismiss="modal" data-toggle="modal" class="btn btn-default btn-block btnIngreso" style="padding-top: 15px; padding-bottom: 15px;background-color:#686de0; color: white">COMPRA RAPIDA</a>
 
-                                <span class="input-group-addon">
 
-                                    <i class="glyphicon glyphicon-envelope"></i>
 
-                                </span>
-
-                                <input type="email" class="form-control" id="ingEmailAlMomento" name="ingEmailAlMomento" placeholder="Correo Electrónico">
-
-                            </div>
-
-                            <br>
-
-                            <input type="submit" name="opcionInicio" class="btn btn-default btn-block btnIngreso" value="COMPRA AL MOMENTO" style="background-color:#686de0; color: white">
                             <p class="text-muted">
                                 <small>Al elegir esta opción la entrega del producto será realizada únicamente en Zapata Camiones.</small>
                             </p>
@@ -523,7 +512,9 @@ if (isset($_SESSION["validarSesion"])) {
 
 
                 </div>
-
+                <center>
+                    <a href="#modalPassword" data-dismiss="modal" data-toggle="modal">¿Ovidaste tu contraseña?</a>
+                </center>
 
 
                 <?php
@@ -536,10 +527,6 @@ if (isset($_SESSION["validarSesion"])) {
 
 
                 <br>
-
-                <center>
-                    <a href="#modalPassword" data-dismiss="modal" data-toggle="modal">¿Ovidaste tu contraseña?</a>
-                </center>
 
             </form>
 
@@ -605,6 +592,74 @@ if (isset($_SESSION["validarSesion"])) {
                 ?>
 
                 <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR">
+
+                <br>
+
+            </form>
+
+        </div>
+
+        <div class="modal-footer">
+
+            ¿No tienes una cuenta? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Regístrate</a></strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--==============================================
+*==   VENTANA MODAL PARA COMPRA RAPIDA  ==*
+===============================================-->
+
+<div class="modal fade modalFormulario" id="modalCompraMom" role="dialog">
+
+    <div class="modal-content modal-dialog">
+
+        <div class="modal-body modalTitulo">
+
+            <h3 class="backColor">COMPRA RAPIDA</h3>
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            <!--==================================
+            OLVIDO CONTRASEÑA
+            ===================================-->
+            <form method="post">
+
+                <label class="text-muted">Si no deseas registrarte, sólo coloca tu correo electrónico y realiza tu compra.</label>
+
+                <div class="form-group">
+
+                    <div class="input-group">
+
+                        <span class="input-group-addon">
+
+                            <i class="glyphicon glyphicon-envelope"></i>
+
+                        </span>
+
+                        <input type="email" class="form-control" id="ingEmailAlMomento" name="ingEmailAlMomento" placeholder="Correo Electrónico" required>
+
+                    </div>
+
+                    <br>
+
+                    <input type="submit" name="opcionInicio" class="btn btn-default btn-block btnIngreso" value="COMPRA AL MOMENTO" style="background-color:#686de0; color: white">
+                    <p class="text-muted">
+                        <small>Al elegir esta opción la entrega del producto será realizada únicamente en Zapata Camiones.</small>
+                    </p>
+
+                </div>
+
+                <?php
+
+                //Creamos un objeto ControladorUsuarios y mandamos a llamar el metodo ctrRegistro Usuario
+                $ingreso = new ControladorUsuarios();
+                $ingreso->ctrIngresoUsuario();
+
+                ?>
 
                 <br>
 
