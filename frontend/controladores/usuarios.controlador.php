@@ -1304,7 +1304,7 @@ class ControladorUsuarios
                 $mail->Subject = "Recibió una nueva consulta";
 
                 //$mail->addAddress("zapata.camiones.redes@gmail.com");
-                $mail->addAddress("jmolina@zapata.com.mx");
+                $mail->addAddress("icontla@zapata.com.mx");
 
                 $mail->msgHTML('
                 
@@ -1328,7 +1328,7 @@ class ControladorUsuarios
                 
                 <body style="align-content: center; justify-content: center; text-align: center; font-family: Arial;">
                     
-                    <p>Saludos Jose Antonio</p>
+                    <p>Saludos Ejecutivo de Refacciones</p>
                     
                     <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Recibiste una pregunta en <a href="https://www.refaccionariazapata.com">Refaccionaria Online Zapata</a>.</h4>
                     
@@ -1515,7 +1515,8 @@ class ControladorUsuarios
 
                     <h4 style="font-weight: 100; color: #000000; padding: 0 20px;">Nuestro ejecutivo se comunicará con usted lo mas pronto posible.</h4>
 
-                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Nombre: </strong>Jose Antonio Molina. <strong>Teléfono: </strong><a href="tel:+525951069120">59-5106-9120</a><br><strong>Correo: </strong><a href="mailto:jmolina@zapata.com.mx">jmolina@zapata.com.mx</a></h4>
+                    <h4 style="font-weight: 100; color: #000000; padding: 0 20px;"><strong>Nombre: </strong>
+                    Ivan Contla Martinez. <strong>Teléfono: </strong><a href="tel:+525545882803">55 4588 2803</a><br><strong>Correo: </strong><a href="mailto:icontla@zapata.com.mx">icontla@zapata.com.mx</a></h4>
                     
                     <h5 style="text-align:center;">Gracias por visitar refaccionariazapata.com</h5>
 
