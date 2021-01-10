@@ -24,7 +24,7 @@
                     <img src="<?php echo $servidor;?>vistas/img/telefono-gris49x51.png" alt="">
                 </div>
                 <div class="col-xs-10 datos-t">
-                    <a href="tel:5959549933">(595) 954-99-33</a>
+                    <a href="tel:5545882803">(55) 4588 2803</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 correoContacto" style="justify-content: center; align-items: center;">

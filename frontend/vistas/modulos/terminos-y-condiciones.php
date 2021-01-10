@@ -64,7 +64,7 @@
             </p>
             
             <ul style="list-style-type:square;">
-                <li style="text-align:justify;"><strong>1.- </strong>Levanta una solicitud de devolución a <a href="mailto:jmolina@zapata.com.mx">jmolina@zapata.com.mx</a> explicando el motivo de la devolución. Es posible que solicitemos fotografías de la parte dañada, defectuosa o el motivo de la devolución.</li>
+                <li style="text-align:justify;"><strong>1.- </strong>Levanta una solicitud de devolución a <a href="mailto:icontla@zapata.com.mx">icontla@zapata.com.mx</a> explicando el motivo de la devolución. Es posible que solicitemos fotografías de la parte dañada, defectuosa o el motivo de la devolución.</li>
                 <li style="text-align:justify;"><strong>2.- </strong>Al ser aprobado el cambio, por error de entrega o pieza errónea por parte de Zapata Camiones Aeropuerto se generará la guía de recolección.</li>
                 <li style="text-align:justify;"><strong>3.- </strong>Tendrás un plazo de 5 días para solicitar la recolección a través de Estafeta, o también puedes llevar el paquete a tu centro de envío más cercano.</li>
                 <li style="text-align:justify;"><strong>4.- </strong>Recibe el cambio de tu refacción.</li>
@@ -85,7 +85,7 @@
                 
                 Sabemos que los accidentes pueden llegar a suceder. Si tu pedido llegó defectuoso, dañado o simplemente no es el correcto, por favor contacta a nuestro servicio de atención lo más pronto posible.
                 <br><br>
-                Mándanos un correo a <a href="mailto:jmolina@zapata.com.mx">jmolina@zapata.com.mx</a> o levanta una solicitud de devolución.
+                Mándanos un correo a <a href="mailto:icontla@zapata.com.mx">icontla@zapata.com.mx</a> o levanta una solicitud de devolución.
                 <br><br>
                 No intentes instalar o usar la refacción, puede generar problemas en tu unidad y en tu proceso de cambio. Al ser aceptada tu petición de devolución te enviaremos tu refacción pre autorizada y en las mismas condiciones que se recibió.
                 
