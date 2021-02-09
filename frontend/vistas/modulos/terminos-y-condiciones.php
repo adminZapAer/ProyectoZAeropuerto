@@ -28,7 +28,7 @@
                 <br><br>
                 Para lograrlo trabajamos de la mano con empresas asociadas como Estafeta, lo que nos permite brindarte un gran soporte de logística rápido y confiable.
                 <br><br>
-                Los precios publicados en <a href="https://www.refaccionariazapata.com">Refaccionaria Online Zapata</a> son <b>Exclusivos en Línea (realizando su compra a través de la página).</b>.
+                Los precios publicados en <a href="https://www.refaccionariazapata.com">Refaccionaria Online Zapata</a> son <b>Exclusivos en Línea</b> (realizando su compra a través de la página).
                 
             </p>
             <br>
