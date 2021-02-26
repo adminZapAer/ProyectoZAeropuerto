@@ -397,7 +397,7 @@
                 include "modulos/aplicacion.php";
                 include "modulos/marca.php";
                 include "modulos/tipo-de-sistema.php";
-                include "modulos/infoZapata.php";
+                /*include "modulos/infoZapata.php";*/
             }
             else{
                 include "modulos/error404.php";
@@ -411,7 +411,7 @@
             include "modulos/aplicacion.php";
             include "modulos/marca.php";
             include "modulos/tipo-de-sistema.php";
-            include "modulos/infoZapata.php";
+            /*include "modulos/infoZapata.php";*/
         }
         include "modulos/footer.php";
         ?>
