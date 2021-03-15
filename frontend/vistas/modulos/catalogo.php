@@ -101,6 +101,8 @@ BARRA PRODUCTOS
             </ul>
             
             <?php
+
+            $enlace = "";
             /*======================================
                     LLAMADO DE PAGINACION
             ======================================*/
@@ -175,6 +177,15 @@ BARRA PRODUCTOS
                         
                         foreach ($catalogos as $key => $value)
                         {
+                            $enlace = $value["enlaceCat"];
+                            $sublink = substr($enlace,0,5);
+                            $link = "";
+                            if($sublink != "https"){
+                                $link = $servidor.$value["enlaceCat"];
+                            }
+                            else{
+                                $link = $value["enlaceCat"];
+                            }
                             echo '
                             <!-- Producto -->
                             
@@ -183,14 +194,13 @@ BARRA PRODUCTOS
                                 <!--===============================================-->
                                 <figure>
                                     
-                                    <a href="'.$servidor.$value["enlaceCat"].'" class="pixelProducto">
+                                    <a href="'.$link.'" class="pixelProducto">
                                         
                                         <img src="'.$servidor.$value["portada"].'" class="img-responsive">
                                         
                                     </a>
                                     
                                 </figure>
-                                
                                 <!--'.$value["id"].'-->
                                 
                                 <!--===============================================-->
@@ -199,7 +209,7 @@ BARRA PRODUCTOS
                                     
                                     <small>
                                         
-                                        <a href="'.$servidor.$value["enlaceCat"].'" class="pixelProducto">
+                                        <a href="'.$link.'" class="pixelProducto">
                                             
                                             '.$value["titulo"].'<br>
                                             
