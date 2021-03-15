@@ -574,6 +574,68 @@ class ModeloProductos{
         $stmt = null;
     }
     
+    /*=======================================================
+                        MOSTRAR CATALOGOS
+    =======================================================*/
+    static public function mdlMostrarCatalogos($tabla, $ordenar, $item, $valor, $base, $tope, $modo){
+        
+        if($item != null){
+            
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar $modo LIMIT $base, $tope");//hacemos una consulta a la tabla, el cual va a estar ordenado por la variable $ordenar en modo descendente, limitando a 4 registros
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+            
+        }
+        else{
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla LIMIT $base, $tope");//hacemos una consulta a la tabla, el cual va a estar ordenado por la variable $ordenar en modo descendente, limitando a 4 registros
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+        }
+        
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        LISTAR CATALOGOS
+    =======================================================*/
+    
+    static public function mdlListarCatalogos($tabla, $ordenar, $item, $valor){
+        if($item != null){
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar DESC");
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt -> execute();
+            
+            return $stmt -> fetchAll();
+        }
+        else{
+            $stmt = Conexion::conectar() -> prepare("SELECT * FROM $tabla");
+            $stmt -> execute();
+            
+            return $stmt -> fetchAll();
+        }
+        $stmt -> close();
+        $stmt = null;
+    }
+    
+    /*=======================================================
+                        MOSTRAR RUTA CATALOGOS
+    =======================================================*/    
+    
+    static public function mdlMostrarRutaCatalogos($tabla, $item, $valor){
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+        //Vamos a enlazar parámetros con el metodo bindParam en donde item es igual al parametro recibido :$item y decimos que el parametro es entero
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        $stmt -> execute();
+        
+        return $stmt -> fetch();
+        $stmt -> close();
+        $stmt = null;
+    }
+    
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     
 }

@@ -276,6 +276,45 @@ class ControladorProductos{
         
         return $respuesta;
     }
+
+    /*=======================================================
+                        MOSTRAR CATALOGOS
+    =======================================================*/
+    static public function ctrMostrarCatalogos($ordenar, $item, $valor, $base, $tope, $modo){
+        
+        $tabla = "catalogos";
+        
+        $respuesta = ModeloProductos::mdlMostrarCatalogos($tabla, $ordenar, $item, $valor, $base, $tope, $modo);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                        LISTAR CATALOGOS
+    =======================================================*/
+    static public function ctrListarCatalogos($ordenar, $item, $valor){
+        
+        $tabla = "catalogos";
+        
+        $respuesta = ModeloProductos::mdlListarCatalogos($tabla, $ordenar, $item, $valor);
+        
+        return $respuesta;
+        
+    }
+    
+    /*=======================================================
+                    MOSTRAR RUTA CATALOGOS
+    =======================================================*/
+    static public function ctrMostrarRutaCatalogos($item, $valor){
+        
+        $tabla = "catalogos";
+        
+        $respuesta = ModeloProductos::mdlMostrarRutaCatalogos($tabla, $item, $valor);
+        
+        return $respuesta;
+        
+    }
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     
 }

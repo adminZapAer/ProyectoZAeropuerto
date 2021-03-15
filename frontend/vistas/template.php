@@ -384,6 +384,9 @@
             else if($rutas[0] == "aplicacion"){
                 include "modulos/aplicaciones.php";
             }
+            else if($rutas[0] == "catalogo"){
+                include "modulos/catalogo.php";
+            }
             else if($rutaMarca !=null || $rutaSistema !=null ||$rutaAplicacion !=null){
                 include "modulos/buscador.php";
             }
